@@ -1,11 +1,15 @@
 {
   "name": "api",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -L",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.0.1",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
@@ -13,36 +17,12 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "ioredis": "^5.0.4",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.15",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
-    "sequelize": "^6.19.0",
-    "web-vitals": "^2.1.4"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "postgre": "^0.1.8",
+    "sequelize": "^6.19.0"
   },
-  "scripts": {
-    "start": "nodemon -L",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
