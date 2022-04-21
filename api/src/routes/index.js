@@ -10,3 +10,6 @@ const router = Router();
 //router.use('/', tRoute);
 
 module.exports = router;
+
+
+//? prueba auth
