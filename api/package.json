@@ -18,6 +18,8 @@
     "express": "^4.17.3",
     "ioredis": "^5.0.4",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.0",
+    "morgan": "^1.10.0",
     "pg": "^8.7.3",
     "postgre": "^0.1.8",
     "sequelize": "^6.19.0"
