@@ -11,5 +11,4 @@ const router = Router();
 
 module.exports = router;
 
-
-//? prueba auth
+//? Ejemplo de como exportar una funcion
