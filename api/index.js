@@ -7,12 +7,13 @@ const mongoose = require ('mongoose');
 
 //connect con db
 
-mongoose.connect('mongodb://localhost/market-nft')
+mongoose.connect('mongodb+srv://IgnacioDev:iRWqbRU3GW1f1rwr@hysmatafuegos.v3zyw.mongodb.net/hysMatafuegos')
     .then(db=>console.log('database connected'))
     .catch(err=>console.log(err))
 
 //settings
 server.set('port', process.env.PORT || 3000);
+
 
 //middlewares
 server.use(morgan('dev'));
@@ -39,6 +40,7 @@ server.use((err, req, res, next) => {
   });
 
 //listener
+
 
 server.listen(server.get('port'), () => {
     console.log('server on port', server.get('port'));
