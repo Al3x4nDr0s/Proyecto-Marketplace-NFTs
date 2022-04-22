@@ -6,8 +6,9 @@ const routes = require ('./src/routes/index.js');
 const mongoose = require ('mongoose');
 
 //connect con db
+//mongodb+srv://IgnacioDev:iRWqbRU3GW1f1rwr@hysmatafuegos.v3zyw.mongodb.net/hysMatafuegos
 
-mongoose.connect('mongodb+srv://IgnacioDev:iRWqbRU3GW1f1rwr@hysmatafuegos.v3zyw.mongodb.net/hysMatafuegos')
+mongoose.connect('mongodb+srv://sevenDevs-Nft:sevenDevs-Nft@sevendevs-nft.hgiww.mongodb.net/test')
     .then(db=>console.log('database connected'))
     .catch(err=>console.log(err))
 
