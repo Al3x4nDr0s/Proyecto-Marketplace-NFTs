@@ -1,13 +1,8 @@
-const { Router } = require('express');
-const router = Router();
+const router = require('express').Router();
+const { check } = require('express-validator')
+//? controllers
+const { createUser, getUser, getUsers, updateUser, deleteUser } = require("../controllers/users");
 
-const { deleteUser } = require('../controllers/controllers.users');
+router.post('/', createUser);
 
-router.delete('/delete/:id', deleteUser);
-
-
-
-
-
-
-router.delete('/delete/:id', deleteUsers);
+module.exports = router;
