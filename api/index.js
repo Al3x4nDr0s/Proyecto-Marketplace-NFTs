@@ -1,11 +1,7 @@
 require('dotenv').config(); //? for use enviroment variables
-
 const morgan = require ('morgan');
 const cookieParser = require('cookie-parser');
 const routes = require ('./src/routes/index.js');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-require ('dotenv').config({path: `.env.${NODE_ENV}`});
-
 //connect con db
 const express = require ('express');
 const server = express();
