@@ -7,6 +7,8 @@ const StyledButton = styled.button`
   cursor: pointer;
   color: var(--secondFontColor);
   padding: 20px 40px;
+  font-weight: 600;
+  font-size: 1.2rem;
   outline: none;
   background: ${(props) => props.color || "#272640"};
   display: flex;
@@ -20,10 +22,6 @@ const StyledButton = styled.button`
       border: 1px solid ${(props) => props.color || "#312244"};
   }
 `;
-
-const InputDefault = styled.input`
-
-`
 
 const iconDictionary = {
     search: "https://cdn-icons-png.flaticon.com/512/64/64673.png",

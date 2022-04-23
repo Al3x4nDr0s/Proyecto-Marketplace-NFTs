@@ -7,9 +7,9 @@ function LandingPage() {
         <div>
             <h1 style={{fontFamily: 'Kanit'}}>Welcome!</h1>
             <Link to="/home" style={{fontFamily: 'Kanit', textDecoration: 'none', color: '#065A60'}}>Click Here</Link>
-            <Button title="aceptar" onClick={() => console.log('entro')}/>
-            <Button color="red" title="aceptar"/>
-            <Button color="orange" icon="search" title="aceptar"/>
+            <Button title="aceptar"/>
+            {/* <Button color="red" title="aceptar"/>
+            <Button color="orange" icon="search" title="aceptar"/> */}
         </div>
     );
 }

@@ -1,25 +1,31 @@
 import { Fragment } from 'react';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom"
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer/Footer.jsx";
 import Home from "./components/Home/Home";
 
 import './App.css';
-
+function MainLayout() {
+  return (
+    <div>
+      {/* <NavBar/> */}
+      <Outlet />
+      <Footer />
+    </div>
+  )
+}
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route exact path={"/"} element={<LandingPage />}/>
-        <Route exact path={"/home"} element={
-          <Fragment>
-            {/* <NavBar/> */}
-            <Home />
-            <Footer />
-          </Fragment>
-        }/>
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route exact path={"/"} element={<LandingPage />} />
+            <Route exact path={"/home"} element={<h1>Home</h1>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
