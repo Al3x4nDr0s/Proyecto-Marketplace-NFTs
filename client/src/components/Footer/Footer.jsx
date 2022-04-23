@@ -1,5 +1,7 @@
 import React from 'react'
 
+// font-family: 'Kanit', sans-serif;
+
 const Footer = () => {
   return (
     <div>

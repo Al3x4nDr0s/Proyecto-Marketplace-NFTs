@@ -1,10 +1,12 @@
 import React from 'react';
 import Button from './shared/Button';
+import {Link} from 'react-router-dom'
 
 function LandingPage() {
     return (
         <div>
-            <h1>Hola</h1>
+            <h1 style={{fontFamily: 'Kanit'}}>Welcome!</h1>
+            <Link to="/home" style={{fontFamily: 'Kanit', textDecoration: 'none', color: '#065A60'}}>Click Here</Link>
             <Button title="aceptar" onClick={() => console.log('entro')}/>
             <Button color="red" title="aceptar"/>
             <Button color="orange" icon="search" title="aceptar"/>
