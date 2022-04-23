@@ -3,11 +3,11 @@ const router = Router();
 
 // Importar los routers;
 
-//const tRoute = require('/');
+const nftRoute = require('./nft');
 
 // Configurar los routers
 
-//router.use('/', tRoute);
+router.use('/nft', nftRoute);
 
 module.exports = router;
 

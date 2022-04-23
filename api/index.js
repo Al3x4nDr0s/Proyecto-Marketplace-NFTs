@@ -4,10 +4,12 @@ const morgan = require ('morgan');
 const cookieParser = require('cookie-parser');
 const routes = require ('./src/routes/index.js');
 const mongoose = require ('mongoose');
+const NODE_ENV = process.env.NODE_ENV || 'development';
+require ('dotenv').config({path: `.env.${NODE_ENV}`});
 
 //connect con db
 
-mongoose.connect('mongodb+srv://IgnacioDev:iRWqbRU3GW1f1rwr@hysmatafuegos.v3zyw.mongodb.net/hysMatafuegos')
+mongoose.connect('mongodb://localhost/market-nft')
     .then(db=>console.log('database connected'))
     .catch(err=>console.log(err))
 
