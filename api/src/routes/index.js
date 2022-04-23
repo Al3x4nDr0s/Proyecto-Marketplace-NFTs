@@ -1,17 +1,9 @@
 const { Router } = require('express');
+const usersRouter = require("../routes/users");
+
 const router = Router();
 
-
-// Importar los routers;
-
-//const tRoute = require('/');
-
-// Configurar los routers
-
-//router.use('/', tRoute);
+router.use('/api/users', usersRouter);
 
 module.exports = router;
 
-//? Ejemplo de como exportar una funcion
-//? otro cambio 
-//? otro comentario
