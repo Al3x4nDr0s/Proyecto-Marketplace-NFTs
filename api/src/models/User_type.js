@@ -1,10 +1,14 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const User_type = mongoose.Schema({
+
+const User_type = Schema({
     name: {
         type: String,
-        
     }
 });
+User_type.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
+})
 
-module.exports = mongoose.model('User_type', User_type);
+module.exports = model('User_type', User_type);

@@ -4,5 +4,7 @@ const { check } = require('express-validator')
 const { createUser, getUser, getUsers, updateUser, deleteUser } = require("../controllers/users.controllers");
 
 router.post('/', createUser);
+router.get('/', getUsers);
+
 
 module.exports = router;

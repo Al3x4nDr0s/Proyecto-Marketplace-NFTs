@@ -15,15 +15,17 @@ const UserSchema = Schema({
     },
     email: {
         type: String,
+        require: true
     },
     password: {
-        type: String
+        type: String,
+        require: true
     },
     image: {
         type: String
     },
     user_type: [{
-            type: Schema.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'User_type'  
     }],
     favorite: {
@@ -42,7 +44,7 @@ const UserSchema = Schema({
 });
 //? schema methods for user model
 UserSchema.method('toJSON', function () {
-    const { __v, _id, ...object } = this.toObject();
+    const { __v, _id, password, ...object } = this.toObject();
     object.uid = _id;
     return object;
 })
