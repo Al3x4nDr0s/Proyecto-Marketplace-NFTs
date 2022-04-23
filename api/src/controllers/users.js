@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const Usuario = require("../models/User.js");
 
 // createUser, getUser, getUsers, updateUser, deleteUser 
-const createUser = async (req, res) => {}
+const createUser = async (req, res) => {
+    //? agregar usuario
+}
 const getUser = async (req, res) => {}
 const getUsers = async (req, res) => {}
 const updateUser = async (req, res) => {}
