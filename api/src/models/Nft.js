@@ -23,7 +23,7 @@ const Nft = mongoose.Schema({
         type: [Date]
         
     },
-    collection: {
+    collectionNft: {
         type: Boolean || [{
             type: mongoose.Schema.ObjectId,
             ref: 'Collection_nft'  
