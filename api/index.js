@@ -1,8 +1,8 @@
 require('dotenv').config(); //? for use enviroment variables
-
 const morgan = require ('morgan');
 const cookieParser = require('cookie-parser');
 const routes = require ('./src/routes/index.js');
+//connect con db
 const express = require ('express');
 const server = express();
 const { dbConnection } = require('./src/databse/config'); 

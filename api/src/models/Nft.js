@@ -5,10 +5,10 @@ const Nft = mongoose.Schema({
         type: String,  
     },
     image: {
-        type: text  
+        type: String  
     },
     description: {
-        type: Text
+        type: String
     },
     details: [{
         user_creator: String,
@@ -34,7 +34,7 @@ const Nft = mongoose.Schema({
         ref: 'Categorie'  
     }],
     price: {
-        type: Int
+        type: int
     },
     sales_types: [{
         type: mongoose.Schema.ObjectId,
