@@ -8,8 +8,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 require ('dotenv').config({path: `.env.${NODE_ENV}`});
 
 //connect con db
-
-mongoose.connect('mongodb://localhost/market-nft')
+mongoose.connect('mongodb+srv://sevenDevs-Nft:sevenDevs-Nft@sevendevs-nft.hgiww.mongodb.net/test')
     .then(db=>console.log('database connected'))
     .catch(err=>console.log(err))
 
