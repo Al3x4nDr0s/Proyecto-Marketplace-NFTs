@@ -20,7 +20,7 @@ const User = mongoose.Schema({
         type: String
     },
     image: {
-        type: Text
+        type: String
     },
     user_type: [{
             type: mongoose.Schema.ObjectId,
@@ -37,7 +37,7 @@ const User = mongoose.Schema({
         ref: 'Wallet'  
     }],
     description: {
-        type: Text
+        type: String
     }
 });
 

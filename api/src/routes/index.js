@@ -2,11 +2,11 @@ const { Router } = require('express');
 const router = Router();
 
 
-// Importar los routers;
-
 //const tRoute = require('/');
+const users = require('./users')
 
 // Configurar los routers
+router.use('/users', users);
 
 //router.use('/', tRoute);
 

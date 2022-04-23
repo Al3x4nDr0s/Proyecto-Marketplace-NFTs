@@ -20,10 +20,10 @@ const Nft = mongoose.Schema({
         type: String
     },
     create_date: {
-        type: [Date]
+        type: Date
         
     },
-    collection: {
+    collectionNft: {
         type: Boolean || [{
             type: mongoose.Schema.ObjectId,
             ref: 'Collection_nft'  
@@ -34,7 +34,7 @@ const Nft = mongoose.Schema({
         ref: 'Categorie'  
     }],
     price: {
-        type: INTEGER
+        type: Int
     },
     sales_types: [{
         type: mongoose.Schema.ObjectId,
