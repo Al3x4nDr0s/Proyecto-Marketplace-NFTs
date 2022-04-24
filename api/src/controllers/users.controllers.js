@@ -1,8 +1,7 @@
-const { response } = require('express');//? for use response object in express
 const bcrypt = require('bcrypt');
 const Usuario = require("../models/User.js");
 const User_type = require("../models/User_type.js");
-
+const { generateJwt } = require('../helpers/generateJwt');
 // createUser, getUser, getUsers, updateUser, deleteUser 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
@@ -28,13 +27,17 @@ const createUser = async (req, res) => {
         });
         //? encriptar password
         const salt = await bcrypt.genSalt(10);
-        usuario.password = await bcrypt.hashSync(password, salt);
+        usuario.password = bcrypt.hashSync(password, salt);
         //? guardar usuario
         await usuario.save();
+        //? generar jwt
+        const token = await generateJwt(usuario.id);
+        console.log(usuario._id);
         //? respuesta
         res.json({
             ok: true,
-            usuario
+            usuario,
+            token
         });
 
     } 
@@ -49,6 +52,7 @@ const createUser = async (req, res) => {
 }
 const getUser = async (req, res) => {}
 const getUsers = async (req, res) => {
+
     //? obtener usuarios //? paginacion
     const { page = 1, limit = 10 } = req.query; 
     const start = (page - 1) * limit;
@@ -63,6 +67,7 @@ const getUsers = async (req, res) => {
         const total = await Usuario.countDocuments();
         res.json({
             ok: true,
+            user: req.uid, //@ id del usuario que esta logueado
             users,
             total,
             end
