@@ -34,7 +34,7 @@ const Nft = mongoose.Schema({
         ref: 'Categorie'  
     }],
     price: {
-        type: int
+        type: Number
     },
     sales_types: [{
         type: mongoose.Schema.ObjectId,
