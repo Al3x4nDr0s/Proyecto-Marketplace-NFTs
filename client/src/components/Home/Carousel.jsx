@@ -4,6 +4,13 @@ import styled from "styled-components"
 
 
 const StyledCarousel = styled.div`
+    display : flex;
+    flex-direction: row;
+    gap : 6px;
+    button{
+        border: none;
+        cursor:pointer;
+    }
     img{
         height: 900px;
         weight: 750px;
@@ -11,11 +18,9 @@ const StyledCarousel = styled.div`
 `
 
 
-
-
 function Carousel() {
     
-    let images = [""]
+    let images = ["https://img.etimg.com/thumb/msid-89705853,width-650,imgsize-44124,,resizemode-4,quality-100/crypto.jpg","https://phantom-marca.unidadeditorial.es/0cec36df05a4e7d6d9126fbed7950a9f/crop/0x0/2041x1150/resize/828/f/webp/assets/multimedia/imagenes/2022/01/07/16415655339687.jpg","https://image.shutterstock.com/image-vector/crypto-currencycrypto-currency-coin-international-600w-2044413572.jpg"]
 
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [selectedImage, setSelectedImage] = useState(images[0])
@@ -37,8 +42,8 @@ function Carousel() {
 
     return (
         <StyledCarousel>
-            <img src={images[selectedIndex]} alt="" />
             <button onClick={previous}>{"<"} </button>
+            <img src={selectedImage} alt="not found" />
             <button onClick={next}>{">"} </button>
         </StyledCarousel>
     );
