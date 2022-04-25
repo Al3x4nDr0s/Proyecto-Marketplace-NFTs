@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
-const Usuario = require("../models/User.js");
+const User = require("../models/User.js");
 const User_type = require("../models/User_type.js");
 const { generateJwt } = require('../helpers/generateJwt');
+const { response } = require('express');
 // createUser, getUser, getUsers, updateUser, deleteUser 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
@@ -17,7 +18,7 @@ const createUser = async (req, res) => {
         }
         //? role user set id user comun default
         const user_type = await User_type.findOne({ name: 'user' });
-        const usuario = new Usuario({
+        const usuario = new User({
             username,
             firstName,
             lastName,
@@ -58,12 +59,12 @@ const getUsers = async (req, res) => {
     const end = page * limit;
     try {
         
-        const users = await Usuario.find({})
+        const users = await User.find({})
             .skip(start)
             .limit(limit)
             .populate('user_type', 'name')
             .exec();
-        const total = await Usuario.countDocuments();
+        const total = await User.countDocuments();
         res.json({
             ok: true,
             user: req.uid, //@ id del usuario que esta logueado
@@ -82,18 +83,26 @@ const getUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {}
-const updateUser = async (req, res) => {
-    try {
-        const userUpdate = await User.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        res.json(userUpdate);
-        
-    } catch (error) {
-        res.status(404).json({error: 'could not be modified'})
+const updateUser =  (req, res) => {
+    
+    const { id } = req.params;
+    const user = req.body;
+    const newUserInfo = {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        image: user.image,
+        favorite: user.favorite,
+        description: user.description
     }
+
+         User.findByIdAndUpdate( id, newUserInfo, { new: true })
+          .then(result => {
+              response.json(result)
+          })
+}
+       
+
     
     // try {
     //     if(!req?.body?.id) {
@@ -115,7 +124,7 @@ const updateUser = async (req, res) => {
     // } catch (error) {
     //     res.status(404).json({error: 'could not be modified'})
     // }
-}
+
 const deleteUser = async (req, res) => {
     const { id } = req.params
     try {
