@@ -3,7 +3,7 @@ const Nft = require ('../models/Nft');
 const getAllNfts = async (req, res) => {
     try {
         const { name } = req.query;
-        const allNfts = await Nft.find();
+        const allNfts = await Nft.find({})
         if (name){
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);

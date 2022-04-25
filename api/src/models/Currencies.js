@@ -6,4 +6,4 @@ const Currencies = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Currencie', Currencies);
+module.exports = mongoose.model('Currencies', Currencies);
