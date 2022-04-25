@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  border: 1px solid ${(props) => props.color || "#272640"};
+  border: 1px solid ${(props) => props.color || "#006466"};
   border-radius: 5px;
   cursor: pointer;
   color: var(--secondFontColor);
-  padding: 20px 40px;
+  padding: .8rem 3rem;
   font-weight: 600;
   font-size: 1.2rem;
   outline: none;
-  background: ${(props) => props.color || "#272640"};
+  background: ${(props) => props.color || "#006466"};
   display: flex;
   img {
       height: 20px;

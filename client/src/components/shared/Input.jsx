@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`
   background-color: var(--secondFontColor);
-  border-radius: 5px;
-//   padding: 10px 40px;
+  border-radius: 15px;
+  width: 15%;
+  height: 38px;
+  // padding: .5rem 3rem;
   outline: none;
   border: 1.5px solid #01022f;
 `;
