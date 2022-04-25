@@ -5,10 +5,11 @@ import Footer from "./components/Footer/Footer.jsx";
 import Home from "./components/Home/Home";
 
 import './App.css';
+import Header from './components/Header/Header';
 function MainLayout() {
   return (
     <div>
-      {/* <NavBar/> */}
+      <Header/>
       <Outlet />
       <Footer />
     </div>
