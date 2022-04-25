@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route exact path={"/"} element={<LandingPage />} />
-            <Route exact path={"/home"} element={<h1>Home</h1>} />
+            <Route exact path={"/home"} element={<Home/>} />
           </Route>
         </Routes>
       </BrowserRouter>
