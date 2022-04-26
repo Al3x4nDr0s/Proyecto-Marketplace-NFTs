@@ -1,13 +1,13 @@
-const Categorie = require('../models/Category');
+const Category = require('../models/Category');
 const Collection = require('../models/Collection_nft');
-const Currencie = require('../models/Currencies');
+const Currencies = require('../models/Currencies');
 const Files_types = require('../models/Files_types');
 const Sales_types = require('../models/Sales_types');
 
-const createCategorie = async (req, res) => {
+const createCategory = async (req, res) => {
     try {
-        const newCategorie = new Categorie(req.body);
-        await newCategorie.save();
+        const newCategory = new Category(req.body);
+        await newCategory.save();
         res.status(200).json({
             ok: true,
             msg: 'Categorie created'
@@ -16,6 +16,20 @@ const createCategorie = async (req, res) => {
         res.status(500).json({
             ok: false,
             msg: "Ups ocurrio un problema"
+        });
+        console.log(error);
+    };
+};
+
+const deleteCategory = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const delCategory = await Category.findByIdAndDelete(id);
+        res.json(delCategory);
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Category not Found"
         });
         console.log(error);
     };
@@ -38,13 +52,27 @@ const createCollection = async (req, res) => {
     };
 };
 
-const createCurrencie = async (req, res) => {
+const deleteCollection = async(req, res) => {
+    const { id } = req.params;
     try {
-        const newCurrencie = new Currencie(req.body);
-        await newCurrencie.save();
+        const delCollection = await Collection.findByIdAndDelete(id);
+        res.json(delCollection);
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Collection not Found"
+        });
+        console.log(error);
+    };
+};
+
+const createCurrencies = async (req, res) => {
+    try {
+        const newCurrencies = new Currencies(req.body);
+        await newCurrencies.save();
         res.status(200).json({
             ok: true,
-            msg: 'Currencie created'
+            msg: 'Currency created'
         });
     } catch (error) {
         res.status(500).json({
@@ -55,7 +83,21 @@ const createCurrencie = async (req, res) => {
     };
 };
 
-const createFiles_type = async (req, res) => {
+const deleteCurrencies = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const delCurrencies = await Currencies.findByIdAndDelete(id);
+        res.json(delCurrencies);
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Currency not Found"
+        });
+        console.log(error);
+    };
+};
+
+const createFiles_types = async (req, res) => {
     try {
         const newFiles_type = new Files_types(req.body);
         await newFiles_type.save();
@@ -72,10 +114,24 @@ const createFiles_type = async (req, res) => {
     };
 };
 
-const createSales_type = async (req, res) => {
+const deleteFiles_types = async(req, res) => {
+    const { id } = req.params;
     try {
-        const newSales_type = new Sales_types(req.body);
-        await newSales_type.save();
+        const delFiles_types = await Files_types.findByIdAndDelete(id);
+        res.json(delFiles_types);
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Files types not Found"
+        });
+        console.log(error);
+    };
+};
+
+const createSales_types = async (req, res) => {
+    try {
+        const newSales_types = new Sales_types(req.body);
+        await newSales_types.save();
         res.status(200).json({
             ok: true,
             msg: 'Sales_types created'
@@ -89,5 +145,21 @@ const createSales_type = async (req, res) => {
     };
 };
 
-module.exports = {createCategorie, createCollection, createCurrencie, createFiles_type, createSales_type};
+const deleteSales_types = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const delSales_types = await Sales_types.findByIdAndDelete(id);
+        res.json(delSales_types);
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Files types not Found"
+        });
+        console.log(error);
+    };
+};
+
+module.exports = {createCategory, createCollection, createCurrencies, createFiles_types,
+     createSales_types, deleteCategory, deleteCollection, deleteCurrencies, deleteFiles_types,
+    deleteSales_types};
 
