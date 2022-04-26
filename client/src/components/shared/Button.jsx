@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  border: 1px solid ${(props) => props.color || "#272640"};
-  border-radius: 5px;
+  border: 1px solid ${(props) => props.color || "var(--mainBackGroundButtonColor)"};
+  border-radius: .5rem;
+  margin: .5rem 0 .8rem 0;
   cursor: pointer;
   color: var(--secondFontColor);
-  padding: 20px 40px;
+  padding: ${(props) => props.padding || ".2rem 1.8rem"};
   font-weight: 600;
   font-size: 1.2rem;
   outline: none;
-  background: ${(props) => props.color || "#272640"};
+  background: ${(props) => props.color || "var(--mainBackGroundButtonColor)"};
   display: flex;
   img {
       height: 20px;
@@ -18,8 +19,8 @@ const StyledButton = styled.button`
 
   &:hover{
       background: white;
+      transition: all .9s ease;
       color: ${(props) => props.color || "var(--mainFontColor)"};
-      border: 1px solid ${(props) => props.color || "#312244"};
   }
 `;
 
@@ -28,8 +29,8 @@ const iconDictionary = {
 }
 
 export default function Button(props) {
-  const { title, color, icon, onClick } = props;
-  return <StyledButton color={color} onClick={onClick}>
+  const { title, color, icon, onClick, padding, width } = props;
+  return <StyledButton color={color} onClick={onClick} width={width} padding={padding}>
       {icon && <img src={iconDictionary[icon] }/>}
       {title}
       </StyledButton>;

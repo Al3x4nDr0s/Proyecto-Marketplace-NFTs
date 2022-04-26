@@ -11,7 +11,16 @@
   --secondFontColor: #DFDFDF;
   --mainBackGroundColor: #0F3942;
   --mainBackGroundButtonColor : #22A4A7;
+  --backgroundInput : #c7d1d3;
+  --mainContainersColor: #002E39;
   --loginBackGroundButtonColor : #006466;
   --colorError : #B54545;
   --colorInfo : #AEAEAE;
+  --large : 18px;
+  --medium : 16px;
+  --small : 14px;
+}
+
+body{
+  background-color: var(--mainBackGroundColor);
 }
