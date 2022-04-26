@@ -39,10 +39,20 @@ const login = async (req, res) => {
             msg: 'Error inesperado'
         });
     }
+}
+
+const googleSignIn = async (req, res) => {
+    console.log(req.body)
+
+    res.json({
+        ok: true,
+        user: req.body
+    })
 
 }
 
 //?export 
 module.exports = { 
-    login
+    login,
+    googleSignIn
 }

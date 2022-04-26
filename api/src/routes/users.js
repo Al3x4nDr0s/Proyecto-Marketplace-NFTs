@@ -19,5 +19,4 @@ router.post('/',
 );
 router.get('/', validarJwt, getUsers);
 
-
 module.exports = router;

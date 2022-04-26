@@ -32,7 +32,6 @@ const createUser = async (req, res) => {
         await usuario.save();
         //? generar jwt
         const token = await generateJwt(usuario.id);
-        console.log(usuario._id);
         //? respuesta
         res.json({
             ok: true,
@@ -65,12 +64,14 @@ const getUsers = async (req, res) => {
             .populate('user_type', 'name')
             .exec();
         const total = await Usuario.countDocuments();
+        const countPages = Math.ceil(total / limit);
         res.json({
             ok: true,
             user: req.uid, //@ id del usuario que esta logueado
             users,
             total,
-            end
+            end,
+            countPages
         });
 
     } catch (error) {
