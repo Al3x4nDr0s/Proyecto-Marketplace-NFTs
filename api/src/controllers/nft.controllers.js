@@ -18,7 +18,7 @@ const getAllNfts = async (req, res) => {
         } else {
             return res.status(200).json(allNfts);
         }
-        res.json(allNfts);
+        
     } catch (error) {
         res.status(404).json({
             msg: '404 Not Found'
@@ -52,4 +52,32 @@ const getNftById = async (req, res) =>{
     };
 };
 
-module.exports = { getAllNfts, createNft };
+const putNftUpdate = async (res, req) => {
+    try {
+        const nftUpdate = await Nft.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true } //es para que nos devuelva el actualizado y no el anterior
+        );
+        res.json(nftUpdate);
+        
+    } catch (error) {
+        res.status(404).json({error: 'could not be modified'})
+    }
+}
+const deleteNft = async (req, res) => {
+    const { id } = req.params
+    try {
+        const nftDelete = await Nft.findByIdAndDelete(id);
+        res.json(nftDelete);
+        
+    } catch (error) {
+        res.status(404).json({error: 'could not delete'})
+    }
+}
+
+module.exports = { 
+    getAllNfts,
+    putNftUpdate,
+    deleteNft
+};
