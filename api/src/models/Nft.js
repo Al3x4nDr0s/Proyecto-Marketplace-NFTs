@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const Nft = mongoose.Schema({
+const Nft = Schema({
     name: {
         type: String,  
     },
@@ -10,47 +10,46 @@ const Nft = mongoose.Schema({
     description: {
         type: String
     },
-    details: [{
+    details: {
         user_creator: String,
         owner: String,
         contract_address: String,
         token_id: Number
-    }],
+    },
     rarity: {
         type: String
     },
     create_date: {
-        type: [Date]
-        
+        type: String
     },
-    collectionNft: {
-        type: Boolean || [{
-            type: mongoose.Schema.ObjectId,
+    collection_nft: {
+        type: Boolean || {
+            type: Schema.Types.ObjectId,
             ref: 'Collection_nft'  
-        }]
+        }
     },
-    category: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Categorie'  
-    }],
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'  
+    },
     price: {
-        type: int
+        type: Number
     },
-    sales_types: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'sales_types'  
-    }],
-    currencies:  [{
-        type: mongoose.Schema.ObjectId,
+    sales_types: {
+        type: Schema.Types.ObjectId,
+        ref: 'Sales_types'  
+    },
+    currencies:  {
+        type: Schema.Types.ObjectId,
         ref: 'Currencies'  
-    }],
-    files_types: [{
-        type: mongoose.Schema.ObjectId,
+    },
+    files_types: {
+        type: Schema.Types.ObjectId,
         ref: 'Files_types'  
-    }],
+    },
 });
 
-module.exports = mongoose.model('Nft', Nft);
+module.exports = model('Nft', Nft);
 
 
 
