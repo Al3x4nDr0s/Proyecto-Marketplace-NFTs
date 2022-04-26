@@ -1,9 +1,10 @@
 const { Schema, model } = require('mongoose');
 
-const Currencies = Schema({
+const Sales_types = Schema({
     name: {
         type: String
     }
+
 });
 
-module.exports = model('Currencies', Currencies);
+module.exports = model('Sales_types', Sales_types);

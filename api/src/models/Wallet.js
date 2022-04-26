@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const Wallet = mongoose.Schema({
-    name: [{ bnb: Number, busd: Number, eth: Number }],
-
+const Wallet = Schema({
+    name: { bnb: Number, busd: Number, eth: Number },
 });
 
-module.exports = mongoose.model('Wallet', Wallet);
+module.exports = model('Wallet', Wallet);

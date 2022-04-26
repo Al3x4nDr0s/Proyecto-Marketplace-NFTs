@@ -4,7 +4,7 @@ const { createCategorie, createCollection, createCurrencie, createFiles_type, cr
 
 router.post('/categorie', createCategorie);
 router.post('/collection', createCollection);
-router.post('/currencie', createCurrencie);
+router.post('/currencies', createCurrencie);
 router.post('/files_type', createFiles_type);
 router.post('/sales_type', createSales_type);
 

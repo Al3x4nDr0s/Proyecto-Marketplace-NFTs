@@ -4,6 +4,11 @@ const getAllNfts = async (req, res) => {
     try {
         const { name } = req.query;
         const allNfts = await Nft.find({})
+            .populate('category',{ name:1, _id:0})
+            .populate('collection_nft', 'name')
+            .populate('currencies', 'name')
+            .populate('sales_types', 'name')
+            .populate('files_types', 'name')
         if (name){
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);

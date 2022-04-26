@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const Collection_nft = mongoose.Schema({
+const Collection_nft = Schema({
     name: {
         type: String,  
     }
-    
 });
 
-module.exports = mongoose.model('Collection_nft', Collection_nft);
+module.exports = model('Collection_nft', Collection_nft);
