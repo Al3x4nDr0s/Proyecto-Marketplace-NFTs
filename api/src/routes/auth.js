@@ -13,9 +13,7 @@ router.post('/',
     ],
     login
 );
-router.post('/google',  
-    googleSignIn
-);
+router.post('/google', googleSignIn);
 router.get('/renew', validarJwt, renewToken)
 
 

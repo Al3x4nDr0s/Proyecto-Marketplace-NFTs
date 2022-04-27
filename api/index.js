@@ -6,6 +6,7 @@ const routes = require ('./src/routes/index.js');
 const express = require ('express');
 const server = express();
 const { dbConnection } = require('./src/databse/config'); 
+var cors = require('cors')
 
 //? use cors 
 // mongoose.connect(process.env.DB_CONNECTION)
@@ -20,14 +21,16 @@ server.set('port', process.env.PORT || 4000);
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(cookieParser());
-server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4000'); 
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
-//routes
+server.use(cors()) //? cors para que se pueda hacer peticiones desde otro dominio 
+//? cors options 
+// server.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*'); 
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+//     next();
+// });
+
 server.use('/', routes);
 
 //control de errores

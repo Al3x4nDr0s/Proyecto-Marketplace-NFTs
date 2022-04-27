@@ -46,7 +46,6 @@ const googleSignIn = async (req, res) => {
     const googleToken = req.body.tokenId;
     const { givenName, familyName } = req.body;
     try {
-        
         const { name, email, img } = await googleVerify(googleToken);
         const usuarioDb = await Usuario.findOne({ email });
         //? role user set id user comun default
