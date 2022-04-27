@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {useNavigate, Link} from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import Modal from './Modal';
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"

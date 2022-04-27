@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Modal from '../shared/Modal.jsx';
+import Modal from '../shared/Modal';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';

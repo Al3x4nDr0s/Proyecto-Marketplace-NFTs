@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom"
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer/Footer.jsx";
