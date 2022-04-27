@@ -29,10 +29,10 @@ const UserSchema = Schema({
             ref: 'User_type'  
     }],
     favorite: {
-        type: String
+        type: Array
     },
     collectionNft: {
-        type: String
+        type: Array
     },
     wallet: [{
         type: Schema.Types.ObjectId,
@@ -40,6 +40,12 @@ const UserSchema = Schema({
     }],
     description: {
         type: String
+    },
+    count_sales: {
+        type: Number
+    },
+    money_sales: {
+        type: Number
     }
 });
 //? schema methods for user model

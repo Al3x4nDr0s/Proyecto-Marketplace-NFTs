@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require("../models/User.js");
+const Usuario = require("../models/User.js");
 const User_type = require("../models/User_type.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
@@ -34,7 +34,6 @@ const createUser = async (req, res) => {
         await usuario.save();
         //? generar jwt
         const token = await generateJwt(usuario.id);
-        console.log(usuario._id);
         //? respuesta
         res.json({
             ok: true,
@@ -65,13 +64,15 @@ const getUsers = async (req, res) => {
             .limit(limit)
             .populate('user_type', 'name')
             .exec();
-        const total = await User.countDocuments();
+        const total = await Usuario.countDocuments();
+        const countPages = Math.ceil(total / limit);
         res.json({
             ok: true,
             user: req.uid, //@ id del usuario que esta logueado
             users,
             total,
-            end
+            end,
+            countPages
         });
 
     } catch (error) {
@@ -84,6 +85,7 @@ const getUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {}
+
 const updateUser =  (req, res) => {
     
     const { id } = req.params;
