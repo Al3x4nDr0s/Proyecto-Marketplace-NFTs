@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {useNavigate, Link} from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import Modal from './Modal';
+import Modal from '../Modal.jsx';
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"
@@ -10,20 +10,20 @@ import {createPortal} from "react-dom"
 const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
-    background-color: var(--mainContainersColor);
+    /* background-color: var(--mainContainersColor); */
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    height: 85px;
     max-width: 100vw;
     width: 100%;
-    padding: 10px 25px;    
+    padding: 10px 25px;  
+    margin-bottom: 1.5rem;  
     color : var(--secondFontColor);
     font-size: 18px;
     flex-wrap:wrap;
-    border-radius: 15px;
     a{
         color: white;
         text-decoration: none;

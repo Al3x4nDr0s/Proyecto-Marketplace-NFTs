@@ -45,7 +45,9 @@ export const ContainerBodyUser = styled.div`
 `;
 
 export const ContainerMisPreferencias = styled.div`
-  background-color: var(--mainContainersColor);
+  /* background-color: #31313145; */
+  background-color: #50505068;
+  /* background-color: var(--mainContainersColor); */
   margin-top: 0.5rem;
   width: 92%;
   border-radius: 0.6rem;
@@ -76,13 +78,16 @@ export const ListaPreferencias = styled.ul`
     a {
       cursor: pointer;
       color: var(--mainBackGroundButtonColor);
+      /* color: rgba(65, 17, 135); */
       font-weight: 700;
     }
   }
 `;
 
 export const ContenedorUltimasVentas = styled.div`
-  background-color: var(--mainContainersColor);
+  /* background-color: #31313145; */
+  background-color: #50505068;
+  /* background-color: var(--mainContainersColor); */
   border-radius: 0.6rem;
   width: 92%;
   padding: 1.5rem;
@@ -101,7 +106,7 @@ export const ImgNft = styled.div`
   background: var(--colorInfo);
   height: 85px;
   margin-right: 10px;
-  border-radius: 1.8rem;
+  border-radius: .8rem;
   width: 85px;
 `;
 
@@ -113,4 +118,11 @@ export const ImgPerfil = styled.div`
   border-radius: 50%;
   border: 1.2px solid var(--mainBackGroundButtonColor);
   width: 60px;
+`;
+
+export const InputData = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
 `;

@@ -16,7 +16,7 @@ const ContainerFooter = styled.div`
   justify-content: space-between;
   padding-top: 1rem;
   margin-top: auto;
-  background-color: var(--mainContainersColor);
+  /* background-color: var(--mainContainersColor); */
   height: 100%;
 `;
 
@@ -83,7 +83,7 @@ const ContainerSoporte = styled.div`
 
 const Footer = () => {
   return (
-    <footer>
+    <footer style={{marginTop: "1.5rem"}}>
       <ContainerFooter>
         <ContainerImagen>
           <Link to="/home">
@@ -138,7 +138,7 @@ const Footer = () => {
       </ContainerFooter>
       <h4
         style={{
-          backgroundColor: "var(--mainContainersColor)",
+          // backgroundColor: "var(--mainContainersColor)",
           textAlign: "center",
           color: "var(--colorInfo)",
           paddingBottom: "1rem",

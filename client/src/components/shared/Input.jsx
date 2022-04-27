@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`
   background-color: var(--secondFontColor);
-  border-radius: 15px;
-  width: 15%;
-  height: 38px;
+  border-radius: .3rem;
+  width: ${(props) => props.width || "15%"};
+  height: ${(props) => props.height || "38px"};
   // padding: .5rem 3rem;
+  padding: ${(props) => props.padding || "0"};
   outline: none;
   border: none;
 `;
 
 export default function Input(props) {
-  const { placeholder, value, type, name, label, onChange, onBlur, width, height } = props;
+  const { placeholder, value, type, name, label, onChange, onBlur, width, height, padding } = props;
   // const Format = () => (
   //   <StyledInput
   //     placeholder={placeholder}
@@ -33,6 +34,7 @@ export default function Input(props) {
       height={height}
       name={name}
       label={label}
+      padding={padding}
       onChange={onChange}
       onBlur={onBlur}
       id={name}

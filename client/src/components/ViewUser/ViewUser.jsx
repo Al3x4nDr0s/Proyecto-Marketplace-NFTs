@@ -9,6 +9,7 @@ import {
   ContenedorUltimasVentas,
   ContainerEliminarUser,
   ImgPerfil,
+  InputData
 } from "./elements/StyleViewUser.jsx";
 import { CardVenta } from "./CardVenta.jsx";
 import Input from "../shared/Input.jsx";
@@ -45,10 +46,12 @@ export const ViewUser = () => {
         <div style={{ display: "flex" }}>
           <ImgPerfil></ImgPerfil>
           <div>
-          <h2>
-            {username} - Level {level}
-          </h2>
-          <p style={{color: "var(--colorInfo)"}}>Calificacion como vendedor - 10/10</p>
+            <h2>
+              {username} - Level {level}
+            </h2>
+            <p style={{ color: "var(--colorInfo)" }}>
+              Calificacion como vendedor - 10/10
+            </p>
           </div>
         </div>
 
@@ -89,41 +92,39 @@ export const ViewUser = () => {
               style={{
                 display: "grid",
                 fontSize: "1.2rem",
-                marginTop: ".5rem",
+                marginBottom: ".8rem",
               }}
             >
               <label>Usuario</label>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: ".6rem" }}
-              >
-                <Input type="text" placeholder={user.username} />
-                <Button title="CAMBIAR USUARIO" padding=".25rem 2rem"></Button>
-              </div>
+              <InputData>
+                <Input type="text" placeholder={user.username} height="32px" padding=".4rem" width="12rem"/>
+                <Button title="CAMBIAR USUARIO" padding=".28rem 1.8rem" margin="0"></Button>
+              </InputData>
             </div>
             <div
               style={{
                 display: "grid",
                 fontSize: "1.2rem",
-                marginTop: ".5rem",
+                margin: ".8rem auto",
               }}
             >
               <label>Clave</label>
               <div
-                style={{ display: "flex", alignItems: "center", gap: ".6rem" }}
+                style={{ display: "flex", alignItems: "center", gap: ".6rem"}}
               >
-                <Input type="text" placeholder="*************" />
-                <Button title="CAMBIAR CLAVE" padding=".25rem 2rem"></Button>
+                <Input type="text" placeholder="*************" height="32px" padding=".4rem" width="12rem" />
+                <Button title="CAMBIAR CLAVE" padding=".25rem 2rem" margin="0 .42rem"></Button>
               </div>
             </div>
             <div
               style={{
                 display: "grid",
                 fontSize: "1.2rem",
-                marginTop: ".5rem",
+                margin: ".8rem auto",
               }}
             >
               <label>Numero celular</label>
-              <Input type="text" placeholder="+54 387 65678904" />
+              <Input type="text" placeholder="+54 387 65678904" height="32px" padding=".4rem" width="12rem" />
             </div>
           </ContainerMisDatos>
           <ContainerEliminarUser>

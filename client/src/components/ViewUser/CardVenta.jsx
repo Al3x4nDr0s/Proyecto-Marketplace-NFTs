@@ -10,7 +10,7 @@ export const CardVenta = (props) => {
         {/* <h3 style={{borderBottom: '1.2px solid var(--mainBackGroundButtonColor)'}}>{title}</h3> */}
         <h3>{title}</h3>
         <p style={{fontSize: '.9rem', color: 'var(--colorInfo)'}}>
-          {tiempo} -{tipo}
+          {tiempo} - {tipo}
         </p>
       </div>
     </UltimasVentas>

@@ -8,8 +8,6 @@ function LandingPage() {
             <h1 style={{fontFamily: 'Kanit'}}>Welcome!</h1>
             <Link to="/home" style={{fontFamily: 'Kanit', textDecoration: 'none', color: '#065A60'}}>Click Here</Link>
             <Button title="aceptar"/>
-            {/* <Button color="red" title="aceptar"/>
-            <Button color="orange" icon="search" title="aceptar"/> */}
         </div>
     );
 }
