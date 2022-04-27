@@ -9,6 +9,9 @@ const getAllNfts = async (req, res) => {
             .populate('currencies', { name:1, _id:0})
             .populate('sales_types', { name:1, _id:0})
             .populate('files_types', { name:1, _id:0})
+            .populate('details.owner', { username:1, _id:0})
+            .populate('details.user_creator', { username:1, _id:0})
+            
         if (name){
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);
