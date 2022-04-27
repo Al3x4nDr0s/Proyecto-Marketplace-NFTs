@@ -5,6 +5,12 @@
   font-family: "Kanit", sans-serif;
 }
 
+body{
+  /* background: rgb(71,17,137);
+  background: linear-gradient(45deg, rgba(71,17,137,1) 0%, rgba(53,7,93,1) 49%, rgba(19,5,78,1) 100%); */
+  background: var(--mainBackGroundColor);
+}
+
 :root {
   --mainFontColor: #171717;
   --secondFontColor: #dfdfdf;
