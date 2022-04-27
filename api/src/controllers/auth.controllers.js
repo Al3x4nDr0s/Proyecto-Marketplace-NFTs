@@ -15,7 +15,7 @@ const login = async (req, res) => {
                 ok: false,
                 msg: 'El email no esta registrado'
             });
-        }
+        };
         //? validar password
         const validPassword = await bcrypt.compareSync(password, existEmail.password);
         if (!validPassword) {
@@ -23,7 +23,7 @@ const login = async (req, res) => {
                 ok: false,
                 msg: 'La contraseña es incorrecta'
             });
-        }
+        };
         //? generar jwt
         const token = await generateJwt(existEmail.id);
         //? respuesta
@@ -39,8 +39,8 @@ const login = async (req, res) => {
             ok: false,
             msg: 'Error inesperado'
         });
-    }
-}
+    };
+};
 
 const googleSignIn = async (req, res) => {
     const googleToken = req.body.tokenId;

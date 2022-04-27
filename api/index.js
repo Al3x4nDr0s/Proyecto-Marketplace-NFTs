@@ -14,14 +14,14 @@ const { dbConnection } = require('./src/databse/config');
 dbConnection();
 
 //settings
-server.set('port', process.env.PORT || 3000);
+server.set('port', process.env.PORT || 4000);
 
 //middlewares
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(cookieParser());
 server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); 
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4000'); 
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
