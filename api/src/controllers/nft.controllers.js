@@ -9,6 +9,7 @@ const getAllNfts = async (req, res) => {
             .populate('currencies', { name:1, _id:0})
             .populate('sales_types', { name:1, _id:0})
             .populate('files_types', { name:1, _id:0})
+            .populate('user', 'username')
         if (name){
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);
@@ -77,6 +78,7 @@ const putNftUpdate = async (res, req) => {
         res.status(404).json({error: 'could not be modified'});
     };
 };
+
 const deleteNft = async (req, res) => {
     const { id } = req.params;
     try {
