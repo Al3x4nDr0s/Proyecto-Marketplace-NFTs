@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useNavigate, Link} from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Modal from './Modal';
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
@@ -80,9 +80,9 @@ function Header() {
     
     return (
         <StyledNav>
-            <X/>
+            {/* <X/> */}
             <LogoContainer onClick={(e)=>handleLogoClick(e)}>
-                <img src={require("./logo.png")} alt="not found" />
+                <img src={require("../images/logo.png")} alt="not found" />
             </LogoContainer>
             <ButtonsContainer >
                 <Link to={"/home"}>Home</Link>
