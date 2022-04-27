@@ -6,12 +6,19 @@
   
 }
 
+body{
+  background: rgb(71,17,137);
+  background: linear-gradient(45deg, rgba(71,17,137,1) 0%, rgba(53,7,93,1) 49%, rgba(19,5,78,1) 100%);
+}
+
 :root {
   --mainFontColor: #171717;
   --secondFontColor: #DFDFDF;
-  --mainBackGroundColor: #0F3942;
+  --mainBackgroundColor: #0F3942;
+  --secondBackgroundColor: #0B132B;
   --mainBackGroundButtonColor : #22A4A7;
   --loginBackGroundButtonColor : #006466;
   --colorError : #B54545;
   --colorInfo : #AEAEAE;
+  
 }

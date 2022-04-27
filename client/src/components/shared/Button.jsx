@@ -6,9 +6,9 @@ const StyledButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   color: var(--secondFontColor);
-  padding: 20px 40px;
+  padding: 5px 40px;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   outline: none;
   background: ${(props) => props.color || "#272640"};
   display: flex;

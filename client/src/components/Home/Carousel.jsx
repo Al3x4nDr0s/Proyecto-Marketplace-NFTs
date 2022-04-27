@@ -6,14 +6,19 @@ import styled from "styled-components"
 const StyledCarousel = styled.div`
     display : flex;
     flex-direction: row;
-    gap : 6px;
+    margin: 20px auto;
+    height: 500px;
+    width: 800px;
     button{
+        font-size: 30px;
         border: none;
+        width: 20px;
         cursor:pointer;
+        background:transparent;
     }
     img{
-        height: 900px;
-        weight: 750px;
+        height: 100%;
+        width: 100%;
     }
 `
 
@@ -24,7 +29,6 @@ function Carousel() {
 
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [selectedImage, setSelectedImage] = useState(images[0])
-    console.log(selectedIndex)
     const selectNewImage = ( index, images, next = true) => {
         const condition = next ? selectedIndex < images.length - 1 : selectedIndex > 0;
         const nextIndex = next ? (condition ? selectedIndex + 1 : 0) : condition ? selectedIndex - 1 : images.length -1;
