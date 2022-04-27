@@ -12,7 +12,6 @@ import {
 } from "./elements/StyleViewUser.jsx";
 import { CardVenta } from "./CardVenta.jsx";
 import Input from "../shared/Input.jsx";
-// import {Link} from 'react-router-dom'
 import Button from "../shared/Button.jsx";
 
 const user = {

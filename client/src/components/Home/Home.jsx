@@ -1,9 +1,12 @@
 import React from 'react';
 
+import {ViewNft} from './elements/ViewNft.jsx'
+
+
 function Home() {
     return (
         <div>
-            <h1>s</h1>
+            
         </div>
     );
 }

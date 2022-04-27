@@ -1,0 +1,502 @@
+[
+    {
+        "_id": "6265c9bbdb43346d61ec28f2",
+        "name": "Alpha",
+        "image": "https://st.depositphotos.com/1325784/1351/v/950/depositphotos_13514172-stock-illustration-original-watercolor-poppy-flower-in.jpg",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "Ale",
+                "owner": "Ale",
+                "contract_address": "fdfgnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546516
+            }
+        ],
+        "crate_date": "24/4/2022 18:53",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[1],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f3",
+        "name": "Beta",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "Nacho",
+                "owner": "Iron Maiden",
+                "contract_address": "sdmfnksndnr5n8iggwecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546517
+            }
+        ],
+        "crate_date": "24/4/2022 18:55",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[2],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Audio"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f4",
+        "name": "Gamma",
+        "image": "https://st3.depositphotos.com/1724125/15739/v/1600/depositphotos_157390184-stock-illustration-cartoon-evil-gamer-troll.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "Iron Maiden",
+                "owner": "Iron Maiden",
+                "contract_address": "ñkfhnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546518
+            }
+        ],
+        "crate_date": "24/4/2022 18:56",
+        "collectionNft": false,
+        "category": ["Gaming"],
+        "price":[3],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f5",
+        "name": "Delta",
+        "image": "https://st.depositphotos.com/36986958/55884/v/1600/depositphotos_558843634-stock-illustration-stinger-bee-mascot-esport-logo.jpg",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "Ale",
+                "contract_address": "sdffnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546519
+            }
+        ],
+        "crate_date": "24/4/2022 18:58",
+        "collectionNft": false,
+        "category": ["eSports"],
+        "price":[4],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f6",
+        "name": "Epsilon",
+        "image": "https://st.depositphotos.com/1724125/5053/v/950/depositphotos_50531475-stock-illustration-evil-christmas-elf.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "PearlJam",
+                "contract_address": "poifnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546510
+            }    
+        ],
+        "crate_date": "24/4/2022 18:59",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[5],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f7",
+        "name": "Zeta",
+        "image": "https://st.depositphotos.com/1338026/3075/v/950/depositphotos_30757381-stock-illustration-tree-with-colorful-sport-icons.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "Gabriel",
+                "owner": "Gabriel",
+                "contract_address": "jhgfnksndnr5n4kjn5wecllsmcwaeoifbn304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546516
+            }
+        ],
+        "crate_date": "24/4/2022 19:01",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[6],
+        "sales_types": ["Live Auction"],
+        "currencies":["BNB"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f8",
+        "name": "Eta",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {   "user_creator": "Gabriel",
+                "owner": "Ale",
+                "contract_address": "mdfvjksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546511
+            }
+        ],
+        "crate_date": "24/4/2022 19:02",
+        "collectionNft": false,
+        "category": ["Collectables"],
+        "price":[7],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Audio"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28f9",
+        "name": "Teta",
+        "image": "https://st.depositphotos.com/1157310/1900/v/950/depositphotos_19005359-stock-illustration-gamer-playing-games-console-too.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "Nacho",
+                "owner": "AliceInChains",
+                "contract_address": "yuifnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546512
+            }
+        ],
+        "crate_date": "24/4/2022 19:03",
+        "collectionNft": false,
+        "category": ["Gaming"],
+        "price":[8],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28fa",
+        "name": "Iota",
+        "image": "https://st2.depositphotos.com/1448225/9009/v/950/depositphotos_90094424-stock-illustration-excited-boy-holding-controller.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "AliceInChains",
+                "owner": "AliceInChains",
+                "contract_address": "dfrfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546513
+            }
+        ],
+        "crate_date": "24/4/2022 19:05",
+        "collectionNft": false,
+        "category": ["Gaming"],
+        "price":[9],
+        "sales_types": ["Fixed Price"],
+        "currencies":["BNB"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28fb",
+        "name": "Kappa",
+        "image": "https://st.depositphotos.com/36986958/55884/v/1600/depositphotos_558843780-stock-illustration-gamer-kids-mascot-esport-logo.jpg",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "Ale",
+                "owner": "AliceInChains",
+                "contract_address": "ñlkfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546514
+            }
+        ],
+        "crate_date": "24/4/2022 19:06",
+        "collectionNft": false,
+        "category": ["eSports"],
+        "price":[10],
+        "sales_types": ["Live Auction"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28fc",
+        "name": "Lambda",
+        "image": "https://st2.depositphotos.com/1025323/5705/i/950/depositphotos_57055695-stock-photo-kiss-of-inner-paint.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "Nacho",
+                "contract_address": "werfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546515
+            }
+        ],
+        "crate_date": "24/4/2022 19:08",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[11],
+        "sales_types": ["Live Auction"],
+        "currencies":["BNB"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28fd",
+        "name": "Mi",
+        "image": "https://st2.depositphotos.com/1339380/5851/v/950/depositphotos_58511375-stock-illustration-healthy-lifestyle.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "Ale",
+                "owner": "Ale",
+                "contract_address": "sgofnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546520
+            }
+        ],
+        "crate_date": "24/4/2022 19:09",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[12],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28fe",
+        "name": "Ni",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "Gabriel",
+                "owner": "Gabriel",
+                "contract_address": "lugfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546521
+            }
+        ],
+        "crate_date": "24/4/2022 19:11",
+        "collectionNft": false,
+        "category": ["Collectables"],
+        "price":[13],
+        "sales_types": ["Fixed Price"],
+        "currencies":["BUSD"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec28ff",
+        "name": "Csi",
+        "image": "https://st.depositphotos.com/1229718/4505/i/950/depositphotos_45058869-stock-photo-sport-psychology.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "Ale",
+                "owner": "Gabriel",
+                "contract_address": "zxcfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546522
+            }
+        ],
+        "crate_date": "24/4/2022 19:12",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[14],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2900",
+        "name": "Omicron",
+        "image": "https://st.depositphotos.com/2765356/56386/v/1600/depositphotos_563865518-stock-illustration-man-wearing-virtual-reality-glasses.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "Gabriel",
+                "owner": "Ale",
+                "contract_address": "cxzfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546532
+            }
+        ],
+        "crate_date": "24/4/2022 19:14",
+        "collectionNft": false,
+        "category": ["Entertainment"],
+        "price":[15],
+        "sales_types": ["Live Auction"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2901",
+        "name": "Pi",
+        "image": "https://st2.depositphotos.com/30632662/46555/v/600/depositphotos_465554164-stock-video-portrait-of-a-cute-little.mp4",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "Nacho",
+                "owner": "Ale",
+                "contract_address": "cvbfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546523
+            }
+        ],
+        "crate_date": "24/4/2022 19:15",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[16],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Video"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2902",
+        "name": "Rho",
+        "image": "https://st3.depositphotos.com/20149864/36298/v/1600/depositphotos_362989502-stock-illustration-gamer-mascot-logo-design-vector.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "Nacho",
+                "owner": "AliceInChains",
+                "contract_address": "hhgfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546524
+            }
+        ],
+        "crate_date": "24/4/2022 19:16",
+        "collectionNft": false,
+        "category": ["Gaming"],
+        "price":[17],
+        "sales_types": ["Live Auction"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2903",
+        "name": "Sigma",
+        "image": "https://st.depositphotos.com/1008522/2010/v/950/depositphotos_20108855-stock-illustration-sports-seamless-pattern-vector.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "AliceInChains",
+                "owner": "AliceInChains",
+                "contract_address": "lllfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546525
+            }
+        ],
+        "crate_date": "24/4/2022 19:18",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[18],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2904",
+        "name": "Tau",
+        "image": "https://st.depositphotos.com/36986958/55844/v/1600/depositphotos_558447720-stock-illustration-fox-mascot-esport-logo-design.jpg",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "AliceInChains",
+                "owner": "Nacho",
+                "contract_address": "ñokfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546531
+            }
+        ],
+        "crate_date": "24/4/2022 19:19",
+        "collectionNft": false,
+        "category": ["eSports"],
+        "price":[19],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2905",
+        "name": "Ypsilon",
+        "image": "https://st.depositphotos.com/4043853/56305/v/1600/depositphotos_563057250-stock-illustration-man-headset-metaverse-technology-concept.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "Iron Maiden",
+                "owner": "PearlJam",
+                "contract_address": "eppfnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546526
+            }
+        ],
+        "crate_date": "24/4/2022 19:21",
+        "collectionNft": false,
+        "category": ["Entertainment"],
+        "price":[20],
+        "sales_types": ["Live Auction"],
+        "currencies":["BNB"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2906",
+        "name": "Fi",
+        "image": "https://st.depositphotos.com/1004061/2510/i/950/depositphotos_25103877-stock-photo-vintage-world-map-colorful-paint.jpg",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "PearlJam",
+                "contract_address": "ññffnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546527
+            }
+        ],
+        "crate_date": "24/4/2022 19:22",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[21],
+        "sales_types": ["Fixed Price"],
+        "currencies":["BUSD"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2907",
+        "name": "Ji",
+        "image": "https://st3.depositphotos.com/9270428/13586/v/1600/depositphotos_135864962-stock-illustration-cute-and-amazing-cartoon-penguin.jpg",
+        "description": "aaaaaaaaaa",
+        "details": [
+            {
+                "user_creator": "Ale",
+                "owner": "PearlJam",
+                "contract_address": "wettnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546528
+            }
+        ],
+        "crate_date": "24/4/2022 19:24",
+        "collectionNft": false,
+        "category": ["Gaming"],
+        "price":[22],
+        "sales_types": ["Live Auction"],
+        "currencies":["BNB"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2908",
+        "name": "Psi",
+        "image": "https://static8.depositphotos.com/1386392/926/v/950/depositphotos_9268841-stock-illustration-soccer-player-kicks-the-ball.jpg",
+        "description": "bbbbbbbbb",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "Ale",
+                "contract_address": "gfmmnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546529
+            }
+        ],
+        "crate_date": "24/4/2022 19:25",
+        "collectionNft": false,
+        "category": ["Sports"],
+        "price":[23],
+        "sales_types": ["Live Auction"],
+        "currencies":["BUSD"],
+        "files_types":["Image"]
+    },
+    {
+        "_id": "6265c9bbdb43346d61ec2909",
+        "name": "Omega",
+        "image": "https://st.depositphotos.com/1432405/54333/v/600/depositphotos_543332818-stock-video-game-joystick-icon-animation.mp4",
+        "description": "cccccccccccc",
+        "details": [
+            {
+                "user_creator": "PearlJam",
+                "owner": "Iron Maiden",
+                "contract_address": "ññddnksndnr5n4kjn5wecllsmcwaeoirjf304jrfornfekjrnfljkncsl",
+                "token_id": 1651454616546530
+            }
+        ],
+        "crate_date": "24/4/2022 19:26",
+        "collectionNft": false,
+        "category": ["Art"],
+        "price":[24],
+        "sales_types": ["Fixed Price"],
+        "currencies":["ETH"],
+        "files_types":["Video"]
+    }
+]

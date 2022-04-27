@@ -23,9 +23,9 @@ function App() {
         <Routes>
           <Route exact path={"/"} element={<LandingPage />} />
           <Route element={<MainLayout />}>
-            <Route exact path={"/home"} element={<h1>Home</h1>} />
+            <Route exact path={"/home"} element={<Home />} />
+            <Route exact path={"/myprofile"} element={<ViewUser />} />
           </Route>
-          <Route exact path={"/myprofile"} element={<ViewUser />} />
         </Routes>
       </BrowserRouter>
     </div>

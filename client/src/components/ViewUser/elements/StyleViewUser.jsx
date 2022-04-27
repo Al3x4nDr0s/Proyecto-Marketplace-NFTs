@@ -97,7 +97,7 @@ export const UltimasVentas = styled.div`
 `;
 
 export const ImgNft = styled.div`
-  content="";
+  content:"";
   background: var(--colorInfo);
   height: 85px;
   margin-right: 10px;
@@ -106,7 +106,7 @@ export const ImgNft = styled.div`
 `;
 
 export const ImgPerfil = styled.div`
-  content="";
+  content:"";
   background: var(--colorInfo);
   height: 60px;
   margin-right: 10px;
