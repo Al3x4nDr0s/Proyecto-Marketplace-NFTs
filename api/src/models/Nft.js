@@ -11,29 +11,31 @@ const Nft = Schema({
         type: String
     },
     details: {
-        user_creator: String,
-        owner: String,
+        user_creator: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'},
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'},
         contract_address: String,
         token_id: Number
     },
-    rarity: {
-        type: String
+    likes: {
+        type: Number
     },
     create_date: {
         type: String
     },
     collection_nft: {
-        type: Boolean || {
-            type: Schema.Types.ObjectId,
-            ref: 'Collection_nft'  
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Collection_nft'  
     },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'  
     },
     price: {
-        type: Number
+        type: String
     },
     sales_types: {
         type: Schema.Types.ObjectId,

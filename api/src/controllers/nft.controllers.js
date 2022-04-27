@@ -13,7 +13,7 @@ const getAllNfts = async (req, res) => {
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);
             return res.status(404).json({
-                ok: 'true',
+                ok: 'false',
                 msg: 'Name NFT not found'
             });
         } else {
@@ -48,11 +48,17 @@ const createNft = async (req, res) => {
 const getNftById = async (req, res) =>{
     const { id } = req.params;
     try {
-
+        const getById = await Nft.findById(id)
+            .populate('category', { name:1, _id:0})
+            .populate('collection_nft', { name:1, _id:0})
+            .populate('currencies', { name:1, _id:0})
+            .populate('sales_types', { name:1, _id:0})
+            .populate('files_types', { name:1, _id:0})
+        res.status(200).json( getById );   
     } catch (error) {
         res.status(404).json({
             ok: 'false',
-            msg: '404 Not Found'
+            msg: 'Id Not Found'
         });
         console.log(error);
     };
@@ -68,22 +74,17 @@ const putNftUpdate = async (res, req) => {
         res.json(nftUpdate);
         
     } catch (error) {
-        res.status(404).json({error: 'could not be modified'})
-    }
-}
+        res.status(404).json({error: 'could not be modified'});
+    };
+};
 const deleteNft = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     try {
         const nftDelete = await Nft.findByIdAndDelete(id);
         res.json(nftDelete);
-        
     } catch (error) {
-        res.status(404).json({error: 'could not delete'})
-    }
-}
-
-module.exports = { 
-    getAllNfts,
-    putNftUpdate,
-    deleteNft
+        res.status(404).json({error: 'could not delete'});
+    };
 };
+
+module.exports = { getAllNfts, createNft, putNftUpdate, deleteNft, getNftById };

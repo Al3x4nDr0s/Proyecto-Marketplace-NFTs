@@ -21,8 +21,4 @@ router.get('/', validarJwt, getUsers);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> history/back/models

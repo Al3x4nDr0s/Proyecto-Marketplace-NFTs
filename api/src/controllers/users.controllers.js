@@ -84,6 +84,7 @@ const getUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {}
+
 const updateUser =  (req, res) => {
     
     const { id } = req.params;
