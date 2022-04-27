@@ -8,10 +8,17 @@ const server = express();
 const { dbConnection } = require('./src/databse/config'); 
 var cors = require('cors')
 
-//? use cors 
-// mongoose.connect(process.env.DB_CONNECTION)
-// .then(db=>console.log('database connected'))
-// .catch(err=>console.log(err))
+//? lista blanca con cors solo permitidos
+// var whitelist = ['http://example1.com', 'http://example2.com']
+// var corsOptions = {
+//     origin: function (origin, callback) {
+//       if (whitelist.indexOf(origin) !== -1) {
+//         callback(null, true)
+//       } else {
+//         callback(new Error('Not allowed by CORS'))
+//       }
+//     }
+//   }
 dbConnection();
 
 //settings

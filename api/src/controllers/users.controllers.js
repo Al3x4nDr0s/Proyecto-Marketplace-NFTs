@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
         }
         //? role user set id user comun default
         const user_type = await User_type.findOne({ name: 'user' });
-        const usuario = new User({
+        const usuario = new Usuario({
             username,
             firstName,
             lastName,
@@ -58,7 +58,7 @@ const getUsers = async (req, res) => {
     const end = page * limit;
     try {
         
-        const users = await User.find({})
+        const users = await Usuario.find({})
             .skip(start)
             .limit(limit)
             .populate('user_type', 'name')
@@ -98,7 +98,7 @@ const updateUser =  (req, res) => {
         description: user.description
     }
 
-         User.findByIdAndUpdate( id, newUserInfo, { new: true })
+    Usuario.findByIdAndUpdate( id, newUserInfo, { new: true })
           .then(result => {
               response.json(result)
           })
@@ -109,7 +109,7 @@ const updateUser =  (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params
     try {
-        const user = await User.findByIdAndDelete(id);
+        const user = await Usuario.findByIdAndDelete(id);
         res.json(user);
         
     } catch (error) {
