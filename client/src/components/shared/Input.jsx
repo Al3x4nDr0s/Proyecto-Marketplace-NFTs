@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const StyledInput = styled.input`
-  background-color: var(--backgroundInput);
-  border-radius: 10px;
-  width: ${(props) => props.width || "30%"};
-  padding: 5px;
-  font-size: var(--medium);
-  height: ${(props) => props.height || "40px"};
+  background-color: var(--secondFontColor);
+  border-radius: 15px;
+  width: 15%;
+  height: 38px;
+  // padding: .5rem 3rem;
   outline: none;
   border: none;
 `;

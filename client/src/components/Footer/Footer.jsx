@@ -135,10 +135,8 @@ const Footer = () => {
             </a>
           </div>
         </ContainerInfoFooter>
-        {/* <ContainerNewsletter>
-        <h3>Subscribe Newsletter!</h3>
-        <Input label="name" type="text" />
-      </ContainerNewsletter> */}
+        <h2>Subscribe Newsletter!</h2>
+        <Input />
       </ContainerFooter>
       <h4
         style={{
