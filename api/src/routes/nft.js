@@ -1,8 +1,9 @@
 const { Router} = require ('express');
 const router = Router();
-const { getAllNfts, putNftUpdate, deleteNft } = require ('../controllers/nftControllers');
+const { getAllNfts, createNft, putNftUpdate, deleteNft } = require ('../controllers/nft.controllers');
 
 router.get('/',getAllNfts);
+router.post('/',  createNft)
 router.put('/:id', putNftUpdate);
 router.delete('/:id', deleteNft);
 

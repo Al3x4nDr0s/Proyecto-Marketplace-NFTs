@@ -4,6 +4,7 @@ const User_type = require("../models/User_type.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
 // createUser, getUser, getUsers, updateUser, deleteUser 
+
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
     const { username, firstName, lastName, email, password } = req.body;
@@ -98,17 +99,18 @@ const updateUser =  (req, res) => {
 
          User.findByIdAndUpdate( id, newUserInfo, { new: true })
           .then(result => {
-              response.json(result)
+              res.json(result)
           })
           .catch(e => console.log(e))
 }
        
 
 const deleteUser = async (req, res) => {
-    const { id } = req.params
+    const { userId } = req.params
+
     try {
         const user = await User.findByIdAndDelete(id);
-        res.json(user);
+        res.redirect('/users');
         
     } catch (error) {
         res.status(404).json({error: 'could not delete'})

@@ -78,6 +78,8 @@ const deleteNft = async (req, res) => {
 
 module.exports = { 
     getAllNfts,
+    createNft,
+    getNftById,
     putNftUpdate,
     deleteNft
 };
