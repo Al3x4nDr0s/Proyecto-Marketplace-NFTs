@@ -135,8 +135,6 @@ const Footer = () => {
             </a>
           </div>
         </ContainerInfoFooter>
-        <h2>Subscribe Newsletter!</h2>
-        <Input />
       </ContainerFooter>
       <h4
         style={{

@@ -7,6 +7,13 @@ const StyledButton = styled.button`
   margin: .5rem 0 .8rem 0;
   cursor: pointer;
   color: var(--secondFontColor);
+  padding: ${(props) => props.padding || ".2rem 1.8rem"};
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  background: ${(props) => props.color || "var(--mainBackGroundButtonColor)"};
+  border: 1px solid ${(props) => props.color || "#006466"};
+  background: ${(props) => props.color || "#006466"};
   display: flex;
   img {
       height: 20px;

@@ -3,6 +3,7 @@ import Modal from '../shared/Modal.jsx';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';
+import {ViewNft} from './elements/ViewNft.jsx'
 
 
 const HomeContainer = styled.div`
@@ -14,7 +15,6 @@ const MainSection = styled.section`
     height: 800px;
 `
 
-import {ViewNft} from './elements/ViewNft.jsx'
 
 
 function Home() {
@@ -24,11 +24,6 @@ function Home() {
 
 
     return (
-<<<<<<< HEAD
-        <div>
-            
-        </div>
-=======
         <HomeContainer>
             <Modal 
             
@@ -42,7 +37,6 @@ function Home() {
             </MainSection>
 
         </HomeContainer>
->>>>>>> e6cf7011ab6241993b6712f047eb66423f40d778
     );
 }
 
