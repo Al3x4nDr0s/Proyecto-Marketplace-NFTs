@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import Modal from '../Header/Modal';
-import Carousel from './Carousel';
+import Modal from '../shared/Modal.jsx';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';
@@ -24,17 +23,16 @@ function Home() {
     return (
         <HomeContainer>
             <Modal 
+            
             open={isOpen}
             onClose={()=>dispatch(setModalOpening(false))}
             >
-                modal
+                
             </Modal>
             <MainSection>
 
             </MainSection>
-            <Carousel/>
 
-            <p>hola</p>
         </HomeContainer>
     );
 }

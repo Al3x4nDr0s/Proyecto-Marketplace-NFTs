@@ -13,9 +13,10 @@ const StyledNav = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
+    background-color: var(--mainContainersColor);
     align-items: center;
     justify-content: space-between;
-    height: 120px;
+    height: 70px;
     max-width: 100vw;
     width: 100%;
     padding: 10px 25px;    
@@ -34,7 +35,7 @@ const LogoContainer = styled.div`
     cursor:pointer;
 
     img{
-        height:100px;
+        height:70px;
         width: auto;
     }
 
@@ -80,9 +81,9 @@ function Header() {
     
     return (
         <StyledNav>
-            {/* <X/> */}
+            
             <LogoContainer onClick={(e)=>handleLogoClick(e)}>
-                <img src={require("../images/logo.png")} alt="not found" />
+                <img src={require("../../assets/logo.png")} alt="not found" />
             </LogoContainer>
             <ButtonsContainer >
                 <Link to={"/home"}>Home</Link>
