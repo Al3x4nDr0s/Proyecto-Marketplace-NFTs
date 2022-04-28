@@ -4,6 +4,10 @@ const Currencies = require('../models/Currencies');
 const Files_types = require('../models/Files_types');
 const Sales_types = require('../models/Sales_types');
 
+const getCategory = async (req, res) => {
+    const category = await Category.find();
+    res.json(category);
+}
 const createCategory = async (req, res) => {
     try {
         const newCategory = new Category(req.body);
@@ -58,6 +62,11 @@ const deleteCategory = async(req, res) => {
         console.log(error);
     };
 };
+
+const getCollection = async (req, res) => {
+    const collection = await Collection.find();
+    res.json(collection);
+}
 
 const createCollection = async (req, res) => {
     try {
@@ -114,6 +123,11 @@ const deleteCollection = async(req, res) => {
     };
 };
 
+const getCurrencies = async (req, res) => {
+    const currencies = await Currencies.find();
+    res.json(currencies);
+}
+
 const createCurrencies = async (req, res) => {
     try {
         const newCurrencies = new Currencies(req.body);
@@ -169,6 +183,11 @@ const deleteCurrencies = async(req, res) => {
     };
 };
 
+const getFiles_types = async (req, res) => {
+    const files_types = await Files_types.find();
+    res.json(files_types);
+}
+
 const createFiles_types = async (req, res) => {
     try {
         const newFiles_type = new Files_types(req.body);
@@ -223,6 +242,11 @@ const deleteFiles_types = async(req, res) => {
         console.log(error);
     };
 };
+
+const getSales_types = async (req, res) => {
+    const sales_types = await Sales_types.find();
+    res.json(sales_types);
+}
 
 const createSales_types = async (req, res) => {
     try {
@@ -282,5 +306,5 @@ const deleteSales_types = async(req, res) => {
 module.exports = {createCategory, createCollection, createCurrencies, createFiles_types,
      createSales_types, deleteCategory, deleteCollection, deleteCurrencies, deleteFiles_types,
     deleteSales_types, modifyCategorie, modifyCollection, modifyCurrencies, modifyFiles_types,
-    modifySales_types };
+    modifySales_types, getCategory, getCollection, getCurrencies, getFiles_types, getSales_types};
 
