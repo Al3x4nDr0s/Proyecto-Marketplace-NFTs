@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const Usuario = require("../models/User.js");
-// const User_type = require("../models/User_type.js");
+const User_type = require("../models/User_type.js");
 const { generateJwt } = require('../helpers/generateJwt');
+const { googleVerify } = require('../helpers/google-verify');
 
 const login = async (req, res) => {
     //? login comun por ahora
@@ -42,15 +43,63 @@ const login = async (req, res) => {
 };
 
 const googleSignIn = async (req, res) => {
-    console.log(req.body)
+    const googleToken = req.body.tokenId;
+    const { givenName, familyName } = req.body;
+    try {
+        
+        const { name, email, img } = await googleVerify(googleToken);
+        const usuarioDb = await Usuario.findOne({ email });
+        //? role user set id user comun default
+        const user_type = await User_type.findOne({ name: 'user' });
+        let usuario;
+        //? create user
+        if (!usuarioDb) {
+            usuario = new Usuario({
+                username: name,
+                firstName: givenName,
+                lastName: familyName,
+                email,
+                image: img,
+                password: ':)',
+                user_type: user_type._id
+            });
+        }
+        else{
+            usuario = usuarioDb;
+        }
+        await usuario.save();
+        const token = await generateJwt(usuario.id);
+        res.json({
+            ok: true,
+            usuario,
+            token
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+}
+
+const renewToken = async (req, res) => {
+
+    const uid = req.uid;
+    const token = await generateJwt(uid);
+    const usuario = await Usuario.findById(uid).populate('user_type', 'name');
     res.json({
         ok: true,
-        user: req.body
+        usuario,
+        token
     });
-};
+
+}
 
 //?export 
 module.exports = { 
     login,
-    googleSignIn
-};
+    googleSignIn,
+    renewToken
+}
