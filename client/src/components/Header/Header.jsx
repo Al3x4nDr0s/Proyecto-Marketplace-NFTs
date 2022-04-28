@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"
-import {TiEqualsOutline} "react-icon/ti"
+import { IoMdCloseCircle } from "react-icons/io";
 const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
@@ -58,6 +58,11 @@ const ButtonsContainer = styled.div`
 
 `;
 
+// const styledIcon = styled.img`
+
+// `
+
+
 
 function Header() {
     const navigate = useNavigate()
@@ -75,11 +80,12 @@ function Header() {
 
     }
     function X(){
-        return createPortal(<TiEqualsOutline/>, document.querySelector(".modalPortal"))
+        return createPortal(<IoMdCloseCircle className='modalIcon'/>, document.getElementById("modalPort"))
     }
     
     return (
         <StyledNav>
+            
             <X/>
             <LogoContainer onClick={(e)=>handleLogoClick(e)}>
                 <img src={require("../../assets/logo.png")} alt="not found" />

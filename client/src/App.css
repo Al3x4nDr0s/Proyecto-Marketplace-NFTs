@@ -12,6 +12,11 @@ body{
   background: var(--mainBackGroundColor);
 }
 
+.modalIcon{
+  height: 30px;
+  background-color: white;
+  width: auto;
+}
 :root {
   --mainFontColor: #171717;
   --secondFontColor: #dfdfdf;

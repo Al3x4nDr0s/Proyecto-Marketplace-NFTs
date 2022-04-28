@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const Container = styled.div`
     position: fixed;
     background-color: wheat;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
+    bottom:10px;
     width: 350px;
     height: 100vh;
     ${(props)=> props.open ? "transform:translateX(0);":"transform:translateX(-100%);"}
