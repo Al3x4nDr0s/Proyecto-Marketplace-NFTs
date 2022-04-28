@@ -7,6 +7,8 @@ import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"
 
+import { IoApps } from "react-icons/io5";
+
 const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
@@ -56,8 +58,17 @@ const ButtonsContainer = styled.div`
             text-decoration-thickness: 3px;
         }
     }
-
 `;
+
+const EtiquetaHamburgesa = styled.a`
+    visibility: hidden;
+
+    @media (max-width: 768px) {
+        visibility: visible;
+    }
+`;
+
+
 
 
 function Header() {
@@ -89,7 +100,8 @@ function Header() {
                 <Link to={"/home"}>Home</Link>
                 <Link to={"/home"}>About</Link>
                 <Link to={"/home"}>Collections</Link>
-                <Button onClick={handleModalClick} title={"Open modal"}/>
+                <EtiquetaHamburgesa style={{ cursor: "pointer"}}>< IoApps/></EtiquetaHamburgesa>
+                {/* <Button onClick={handleModalClick} title={}/> */}
                 <Button title={"Login"}/>
 
             </ButtonsContainer>
