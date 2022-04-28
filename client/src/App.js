@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import Header from "./components/Header/Header.jsx";
 import Home from "./components/Home/Home.jsx";
 import {ViewUser} from './components/ViewUser/ViewUser.jsx'
+import { Register } from './components/Register/Register.jsx'
 
 import './App.css';
 function MainLayout() {
@@ -26,6 +27,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route exact path={"/myprofile"} element={<ViewUser/>}/>
             <Route exact path={"/home"} element={<Home />} />
+            <Route exact path={"/register"} element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>
