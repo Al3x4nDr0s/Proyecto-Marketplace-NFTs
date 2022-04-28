@@ -21,7 +21,7 @@ router.post('/',
 router.get('/', 
         [
             validarJwt,
-            validarADMIN_ROLE
+           
         ],
         getUsers);
 router.put('/:id', updateUser);
