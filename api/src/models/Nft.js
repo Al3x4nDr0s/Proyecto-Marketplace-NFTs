@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose');
+var mongoose = require('mongoose')
+require('mongoose-double')(mongoose);
 
 const Nft = Schema({
     name: {
@@ -35,7 +37,7 @@ const Nft = Schema({
         ref: 'Category'  
     },
     price: {
-        type: String
+        type: mongoose.Types.Double
     },
     sales_types: {
         type: Schema.Types.ObjectId,
