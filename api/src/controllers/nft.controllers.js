@@ -9,7 +9,8 @@ const getAllNfts = async (req, res) => {
             .populate('currencies', { name:1, _id:0})
             .populate('sales_types', { name:1, _id:0})
             .populate('files_types', { name:1, _id:0})
-            .populate('user', 'username')
+            .populate('details.owner', { username:1, _id:0})
+            .populate('details.user_creator', { username:1, _id:0})
         if (name){
             response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
             if(response.length >= 1 ) return res.send(response);
@@ -55,6 +56,8 @@ const getNftById = async (req, res) =>{
             .populate('currencies', { name:1, _id:0})
             .populate('sales_types', { name:1, _id:0})
             .populate('files_types', { name:1, _id:0})
+            .populate('details.owner', { username:1, _id:0})
+            .populate('details.user_creator', { username:1, _id:0})
         res.status(200).json( getById );   
     } catch (error) {
         res.status(404).json({
@@ -73,7 +76,6 @@ const putNftUpdate = async (res, req) => {
             { new: true } //es para que nos devuelva el actualizado y no el anterior
         );
         res.json(nftUpdate);
-        
     } catch (error) {
         res.status(404).json({error: 'could not be modified'});
     };
