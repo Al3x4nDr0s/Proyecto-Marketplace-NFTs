@@ -1,28 +1,29 @@
 // const jwt = require("jsonwebtoken");
 const Usuario = require('../models/User');
-const user_type = require('../models/User_type');
+const User_type = require('../models/User_type');
 
 const validarADMIN_ROLE = async (req, res, next) => {
 
     const uid = req.uid;
     try {
-        console.log('uid', uid);
+
         const usuarioDB = await Usuario.findById(uid);
-        
-        console.log(usuarioDB);
-        // if (!usuarioDB) {
-        //     return res.status(404).json({
-        //         ok:false,
-        //         msg: 'usuario no existe'
-        //     })
-        // }
-        // if (usuarioDB.role != 'ADMIN_ROLE') {
-        //     return res.status(403).json({
-        //         ok:false,
-        //         msg: 'no tiene autorizacion'
-        //     })
-        // }
-        next();
+        if (!usuarioDB) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Usuario no existe'
+            });
+        }
+        const user_typeDB = await User_type.findById(usuarioDB.user_type[0]);
+        console.log(user_typeDB.name);
+        if(user_typeDB.name === 'admin'){
+            next();
+        } else {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No tienes permisos para realizar esta acción'
+            });
+        }
 
     } catch (error) {
         res.status(500).json({
