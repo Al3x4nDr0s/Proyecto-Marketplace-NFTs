@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+
+
 const StyledInput = styled.input`
   background-color: var(--secondFontColor);
   border-radius: 5px;

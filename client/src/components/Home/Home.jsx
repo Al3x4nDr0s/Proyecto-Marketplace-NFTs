@@ -3,7 +3,7 @@ import Modal from '../shared/Modal';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';
-
+import { TiThListOutline } from "react-icons/hi";
 
 const HomeContainer = styled.div`
     

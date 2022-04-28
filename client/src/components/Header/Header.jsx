@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"
-
 const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
@@ -75,12 +74,12 @@ function Header() {
 
     }
     function X(){
-        return createPortal(<div>Portal</div>, document.querySelector(".modal"))
+        // return createPortal(<TiEqualsOutline/>, document.querySelector(".modalPortal"))
     }
     
     return (
         <StyledNav>
-            
+            {/* <X/> */}
             <LogoContainer onClick={(e)=>handleLogoClick(e)}>
                 <img src={require("../../assets/logo.png")} alt="not found" />
             </LogoContainer>

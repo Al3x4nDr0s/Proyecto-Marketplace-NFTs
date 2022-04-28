@@ -3,11 +3,13 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     position: fixed;
-    background-color: wheat;
+    background: rgb(0,0,0);
+    background: linear-gradient(162deg, rgba(0,0,0,0.47942927170868344) 0%, rgba(46,51,140,1) 49%, rgba(0,0,0,1) 100%); 
+    border-radius: 10px;
     top: 0;
-    left: 0;
+    left: 50;
     width: 350px;
-    height: 100vh;
+    height: 90vh;
     ${(props)=> props.open ? "transform:translateX(0);":"transform:translateX(-100%);"}
     transition: transform 0.3s;
 `
@@ -21,7 +23,7 @@ function Modal({ open, children, onClose }) {
             <div>
 
                 {children}
-                <button onClick={onClose}>x</button>
+                <button onClick={onClose}></button>
             </div>
         </Container>
     );
