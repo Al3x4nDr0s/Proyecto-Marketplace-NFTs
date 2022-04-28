@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt');
 const Usuario = require("../models/User.js");
+const Nft = require('../models/Nft')
 const User_type = require("../models/User_type.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
+const User = require('../models/User.js');
 // createUser, getUser, getUsers, updateUser, deleteUser 
 
 const createUser = async (req, res) => {
@@ -84,7 +86,11 @@ const getUsers = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {}
+const getUser = async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.json(user)
+}
 
 const updateUser =  (req, res) => {
     
@@ -108,15 +114,21 @@ const updateUser =  (req, res) => {
        
 
 const deleteUser = async (req, res) => {
-    const { userId } = req.params
+    const { id } = req.params
 
     try {
-        const user = await User.findByIdAndDelete(id);
-        res.redirect('/users');
+        const user = await Usuario.findByIdAndDelete(id);
+        // await Nft.deleteMany({details: {owner: id} })
+        const nfts =  await Nft.find({ details: { owner: id } }).exec();
+            nfts.forEach( nft => {
+                Nft.deleteOne(nft._id);
+})
+        res.json(user);
         
-    } catch (error) {
+     } catch (error) {
         res.status(404).json({error: 'could not delete'})
     }
 }
+
 
 module.exports = { createUser, getUser, getUsers, updateUser, deleteUser };
