@@ -24,6 +24,13 @@ const login = async (req, res) => {
                 msg: 'La contraseña es incorrecta'
             });
         };
+        //? si confirm email es false no puede logearse
+        // if (!existEmail.confirm_email) {
+        //     return res.status(400).json({
+        //         ok: false,
+        //         msg: 'El email no ha sido confirmado'
+        //     });
+        // }
         //? generar jwt
         const token = await generateJwt(existEmail.id);
         //? respuesta
