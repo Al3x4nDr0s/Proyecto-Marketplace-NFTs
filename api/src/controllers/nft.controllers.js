@@ -23,35 +23,51 @@ const getAllNfts = async (req, res) => {
         //     return res.status(200).json(allNfts);
         // }
         //? AGREGATE 
-        const getAllNfts = await Nft.aggregate([
-            { 
+        const getAllNfts = await Nft.aggregate(
+        //? array to object 
+        [
+            //? unwind 
+            {
                 $lookup: {
                     from: 'categories',
                     localField: 'category',
                     foreignField: '_id',
-                    as: 'category',
-                    pipeline: [
-                        { $project: { name: 1, _id: 0 } }    
-                    ]
-                },
+                    as: 'category'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$category',
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
                 $lookup: {
                     from: 'collection_nfts',
                     localField: 'collection_nft',
                     foreignField: '_id',
-                    as: 'collection_nft',
-                    pipeline: [{ $project: { name: 1, _id: 0 } }]
-
+                    as: 'collection_nft'
                 }
             },
             {
+                $unwind: {
+                    path: '$collection_nft',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                //? si no viene no importa
                 $lookup: {
                     from: 'currencies',
                     localField: 'currencies',
                     foreignField: '_id',
-                    as: 'currencies',
-                    pipeline: [{ $project: { name: 1, _id: 0 } }]
+                    as: 'currencies'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$currencies',
+                    preserveNullAndEmptyArrays: true
                 }
             },
             {
@@ -59,8 +75,13 @@ const getAllNfts = async (req, res) => {
                     from: 'sales_types',
                     localField: 'sales_types',
                     foreignField: '_id',
-                    as: 'sales_types',
-                    pipeline: [{ $project: { name: 1, _id: 0 } }]
+                    as: 'sales_types'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$sales_types',
+                    preserveNullAndEmptyArrays: true
                 }
             },
             {
@@ -68,8 +89,13 @@ const getAllNfts = async (req, res) => {
                     from: 'files_types',
                     localField: 'files_types',
                     foreignField: '_id',
-                    as: 'files_types',
-                    pipeline: [{ $project: { name: 1, _id: 0 } }]
+                    as: 'files_types'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$files_types',
+                    preserveNullAndEmptyArrays: true
                 }
             },
             {
@@ -77,33 +103,56 @@ const getAllNfts = async (req, res) => {
                     from: 'users',
                     localField: 'details.owner',
                     foreignField: '_id',
-                    as: 'details.owner',
-                    pipeline: [
-                        {
-                            $project: {
-                                username: 1,
-                                _id: 0
-                            }
-                        }
-                    ]
+                    as: 'details.owner'
                 }
+            },
+            {  
+                $unwind: '$details.owner'
             },
             {
                 $lookup: {
                     from: 'users',
                     localField: 'details.user_creator',
                     foreignField: '_id',
-                    as: 'details.user_creator',
-                    pipeline: [
-                        {
-                            $project: {
-                                username: 1,
-                                _id: 0
-                            }
-                        }
-                    ]
+                    as: 'details.user_creator'
+                }
+            },
+            {
+                $unwind: '$details.user_creator'
+            },
+            {
+                $project: {
+                    name: 1,
+                    image: 1,
+                    description: 1,
+                    details: {
+                        user_creator: {
+                            username: 1
+                        },
+                        owner: {
+                            username: 1
+                        },
+                        contract_address: 1,
+                        token_id: 1
+                    },
+                    category: {
+                        name: 1
+                    },
+                    collection_nft: {
+                        name: 1
+                    },
+                    currencies: {
+                        name: 1
+                    },
+                    sales_types: {
+                        name: 1
+                    },
+                    files_types: {
+                        name: 1
+                    }
                 }
             }
+        
             
         ]);
 

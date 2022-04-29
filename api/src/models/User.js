@@ -46,7 +46,13 @@ const UserSchema = Schema({
     },
     money_sales: {
         type: Number
+    },
+    //? estado del usuario confirmacion de mail
+    confirm_email: {
+        type: Boolean,
+        default: false
     }
+    
 });
 //? schema methods for user model
 UserSchema.method('toJSON', function () {
