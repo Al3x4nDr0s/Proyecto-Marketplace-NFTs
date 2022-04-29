@@ -5,8 +5,10 @@ import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
+import GoogleLogin from 'react-google-login';
 
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 
 export const Register = () => {
   let navigate = useNavigate();
@@ -28,6 +30,9 @@ export const Register = () => {
   });
 
   const [dataBack, setDataBack] = useState(0);
+  const [loginData, setLoginData] = useState(localStorage.getItem('loginData')?
+                                             JSON.parse(localStorage.getItem('loginData')):
+                                             null);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -86,6 +91,36 @@ export const Register = () => {
           });
     }
   };
+
+  const handleLogin=(googleData)=>{
+   
+   /* axios
+    .post("http://localhost:4000/auth/google",
+      {token: googleData.tokenId,
+      givenName: googleData.profileObj.givenName,
+      familyName: googleData.profileObj.familyName })
+      .then((res) => {
+        console.log(res.data)
+        setLoginData(res.data);
+        localStorage.setItem('loginData', JSON.stringify(res.data))
+        
+      })
+      .catch((e) => {
+        console.log(e.response.data);
+        alert(e.response.data.msg);
+      });
+      */
+      console.log(googleData);
+      navigate("/home");
+      
+  
+ 
+  };
+
+  const handleFailure=(response)=>{
+   
+    console.log(response);
+  }
 
   return (
     <>
@@ -170,29 +205,39 @@ export const Register = () => {
                 />
               </FormItem>
             </FormRow>
-          
+
             <FormRow>
               <FormAccept>
                 <input type="checkbox" />
                 <Label>Accepto Terminos y Condiciones</Label>
               </FormAccept>
             </FormRow>
-            
-          
-          <FormIcons>
-            <FcGoogle size="2em" />
-            <BsFacebook size="2em" color="#4267B2" />
-            </FormIcons>
-          <FormIcons>
-            <Button onClick={handleClick}width="15%" title="Back">
-              Back
-            </Button>
-            
 
-            <Button width="15%" title="Register">
-              Register
-            </Button>
-          </FormIcons>
+            <FormIcons>
+              {//<FcGoogle size="2em" />
+              }
+              <GoogleLogin
+              clientId="623666465652-gdbjevbm9pvugieks0it5c4hijk97gag.apps.googleusercontent.com"
+            
+              //buttonText="Login"
+              render={renderProps => (
+                <FcGoogle size="2em" onClick={renderProps.onClick} >This is my custom Google button</FcGoogle>
+              )}
+              onSuccess={handleLogin}
+              onFailure={handleFailure}
+              cookiePolicy={'single_host_origin'}
+              />
+              <BsFacebook size="2em" color="#4267B2" />
+            </FormIcons>
+            <FormIcons>
+              <Button onClick={handleClick} width="15%" title="Back">
+                Back
+              </Button>
+
+              <Button width="15%" title="Register">
+                Register
+              </Button>
+            </FormIcons>
           </FormColumn>
         </Form>
       </FormContainer>
@@ -229,7 +274,6 @@ const FormItem = styled.div`
   height: 60px;
 `;
 
-
 const FormColumn = styled.div`
   margin-right: 4%;
   align-items: center;
@@ -253,12 +297,14 @@ const FormRow = styled.div`
   }
 `;
 
-const FormIcons = styled.form`
+const FormIcons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 5%;
   padding: 0;
+  svg{cursor: pointer}; 
+  
 `;
 
 const Form = styled.form`
