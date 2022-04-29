@@ -7,6 +7,7 @@ import Home from "./components/Home/Home.jsx";
 import {ViewUser} from './components/ViewUser/ViewUser.jsx';
 import Login from './components/Auth/Login.jsx';
 import {DetailsNft} from './components/Home/elements/DetailsNft.jsx';
+import { Register } from './components/Register/Register.jsx'
 
 import './App.css';
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
@@ -33,6 +34,7 @@ function App() {
             <Route exact path={"/details/:idNft"} element={<DetailsNft />}/>
             <Route exact path={"/home"} element={<Home />} />
             <Route exact path={"/home/login"} element={<Login />} />
+            <Route exact path={"/register"} element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>
