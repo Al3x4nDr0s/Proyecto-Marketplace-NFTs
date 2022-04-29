@@ -5,6 +5,7 @@ const { createUser, getUser, getUsers, updateUser, deleteUser } = require("../co
 //! joi validator o check validator
 const { validarCampos } = require('../middlewares/validar.campos.js');
 const { validarJwt } = require('../middlewares/validarJwt.js');
+const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole.js');
 
 router.post('/',
     [
@@ -17,8 +18,12 @@ router.post('/',
     ], 
     createUser
 );
-router.get('/', validarJwt, getUsers);
-router.get('/:id', getUser);
+router.get('/', 
+        [
+            validarJwt,
+            validarADMIN_ROLE
+        ],
+        getUsers);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
