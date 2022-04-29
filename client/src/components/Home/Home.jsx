@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
-// import Modal from '../shared/Modal.jsx';
+import React from 'react';
+import Modal from '../Modal.jsx';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';
 import {ViewNft} from './elements/ViewNft.jsx'
+import { CollectionsCarousel } from './elements/CollectionsCarousel.jsx';
 
 
 const HomeContainer = styled.div`
@@ -20,24 +21,23 @@ const HomeTitle = styled.div`
 
 
 function Home() {
-    /* const dispatch = useDispatch()
-    const {isOpen} = useSelector(state=>({isOpen: state.isOpen})) */
-
-
+    const dispatch = useDispatch()
+    const {isOpen} = useSelector(state=>({isOpen: state.isOpen}))
 
     return (
         <HomeContainer>
-            {/* <Modal 
+            <Modal 
             
             open={isOpen}
             onClose={()=>dispatch(setModalOpening(false))}
             >
                 
-            </Modal> */}
+            </Modal>  
 
             <MainSection>
             <HomeTitle/>
-                <ViewNft />
+            <CollectionsCarousel />    
+            <ViewNft />
             </MainSection>
 
         </HomeContainer>

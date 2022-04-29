@@ -12,8 +12,10 @@ import {
   InputData
 } from "./elements/StyleViewUser.jsx";
 import { CardVenta } from "./CardVenta.jsx";
+import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
+import { useNavigate, Link } from "react-router-dom";
 
 const user = {
   username: "TheKing",
@@ -40,6 +42,8 @@ const user = {
 
 export const ViewUser = () => {
   const { username, level } = user;
+
+  const navigate = useNavigate()
   return (
     <>
       <ContainerHeaderUser>
@@ -56,7 +60,8 @@ export const ViewUser = () => {
         </div>
 
         <ContainerButton>
-          <Button title="MIS PUBLICACIONES" />
+          <Button title="MIS PUBLICACIONES" onClick={() => navigate(`/myprofile/mispublicaciones`)}/>
+          {/* <Link to={`/myprofile/mispublicaciones`}>MIS PUBLICACIONES</Link> */}
           <Button title="LOGOUT" />
         </ContainerButton>
       </ContainerHeaderUser>
@@ -66,7 +71,7 @@ export const ViewUser = () => {
           <ContainerMisPreferencias>
             <ListaPreferencias>
               {user.preferencias.map((x) => (
-                <li>
+                <li key={x}>
                   {x} <a>X</a>
                 </li>
               ))}
