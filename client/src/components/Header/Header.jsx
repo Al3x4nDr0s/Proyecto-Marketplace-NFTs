@@ -2,27 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 import {useNavigate, Link} from "react-router-dom"
 import { useDispatch } from 'react-redux'
+<<<<<<< HEAD
 import { setModalOpening } from '../../redux/actions';
 import Button from '../shared/Button';
 import {createPortal} from "react-dom"
 import { IoMdCloseCircle } from "react-icons/io";
+=======
+import Modal from '../Modal.jsx';
+import { setModalOpening } from '../../redux/actions';
+import Button from '../shared/Button';
+import {createPortal} from "react-dom"
+
+import { IoApps } from "react-icons/io5";
+
+>>>>>>> d95a4df05c08ffa8d6b8e61459dbb755cce82515
 const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
-    background-color: var(--mainContainersColor);
+    /* background-color: var(--mainContainersColor); */
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    height: 85px;
     max-width: 100vw;
     width: 100%;
-    padding: 10px 25px;    
+    padding: 10px 25px;  
+    margin-bottom: 1.5rem;  
     color : var(--secondFontColor);
     font-size: 18px;
     flex-wrap:wrap;
-    border-radius: 15px;
     a{
         color: white;
         text-decoration: none;
@@ -55,12 +65,22 @@ const ButtonsContainer = styled.div`
             text-decoration-thickness: 3px;
         }
     }
-
 `;
 
+<<<<<<< HEAD
 // const styledIcon = styled.img`
 
 // `
+=======
+const EtiquetaHamburgesa = styled.a`
+    visibility: hidden;
+
+    @media (max-width: 768px) {
+        visibility: visible;
+    }
+`;
+
+>>>>>>> d95a4df05c08ffa8d6b8e61459dbb755cce82515
 
 
 
@@ -94,7 +114,8 @@ function Header() {
                 <Link to={"/home"}>Home</Link>
                 <Link to={"/home"}>About</Link>
                 <Link to={"/home"}>Collections</Link>
-                <Button onClick={handleModalClick} title={"Open modal"}/>
+                <EtiquetaHamburgesa style={{ cursor: "pointer"}}>< IoApps/></EtiquetaHamburgesa>
+                {/* <Button onClick={handleModalClick} title={}/> */}
                 <Button title={"Login"}/>
 
             </ButtonsContainer>
