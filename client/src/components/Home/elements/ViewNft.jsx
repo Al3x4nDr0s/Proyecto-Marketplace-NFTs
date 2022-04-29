@@ -117,7 +117,7 @@ export const ViewNft = () => {
           nextSlideMessage: "Next slide",
         }}
         // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log("slide change")}
       >
         {nft.length ? (
@@ -134,7 +134,7 @@ export const ViewNft = () => {
                   currency={x.currencies}
                   salestype={x.sales_types.name}
                   id={x._id}
-                  key={x._id}
+                  key={x.name}
                 />
               </SwiperSlide>
             ))
@@ -220,7 +220,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x._id}
+                key={x._name}
               />
             </SwiperSlide>
           ))}
@@ -284,7 +284,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x._id}
+                key={x.name}
               />
             </SwiperSlide>
           ))}
@@ -348,7 +348,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x._id}
+                key={x.name}
               />
             </SwiperSlide>
           ))}
@@ -413,7 +413,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x._id}
+                key={x.name}
               />
             </SwiperSlide>
           ))}

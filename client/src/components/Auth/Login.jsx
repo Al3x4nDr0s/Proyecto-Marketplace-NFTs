@@ -86,8 +86,9 @@ const Login = () => {
     try {
       await authService.login(email, password).then(
         () => {
-          navigate("/home");
-          window.location.reload();
+          // navigate("/home");
+          // window.location.reload();
+          console.log('ok')
         },
         (error) => {
           console.log(error);
