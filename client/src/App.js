@@ -4,12 +4,12 @@ import Footer from "./components/Footer/Footer.jsx";
 // import NavBar from './components/Header/Header.jsx';
 import Header from "./components/Header/Header.jsx";
 import Home from "./components/Home/Home.jsx";
-import {ViewUser} from './components/ViewUser/ViewUser.jsx'
-
+import {ViewUser} from './components/ViewUser/ViewUser.jsx';
+import Login from './components/Auth/Login.jsx';
 import {DetailsNft} from './components/Home/elements/DetailsNft.jsx';
 
 import './App.css';
-import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones";
+import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 function MainLayout() {
   return (
     <div>
@@ -32,6 +32,7 @@ function App() {
             <Route exact path={"/myprofile/mispublicaciones"} element={<MisPublicaciones/>}/>
             <Route exact path={"/details/:idNft"} element={<DetailsNft />}/>
             <Route exact path={"/home"} element={<Home />} />
+            <Route exact path={"/home/login"} element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

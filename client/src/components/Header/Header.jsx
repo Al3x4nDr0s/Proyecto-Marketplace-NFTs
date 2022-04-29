@@ -99,8 +99,7 @@ function Header() {
                 <Link to={"/home"}>About</Link>
                 <Link to={"/home"}>Collections</Link>
                 <EtiquetaHamburgesa style={{ cursor: "pointer"}} onClick={handleModalClick}>< IoApps/></EtiquetaHamburgesa>
-                {/* <Button onClick={handleModalClick} title={}/> */}
-                <Button title={"LOGIN"}/>
+                <Button title={"LOGIN"} onClick={() => navigate('/home/login')}/>
                 <Button title={"REGISTER"}/>
 
             </ButtonsContainer>
