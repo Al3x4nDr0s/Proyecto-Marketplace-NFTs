@@ -4,6 +4,7 @@ const User_type = require("../models/User_type.js");
 const Nfts = require("../models/Nft.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
+const nodemailer = require('nodemailer')
 // createUser, getUser, getUsers, updateUser, deleteUser 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
@@ -32,6 +33,33 @@ const createUser = async (req, res) => {
         usuario.password = bcrypt.hashSync(password, salt);
         //? guardar usuario
         await usuario.save();
+        //? enviar email de confirmacion de registro
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'nachoburgos1995@gmail.com',
+                pass: 'mtlsdatewtbcwhbf'
+            }
+        });
+        const mailOptions = {
+            from: "SevenDevsNfts <",
+            to: usuario.email,
+            subject: 'Confirmacion de registro',
+            text: 'Hola ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
+                'Gracias por registrarte en SevenDevsNfts.\n' +
+                'Para confirmar tu registro, por favor haz click en el siguiente enlace:\n\n' +
+                'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
+                'Si no funciona, copia y pega el enlace en tu navegador.\n\n' +
+                'Gracias,\n' +
+                'SevenDevsNfts'
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
         //? generar jwt
         const token = await generateJwt(usuario.id);
         //? respuesta
