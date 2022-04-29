@@ -6,7 +6,10 @@ import Header from "./components/Header/Header.jsx";
 import Home from "./components/Home/Home.jsx";
 import {ViewUser} from './components/ViewUser/ViewUser.jsx'
 
+import {DetailsNft} from './components/Home/elements/DetailsNft.jsx';
+
 import './App.css';
+import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones";
 function MainLayout() {
   return (
     <div>
@@ -18,6 +21,7 @@ function MainLayout() {
 }
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,6 +29,8 @@ function App() {
           <Route exact path={"/"} element={<LandingPage />} />
           <Route element={<MainLayout />}>
             <Route exact path={"/myprofile"} element={<ViewUser/>}/>
+            <Route exact path={"/myprofile/mispublicaciones"} element={<MisPublicaciones/>}/>
+            <Route exact path={"/details/:idNft"} element={<DetailsNft />}/>
             <Route exact path={"/home"} element={<Home />} />
           </Route>
         </Routes>

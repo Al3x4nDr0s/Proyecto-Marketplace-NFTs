@@ -1,66 +1,116 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Pagination, Autoplay, Navigation, Scrollbar, A11y } from "swiper";
+import { Autoplay, Navigation, Scrollbar, A11y } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// import {IoIosMenu} from "react-icons/io";
+import SwiperCore, { Pagination } from "swiper/core";
 
-import { ImStack } from "react-icons/im";
+import {
+  ContainerNFT,
+  NftTitle,
+  ContainerCardNft,
+} from "./StylesHome/ViewNftStyles.jsx";
 
+import { Link } from "react-router-dom";
 
+import { CardNft } from "./CardNft.jsx";
 
+import { getAllNft } from "../../../redux/actions/index";
+
+import {
+  FcSteam,
+  FcSportsMode,
+  FcStumbleupon,
+  FcSignature,
+} from "react-icons/fc";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const ContainerNFT = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  /* background-color: var(--mainContainersColor); */
-`;
-
-const NftTitle = styled.h1`
-  font-size: 1.5rem;
-  color: var(--secondFontColor);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+const ContainerTitleCategory = styled.div`
   border-bottom: 1px solid var(--mainBackGroundButtonColor);
-`;
-
-const ContainerCards = styled.div`
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  a {
+    text-decoration: none;
+    font-size: var(--large);
+    color: var(--secondFontColor);
+
+    &:hover {
+      text-decoration-line: underline;
+      text-decoration-thickness: 3px;
+    }
+  }
 `;
 
-const Cards = styled.div`
-  content: "";
-  width: 240px;
-  text-align: center;
-  line-height: 300px;
-  height: 300px;
-  color: var(--secondFontColor);
-  border-radius: 1rem;
-  background-color: #50505068;
-  /* background-color: var(--mainContainersColor); */
-`;
+SwiperCore.use([Pagination]);
 
 export const ViewNft = () => {
+  const nft = useSelector((state) => state.nfts);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllNft());
+  }, []);
+
   return (
     <ContainerNFT>
-      <NftTitle>Gaming</NftTitle>
+      <h2 style={{textAlign: "center", color: "var(--secondFontColor)", fontSize: '2rem', margin: "2.2rem 0 2.2rem 0"}}>Categories</h2>
+      <ContainerTitleCategory>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <NftTitle>Gaming</NftTitle>
+          <FcSteam style={{ width: "30px", height: "30px" }} />
+        </div>
+        <Link to={`category/gaming`}>All Category</Link>
+      </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={5}
-        pagination={{ clickable: true }}
+        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        // spaceBetween={125}
+        // slidesPerView={(ancho > 1300) ? 5 : 2}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
+        }}
+        grabCursor={true}
+        // centeredSlides={true}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          980: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1400: {
+            slidesPerView: 4,
+            width: "1260",
+            spaceBetween: 45,
+          },
         }}
         a11y={{
           prevSlideMessage: "Previous slide",
@@ -68,154 +118,306 @@ export const ViewNft = () => {
         }}
         // scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide>
-          <Cards>Slide 1 <ImStack /></Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 2</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 3</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 4</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 5  <ImStack /></Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 6</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 7</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 8</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 9</Cards>
-        </SwiperSlide>
+        {nft.length ? (
+          nft
+            .filter((x) => x.category.name === "Gaming")
+            .map((x) => (
+              <SwiperSlide>
+                <CardNft
+                  image={x.image}
+                  name={x.name}
+                  price={x.price}
+                  files={x.files_types.name}
+                  category={x.category}
+                  currency={x.currencies}
+                  salestype={x.sales_types.name}
+                  id={x._id}
+                  key={x._id}
+                />
+              </SwiperSlide>
+            ))
+        ) : (
+          <>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CardNft />
+            </SwiperSlide>
+          </>
+        )}
       </Swiper>
-      <NftTitle>Deportes</NftTitle>
+      <ContainerTitleCategory>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <NftTitle>Deportes</NftTitle>
+          <FcSportsMode style={{ width: "30px", height: "30px" }} />
+        </div>
+        <Link to={`category/deport`}>All Category</Link>
+      </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={5}
+        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        // spaceBetween={125}
+        // slidesPerView={5}
         // navigation
-        pagination={{ clickable: true }}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          980: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1400: {
+            slidesPerView: 4,
+            width: "1260",
+            spaceBetween: 45,
+          },
+        }}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
-        // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide>
-          <Cards>Slide 1</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 2</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 3</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 4</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 5</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 6</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 7</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 8</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 9</Cards>
-        </SwiperSlide>
+        {nft
+          ?.filter((x) => x.category.name === "Sports")
+          .map((x) => (
+            <SwiperSlide>
+              <CardNft
+                image={x.image}
+                name={x.name}
+                price={x.price}
+                files={x.files_types.name}
+                category={x.category}
+                currency={x.currencies}
+                salestype={x.sales_types.name}
+                id={x._id}
+                key={x._id}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
-
-      <NftTitle>Multiverse</NftTitle>
+      <ContainerTitleCategory>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <NftTitle>Multiverse</NftTitle>
+          <FcStumbleupon style={{ width: "30px", height: "30px" }} />
+        </div>
+        <Link to={`category/multiverse`}>All Category</Link>
+      </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={5}
+        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        // spaceBetween={125}
+        // slidesPerView={5}
         // navigation
-        pagination={{ clickable: true }}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          980: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1400: {
+            slidesPerView: 4,
+            width: "1260",
+            spaceBetween: 45,
+          },
+        }}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
-        // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide>
-          <Cards>Slide 1</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 2</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 3</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 4</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 5</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 6</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 7</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 8</Cards>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Cards>Slide 9</Cards>
-        </SwiperSlide>
+        {nft
+          ?.filter((x) => x.category.name === "Entertainment")
+          .map((x) => (
+            <SwiperSlide>
+              <CardNft
+                image={x.image}
+                name={x.name}
+                price={x.price}
+                files={x.files_types.name}
+                category={x.category}
+                currency={x.currencies}
+                salestype={x.sales_types.name}
+                id={x._id}
+                key={x._id}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
-
-      {/* 
-      <ContainerCards>
-        
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-      </ContainerCards>
-      
-      <ContainerCards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-      </ContainerCards>
-      <NftTitle>Deportes</NftTitle>
-      <ContainerCards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-        <Cards></Cards>
-      </ContainerCards> */}
+      <ContainerTitleCategory>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <NftTitle>Arte</NftTitle>
+          <FcSignature style={{ width: "30px", height: "30px" }} />
+        </div>
+        <Link to={`category/art`}>All Category</Link>
+      </ContainerTitleCategory>
+      <Swiper
+        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        // spaceBetween={125}
+        // slidesPerView={5}
+        // navigation
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          980: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1400: {
+            slidesPerView: 4,
+            width: "1260",
+            spaceBetween: 45,
+          },
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+      >
+        {nft
+          ?.filter((x) => x.category.name === "Art")
+          .map((x) => (
+            <SwiperSlide>
+              <CardNft
+                image={x.image}
+                name={x.name}
+                price={x.price}
+                files={x.files_types.name}
+                category={x.category}
+                currency={x.currencies}
+                salestype={x.sales_types.name}
+                id={x._id}
+                key={x._id}
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+      <ContainerTitleCategory>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <NftTitle>eSports</NftTitle>
+          <FcStumbleupon style={{ width: "30px", height: "30px" }} />
+        </div>
+        <Link to={`category/multiverse`}>All Category</Link>
+      </ContainerTitleCategory>
+      <Swiper
+        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        // spaceBetween={125}
+        // slidesPerView={5}
+        // navigation
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          980: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1400: {
+            slidesPerView: 4,
+            width: "1260",
+            spaceBetween: 45,
+          },
+        }}
+        // width=
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+      >
+        {nft
+          ?.filter((x) => x.category.name === "eSports")
+          .map((x) => (
+            <SwiperSlide>
+              <CardNft
+                image={x.image}
+                name={x.name}
+                price={x.price}
+                files={x.files_types.name}
+                category={x.category}
+                currency={x.currencies}
+                salestype={x.sales_types.name}
+                id={x._id}
+                key={x._id}
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
     </ContainerNFT>
   );
 };

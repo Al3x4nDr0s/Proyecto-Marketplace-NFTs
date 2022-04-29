@@ -1,7 +1,5 @@
 import React from "react";
 
-import Input from "../shared/Input.jsx";
-
 import logo from "./assetsFooter/LOGOTIPO.png";
 
 import { Link } from "react-router-dom";

@@ -13,8 +13,8 @@ const StyledNav = styled.nav`
     display : flex;
     flex-direction: row;
     /* position: fixed; */
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     /* background-color: var(--mainContainersColor); */
     align-items: center;
     justify-content: space-between;
@@ -35,7 +35,7 @@ const StyledNav = styled.nav`
 const LogoContainer = styled.div`
     display: flex;
     cursor:pointer;
-
+    margin-left: 3.8rem;
     img{
         height:70px;
         width: auto;
@@ -51,6 +51,7 @@ const ButtonsContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-right: 4.5rem;
     list-style:none;
     a{
         &:hover{
@@ -61,15 +62,12 @@ const ButtonsContainer = styled.div`
 `;
 
 const EtiquetaHamburgesa = styled.a`
-    visibility: hidden;
+    visibility: visible;
 
     @media (max-width: 768px) {
         visibility: visible;
     }
 `;
-
-
-
 
 function Header() {
     const navigate = useNavigate()
@@ -100,9 +98,10 @@ function Header() {
                 <Link to={"/home"}>Home</Link>
                 <Link to={"/home"}>About</Link>
                 <Link to={"/home"}>Collections</Link>
-                <EtiquetaHamburgesa style={{ cursor: "pointer"}}>< IoApps/></EtiquetaHamburgesa>
+                <EtiquetaHamburgesa style={{ cursor: "pointer"}} onClick={handleModalClick}>< IoApps/></EtiquetaHamburgesa>
                 {/* <Button onClick={handleModalClick} title={}/> */}
-                <Button title={"Login"}/>
+                <Button title={"LOGIN"}/>
+                <Button title={"REGISTER"}/>
 
             </ButtonsContainer>
             
