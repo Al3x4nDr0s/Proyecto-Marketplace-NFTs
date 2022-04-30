@@ -150,7 +150,9 @@ const getAllNfts = async (req, res) => {
                     },
                     files_types: {
                         name: 1
-                    }
+                    },
+                    create_date: 1,
+                    price: 1,
                 }
             }
         
