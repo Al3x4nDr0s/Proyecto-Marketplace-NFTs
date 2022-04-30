@@ -110,15 +110,28 @@ export const ImgNft = styled.div`
   width: 85px;
 `;
 
-export const ImgPerfil = styled.div`
-  content:"";
-  background: var(--colorInfo);
+const ImgPerfil = styled.div`
+  /* content:""; */
+  /* background: ${(props) => `url(${props.backgroundImage}` || "var(--colorInfo)"}; */
+  background-image: ${(props) => `url(${props.background})`};
+  /* background-image: url(${props => props.backgroundImage}); */
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 60px;
   margin-right: 10px;
   border-radius: 50%;
   border: 1.2px solid var(--mainBackGroundButtonColor);
   width: 60px;
 `;
+
+export const ImagenPerfil = (props) => {
+  const {background} = props
+
+  console.log(background)
+  return (
+    <ImgPerfil background={background}/>
+  )
+}
 
 export const InputData = styled.div`
   display: flex;

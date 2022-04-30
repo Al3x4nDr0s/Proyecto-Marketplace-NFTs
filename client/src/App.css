@@ -5,9 +5,14 @@
   font-family: "Kanit", sans-serif;
 }
 
-body{
-  background: rgb(71,17,137);
-  background: linear-gradient(45deg, rgba(71,17,137,1) 0%, rgba(53,7,93,1) 49%, rgba(19,5,78,1) 100%);
+body {
+  background: rgb(71, 17, 137);
+  background: linear-gradient(
+    45deg,
+    rgba(71, 17, 137, 1) 0%,
+    rgba(53, 7, 93, 1) 49%,
+    rgba(19, 5, 78, 1) 100%
+  );
   /* background: rgb(71, 17, 137);
   background: linear-gradient(
     45deg,
@@ -33,4 +38,9 @@ body{
   --large: 18px;
   --medium: 16px;
   --small: 14px;
+
+  --gray: #555;
+  --purple: #4e65ff;
+  --green-blue: #92effd;
+  --white: #fff;
 }

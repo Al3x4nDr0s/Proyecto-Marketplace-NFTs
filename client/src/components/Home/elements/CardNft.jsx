@@ -16,17 +16,18 @@ export const CardNft = (props) => {
   const { image, name, price, id, category, files, currency, salestype } =
     props;
 
-  console.log();
+  // console.log(image);
+  // console.log(id)
   return (
     <ContainerCategory>
       <Link style={{ textDecoration: "none" }} to={`/details/${id}`}>
         {files === "Image" ? (
-          <Card backgroundImage={image} />
+          <Card backgroundImage={image} key={id}/>
         ) : files === "Video" ? (
-          <Card backgroundImage={imagenvideo} />
+          <Card backgroundImage={imagenvideo} key={id}/>
         ) : //   <video src={image} width="260px" height="300px"></video>
         files === "Audio" ? (
-          <Card backgroundImage={imagenaudio} />
+          <Card backgroundImage={imagenaudio} key={id}/>
         ) : null}
         {/* <Card backgroundImage={image} /> */}
         <ContainerDataCard>

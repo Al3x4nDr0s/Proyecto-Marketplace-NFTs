@@ -8,50 +8,39 @@ import {
   ListaPreferencias,
   ContenedorUltimasVentas,
   ContainerEliminarUser,
-  ImgPerfil,
-  InputData
+  // ImgPerfil,
+  InputData,
+  ImagenPerfil
 } from "./elements/StyleViewUser.jsx";
 import { CardVenta } from "./CardVenta.jsx";
 import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const user = {
-  username: "TheKing",
-  level: 4,
-  preferencias: ["gaming", "music", "deporte", "shoes", "arte"],
-  ultimasventas: [
-    {
-      title: "e-sport nft",
-      tiempo: "hace 9 minutos",
-      tipo: "venta",
-    },
-    {
-      title: "retro-psn",
-      tiempo: "hace 28 minutos",
-      tipo: "venta",
-    },
-    {
-      title: "xbox-s",
-      tiempo: "hace 45 minutos",
-      tipo: "subasta",
-    },
-  ],
-};
+export const ViewUser = React.memo(() => {
+  // const { username, level } = user;
 
-export const ViewUser = () => {
-  const { username, level } = user;
+  const user = useSelector((state) => state.user)
 
+
+
+  console.log(user)
+
+  const {username, image} = user
+
+  console.log(image)
+  // {}
   const navigate = useNavigate()
   return (
     <>
       <ContainerHeaderUser>
         <div style={{ display: "flex" }}>
-          <ImgPerfil></ImgPerfil>
+          <ImagenPerfil background={image} />
           <div>
             <h2>
-              {username} - Level {level}
+              {username}
             </h2>
             <p style={{ color: "var(--colorInfo)" }}>
               Calificacion como vendedor - 10/10
@@ -70,22 +59,22 @@ export const ViewUser = () => {
           <h2>Mis preferencias</h2>
           <ContainerMisPreferencias>
             <ListaPreferencias>
-              {user.preferencias.map((x) => (
+              {/* {user.preferencias.map((x) => (
                 <li key={x}>
                   {x} <a>X</a>
                 </li>
-              ))}
+              ))} */}
             </ListaPreferencias>
           </ContainerMisPreferencias>
           <h2 style={{ marginTop: ".8rem" }}>Ultimas ventas</h2>
           <ContenedorUltimasVentas>
-            {user.ultimasventas.map((x) => (
+            {/* {user.ultimasventas.map((x) => (
               <CardVenta
                 title={x.title.toUpperCase()}
                 tiempo={x.tiempo}
                 tipo={x.tipo}
               />
-            ))}
+            ))} */}
           </ContenedorUltimasVentas>
         </div>
         <div
@@ -102,7 +91,7 @@ export const ViewUser = () => {
             >
               <label>Usuario</label>
               <InputData>
-                <Input type="text" placeholder={user.username} height="32px" padding=".4rem" width="12rem"/>
+                <Input type="text" placeholder="username" height="32px" padding=".4rem" width="12rem"/>
                 <Button title="CAMBIAR USUARIO" padding=".28rem 1.8rem" margin="0"></Button>
               </InputData>
             </div>
@@ -139,4 +128,4 @@ export const ViewUser = () => {
       </ContainerBodyUser>
     </>
   );
-};
+});

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllNft } from "../../../redux/actions/index";
+
 
 import styled from "styled-components";
 
@@ -12,7 +13,6 @@ const ContainerMisPublicaciones = styled.div`
 `;
 
 const ContainerPublicacion = styled.div`
-  /* background-color: red; */
   display: flex;
 `;
 
@@ -24,8 +24,7 @@ export const MisPublicaciones = () => {
   useEffect(() => {
     dispatch(getAllNft());
   }, []);
-
-  console.log(nft);
+   
   return (
     <ContainerMisPublicaciones>
       <h2>Mis Publicaciones</h2>
@@ -35,7 +34,7 @@ export const MisPublicaciones = () => {
           backgroundColor: "var(--mainBackGroundButtonColor)",
         }}
       />
-      {nft?.map((x) => (
+      {/* {nft?.map((x) => (
         <ContainerPublicacion>
           <img src={x.image} style={{ width: "240px", height: "230px" }} />
           <div>
@@ -46,7 +45,7 @@ export const MisPublicaciones = () => {
             </div>
           </div>
         </ContainerPublicacion>
-      ))}
+      ))} */}
     </ContainerMisPublicaciones>
   );
 };

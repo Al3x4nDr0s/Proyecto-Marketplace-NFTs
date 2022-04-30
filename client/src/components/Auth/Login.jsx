@@ -8,6 +8,8 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "../shared/Button.jsx";
 
 import Input from "../shared/Input.jsx";
+import Swal from 'sweetalert2'
+
 
 const ContainerLogin = styled.form`
   width: 45%;
@@ -64,8 +66,23 @@ const ButtonGoogle = styled.div`
   height: 45px;
 `;
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+
+
 const Login = () => {
   const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -84,24 +101,48 @@ const Login = () => {
   const handleSend = async (e) => {
     e.preventDefault();
     try {
-      await authService.login(email, password).then(
-        () => {
+      const auth = await authService.login(email, password)
+      const verifyAuth = await auth
+      if(verifyAuth.ok === true) {
+        // alertify.alert().setting({
+        //   'label': 'Accept',
+        //   'message': `El usuario ${verifyAuth.username.user} exitosamente`,
+        //   'onok': function(){alertify.succes('Usuario Logueado')}
+        // }).show();
+        // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
+        navigate("/home");
+        // window.location.reload();
+        // alertify.alert('Usuario autenticado exitosamente');
+        // console.log(verifyAuth)
+      }
+      // await authService.login(email, password).then(
+        // () => {
+          // alert('usuario autenticado exitosamente')
           // navigate("/home");
           // window.location.reload();
-          console.log('ok')
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        // },
+        // (error) => {
+          // alert('no es un correo registrado')
+          // console.log(error);
+        // }
+      // );
     } catch (error) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Correo no registrado'
+      })
+      // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
       console.log(error);
     }
   };
 
   return (
     <div style={{ width: "100%" }}>
-      <ContainerLogin>
+      <ContainerLogin onSubmit={handleSend}>
         <h1 style={{ color: "var(--secondFontColor)" }}>Login</h1>
         <ContainerUsuarioLogin>
           <label
@@ -159,8 +200,8 @@ const Login = () => {
           <Button
             title="INGRESAR"
             padding=".8rem 6.5rem"
-            type={"submit"}
-            onClick={handleSend}
+            type="submit"
+            // onClick={handleSend}
           />
         </ContainerButtonLogin>
       </ContainerLogin>

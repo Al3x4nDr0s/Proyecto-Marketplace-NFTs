@@ -63,6 +63,8 @@ export const ViewNft = () => {
     dispatch(getAllNft());
   }, []);
 
+console.log(nft)
+
   return (
     <ContainerNFT>
       <h2 style={{textAlign: "center", color: "var(--secondFontColor)", fontSize: '2rem', margin: "2.2rem 0 2.2rem 0"}}>Categories</h2>
@@ -77,7 +79,7 @@ export const ViewNft = () => {
           <NftTitle>Gaming</NftTitle>
           <FcSteam style={{ width: "30px", height: "30px" }} />
         </div>
-        <Link to={`category/gaming`}>All Category</Link>
+        <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -123,7 +125,7 @@ export const ViewNft = () => {
         {nft.length ? (
           nft
             .filter((x) => x.category.name === "Gaming")
-            .map((x) => (
+            .map((x, i) => (
               <SwiperSlide>
                 <CardNft
                   image={x.image}
@@ -134,7 +136,7 @@ export const ViewNft = () => {
                   currency={x.currencies}
                   salestype={x.sales_types.name}
                   id={x._id}
-                  key={x.name}
+                  key={x._id}
                 />
               </SwiperSlide>
             ))
@@ -172,7 +174,7 @@ export const ViewNft = () => {
           <NftTitle>Deportes</NftTitle>
           <FcSportsMode style={{ width: "30px", height: "30px" }} />
         </div>
-        <Link to={`category/deport`}>All Category</Link>
+        <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -220,7 +222,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x._name}
+                key={x._id}
               />
             </SwiperSlide>
           ))}
@@ -236,7 +238,7 @@ export const ViewNft = () => {
           <NftTitle>Multiverse</NftTitle>
           <FcStumbleupon style={{ width: "30px", height: "30px" }} />
         </div>
-        <Link to={`category/multiverse`}>All Category</Link>
+        <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -284,7 +286,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x.name}
+                key={x._id}
               />
             </SwiperSlide>
           ))}
@@ -300,13 +302,10 @@ export const ViewNft = () => {
           <NftTitle>Arte</NftTitle>
           <FcSignature style={{ width: "30px", height: "30px" }} />
         </div>
-        <Link to={`category/art`}>All Category</Link>
+        <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -348,7 +347,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x.name}
+                key={x._id}
               />
             </SwiperSlide>
           ))}
@@ -364,7 +363,7 @@ export const ViewNft = () => {
           <NftTitle>eSports</NftTitle>
           <FcStumbleupon style={{ width: "30px", height: "30px" }} />
         </div>
-        <Link to={`category/multiverse`}>All Category</Link>
+        <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -413,7 +412,7 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 salestype={x.sales_types.name}
                 id={x._id}
-                key={x.name}
+                key={x._id}
               />
             </SwiperSlide>
           ))}

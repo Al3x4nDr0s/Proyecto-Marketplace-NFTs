@@ -2,12 +2,12 @@ import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Scrollbar, Pagination, Navigation, Autoplay  } from "swiper";
+import { Scrollbar, Pagination, Navigation, Autoplay } from "swiper";
 import styled from "styled-components";
 
-import image1 from '../../../assets/img-carousel/img1.webp';
-import image2 from '../../../assets/img-carousel/img2.png';
-import image3 from '../../../assets/img-carousel/img3.jpg';
+import image1 from "../../../assets/img-carousel/img1.webp";
+import image2 from "../../../assets/img-carousel/img2.png";
+import image3 from "../../../assets/img-carousel/img3.jpg";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,6 +17,8 @@ import "swiper/css/scrollbar";
 const ContainerCarousel = styled.div`
   width: 85%;
   margin: 0 auto;
+  position: relative;
+  /* background: red; */
 `;
 
 const SlideMain = styled.div`
@@ -25,42 +27,57 @@ const SlideMain = styled.div`
   margin: 0 auto;
   height: 600px;
   text-align: center;
-  background-image: ${(props) => `url(${props.backgroundImage})` || "url('../../../assets/imagen1.png')"};
+  background-image: ${(props) =>
+    `url(${props.backgroundImage})` || "url('../../../assets/imagen1.png')"};
   background-size: cover;
   background-repeat: no-repeat;
   line-height: 500px;
 `;
 
-const Slide = (props) => {
-    const {backgroundImage} = props
+const ContainerDataCollections = styled.div`
+  width: 71%;
+  position: absolute;
+  bottom: 0;
+  right: 120px;
+  z-index: 1000;
+  margin: 0 auto;
+`;
 
-    return (
-        <SlideMain backgroundImage={backgroundImage}/>
-    )
-}
+const Slide = (props) => {
+  const { backgroundImage } = props;
+
+  return <SlideMain backgroundImage={backgroundImage} />;
+};
 
 export const CollectionsCarousel = () => {
   return (
-    <ContainerCarousel>
-      <Swiper
-        modules={[Pagination, Scrollbar, Navigation, Autoplay]}
-        navigation
-        autoplay={{
-            delay: 2500
-        }}
-        pagination={{ clickable: true }}
-        slidesPerView={1}
-      >
-        <SwiperSlide>
-          <Slide backgroundImage={image1}></Slide>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide backgroundImage={image2}></Slide>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide backgroundImage={image3}></Slide>
-        </SwiperSlide>
-      </Swiper>
-    </ContainerCarousel>
+    <div>
+      <ContainerCarousel>
+        <Swiper
+          modules={[Pagination, Scrollbar, Navigation, Autoplay]}
+          navigation
+          autoplay={{
+            delay: 2500,
+          }}
+          pagination={{ clickable: true }}
+          slidesPerView={1}
+        >
+          <SwiperSlide>
+            <Slide backgroundImage={image1}></Slide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Slide backgroundImage={image2}></Slide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Slide backgroundImage={image3}></Slide>
+          </SwiperSlide>
+        </Swiper>
+        {/* <ContainerDataCollections>
+          <h1 style={{ color: "var(--secondFontColor)", fontSize: "45px" }}>
+            Collections
+          </h1>
+        </ContainerDataCollections> */}
+      </ContainerCarousel>
+    </div>
   );
 };
