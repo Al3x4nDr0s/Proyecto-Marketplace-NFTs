@@ -20,7 +20,7 @@ const createCategory = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Ups ocurrio un problema"
+            msg: "Category could not be create"
         });
         console.log(error);
     };
@@ -80,7 +80,7 @@ const createCollection = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Ups ocurrio un problema"
+            msg: "Collection could not be create"
         });
         console.log(error);
     };
@@ -140,7 +140,7 @@ const createCurrencies = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Ups ocurrio un problema"
+            msg: "Currency could not be create"
         });
         console.log(error);
     };
@@ -200,7 +200,7 @@ const createFiles_types = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Ups ocurrio un problema"
+            msg: "Files type could not be create"
         });
         console.log(error);
     };
@@ -254,13 +254,13 @@ const createSales_types = async (req, res) => {
         await newSales_types.save();
         res.status(200).json({
             ok: true,
-            msg: 'Sales_types created',
+            msg: 'Sales types created',
             newSales_types
         });
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Ups ocurrio un problema"
+            msg: "Sales type could not be create",
         });
         console.log(error);
     };
@@ -277,13 +277,13 @@ const modifySales_types = async (res, req) => {
         );
         res.status(200).json({
             ok: true,
-            msg: 'Sales types modified',
+            msg: 'Sales Types modified',
             sales_typesUpdate
         });
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Sales types could not be modified"
+            msg: "Sales Types could not be modified"
         });
         console.log(error);
     };
@@ -293,11 +293,15 @@ const deleteSales_types = async(req, res) => {
     const { id } = req.params;
     try {
         const delSales_types = await Sales_types.findByIdAndDelete(id);
-        res.json(delSales_types);
+        res.json({
+            ok: true,
+            msg: "Sales Types Deleted",
+            delSales_types
+        });
     } catch (error) {
         res.status(404).json({
             ok: false,
-            msg: "Files types not Found"
+            msg: "Files Types not Found"
         });
         console.log(error);
     };

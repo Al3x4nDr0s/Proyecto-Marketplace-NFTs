@@ -52,6 +52,10 @@ const Nft = Schema({
         ref: 'Files_types'  
     },
 });
+Nft.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
+});
 
 module.exports = model('Nft', Nft);
 

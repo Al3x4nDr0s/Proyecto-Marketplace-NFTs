@@ -9,6 +9,6 @@ const User_type = Schema({
 User_type.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
     return object;
-})
+});
 
 module.exports = model('User_type', User_type);

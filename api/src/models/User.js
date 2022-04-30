@@ -24,20 +24,16 @@ const UserSchema = Schema({
     image: {
         type: String
     },
-    user_type: [{
+    user_type: {
             type: Schema.Types.ObjectId,
             ref: 'User_type'  
-    }],
+    },
     favorite: {
         type: Array
     },
     collectionNft: {
         type: Array
     },
-    wallet: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Wallet'  
-    }],
     description: {
         type: String
     },
@@ -61,5 +57,12 @@ UserSchema.method('toJSON', function () {
     return object;
 })
 
+// UserSchema.set('toJSON', {
+//     transform: (document, returnedObject) => {
+//         returnedObject.id = returnedObject._id
+//         delete returnedObject._id
+//         delete returnedObject.__v
+//     }
+// })
 
 module.exports = model('User', UserSchema);

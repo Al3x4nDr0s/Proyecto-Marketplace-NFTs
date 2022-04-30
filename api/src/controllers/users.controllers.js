@@ -1,26 +1,28 @@
 const bcrypt = require('bcrypt');
-const Usuario = require("../models/User.js");
+const User = require("../models/User.js");
+const Nft = require('../models/Nft')
 const User_type = require("../models/User_type.js");
 const Nfts = require("../models/Nft.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
 const nodemailer = require('nodemailer')
 // createUser, getUser, getUsers, updateUser, deleteUser 
+
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
     const { username, firstName, lastName, email, password } = req.body;
     try {
         //? validar nickname !importante y email
-        const existEmail = await Usuario.findOne({ email });
+        const existEmail = await User.findOne({ email });
         if (existEmail) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email ya esta registrado'
+                msg: 'This email is already registered'
             });
         }
         //? role user set id user comun default
         const user_type = await User_type.findOne({ name: 'user' });
-        const usuario = new Usuario({
+        const usuario = new User({
             username,
             firstName,
             lastName,
@@ -44,13 +46,13 @@ const createUser = async (req, res) => {
         const mailOptions = {
             from: "SevenDevsNfts <",
             to: usuario.email,
-            subject: 'Confirmacion de registro',
-            text: 'Hola ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
-                'Gracias por registrarte en SevenDevsNfts.\n' +
-                'Para confirmar tu registro, por favor haz click en el siguiente enlace:\n\n' +
+            subject: 'Confirmation of registration',
+            text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
+                'Thank you for registering on SevenDevsNfts.\n' +
+                'To confirm your registration, please click on the following link:\n\n' +
                 'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
-                'Si no funciona, copia y pega el enlace en tu navegador.\n\n' +
-                'Gracias,\n' +
+                "If it doesn't work, copy and paste the link into your browser.\n\n" +
+                'Thank you,\n' +
                 'SevenDevsNfts'
         };
         transporter.sendMail(mailOptions, function (error, info) {
@@ -74,7 +76,7 @@ const createUser = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
 
@@ -87,12 +89,12 @@ const getUsers = async (req, res) => {
     const end = page * limit;
     try {
         
-        const users = await Usuario.find({})
+        const users = await User.find({})
             .skip(start)
             .limit(limit)
             .populate('user_type', 'name')
             .exec();
-        const total = await Usuario.countDocuments();
+        const total = await User.countDocuments();
         const countPages = Math.ceil(total / limit);
         res.json({
             ok: true,
@@ -107,12 +109,26 @@ const getUsers = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
 }
 
-const getUser = async (req, res) => {}
+const getUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        res.json(user)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    }
+    
+}
 
 const updateUser =  (req, res) => {
     
@@ -127,9 +143,9 @@ const updateUser =  (req, res) => {
         description: user.description
     }
 
-    Usuario.findByIdAndUpdate( id, newUserInfo, { new: true })
+    User.findByIdAndUpdate( id, newUserInfo, { new: true })
           .then(result => {
-              response.json(result)
+              res.json(result)
           })
           .catch(e => console.log(e))
 }
@@ -139,7 +155,7 @@ const deleteUser = async (req, res) => {
 
     const { id } = req.params
     //? borrar nfts del usuario en details owner
-    await Usuario.findByIdAndDelete(id);
+    await User.findByIdAndDelete(id);
     return new Promise((resolve, reject) => {
         Nfts.deleteMany({ 'details.owner': id }, (err, result) => {
             if (err) reject(err);
@@ -152,5 +168,6 @@ const deleteUser = async (req, res) => {
     .catch(e => console.log(e))
 
 }
+
 
 module.exports = { createUser, getUser, getUsers, updateUser, deleteUser };

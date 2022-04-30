@@ -13,7 +13,7 @@ const login = async (req, res) => {
         if (!existEmail) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email no esta registrado'
+                msg: 'The email is not registered'
             });
         };
         //? validar password
@@ -21,7 +21,7 @@ const login = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: 'La contraseña es incorrecta'
+                msg: 'The password is wrong'
             });
         };
         //? si confirm email es false no puede logearse
@@ -44,7 +44,7 @@ const login = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     };
 };
@@ -85,7 +85,7 @@ const googleSignIn = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
 }

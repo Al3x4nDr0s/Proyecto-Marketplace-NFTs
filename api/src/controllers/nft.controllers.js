@@ -1,5 +1,3 @@
-const Nft = require ('../models/Nft');
-
 const getAllNfts = async (req, res) => {
     try {
         // const { name } = req.query;
@@ -142,7 +140,8 @@ const getAllNfts = async (req, res) => {
                         name: 1
                     },
                     currencies: {
-                        name: 1
+                        name: 1,
+                        image: 1
                     },
                     sales_types: {
                         name: 1
@@ -155,9 +154,7 @@ const getAllNfts = async (req, res) => {
         
             
         ]);
-
         res.status(200).json( getAllNfts );
-
     } catch (error) {
         res.status(404).json({
             ok: 'false',
@@ -168,6 +165,7 @@ const getAllNfts = async (req, res) => {
 };
 
 const createNft = async (req, res) => {
+    
     try {
         const nft = new Nft(req.body);
         await nft.save();
@@ -178,7 +176,7 @@ const createNft = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: 'false',
-            msg: "Ups ocurrio un problema"
+            msg: "Unexpected error"
         });
         console.log(error);
     };
@@ -194,6 +192,8 @@ const getNftById = async (req, res) =>{
             .populate('currencies', { name:1, _id:0})
             .populate('sales_types', { name:1, _id:0})
             .populate('files_types', { name:1, _id:0})
+            .populate('details.owner', { username:1, _id:0})
+            .populate('details.user_creator', { username:1, _id:0})
         res.status(200).json( getById );   
     
     } catch (error) {
@@ -213,11 +213,11 @@ const putNftUpdate = async (res, req) => {
             { new: true } //es para que nos devuelva el actualizado y no el anterior
         );
         res.json(nftUpdate);
-        
     } catch (error) {
         res.status(404).json({error: 'could not be modified'});
     };
 };
+
 const deleteNft = async (req, res) => {
     const { id } = req.params;
     try {
