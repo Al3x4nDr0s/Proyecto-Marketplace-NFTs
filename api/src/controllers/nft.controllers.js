@@ -142,7 +142,8 @@ const getAllNfts = async (req, res) => {
                         name: 1
                     },
                     currencies: {
-                        name: 1
+                        name: 1,
+                        image: 1
                     },
                     sales_types: {
                         name: 1
@@ -168,6 +169,7 @@ const getAllNfts = async (req, res) => {
 };
 
 const createNft = async (req, res) => {
+    
     try {
         const nft = new Nft(req.body);
         await nft.save();
