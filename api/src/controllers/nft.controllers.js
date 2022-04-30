@@ -174,7 +174,7 @@ const createNft = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: 'false',
-            msg: "Ups ocurrio un problema"
+            msg: "Unexpected error"
         });
         console.log(error);
     };

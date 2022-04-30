@@ -6,7 +6,7 @@ const validarJwt = (req, res, next) => {
     if (!token) {
         return res.status(401).json({
             ok: false,
-            msg: 'No hay token'
+            msg: 'No token'
         });
     }
     //? verificar token
@@ -22,7 +22,7 @@ const validarJwt = (req, res, next) => {
     } catch (error) {
         return res.status(401).json({
             ok: false,
-            msg: 'Token invalido'
+            msg: 'Invalid Token'
         });
     }
 

@@ -11,7 +11,7 @@ const validarADMIN_ROLE = async (req, res, next) => {
         if (!usuarioDB) {
             return res.status(404).json({
                 ok: false,
-                msg: 'Usuario no existe'
+                msg: 'User does not exist'
             });
         }
         const user_typeDB = await User_type.findById(usuarioDB.user_type[0]);
@@ -21,7 +21,7 @@ const validarADMIN_ROLE = async (req, res, next) => {
         } else {
             return res.status(401).json({
                 ok: false,
-                msg: 'No tienes permisos para realizar esta acción'
+                msg: 'You do not have permissions to perform this action'
             });
         }
 
