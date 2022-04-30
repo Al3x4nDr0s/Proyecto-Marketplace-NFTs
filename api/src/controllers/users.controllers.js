@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const User = require("../models/User.js");
-const Nft = require('../models/Nft')
 const User_type = require("../models/User_type.js");
 const Nfts = require("../models/Nft.js");
 const { generateJwt } = require('../helpers/generateJwt');
