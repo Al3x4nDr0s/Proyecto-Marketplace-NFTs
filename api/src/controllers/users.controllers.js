@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
         if (existEmail) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email ya esta registrado'
+                msg: 'This email is already registered'
             });
         }
         //? role user set id user comun default
@@ -46,13 +46,13 @@ const createUser = async (req, res) => {
         const mailOptions = {
             from: "SevenDevsNfts <",
             to: usuario.email,
-            subject: 'Confirmacion de registro',
-            text: 'Hola ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
-                'Gracias por registrarte en SevenDevsNfts.\n' +
-                'Para confirmar tu registro, por favor haz click en el siguiente enlace:\n\n' +
+            subject: 'Confirmation of registration',
+            text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
+                'Thank you for registering on SevenDevsNfts.\n' +
+                'To confirm your registration, please click on the following link:\n\n' +
                 'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
-                'Si no funciona, copia y pega el enlace en tu navegador.\n\n' +
-                'Gracias,\n' +
+                "If it doesn't work, copy and paste the link into your browser.\n\n" +
+                'Thank you,\n' +
                 'SevenDevsNfts'
         };
         transporter.sendMail(mailOptions, function (error, info) {
@@ -76,7 +76,7 @@ const createUser = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
 
@@ -109,7 +109,7 @@ const getUsers = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
 }
@@ -124,7 +124,7 @@ const getUser = async (req, res) => {
         console.log(error)
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     }
     

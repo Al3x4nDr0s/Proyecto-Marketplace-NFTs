@@ -8,5 +8,9 @@ const Currencies = Schema({
         type: String
     }
 });
+Currencies.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
+});
 
 module.exports = model('Currencies', Currencies);

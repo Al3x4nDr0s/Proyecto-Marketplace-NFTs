@@ -24,20 +24,16 @@ const UserSchema = Schema({
     image: {
         type: String
     },
-    user_type: [{
+    user_type: {
             type: Schema.Types.ObjectId,
             ref: 'User_type'  
-    }],
+    },
     favorite: {
         type: Array
     },
     collectionNft: {
         type: Array
     },
-    wallet: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Wallet'  
-    }],
     description: {
         type: String
     },
