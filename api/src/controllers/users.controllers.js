@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
 const Usuario = require("../models/User.js");
+const Nft = require('../models/Nft')
 const User_type = require("../models/User_type.js");
 const Nfts = require("../models/Nft.js");
 const { generateJwt } = require('../helpers/generateJwt');
 const { response } = require('express');
 const nodemailer = require('nodemailer')
 // createUser, getUser, getUsers, updateUser, deleteUser 
+
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
     const { username, firstName, lastName, email, password } = req.body;
@@ -112,7 +114,21 @@ const getUsers = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {}
+const getUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        res.json(user)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+    
+}
 
 const updateUser =  (req, res) => {
     
@@ -129,7 +145,7 @@ const updateUser =  (req, res) => {
 
     Usuario.findByIdAndUpdate( id, newUserInfo, { new: true })
           .then(result => {
-              response.json(result)
+              res.json(result)
           })
           .catch(e => console.log(e))
 }
@@ -152,5 +168,6 @@ const deleteUser = async (req, res) => {
     .catch(e => console.log(e))
 
 }
+
 
 module.exports = { createUser, getUser, getUsers, updateUser, deleteUser };
