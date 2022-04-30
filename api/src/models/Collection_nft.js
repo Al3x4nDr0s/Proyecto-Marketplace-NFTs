@@ -5,5 +5,9 @@ const Collection_nft = Schema({
         type: String,  
     }
 });
+Collection_nft.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
+});
 
 module.exports = model('Collection_nft', Collection_nft);
