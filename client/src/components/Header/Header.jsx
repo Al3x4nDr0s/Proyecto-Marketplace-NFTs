@@ -11,11 +11,13 @@ import {
 } from "../../redux/actions/index";
 import Button from "../shared/Button";
 // import { createPortal } from "react-dom";
+import { IoIosLogOut } from "react-icons/io";
+import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 // import alertify from 'alertifyjs';
 
-import './header.css';
+import "./header.css";
 
 // alertify
 
@@ -80,6 +82,15 @@ const EtiquetaHamburgesa = styled.a`
   }
 `;
 
+const ContainerItemsMenu = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100px;
+  margin-right: 35px;
+  height: 45px;
+`;
+
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -112,58 +123,66 @@ function Header() {
     navigate("/home");
   }
 
-//   function handleModalClick(e) {
-//     dispatch(setModalOpening(true));
-//   }
-//   function X() {
-//     return createPortal(<div>Portal</div>, document.querySelector(".modal"));
-//   }
+  //   function handleModalClick(e) {
+  //     dispatch(setModalOpening(true));
+  //   }
+  //   function X() {
+  //     return createPortal(<div>Portal</div>, document.querySelector(".modal"));
+  //   }
 
   return (
     <StyledNav>
       <LogoContainer onClick={(e) => handleLogoClick(e)}>
         <img src={require("../../assets/logo.png")} alt="not found" />
       </LogoContainer>
-        {jwt ? (
-          <>
-            <div className={`navigation ${isActive ? "active" : ""}`}>
-              <div className="user-box">
-                <div className="image-box">
-                  <img src={userData.image} alt="foto-1" />
-                </div>
-                <p className="username">{userData.username}</p>
+      {jwt ? (
+        <>
+          <div className={`navigation ${isActive ? "active" : ""}`}>
+            <div className="user-box">
+              <div className="image-box">
+                <img src={userData.image} alt="foto-1" />
               </div>
-              <div className="menu-toggle" onClick={(e) => handleClick(e)}>
-                <ul className="menu">
-                  <li>
-                    <Link to="/myprofile">Profile</Link>
-                  </li>
-                  <li>
-                    <a href="#">About</a>
-                  </li>
-                  <li>
-                    <Link to="/home" onClick={handleLogout}>Logout</Link>
-                  </li>
-                </ul>
-              </div>
+              <p className="username">{userData.username}</p>
             </div>
-            {/* <Button title="PERFIL" onClick={() => navigate("myprofile")} />
+            <div className="menu-toggle" onClick={(e) => handleClick(e)}>
+              <ul className="menu">
+                <li>
+                  <ContainerItemsMenu>
+                    <FaUserCircle style={{ width: "22px", height: "42px" }} />
+                    <Link to="/myprofile">Profile</Link>
+                  </ContainerItemsMenu>
+                </li>
+                <li>
+                <ContainerItemsMenu>
+                    <FaInfoCircle style={{ width: "22px", height: "42px" }} />
+                    <a href="#">About</a>
+                  </ContainerItemsMenu>
+                </li>
+                <li>
+                <ContainerItemsMenu>
+                    <IoIosLogOut style={{ width: "22px", height: "42px" }} />
+                    <Link to="/home" onClick={handleLogout}>Logout</Link>
+                  </ContainerItemsMenu>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* <Button title="PERFIL" onClick={() => navigate("myprofile")} />
             <Button title="LOGOUT" onClick={handleLogout} /> */}
-          </>
-        ) : (
-          <>
+        </>
+      ) : (
+        <>
           <ButtonsContainer>
-        <Link to={"/home"}>Home</Link>
-        <Link to={"/home"}>About</Link>
-        <Link to={"/home"}>Collections</Link>
+            <Link to={"/home"}>Home</Link>
+            <Link to={"/home"}>About</Link>
+            <Link to={"/home"}>Collections</Link>
             <Button title={"LOGIN"} onClick={() => navigate("/home/login")} />
             <Button title={"REGISTER"} onClick={() => navigate("/register")} />
-            </ButtonsContainer>
-          </>
-        )}
+          </ButtonsContainer>
+        </>
+      )}
 
-        {/* <Button title={"PRUEBA"} onClick={() => alertify.alert('prueba')}/> */}
-      
+      {/* <Button title={"PRUEBA"} onClick={() => alertify.alert('prueba')}/> */}
     </StyledNav>
   );
 }

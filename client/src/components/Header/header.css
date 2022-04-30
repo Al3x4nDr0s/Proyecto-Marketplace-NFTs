@@ -20,6 +20,7 @@
   background: #131833f3;
   /* background: #22a5a7bb; */
   box-shadow: 0 25px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(100px);
   overflow: hidden;
   transition: height 0.5s, width 0.5s;
   transition-delay: 0s, 0.75s;
@@ -37,7 +38,8 @@
 }
 
 .navigation .user-box .username {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
   white-space: nowrap;
   color: var(--secondFontColor);
 }
@@ -96,12 +98,11 @@
 
 .menu {
   position: absolute;
-  width: 100%;
-  height: calc(100% - 60px);
-  margin-top: 45px;
-  margin-left: -5.5rem;
+  width: 90%;
+  height: calc(100% - 50px);
+  margin-top: 60px;
+  margin-left: -7.3rem;
   /* padding: 20px; */
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .menu li {

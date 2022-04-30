@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "alertifyjs": "^1.13.1",
     "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-google-login": "^5.2.2",

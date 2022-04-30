@@ -4,12 +4,17 @@ import authService from "../../services/authService";
 import styled from "styled-components";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import GoogleLogin from "react-google-login";
+
+import axios from "axios";
+// const client = new OAuth2Client(process.env.GOOGLE_ID);
 
 import Button from "../shared/Button.jsx";
 
 import Input from "../shared/Input.jsx";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
+// const client = process.env.GOOGLE_ID
 
 const ContainerLogin = styled.form`
   width: 45%;
@@ -68,17 +73,15 @@ const ButtonGoogle = styled.div`
 
 const Toast = Swal.mixin({
   toast: true,
-  position: 'bottom-end',
+  position: "bottom-end",
   showConfirmButton: false,
   timer: 2000,
   timerProgressBar: true,
   didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
-
-
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const Login = () => {
   const navigate = useNavigate();
@@ -90,6 +93,9 @@ const Login = () => {
 
   const { email, password } = user;
 
+  const clientGoogle =
+    "796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com";
+
   const handleUser = (e) => {
     console.log(user);
     setUser({
@@ -98,12 +104,30 @@ const Login = () => {
     });
   };
 
+  const handleGoogleLogin = async (googleData) => {
+    try {
+      const dataGoogle = await axios.post(`http://localhost:4000/auth/google`, {
+        tokenId: googleData.tokenId,
+        givenName: googleData.profileObj.givenName,
+        familyName: googleData.profileObj.familyName,
+      });
+      const finallyGoogle = await dataGoogle.data;
+      localStorage.setItem("token", JSON.stringify(finallyGoogle.token));
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert("error no se pudo ingresar", error);
+    }
+  };
+
+  // console.log(client)
+
   const handleSend = async (e) => {
     e.preventDefault();
     try {
-      const auth = await authService.login(email, password)
-      const verifyAuth = await auth
-      if(verifyAuth.ok === true) {
+      const auth = await authService.login(email, password);
+      const verifyAuth = await auth;
+      if (verifyAuth.ok === true) {
         // alertify.alert().setting({
         //   'label': 'Accept',
         //   'message': `El usuario ${verifyAuth.username.user} exitosamente`,
@@ -111,30 +135,30 @@ const Login = () => {
         // }).show();
         // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
         Toast.fire({
-          icon: 'success',
-          title: 'Signed in successfully'
-        })
+          icon: "success",
+          title: "Signed in successfully",
+        });
         navigate("/home");
         // window.location.reload();
         // alertify.alert('Usuario autenticado exitosamente');
         // console.log(verifyAuth)
       }
       // await authService.login(email, password).then(
-        // () => {
-          // alert('usuario autenticado exitosamente')
-          // navigate("/home");
-          // window.location.reload();
-        // },
-        // (error) => {
-          // alert('no es un correo registrado')
-          // console.log(error);
-        // }
+      // () => {
+      // alert('usuario autenticado exitosamente')
+      // navigate("/home");
+      // window.location.reload();
+      // },
+      // (error) => {
+      // alert('no es un correo registrado')
+      // console.log(error);
+      // }
       // );
     } catch (error) {
       Toast.fire({
-        icon: 'error',
-        title: 'Correo no registrado'
-      })
+        icon: "error",
+        title: "Correo no registrado",
+      });
       // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
       console.log(error);
     }
@@ -178,7 +202,9 @@ const Login = () => {
             height="40px"
           />
         </ContainerClaveLogin>
-        <div><h4 style={{color: 'var(--secondFontColor)'}}>ó logueate con</h4></div>
+        <div>
+          <h4 style={{ color: "var(--secondFontColor)" }}>ó logueate con</h4>
+        </div>
         <ContainerButtonFacebookGoogle>
           <ButtonFacebook>
             <FaFacebookF
@@ -190,11 +216,18 @@ const Login = () => {
               }}
             />
           </ButtonFacebook>
-          <ButtonGoogle>
-            <FcGoogle
-              style={{ width: "33px", height: "33px", marginTop: "6px" }}
-            />
-          </ButtonGoogle>
+          <GoogleLogin
+            clientId={clientGoogle}
+            onSuccess={handleGoogleLogin}
+            onFailure={handleGoogleLogin}
+            render={(renderProps) => (
+              <ButtonGoogle onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                <FcGoogle
+                  style={{ width: "33px", height: "33px", marginTop: "6px" }}
+                />
+              </ButtonGoogle>
+            )}
+          />
         </ContainerButtonFacebookGoogle>
         <ContainerButtonLogin>
           <Button

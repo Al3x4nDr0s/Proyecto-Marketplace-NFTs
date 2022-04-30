@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,11 +59,18 @@ export const ViewNft = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllNft());
-  }, []);
+  const [mynft, setNft] = useState([])
 
-console.log(nft)
+  const instantCallback = useCallback(dispatch, [dispatch]);
+
+  useEffect(() => {
+    if(Object.keys(nft).length === 0) {
+      instantCallback(getAllNft());
+    }
+    setNft(nft);
+  }, [instantCallback, mynft]);
+
+// console.log(nft)
 
   return (
     <ContainerNFT>
