@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const Usuario = require("../models/User.js");
+const User = require("../models/User.js");
 const Nft = require('../models/Nft')
 const User_type = require("../models/User_type.js");
 const Nfts = require("../models/Nft.js");
@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
     try {
         //? validar nickname !importante y email
-        const existEmail = await Usuario.findOne({ email });
+        const existEmail = await User.findOne({ email });
         if (existEmail) {
             return res.status(400).json({
                 ok: false,
@@ -22,7 +22,7 @@ const createUser = async (req, res) => {
         }
         //? role user set id user comun default
         const user_type = await User_type.findOne({ name: 'user' });
-        const usuario = new Usuario({
+        const usuario = new User({
             username,
             firstName,
             lastName,
@@ -89,12 +89,12 @@ const getUsers = async (req, res) => {
     const end = page * limit;
     try {
         
-        const users = await Usuario.find({})
+        const users = await User.find({})
             .skip(start)
             .limit(limit)
             .populate('user_type', 'name')
             .exec();
-        const total = await Usuario.countDocuments();
+        const total = await User.countDocuments();
         const countPages = Math.ceil(total / limit);
         res.json({
             ok: true,
@@ -143,7 +143,7 @@ const updateUser =  (req, res) => {
         description: user.description
     }
 
-    Usuario.findByIdAndUpdate( id, newUserInfo, { new: true })
+    User.findByIdAndUpdate( id, newUserInfo, { new: true })
           .then(result => {
               res.json(result)
           })
@@ -155,7 +155,7 @@ const deleteUser = async (req, res) => {
 
     const { id } = req.params
     //? borrar nfts del usuario en details owner
-    await Usuario.findByIdAndDelete(id);
+    await User.findByIdAndDelete(id);
     return new Promise((resolve, reject) => {
         Nfts.deleteMany({ 'details.owner': id }, (err, result) => {
             if (err) reject(err);
