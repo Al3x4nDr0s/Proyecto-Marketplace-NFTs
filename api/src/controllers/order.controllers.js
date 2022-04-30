@@ -1,5 +1,24 @@
 const Nft = require ('../models/Nft');
 
+const orderNft = async (req, res) => {
+    try {
+        const nfts = await Nft.find({}).exec();
+        console.log(nfts)
+        const order = nfts.sort((a, b) => a.price - b.price);
+        res.json(order)
+
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+    
+}
+
+module.exports = {orderNft}
+
 // db.student.find({}).sort({units: -1})
 
 // sort by "field" ascending and "test" descending

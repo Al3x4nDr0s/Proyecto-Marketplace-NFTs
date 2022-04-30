@@ -24,6 +24,7 @@ router.get('/',
            validarADMIN_ROLE
         ],
         getUsers);
+router.get('/:id', getUser);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 

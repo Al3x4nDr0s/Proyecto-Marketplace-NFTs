@@ -89,8 +89,18 @@ const getUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id);
-    res.json(user)
+    try {
+        const user = await User.findById(id);
+        res.json(user)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+    
 }
 
 const updateUser =  (req, res) => {
