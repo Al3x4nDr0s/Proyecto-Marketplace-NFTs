@@ -3,7 +3,7 @@ const Nft = require ('../models/Nft');
 const orderNft = async (req, res) => {
     try {
         const nfts = await Nft.find({}).exec();
-        console.log(nfts)
+        // console.log(nfts)
         const order = nfts.sort((a, b) => a.price - b.price);
         res.json(order)
 
