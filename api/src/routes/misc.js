@@ -20,7 +20,6 @@ router.delete('/collection/:id', deleteCollection);
 router.delete('/currencies/:id', deleteCurrencies);
 router.delete('/files_type/:id', deleteFiles_types);
 router.delete('/sales_type/:id', deleteSales_types);
-//? GETS
 router.get('/category', getCategory);
 router.get('/collection', getCollection);
 router.get('/currencies', getCurrencies);
