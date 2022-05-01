@@ -1,5 +1,4 @@
 import Input from "../shared/Input.jsx";
-import Button from "../shared/Button.jsx";
 import axios from "axios";
 import styled, { css } from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
@@ -29,17 +28,20 @@ export const Register = () => {
     phone: "",
   });
 
-  const [dataBack, setDataBack] = useState(0);
-  const [disabled, setDisabled] = useState(true)
+  
+  const [disabled, setDisabled] = useState(true);
+  const [checked, setChecked] = useState(false);
 
 
   useEffect(()=>{
-    if(!errors.firstName&&!errors.lastName&&!errors.username&&!errors.email&&!errors.password&&!errors.phone){
+    if(errors.firstName===''&&errors.lastName===''&&errors.username===''&&errors.email===''&&errors.password===''&&errors.phone===''&&checked
+    &&input.firstName!==''&&input.lastName!==''&&input.username!==''&&input.email!==''&&input.password!==''&&input.phone!==''){
       setDisabled(false);
-    }else if(!input.firstName||!input.lastName||!input.username||!input.email||!input.password||!input.phone){
+    } else{
       setDisabled(true);
     }
-  },[errors])
+    
+  },[input,errors,checked])
 
 
   const handleClick = (e) => {
@@ -51,20 +53,6 @@ export const Register = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
     console.log("Entramos a HandleChange");
     
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:4000/users/", input)
-      .then((res) => console.log(res))
-      .catch((e) => {
-        console.log(e.response.data);
-        alert(e.response.data.msg);
-      });
-  };
-
-  const handleOnBlur = (e) => {
     if (e.target.value === "") {
       setErrors({
         ...errors,
@@ -96,9 +84,29 @@ export const Register = () => {
         : setErrors({
             ...errors,
             [e.target
-              .name]: `* 7-15 Char, 1 dig, 1 Special Char`,
+              .name]: `* 7-15 Char, 1 dig, 1 Spec.Char`,
           });
     }
+
+    
+
+    
+
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4000/users/", input)
+      .then((res) => console.log(res))
+      .catch((e) => {
+        console.log(e.response.data);
+        alert(e.response.data.msg);
+      });
+  };
+
+  const handleOnBlur = (e) => {
+    
     
   };
 
@@ -131,7 +139,12 @@ export const Register = () => {
   const handleFailure=(response)=>{
    
     console.log(response);
-  }
+  };
+
+  const handleChecked=(e)=>{
+    console.log(e.target.checked);
+    setChecked(e.target.checked);
+  };
 
   return (
     <>
@@ -150,7 +163,7 @@ export const Register = () => {
                   value={input.firstName}
                   placeHolder="Enter your name"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.firstName}</MsgError>
@@ -164,7 +177,7 @@ export const Register = () => {
                   value={input.lastName}
                   placeHolder="Enter your name"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.lastName}</MsgError>
@@ -179,7 +192,7 @@ export const Register = () => {
                   value={input.username}
                   placeHolder="Enter your Username"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.username}</MsgError>
@@ -191,7 +204,7 @@ export const Register = () => {
                   value={input.email}
                   placeHolder="Enter your email"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.email}</MsgError>
@@ -206,7 +219,7 @@ export const Register = () => {
                   value={input.password}
                   placeHolder="Enter your password"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.password}</MsgError>
@@ -219,7 +232,7 @@ export const Register = () => {
                   value={input.phone}
                   placeHolder="Enter your phone number"
                   onChange={handleChange}
-                  onBlur={handleOnBlur}
+                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.phone}</MsgError>
@@ -228,8 +241,8 @@ export const Register = () => {
 
             <FormRow>
               <FormAccept>
-                <input type="checkbox" />
-                <Label>Accepto Terminos y Condiciones</Label>
+                <input type="checkbox" name='accept' onChange={handleChecked} />
+                <Label style={{marginLeft:"10px"}}>I Agree to Terms and Conditions</Label>
               </FormAccept>
             </FormRow>
 
@@ -260,7 +273,7 @@ export const Register = () => {
             <FormIcons>
               <Button1 onClick={handleClick} height="10%" width="25%" title="Back"></Button1>
 
-              <Button1 disabled={disabled} height="10%" width="25%" title="Register"></Button1>
+              <Button1 disabled={disabled} type="submit" height="10%" width="25%" title="Register"></Button1>
               
             </FormIcons>
           </FormColumn>
@@ -292,7 +305,7 @@ const FormItem = styled.div`
   margin: 0% 5% 0% 5%;
   padding: 0;
   border: none;
-  height: 80px;
+  height: 90px;
 `;
 
 const FormColumn = styled.div`
