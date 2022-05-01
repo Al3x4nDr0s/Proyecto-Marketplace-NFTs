@@ -177,7 +177,7 @@ function Header() {
             <Link to={"/home"}>About</Link>
             <Link to={"/home"}>Collections</Link>
             <Button title={"LOGIN"} onClick={() => navigate("/home/login")} />
-            <Button title={"REGISTER"} onClick={() => navigate("/register")} />
+            <Button title={"REGISTER"} onClick={() => navigate("/home/register")} />
           </ButtonsContainer>
         </>
       )}
