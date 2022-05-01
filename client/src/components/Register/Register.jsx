@@ -1,10 +1,10 @@
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
 import axios from "axios";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
 import GoogleLogin from 'react-google-login';
 
 
@@ -30,9 +30,17 @@ export const Register = () => {
   });
 
   const [dataBack, setDataBack] = useState(0);
-  const [loginData, setLoginData] = useState(localStorage.getItem('loginData')?
-                                             JSON.parse(localStorage.getItem('loginData')):
-                                             null);
+  const [disabled, setDisabled] = useState(true)
+
+
+  useEffect(()=>{
+    if(!errors.firstName&&!errors.lastName&&!errors.username&&!errors.email&&!errors.password&&!errors.phone){
+      setDisabled(false);
+    }else if(!input.firstName||!input.lastName||!input.username||!input.email||!input.password||!input.phone){
+      setDisabled(true);
+    }
+  },[errors])
+
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -42,6 +50,7 @@ export const Register = () => {
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
     console.log("Entramos a HandleChange");
+    
   };
 
   const handleSubmit = (e) => {
@@ -68,7 +77,7 @@ export const Register = () => {
     } else if (e.target.name === "username") {
       /^[A-Za-z0-9]+([A-Za-z0-9]*|[._-]?[A-Za-z0-9]+)*$/g.test(e.target.value)
         ? setErrors({ ...errors, [e.target.name]: "" })
-        : setErrors({ ...errors, [e.target.name]: "* Not valid nickname" });
+        : setErrors({ ...errors, [e.target.name]: "* Not valid username" });
     } else if (e.target.name === "email") {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
         e.target.value
@@ -87,9 +96,10 @@ export const Register = () => {
         : setErrors({
             ...errors,
             [e.target
-              .name]: `* ${e.target.name}: At least 7 to 15 Character, One digit and One Special Character`,
+              .name]: `* 7-15 Char, 1 dig, 1 Special Char`,
           });
     }
+    
   };
 
   const handleLogin=(googleData)=>{
@@ -111,6 +121,7 @@ export const Register = () => {
       });
       */
       console.log(googleData);
+      localStorage.setItem('token',JSON.stringify(googleData));
       navigate("/home");
       
   
@@ -125,12 +136,14 @@ export const Register = () => {
   return (
     <>
       <FormContainer>
-        <FormTitle>REGISTER</FormTitle>
+        <FormTitle>
+        <h1>REGISTER</h1>
+        </FormTitle>
         <Form onSubmit={handleSubmit}>
           <FormColumn>
             <FormRow>
               <FormItem>
-                <Label>FirstName</Label>
+                <Label>First Name</Label>
                 <Input
                   type="text"
                   name="firstName"
@@ -140,9 +153,11 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
-              </FormItem>
+                <MsgError>{errors.firstName}</MsgError>
+               </FormItem>
+              
               <FormItem>
-                <Label>LastName</Label>
+                <Label>Last Name</Label>
                 <Input
                   type="text"
                   name="lastName"
@@ -152,7 +167,8 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
-              </FormItem>
+                <MsgError>{errors.lastName}</MsgError>
+               </FormItem>
             </FormRow>
             <FormRow>
               <FormItem>
@@ -166,7 +182,8 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
-              </FormItem>
+                <MsgError>{errors.username}</MsgError>
+                </FormItem>
               <FormItem>
                 <Label>Email</Label>
                 <Input
@@ -177,7 +194,8 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
-              </FormItem>
+                <MsgError>{errors.email}</MsgError>
+               </FormItem>
             </FormRow>
             <FormRow>
               <FormItem>
@@ -191,7 +209,8 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
-              </FormItem>
+                <MsgError>{errors.password}</MsgError>
+                </FormItem>
 
               <FormItem>
                 <Label>Phone</Label>
@@ -203,6 +222,7 @@ export const Register = () => {
                   onBlur={handleOnBlur}
                   width="100%"
                 />
+                <MsgError>{errors.phone}</MsgError>
               </FormItem>
             </FormRow>
 
@@ -214,40 +234,41 @@ export const Register = () => {
             </FormRow>
 
             <FormIcons>
-              {//<FcGoogle size="2em" />
-              }
+            <BotonFacebook>
+              <FaFacebookF size="2em" color="white" style={{
+                color: "var(--secondFontColor)",
+                width: "40px",
+                margin:"8px 5px",
+                height: "28px",
+              }}/>
+            </BotonFacebook>
               <GoogleLogin
               clientId="623666465652-gdbjevbm9pvugieks0it5c4hijk97gag.apps.googleusercontent.com"
             
               //buttonText="Login"
               render={renderProps => (
-                <FcGoogle size="2em" onClick={renderProps.onClick} >This is my custom Google button</FcGoogle>
+                <BotonGoogle>
+                <FcGoogle style={{ width: "33px", height: "33px", margin:"6px 8px"}} onClick={renderProps.onClick} >This is my custom Google button</FcGoogle>
+                </BotonGoogle>
               )}
               onSuccess={handleLogin}
               onFailure={handleFailure}
               cookiePolicy={'single_host_origin'}
               />
-              <BsFacebook size="2em" color="#4267B2" />
+              
             </FormIcons>
             <FormIcons>
-              <Button onClick={handleClick} width="15%" title="Back">
-                Back
-              </Button>
+              <Button1 onClick={handleClick} height="10%" width="25%" title="Back"></Button1>
 
-              <Button width="15%" title="Register">
-                Register
-              </Button>
+              <Button1 disabled={disabled} height="10%" width="25%" title="Register"></Button1>
+              
             </FormIcons>
           </FormColumn>
         </Form>
       </FormContainer>
 
-      <MsgError>{errors.firstName}</MsgError>
-      <MsgError>{errors.lastName}</MsgError>
-      <MsgError>{errors.username}</MsgError>
-      <MsgError>{errors.email}</MsgError>
-      <MsgError>{errors.password}</MsgError>
-      <MsgError>{errors.phone}</MsgError>
+      
+      
     </>
   );
 };
@@ -260,7 +281,7 @@ const colores = {
 
 const Label = styled.label`
   color: var(--secondFontColor);
-  font-size: var(--medium);
+  font-size: 1.1rem;
   padding: 0px;
   min-height: 10px;
 `;
@@ -271,7 +292,7 @@ const FormItem = styled.div`
   margin: 0% 5% 0% 5%;
   padding: 0;
   border: none;
-  height: 60px;
+  height: 80px;
 `;
 
 const FormColumn = styled.div`
@@ -301,9 +322,10 @@ const FormIcons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 5%;
+  gap: 10%;
   padding: 0;
-  svg{cursor: pointer}; 
+  margin:5%;
+  //svg{cursor: pointer}; 
   
 `;
 
@@ -319,10 +341,11 @@ const FormTitle = styled.div`
   text-align: center;
   font-size: var(--large);
   color: var(--secondFontColor);
+  margin-bottom: 3%;
 `;
 
 const FormContainer = styled.div`
-  background-color: #3d2556;
+  background-color: #320C6A;
   border-radius: 5px;
   margin: 5% 25% 0% 25%;
   padding: 2% 2%;
@@ -333,6 +356,21 @@ const FormAccept = styled.div`
   margin: 10;
   gap: 5%;
 `;
+const BotonGoogle = styled.div`
+  background-color: #fafafa;
+  border-radius: 0.8rem;
+  width: 50px;
+  cursor: pointer;
+  height: 45px;
+`;
+
+const BotonFacebook = styled.div`
+ background-color: #166fe5;
+  width: 50px;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  height: 45px;
+`;
 
 const MsgError = styled.p`
   font-size: 12px;
@@ -340,8 +378,62 @@ const MsgError = styled.p`
   padding: 0;
   color: ${colores.error};
   width: 100%;
-  text-align: center;
+  text-align: left;
 `;
+
+const StyledButton = styled.button`
+  border: none;
+  border-radius: .3rem;
+  margin: ${(props) => props.margin || ".5rem 0 .8rem 0"};
+  cursor: pointer;
+  color: var(--secondFontColor);
+  padding: ${(props) => props.padding || ".2rem 1.8rem"};
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  /* background: ${(props) => props.color || "#23136e"}; */
+  background: ${(props) => props.color || "var(--mainBackGroundButtonColor)"};  
+  /* border: 1px solid ${(props) => props.color || "#23136e"}; */
+  /* background: ${(props) => props.color || "#6d6a799f"}; */
+  display: flex;
+  height: 40px;
+  line-height:30px;
+img {
+    height: 20px;
+}
+
+
+
+${props =>
+            props.disabled ?
+            css`
+            opacity: 0.5;
+            `
+            :  css`
+            &:hover{
+            background: white;
+            transition: all .9s ease;
+            color: ${(props) => props.color || "var(--mainFontColor)"};
+}
+            `};
+
+
+`
+
+const Button1 = ({disabled=false, title, onClick}) => {
+    return <StyledButton
+     disabled={disabled}
+     title={title}
+     onClick={onClick}
+     >
+       {title}
+     </StyledButton>;
+};
+
+
+
+
+
 
 /*Salida del Componente
 { 
