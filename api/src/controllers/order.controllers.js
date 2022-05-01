@@ -2,7 +2,14 @@ const Nft = require ('../models/Nft');
 
 const orderNft = async (req, res) => {
     try {
-        const nfts = await Nft.find({}).exec();
+        const nfts = await Nft.find({})
+        .populate('category', { name:1, _id:0})
+        .populate('collection_nft', { name:1, _id:0})
+        .populate('currencies', { name:1, _id:0})
+        .populate('sales_types', { name:1, _id:0})
+        .populate('files_types', { name:1, _id:0})
+        .populate('details.owner', { username:1, _id:0})
+        .populate('details.user_creator', { username:1, _id:0})
         // console.log(nfts)
         const order = nfts.sort((a, b) => a.price - b.price);
         res.json(order)
