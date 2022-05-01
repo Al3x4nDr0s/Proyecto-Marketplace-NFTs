@@ -22,14 +22,22 @@ const getAllNfts = async (req, res) => {
         // } else {
         //     return res.status(200).json(allNfts);
         // }
-        const { page = 1, limit = 10 } = req.query; 
+        let { page = 1, limit } = req.query; 
+        
+        const total = await Nft.countDocuments();
+        const countPages = Math.ceil(total / limit);
+        limit ? limit = parseInt(limit) : limit = total;
+        
         const start = (page - 1) * limit;
         const end = page * limit;
         //? AGREGATE 
         const getAllNfts = await Nft.aggregate([
             //? skip limit 
             { $skip: start },
-            { $limit: limit },
+            { $limit : limit },
+            //? sort by name
+            { $sort: { name: 1 } },
+            
             {
                 $lookup: {
                     from: 'categories',
@@ -157,12 +165,9 @@ const getAllNfts = async (req, res) => {
                     create_date: 1,
                     price: 1,
                 }
-            }
-        
-            
+            }    
         ]);
-        const total = await Nft.countDocuments();
-        const countPages = Math.ceil(total / limit);
+        
         res.status(200).json({
             ok: 'true',
             getAllNfts,
