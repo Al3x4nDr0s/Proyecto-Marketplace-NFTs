@@ -12,19 +12,17 @@ import {
   InputData,
   ImagenPerfil
 } from "./elements/StyleViewUser.jsx";
-import { CardVenta } from "./CardVenta.jsx";
-import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
+// import { CardVenta } from "./CardVenta.jsx";
+// import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const ViewUser = React.memo(() => {
   // const { username, level } = user;
 
   const user = useSelector((state) => state.user)
-
-
 
   console.log(user)
 

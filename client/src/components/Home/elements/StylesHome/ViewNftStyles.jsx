@@ -57,8 +57,6 @@ export const ContainerDataCard = styled.div`
   /* border-radius: .6rem .6rem 0 0; */
 `;
 
-
-
 export const ContainerCategory = styled.div`
   &:hover {
     -moz-transform: skew(-4deg, 0deg);
@@ -77,3 +75,4 @@ export const Card = (props) => {
 
   return <Cards backgroundImage={backgroundImage} />;
 };
+

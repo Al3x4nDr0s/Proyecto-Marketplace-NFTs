@@ -59,22 +59,31 @@ export const ViewNft = () => {
 
   const dispatch = useDispatch();
 
-  const [mynft, setNft] = useState([])
+  const [mynft, setNft] = useState([]);
 
   const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
-    if(Object.keys(nft).length === 0) {
+    if (Object.keys(nft).length === 0) {
       instantCallback(getAllNft());
     }
     setNft(nft);
   }, [instantCallback, mynft]);
 
-// console.log(nft)
+  console.log(nft);
 
   return (
     <ContainerNFT>
-      <h2 style={{textAlign: "center", color: "var(--secondFontColor)", fontSize: '2rem', margin: "2.2rem 0 2.2rem 0"}}>Categories</h2>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "var(--secondFontColor)",
+          fontSize: "2rem",
+          margin: "2.2rem 0 2.2rem 0",
+        }}
+      >
+        Categories
+      </h2>
       <ContainerTitleCategory>
         <div
           style={{
@@ -129,7 +138,7 @@ export const ViewNft = () => {
         // onSwiper={(swiper) => console.log(swiper)}
         // onSlideChange={() => console.log("slide change")}
       >
-        {nft.length ? (
+        {nft?.length ? (
           nft
             .filter((x) => x.category.name === "Gaming")
             .map((x, i) => (
@@ -141,6 +150,8 @@ export const ViewNft = () => {
                   files={x.files_types.name}
                   category={x.category}
                   currency={x.currencies}
+                  imageCurrencies={x.currencies.image}
+                  owner={x.details.owner.username}
                   salestype={x.sales_types.name}
                   id={x._id}
                   key={x._id}
@@ -227,6 +238,8 @@ export const ViewNft = () => {
                 files={x.files_types.name}
                 category={x.category}
                 currency={x.currencies}
+                imageCurrencies={x.currencies.image}
+                owner={x.details.owner.username}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -291,6 +304,8 @@ export const ViewNft = () => {
                 files={x.files_types.name}
                 category={x.category}
                 currency={x.currencies}
+                imageCurrencies={x.currencies.image}
+                owner={x.details.owner.username}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -352,6 +367,8 @@ export const ViewNft = () => {
                 files={x.files_types.name}
                 category={x.category}
                 currency={x.currencies}
+                imageCurrencies={x.currencies.image}
+                owner={x.details.owner.username}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -417,6 +434,8 @@ export const ViewNft = () => {
                 files={x.files_types.name}
                 category={x.category}
                 currency={x.currencies}
+                imageCurrencies={x.currencies.image}
+                owner={x.details.owner.username}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
