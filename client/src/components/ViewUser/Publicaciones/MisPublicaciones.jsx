@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
 
-import { getAllNft } from "../../../redux/actions/index";
+// import { getAllNft } from "../../../redux/actions/index";
 
 import "./publicaciones.css";
 
 import styled from "styled-components";
 
-import { CardImg } from "../elements/StyleViewUser.jsx";
+// import { CardImg } from "../elements/StyleViewUser.jsx";
+import {Loading} from "../../Loading/Loading.jsx";
+
 
 const ContainerMisPublicaciones = styled.div`
   width: 85%;
@@ -15,21 +17,22 @@ const ContainerMisPublicaciones = styled.div`
   color: var(--secondFontColor);
 `;
 
-const ContainerPublicacion = styled.div`
-  display: flex;
-`;
+// const ContainerPublicacion = styled.div`
+//   display: flex;
+// `;
 
 export const MisPublicaciones = () => {
-  const nft = useSelector((state) => state.nft);
+  // const nft = useSelector((state) => state.nft);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllNft());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllNft());
+  // }, [dispatch]);
 
   return (
     <ContainerMisPublicaciones>
+      <>
       <h2>Mis Publicaciones</h2>
       <hr
         style={{
@@ -37,6 +40,10 @@ export const MisPublicaciones = () => {
           backgroundColor: "var(--mainBackGroundButtonColor)",
         }}
       />
+      
+      <Loading/>
+      
+      </>
       {/* <>
         <CardContainerNft>
           <CardingImg>
