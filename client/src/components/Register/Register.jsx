@@ -4,8 +4,7 @@ import styled, { css } from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
-import GoogleLogin from 'react-google-login';
-
+import GoogleLogin from "react-google-login";
 
 import React, { useState, useEffect } from "react";
 
@@ -28,21 +27,30 @@ export const Register = () => {
     phone: "",
   });
 
-  
   const [disabled, setDisabled] = useState(true);
   const [checked, setChecked] = useState(false);
 
-
-  useEffect(()=>{
-    if(errors.firstName===''&&errors.lastName===''&&errors.username===''&&errors.email===''&&errors.password===''&&errors.phone===''&&checked
-    &&input.firstName!==''&&input.lastName!==''&&input.username!==''&&input.email!==''&&input.password!==''&&input.phone!==''){
+  useEffect(() => {
+    if (
+      errors.firstName === "" &&
+      errors.lastName === "" &&
+      errors.username === "" &&
+      errors.email === "" &&
+      errors.password === "" &&
+      errors.phone === "" &&
+      checked &&
+      input.firstName !== "" &&
+      input.lastName !== "" &&
+      input.username !== "" &&
+      input.email !== "" &&
+      input.password !== "" &&
+      input.phone !== ""
+    ) {
       setDisabled(false);
-    } else{
+    } else {
       setDisabled(true);
     }
-    
-  },[input,errors,checked])
-
+  }, [input, errors, checked]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -52,7 +60,7 @@ export const Register = () => {
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
     console.log("Entramos a HandleChange");
-    
+
     if (e.target.value === "") {
       setErrors({
         ...errors,
@@ -83,15 +91,9 @@ export const Register = () => {
         ? setErrors({ ...errors, [e.target.name]: "" })
         : setErrors({
             ...errors,
-            [e.target
-              .name]: `* 7-15 Char, 1 dig, 1 Spec.Char`,
+            [e.target.name]: `* 7-15 Char, 1 dig, 1 Spec.Char`,
           });
     }
-
-    
-
-    
-
   };
 
   const handleSubmit = (e) => {
@@ -105,14 +107,10 @@ export const Register = () => {
       });
   };
 
-  const handleOnBlur = (e) => {
-    
-    
-  };
+  const handleOnBlur = (e) => {};
 
-  const handleLogin=(googleData)=>{
-   
-   /* axios
+  const handleLogin = (googleData) => {
+    /* axios
     .post("http://localhost:4000/auth/google",
       {token: googleData.tokenId,
       givenName: googleData.profileObj.givenName,
@@ -128,20 +126,16 @@ export const Register = () => {
         alert(e.response.data.msg);
       });
       */
-      console.log(googleData);
-      localStorage.setItem('token',JSON.stringify(googleData));
-      navigate("/home");
-      
-  
- 
+    console.log(googleData);
+    localStorage.setItem("token", JSON.stringify(googleData));
+    navigate("/home");
   };
 
-  const handleFailure=(response)=>{
-   
+  const handleFailure = (response) => {
     console.log(response);
   };
 
-  const handleChecked=(e)=>{
+  const handleChecked = (e) => {
     console.log(e.target.checked);
     setChecked(e.target.checked);
   };
@@ -150,7 +144,7 @@ export const Register = () => {
     <>
       <FormContainer>
         <FormTitle>
-        <h1>REGISTER</h1>
+          <h1>Register</h1>
         </FormTitle>
         <Form onSubmit={handleSubmit}>
           <FormColumn>
@@ -161,27 +155,29 @@ export const Register = () => {
                   type="text"
                   name="firstName"
                   value={input.firstName}
-                  placeHolder="Enter your name"
+                  placeholder="Enter your name"
+                  padding= ".5rem"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.firstName}</MsgError>
-               </FormItem>
-              
+              </FormItem>
+
               <FormItem>
                 <Label>Last Name</Label>
                 <Input
                   type="text"
                   name="lastName"
                   value={input.lastName}
-                  placeHolder="Enter your name"
+                  placeholder="Enter your name"
+                  padding= ".5rem"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.lastName}</MsgError>
-               </FormItem>
+              </FormItem>
             </FormRow>
             <FormRow>
               <FormItem>
@@ -190,25 +186,27 @@ export const Register = () => {
                   type="text"
                   name="username"
                   value={input.username}
-                  placeHolder="Enter your Username"
+                  placeholder="Enter your Username"
+                  padding= ".5rem"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.username}</MsgError>
-                </FormItem>
+              </FormItem>
               <FormItem>
                 <Label>Email</Label>
                 <Input
                   name="email"
                   value={input.email}
-                  placeHolder="Enter your email"
+                  placeholder="Enter your email"
+                  padding= ".5rem"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.email}</MsgError>
-               </FormItem>
+              </FormItem>
             </FormRow>
             <FormRow>
               <FormItem>
@@ -217,20 +215,22 @@ export const Register = () => {
                   type="password"
                   name="password"
                   value={input.password}
-                  placeHolder="Enter your password"
+                  placeholder="Enter your password"
+                  padding= ".5rem"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.password}</MsgError>
-                </FormItem>
+              </FormItem>
 
               <FormItem>
                 <Label>Phone</Label>
                 <Input
                   name="phone"
                   value={input.phone}
-                  placeHolder="Enter your phone number"
+                  padding= ".5rem"
+                  placeholder="Enter your phone number"
                   onChange={handleChange}
                   //onBlur={handleOnBlur}
                   width="100%"
@@ -239,49 +239,68 @@ export const Register = () => {
               </FormItem>
             </FormRow>
 
-            <FormRow>
+            <ContainerAccept>
               <FormAccept>
-                <input type="checkbox" name='accept' onChange={handleChecked} />
-                <Label style={{marginLeft:"10px"}}>I Agree to Terms and Conditions</Label>
+                <input type="checkbox" name="accept" onChange={handleChecked} />
+                <Label style={{ marginLeft: "10px" }}>
+                  I Agree to Terms and Conditions
+                </Label>
               </FormAccept>
-            </FormRow>
+            </ContainerAccept>
 
             <FormIcons>
-            <BotonFacebook>
-              <FaFacebookF size="2em" color="white" style={{
-                color: "var(--secondFontColor)",
-                width: "40px",
-                margin:"8px 5px",
-                height: "28px",
-              }}/>
-            </BotonFacebook>
+              <BotonFacebook>
+                <FaFacebookF
+                  size="2em"
+                  color="white"
+                  style={{
+                    color: "var(--secondFontColor)",
+                    width: "40px",
+                    margin: "8px 5px",
+                    height: "28px",
+                  }}
+                />
+              </BotonFacebook>
               <GoogleLogin
-              clientId="623666465652-gdbjevbm9pvugieks0it5c4hijk97gag.apps.googleusercontent.com"
-            
-              //buttonText="Login"
-              render={renderProps => (
-                <BotonGoogle>
-                <FcGoogle style={{ width: "33px", height: "33px", margin:"6px 8px"}} onClick={renderProps.onClick} >This is my custom Google button</FcGoogle>
-                </BotonGoogle>
-              )}
-              onSuccess={handleLogin}
-              onFailure={handleFailure}
-              cookiePolicy={'single_host_origin'}
+                clientId="623666465652-gdbjevbm9pvugieks0it5c4hijk97gag.apps.googleusercontent.com"
+                //buttonText="Login"
+                render={(renderProps) => (
+                  <BotonGoogle>
+                    <FcGoogle
+                      style={{
+                        width: "33px",
+                        height: "33px",
+                        margin: "6px 8px",
+                      }}
+                      onClick={renderProps.onClick}
+                    >
+                      This is my custom Google button
+                    </FcGoogle>
+                  </BotonGoogle>
+                )}
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                cookiePolicy={"single_host_origin"}
               />
-              
             </FormIcons>
-            <FormIcons>
-              <Button1 onClick={handleClick} height="10%" width="25%" title="Back"></Button1>
-
-              <Button1 disabled={disabled} type="submit" height="10%" width="25%" title="Register"></Button1>
-              
-            </FormIcons>
+            <FormButtons>
+              <Button1
+                onClick={handleClick}
+                height="40px"
+                width="100%"
+                title="BACK"
+              ></Button1>
+              <Button1
+                disabled={disabled}
+                type="submit"
+                height="40px"
+                width="100%"
+                title="REGISTER"
+              ></Button1>
+            </FormButtons>
           </FormColumn>
         </Form>
       </FormContainer>
-
-      
-      
     </>
   );
 };
@@ -300,10 +319,10 @@ const Label = styled.label`
 `;
 
 const FormItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0% 5% 0% 5%;
-  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0% 7% 0% 12%;
+  padding: .1rem;
   border: none;
   height: 90px;
 `;
@@ -319,11 +338,11 @@ const FormColumn = styled.div`
 `;
 
 const FormRow = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
-  gap: 3%;
-  padding: 0;
+  gap: 5%;
+  padding: .2rem;
   margin-bottom: 3%;
   @media (max-width: 768px) {
     display: block;
@@ -336,10 +355,18 @@ const FormIcons = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 10%;
-  padding: 0;
-  margin:5%;
-  //svg{cursor: pointer}; 
-  
+  padding: 0.1rem;
+  margin: 5%;
+  //svg{cursor: pointer};
+`;
+
+const FormButtons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  width: 60%;
+  align-items: center;
+  margin: 0 auto;
 `;
 
 const Form = styled.form`
@@ -358,17 +385,25 @@ const FormTitle = styled.div`
 `;
 
 const FormContainer = styled.div`
-  background-color: #320C6A;
-  border-radius: 5px;
+  background-color: #46198f53;
+  border-radius: 1rem;
   margin: 5% 25% 0% 25%;
   padding: 2% 2%;
 `;
 
+const ContainerAccept = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
+
+
 const FormAccept = styled.div`
   text-align: center;
-  margin: 10;
+  margin: 0 auto;
   gap: 5%;
 `;
+
+
 const BotonGoogle = styled.div`
   background-color: #fafafa;
   border-radius: 0.8rem;
@@ -378,7 +413,7 @@ const BotonGoogle = styled.div`
 `;
 
 const BotonFacebook = styled.div`
- background-color: #166fe5;
+  background-color: #166fe5;
   width: 50px;
   border-radius: 0.8rem;
   cursor: pointer;
@@ -396,57 +431,63 @@ const MsgError = styled.p`
 
 const StyledButton = styled.button`
   border: none;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   margin: ${(props) => props.margin || ".5rem 0 .8rem 0"};
   cursor: pointer;
   color: var(--secondFontColor);
   padding: ${(props) => props.padding || ".2rem 1.8rem"};
   font-weight: 600;
+  text-align: center;
   font-size: 1rem;
   outline: none;
   /* background: ${(props) => props.color || "#23136e"}; */
-  background: ${(props) => props.color || "var(--mainBackGroundButtonColor)"};  
+  background: ${(props) => props.color || "var(--mainBackGroundButtonColor)"};
   /* border: 1px solid ${(props) => props.color || "#23136e"}; */
   /* background: ${(props) => props.color || "#6d6a799f"}; */
-  display: flex;
-  height: 40px;
-  line-height:30px;
-img {
+  width: ${(props) => props.width || "60px"};
+  height: ${(props) => props.height || "40px"};
+  line-height: 30px;
+  img {
     height: 20px;
-}
+  }
 
-
-
-${props =>
-            props.disabled ?
-            css`
-            opacity: 0.5;
-            `
-            :  css`
-            &:hover{
+  ${(props) =>
+    props.disabled
+      ? css`
+          opacity: 0.5;
+        `
+      : css`
+          &:hover {
             background: white;
-            transition: all .9s ease;
+            transition: all 0.9s ease;
             color: ${(props) => props.color || "var(--mainFontColor)"};
-}
-            `};
+          }
+        `};
+`;
 
-
-`
-
-const Button1 = ({disabled=false, title, onClick}) => {
-    return <StyledButton
-     disabled={disabled}
-     title={title}
-     onClick={onClick}
-     >
-       {title}
-     </StyledButton>;
+const Button1 = ({
+  disabled = false,
+  title,
+  onClick,
+  padding,
+  margin,
+  width,
+  height,
+}) => {
+  return (
+    <StyledButton
+      disabled={disabled}
+      padding={padding}
+      margin={margin}
+      width={width}
+      height={height}
+      title={title}
+      onClick={onClick}
+    >
+      {title}
+    </StyledButton>
+  );
 };
-
-
-
-
-
 
 /*Salida del Componente
 { 

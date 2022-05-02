@@ -21,7 +21,7 @@ const ContainerLogin = styled.form`
   background-color: #46198f53;
   border-radius: 1rem;
   margin: 0 auto;
-  padding: 2rem 2rem;
+  padding: 3.2rem 2rem;
   text-align: center;
 `;
 
@@ -42,7 +42,7 @@ const ContainerClaveLogin = styled.div`
 const ContainerButtonLogin = styled.div`
   width: 50%;
   padding-top: 1rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +61,17 @@ const ButtonFacebook = styled.div`
   border-radius: 0.8rem;
   cursor: pointer;
   height: 45px;
+
+  &:hover {
+    background: rgb(61, 103, 154);
+    background: radial-gradient(
+      circle,
+      rgba(61, 103, 154, 1) 0%,
+      rgba(39, 71, 147, 1) 52%,
+      #2d3164 100%
+    );
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const ButtonGoogle = styled.div`
@@ -69,12 +80,25 @@ const ButtonGoogle = styled.div`
   width: 50px;
   cursor: pointer;
   height: 45px;
+
+  &:hover {
+    background: rgb(111, 111, 111);
+    background: radial-gradient(
+      circle,
+      rgba(111, 111, 111, 1) 0%,
+      rgba(209, 209, 209, 1) 65%,
+      rgba(92, 92, 92, 1) 100%
+    );
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const Toast = Swal.mixin({
   toast: true,
-  position: "bottom-end",
+  position: "top-end",
   showConfirmButton: false,
+  color: 'var(--secondFontColor)',
+  background: '#46198fb3',
   timer: 2000,
   timerProgressBar: true,
   didOpen: (toast) => {
@@ -128,38 +152,17 @@ const Login = () => {
       const auth = await authService.login(email, password);
       const verifyAuth = await auth;
       if (verifyAuth.ok === true) {
-        // alertify.alert().setting({
-        //   'label': 'Accept',
-        //   'message': `El usuario ${verifyAuth.username.user} exitosamente`,
-        //   'onok': function(){alertify.succes('Usuario Logueado')}
-        // }).show();
-        // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
         Toast.fire({
           icon: "success",
           title: "Signed in successfully",
         });
         navigate("/home");
-        // window.location.reload();
-        // alertify.alert('Usuario autenticado exitosamente');
-        // console.log(verifyAuth)
       }
-      // await authService.login(email, password).then(
-      // () => {
-      // alert('usuario autenticado exitosamente')
-      // navigate("/home");
-      // window.location.reload();
-      // },
-      // (error) => {
-      // alert('no es un correo registrado')
-      // console.log(error);
-      // }
-      // );
     } catch (error) {
       Toast.fire({
         icon: "error",
         title: "Correo no registrado",
       });
-      // alertify.alert('prueba de alerta', 'Alert Message!', function(){ alertify.success('Ok'); })
       console.log(error);
     }
   };
@@ -172,12 +175,12 @@ const Login = () => {
           <label
             style={{ color: "var(--secondFontColor)", fontSize: "1.1rem" }}
           >
-            Correo Electronico
+            Email
           </label>
           <Input
             type="email"
             name="email"
-            placeholder="Ingrese su correo..."
+            placeholder="email@email.com"
             value={email}
             onChange={handleUser}
             width="270px"
@@ -189,12 +192,12 @@ const Login = () => {
           <label
             style={{ color: "var(--secondFontColor)", fontSize: "1.1rem" }}
           >
-            Contraseña
+            Password
           </label>
           <Input
             type="password"
             name="password"
-            placeholder="Ingrese su contraseña..."
+            placeholder="password..."
             value={password}
             onChange={handleUser}
             padding=".6rem"
@@ -203,7 +206,7 @@ const Login = () => {
           />
         </ContainerClaveLogin>
         <div>
-          <h4 style={{ color: "var(--secondFontColor)" }}>ó logueate con</h4>
+          <h4 style={{ color: "var(--secondFontColor)" }}>or login with</h4>
         </div>
         <ContainerButtonFacebookGoogle>
           <ButtonFacebook>
@@ -221,7 +224,10 @@ const Login = () => {
             onSuccess={handleGoogleLogin}
             onFailure={handleGoogleLogin}
             render={(renderProps) => (
-              <ButtonGoogle onClick={renderProps.onClick} disabled={renderProps.disabled}>
+              <ButtonGoogle
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
                 <FcGoogle
                   style={{ width: "33px", height: "33px", marginTop: "6px" }}
                 />
@@ -230,12 +236,7 @@ const Login = () => {
           />
         </ContainerButtonFacebookGoogle>
         <ContainerButtonLogin>
-          <Button
-            title="INGRESAR"
-            padding=".8rem 6.5rem"
-            type="submit"
-            // onClick={handleSend}
-          />
+          <Button title="LOGIN" padding=".8rem 6.5rem" type="submit" />
         </ContainerButtonLogin>
       </ContainerLogin>
     </div>

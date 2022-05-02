@@ -10,6 +10,7 @@ import {
   removeUser,
 } from "../../redux/actions/index";
 import Button from "../shared/Button";
+
 // import { createPortal } from "react-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
@@ -153,15 +154,17 @@ function Header() {
                   </ContainerItemsMenu>
                 </li>
                 <li>
-                <ContainerItemsMenu>
+                  <ContainerItemsMenu>
                     <FaInfoCircle style={{ width: "22px", height: "42px" }} />
                     <a href="#">About</a>
                   </ContainerItemsMenu>
                 </li>
                 <li>
-                <ContainerItemsMenu>
+                  <ContainerItemsMenu>
                     <IoIosLogOut style={{ width: "22px", height: "42px" }} />
-                    <Link to="/home" onClick={handleLogout}>Logout</Link>
+                    <Link to="/home" onClick={handleLogout}>
+                      Logout
+                    </Link>
                   </ContainerItemsMenu>
                 </li>
               </ul>
@@ -174,10 +177,51 @@ function Header() {
         <>
           <ButtonsContainer>
             <Link to={"/home"}>Home</Link>
-            <Link to={"/home"}>About</Link>
-            <Link to={"/home"}>Collections</Link>
+            <Link
+              to={"/home"}
+              onClick={() =>
+                Swal.fire({
+                  title: "In Construction",
+                  width: 600,
+                  padding: "3em",
+                  color: "var(--secondFontColor)",
+                  background: "#46198fb3",
+                  backdrop: `
+                #21217750
+                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
+                left top
+                no-repeat
+              `,
+                })
+              }
+            >
+              About
+            </Link>
+            <Link
+              to={"/home"}
+              onClick={() =>
+                Swal.fire({
+                  title: "In Construction",
+                  width: 600,
+                  padding: "3em",
+                  color: "var(--secondFontColor)",
+                  background: "#46198fb3",
+                  backdrop: `
+                #2121774c
+                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
+                left top
+                no-repeat
+              `,
+                })
+              }
+            >
+              Collections
+            </Link>
             <Button title={"LOGIN"} onClick={() => navigate("/home/login")} />
-            <Button title={"REGISTER"} onClick={() => navigate("/home/register")} />
+            <Button
+              title={"REGISTER"}
+              onClick={() => navigate("/home/register")}
+            />
           </ButtonsContainer>
         </>
       )}

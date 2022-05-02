@@ -24,12 +24,9 @@ export const ViewUser = React.memo(() => {
 
   const user = useSelector((state) => state.user)
 
-  console.log(user)
 
   const {username, image} = user
 
-  console.log(image)
-  // {}
   const navigate = useNavigate()
   return (
     <>
@@ -48,7 +45,6 @@ export const ViewUser = React.memo(() => {
 
         <ContainerButton>
           <Button title="MIS PUBLICACIONES" onClick={() => navigate(`/myprofile/mispublicaciones`)}/>
-          {/* <Link to={`/myprofile/mispublicaciones`}>MIS PUBLICACIONES</Link> */}
           <Button title="LOGOUT" />
         </ContainerButton>
       </ContainerHeaderUser>
@@ -56,16 +52,18 @@ export const ViewUser = React.memo(() => {
         <div>
           <h2>Mis preferencias</h2>
           <ContainerMisPreferencias>
-            <ListaPreferencias>
+          <h2>In construction</h2>
+            {/* <ListaPreferencias> */}
               {/* {user.preferencias.map((x) => (
                 <li key={x}>
                   {x} <a>X</a>
                 </li>
               ))} */}
-            </ListaPreferencias>
+            {/* </ListaPreferencias> */}
           </ContainerMisPreferencias>
           <h2 style={{ marginTop: ".8rem" }}>Ultimas ventas</h2>
           <ContenedorUltimasVentas>
+            <h2>In construction</h2>
             {/* {user.ultimasventas.map((x) => (
               <CardVenta
                 title={x.title.toUpperCase()}
@@ -87,7 +85,7 @@ export const ViewUser = React.memo(() => {
                 marginBottom: ".8rem",
               }}
             >
-              <label>Usuario</label>
+              <label>Username</label>
               <InputData>
                 <Input type="text" placeholder="username" height="32px" padding=".4rem" width="12rem"/>
                 <Button title="CAMBIAR USUARIO" padding=".28rem 1.8rem" margin="0"></Button>
@@ -100,7 +98,7 @@ export const ViewUser = React.memo(() => {
                 margin: ".8rem auto",
               }}
             >
-              <label>Clave</label>
+              <label>Passoword</label>
               <div
                 style={{ display: "flex", alignItems: "center", gap: ".6rem"}}
               >
@@ -115,7 +113,7 @@ export const ViewUser = React.memo(() => {
                 margin: ".8rem auto",
               }}
             >
-              <label>Numero celular</label>
+              <label>Mobil</label>
               <Input type="text" placeholder="+54 387 65678904" height="32px" padding=".4rem" width="12rem" />
             </div>
           </ContainerMisDatos>

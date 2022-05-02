@@ -1,20 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-//import InfiniteScroll from "react-infinite-scroll-component";
-import { getAllNft } from "../../../redux/actions/index";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Loading } from "../../Loading/Loading.jsx";
+import { getNftQuery } from "../../../redux/actions/index";
 
-import Button from "../../shared/Button.jsx";
 
 import { CardNft } from "./CardNft.jsx";
 
 const ContainerAll = styled.div`
-  width: 85%;
+  width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 23% 77%;
-  gap: 1rem;
-  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  grid-template-columns: 100%;
 `;
 
 const ContainerFilterNft = styled.div`
@@ -24,149 +22,86 @@ const ContainerFilterNft = styled.div`
 const ContainerNft = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.2rem;
-  border-left: 1px solid var(--mainBackGroundButtonColor);
-  padding: 0 3rem;
-  margin-bottom: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: .5rem;
+  margin-left: 1rem;
 `;
 
-const ContainerButtonPrevNext = styled.div`
-  width: 85%;
-  height: 45px;
-  /* display: flex; */
-  /* align-items: center; */
-  /* text-align: center; */
-  display: flex;
-  margin: 0 auto;
+const ContainerFiltrosMain = styled.div`
+  width: 80%;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  border-radius: .5rem;
+  margin: 0 auto 2rem auto;
+  background-color: #46198f53;
 `;
+
+// const ContainerLoading = styled.div`
+//   background-color: red;
+//   width: 50%;
+//   margin: 0 auto;
+// `
 
 export const AllNft = () => {
-  const nft = useSelector((state) => state.nfts);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setPerPage] = useState(9);
-  const [current, setCurrent] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [allnft, setNft] = useState([]);
-
-  const pages = [];
-
+  const nft = useSelector((state) => state.nftquery);
+  const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();
 
-  const instantCallback = useCallback(dispatch, [dispatch]);
+  const [page, setPage] = useState(1);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  const currentItems = nft.slice(indexOfFirstItem, indexOfLastItem);
-
-  for (let i = 0; i < Math.ceil(nft.length / itemsPerPage); i++) {
-    pages.push(i + 1);
-  }
+  const instantCallback = useCallback(dispatch, [dispatch])
 
   useEffect(() => {
-    if (nft.length === 0) {
-      instantCallback(getAllNft());
-      setLoading(false);
-    }
-    setNft(nft);
-    setCurrent(currentItems);
-  }, [instantCallback, nft, currentPage]);
+    // if(nft.length === 0) {
+      instantCallback(getNftQuery(page))
+    // }
+  }, [instantCallback, page]);
 
-  const handleNext = () => {
-    // e.preventDefault();
-    setCurrentPage((prev) => prev + 1);
-    setCurrent([...current, currentItems]);
+  const fecthNft = () => {
+    setTimeout(() => {
+      if (hasMore) {
+        setPage((prevState) => prevState + 1);
+      }
+    }, 1000);
   };
 
-  console.log(current);
-
-  const handlePrev = () => {
-    // e.preventDefault();
-    setCurrentPage((prev) => prev - 1);
-  };
-
-  // console.log(allnft)
   return (
     <>
+      <ContainerFiltrosMain>
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+      </ContainerFiltrosMain>
       <ContainerAll>
-        {/* <h1 style={{ color: "var(--secondFontColor)" }}>All NFT</h1> */}
-        <ContainerFilterNft>
-          <h2 style={{ color: "var(--secondFontColor)" }}>Prueba Filtro</h2>
-        </ContainerFilterNft>
-        {/* <InfiniteScroll
-        dataLength={allnft?.length}
-        next={handleNext}
-        hasMore={true}
-        loader={<h1>Loading...</h1>}
-      > */}
-        <ContainerNft>
-          {currentItems?.map((x) => (
-            <CardNft
-              image={x.image}
-              name={x.name}
-              price={x.price}
-              files={x.files_types.name}
-              category={x.category}
-              currency={x.currencies}
-              imageCurrencies={x.currencies.image}
-              owner={x.details.owner.username}
-              salestype={x.sales_types.name}
-              id={x._id}
-              key={x._id}
-            />
-          ))}
-        </ContainerNft>
-
-        {/* </InfiniteScroll> */}
-      </ContainerAll>
-      <ContainerButtonPrevNext>
-        <div
-          style={{
-            margin: "0 55%",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1rem",
-          }}
+        <InfiniteScroll
+          dataLength={nft?.length}
+          next={fecthNft}
+          hasMore={hasMore}
+          loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
+          endMessage={
+            <p style={{ textAlign: 'center', color: 'var(--secondFontColor)' }}>
+              Llegaste al final!
+            </p>
+          }
         >
-          <button
-            style={{
-              border: "none",
-              borderRadius: ".3rem",
-              margin: ".5rem 0 .8rem 0",
-              cursor: "pointer",
-              color: "var(--secondFontColor)",
-              padding: ".2rem 1.8rem",
-              outline: "none",
-              background: "var(--mainBackGroundButtonColor)",
-            }}
-            onClick={handlePrev}
-            disabled={currentPage === pages[0] ? true : false}
-          >
-            prev
-          </button>
-          <button
-            style={{
-              border: "none",
-              borderRadius: ".3rem",
-              margin: ".5rem 0 .8rem 0",
-              cursor: "pointer",
-              color: "var(--secondFontColor)",
-              padding: ".2rem 1.8rem",
-              outline: "none",
-              background: "var(--mainBackGroundButtonColor)",
-            }}
-            onClick={handleNext}
-            disabled={currentPage === pages[pages.length - 1] ? true : false}
-          >
-            next
-          </button>
-          {/* <Button onClick={handlePrev} disabled={currentPage === pages[0] ? true : false} title={"prev"} /> */}
-          {/* <Button onClick={handleNext} disabled={true} title={"next"} /> */}
-        </div>
-      </ContainerButtonPrevNext>
+          <ContainerNft>
+            {nft?.map((x) => (
+              <CardNft
+                image={x.image}
+                name={x.name}
+                price={x.price}
+                files={x.files_types?.name}
+                category={x.category}
+                currency={x.currencies}
+                imageCurrencies={x.currencies.image}
+                owner={x.details.owner.username}
+                salestype={x.sales_types.name}
+                id={x._id}
+                key={x._id}
+              />
+            ))}
+          </ContainerNft>
+        </InfiniteScroll>
+      </ContainerAll>
     </>
   );
 };

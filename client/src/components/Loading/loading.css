@@ -1,11 +1,11 @@
 .loading-1{
     margin-top: 50vh;
     margin-left: 45vw;
-    position: relative;
+    /* position: relative; */
 }
 .loading-1 i {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     display: block;
     width: 9px;
     height: 5px;

@@ -1,7 +1,4 @@
 import React from "react";
-
-import { Card } from "./StylesHome/ViewNftStyles.jsx";
-
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,6 +6,8 @@ import {
   ContainerDataCard,
   ContainerCategory,
 } from "./StylesHome/ViewNftStyles.jsx";
+
+import Swal from "sweetalert2";
 
 import imagenaudio from "../../../assets/nft-audio.jpg";
 import imagenvideo from "../../../assets/azuki-nft.gif";
@@ -76,8 +75,6 @@ const CardBody = styled.div`
       cursor: pointer;
       font-weight: 400;
     }
-
-    
   }
 
   p {
@@ -195,12 +192,42 @@ export const CardNft = (props) => {
     owner,
     imageCurrencies,
   } = props;
-  // console.log(image);
-  console.log(owner)
-  // console.log(id)
+
+  // const handlePhoto = () => {
+  //   Swal.fire({
+
+  //   })
+  // }
+
+  const handlePhoto = () => {
+    if (files === "Image") {
+      return `${image}`;
+    }
+    if (files === "Video") {
+      return `${imagenvideo}`;
+    }
+    if (files === "Audio") {
+      return `${imagenaudio}`;
+    }
+  };
+
   return (
     <CardContainerNft>
-      <CardingImg>
+      <CardingImg
+        onClick={() =>
+          Swal.fire({
+            imageUrl: `${handlePhoto()}`,
+            imageHeight: 360,
+            imageWidth: 400,
+            title: `${name}`,
+            color: 'var(--secondFontColor)',
+            background: '#46198fb3',
+            backdrop: `
+            #46198f84
+            `,
+          })
+        }
+      >
         {files === "Image" ? (
           <img src={image} key={id} />
         ) : files === "Video" ? (
@@ -233,7 +260,8 @@ export const CardNft = (props) => {
       <CardFooter>
         <img src="https://rvs-nft-preview-card.netlify.app/images/image-avatar.png" />
         <p>
-          Creation of <span> {owner} </span>
+          Creation of{" "}
+          <span onClick={() => alert("prueba de fuego")}> {owner} </span>
         </p>
       </CardFooter>
     </CardContainerNft>

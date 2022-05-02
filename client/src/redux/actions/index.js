@@ -5,6 +5,7 @@ export const SET_RESIZE = 'SET_RESIZE';
 // export const GET_NFT = 'GET_NFT';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_ALL_NFT = 'GET_ALL_NFT';
+export const GET_NFT_QUERY = 'GET_NFT_QUERY';
 export const REMOVE_USER = 'REMOVE_USER';
 
 export const setModalOpening = (isOpen) => async (dispatch) => {
@@ -22,6 +23,17 @@ export const getAllNft = () => async dispatch => {
         payload: dataNft.data.getAllNfts
     })
     return data
+}
+
+export const getNftQuery = (page) => async dispatch => {
+    const dataQuery = await axios.get('http://localhost:4000/nft', {params: {page: page, limit: 9}})
+    if(dataQuery) {
+        const dataNftQuery = await dispatch({
+            type: GET_NFT_QUERY,
+            payload: dataQuery.data.getAllNfts
+        })
+        return dataNftQuery
+    }
 }
 
 export const getTokenUser = (user) => async dispatch => {
