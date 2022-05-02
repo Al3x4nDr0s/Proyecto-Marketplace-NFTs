@@ -41,7 +41,7 @@ function App() {
             <Route exact path={"/nft"} element={<AllNft />} />
             <Route exact path={"/home"} element={<Home />} />
             <Route exact path={"/home/login"} element={!logged ? <Login /> : <Home/>} />
-            <Route exact path={"/register"} element={<Register />} />
+            <Route exact path={"/home/register"} element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>
