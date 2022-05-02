@@ -4,10 +4,10 @@ const { getAllNfts, createNft, putNftUpdate, deleteNft, getNftById } = require (
 const { validarJwt } = require('../middlewares/validarJwt.js');
 
 router.get('/', getAllNfts); /// Trae todos los NFT y name por query
-router.post('/', createNft);
+router.post('/', validarJwt, createNft);
 router.get('/:id', getNftById);
 router.put('/:id', putNftUpdate);
-router.delete('/:id', deleteNft);
+router.delete('/:id',validarJwt, deleteNft);
 
 
 module.exports = router;

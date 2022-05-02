@@ -1,3 +1,5 @@
+
+const Nft = require ('../models/Nft');
 const getAllNfts = async (req, res) => {
     try {
         // const { name } = req.query;
@@ -20,11 +22,22 @@ const getAllNfts = async (req, res) => {
         // } else {
         //     return res.status(200).json(allNfts);
         // }
+        let { page = 1, limit } = req.query; 
+        
+        const total = await Nft.countDocuments();
+        const countPages = Math.ceil(total / limit);
+        limit ? limit = parseInt(limit) : limit = total;
+        
+        const start = (page - 1) * limit;
+        const end = page * limit;
         //? AGREGATE 
-        const getAllNfts = await Nft.aggregate(
-        //? array to object 
-        [
-            //? unwind 
+        const getAllNfts = await Nft.aggregate([
+            //? skip limit 
+            { $skip: start },
+            { $limit : limit },
+            //? sort by name
+            { $sort: { name: 1 } },
+            
             {
                 $lookup: {
                     from: 'categories',
@@ -140,20 +153,28 @@ const getAllNfts = async (req, res) => {
                         name: 1
                     },
                     currencies: {
-                        name: 1
+                        name: 1,
+                        image: 1
                     },
                     sales_types: {
                         name: 1
                     },
                     files_types: {
                         name: 1
-                    }
+                    },
+                    create_date: 1,
+                    price: 1,
                 }
-            }
-        
-            
+            }    
         ]);
-        res.status(200).json( getAllNfts );
+        
+        res.status(200).json({
+            ok: 'true',
+            getAllNfts,
+            total,
+            end,
+            countPages
+        });
     } catch (error) {
         res.status(404).json({
             ok: 'false',
@@ -164,6 +185,7 @@ const getAllNfts = async (req, res) => {
 };
 
 const createNft = async (req, res) => {
+    
     try {
         const nft = new Nft(req.body);
         await nft.save();
@@ -212,8 +234,12 @@ const putNftUpdate = async (res, req) => {
         );
         res.json(nftUpdate);
     } catch (error) {
-        res.status(404).json({error: 'could not be modified'});
-    };
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    }
 };
 
 const deleteNft = async (req, res) => {
@@ -222,8 +248,12 @@ const deleteNft = async (req, res) => {
         const nftDelete = await Nft.findByIdAndDelete(id);
         res.json(nftDelete);
     } catch (error) {
-        res.status(404).json({error: 'could not delete'});
-    };
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    }
 };
 
 module.exports = { getAllNfts, createNft, putNftUpdate, deleteNft, getNftById };
