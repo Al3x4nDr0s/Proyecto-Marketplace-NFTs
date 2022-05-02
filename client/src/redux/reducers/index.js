@@ -23,20 +23,19 @@ const rootReducer = (state = initialState, action) => {
         case REMOVE_USER:
             return { ...state, user: action.payload, isLogged: false }
         case GET_NFT_QUERY:
-            var setHasMore;
-            if(action.payload.length) {
-                setHasMore = action.payload.length !== 0 ? true : false
+            // console.log('aquiii', state.nftquery)
+            let setHasMore;
+            if(state.nftquery.length > 0) {
+                action.payload.length > 0 ? setHasMore = true : setHasMore = false
             } else {
                 setHasMore = false
             }
-            const unionPrueba = state.nftquery.concat(action.payload)
-            const prueba = [...action.payload, action.payload]
-            const set = new Set( unionPrueba.map( JSON.stringify))
-            const sinDuplicaciones = Array.from( set ).map( JSON.parse )
             return {
                 ...state,
                 hasMore: setHasMore,
-                nftquery: state.hasMore !== true ? state.nftquery : sinDuplicaciones
+                nftquery: state.hasMore === false 
+                ? state.nftquery 
+                : [ ...state.nftquery, ...action.payload ]
             }
         default: return state
     };

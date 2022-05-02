@@ -26,7 +26,7 @@ export const getAllNft = () => async dispatch => {
 }
 
 export const getNftQuery = (page) => async dispatch => {
-    const dataQuery = await axios.get('http://localhost:4000/nft', {params: {page: page, limit: 9}})
+    const dataQuery = await axios.get('http://localhost:4000/nft', {params: {page: page, limit: 8}})
     if(dataQuery) {
         const dataNftQuery = await dispatch({
             type: GET_NFT_QUERY,

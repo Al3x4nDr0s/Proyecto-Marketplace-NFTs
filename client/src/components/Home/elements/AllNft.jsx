@@ -44,6 +44,7 @@ const ContainerFiltrosMain = styled.div`
 // `
 
 export const AllNft = () => {
+  const nftAll = useSelector((state) => state.nfts);
   const nft = useSelector((state) => state.nftquery);
   const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();
@@ -53,9 +54,11 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch])
 
   useEffect(() => {
-    // if(nft.length === 0) {
-      instantCallback(getNftQuery(page))
-    // }
+    instantCallback(getNftQuery(page))
+    return () => {
+        
+    }
+
   }, [instantCallback, page]);
 
   const fecthNft = () => {
@@ -65,16 +68,15 @@ export const AllNft = () => {
       }
     }, 1000);
   };
-
   return (
     <>
       <ContainerFiltrosMain>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
-          dataLength={nft?.length}
-          next={fecthNft}
+          dataLength={nftAll?.length} //? 8
+          next={fecthNft} //2
           hasMore={hasMore}
           loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
           endMessage={
