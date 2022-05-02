@@ -19,7 +19,7 @@ export const getAllNft = () => async dispatch => {
     const dataNft = await axios.get('http://localhost:4000/nft')
     const data = await dispatch({
         type: GET_ALL_NFT,
-        payload: dataNft.data
+        payload: dataNft.data.getAllNfts
     })
     return data
 }
