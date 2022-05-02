@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../Loading/Loading.jsx";
-import { getNftQuery } from "../../../redux/actions/index";
+import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
 
 
 import { CardNft } from "./CardNft.jsx";
@@ -53,7 +53,7 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch])
 
   useEffect(() => {
-    // if(nft.length === 0) {
+    // if(hasMore) {
       instantCallback(getNftQuery(page))
     // }
   }, [instantCallback, page]);
