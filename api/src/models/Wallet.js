@@ -20,6 +20,7 @@ const Wallet = Schema({
         ref: 'User'
     }
 });
+
 Wallet.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
     return object;
