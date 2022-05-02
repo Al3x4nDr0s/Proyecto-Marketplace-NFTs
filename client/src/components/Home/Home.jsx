@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '../Modal.jsx';
 import {useSelector, useDispatch} from "react-redux"
 import { setModalOpening } from '../../redux/actions';
 import styled from 'styled-components';
 import {ViewNft} from './elements/ViewNft.jsx'
 import { CollectionsCarousel } from './elements/CollectionsCarousel.jsx';
-
+import {removeNftQuery} from '../../redux/actions'
 
 const HomeContainer = styled.div`
     
@@ -23,6 +23,10 @@ const HomeTitle = styled.div`
 function Home() {
     const dispatch = useDispatch()
     const {isOpen} = useSelector(state=>({isOpen: state.isOpen}))
+
+    useEffect(() => {
+        dispatch(removeNftQuery())
+    },[])
 
     return (
         <HomeContainer>

@@ -18,19 +18,19 @@ const ContainerCarousel = styled.div`
   width: 85%;
   margin: 0 auto;
   position: relative;
-  /* background: red; */
 `;
 
 const SlideMain = styled.div`
-  content: "";
-  width: 85%;
+  width: 90%;
+  max-width: 85%;
   margin: 0 auto;
-  height: 600px;
+  height: 75vh;
   text-align: center;
   background-image: ${(props) =>
     `url(${props.backgroundImage})` || "url('../../../assets/imagen1.png')"};
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   line-height: 500px;
 `;
 
