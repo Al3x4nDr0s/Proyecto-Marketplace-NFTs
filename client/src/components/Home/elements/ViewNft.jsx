@@ -99,7 +99,7 @@ export const ViewNft = () => {
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         grabCursor={true}
@@ -163,9 +163,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -190,7 +187,7 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
@@ -229,9 +226,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -256,7 +250,7 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
@@ -319,7 +313,7 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
@@ -358,9 +352,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -384,9 +375,8 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        // width=
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >

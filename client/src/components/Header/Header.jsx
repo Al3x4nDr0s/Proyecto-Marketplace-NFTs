@@ -2,25 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../Modal.jsx";
 import authService from "../../services/authService";
-import {
-  setModalOpening,
-  getTokenUser,
-  removeUser,
-} from "../../redux/actions/index";
+import { getTokenUser, removeUser } from "../../redux/actions/index";
 import Button from "../shared/Button";
-
-// import { createPortal } from "react-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
 
 import Swal from "sweetalert2";
-// import alertify from 'alertifyjs';
 
 import "./header.css";
-
-// alertify
 
 import { IoApps } from "react-icons/io5";
 import axios from "axios";
@@ -28,11 +18,14 @@ import axios from "axios";
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
-  /* position: fixed; */
-  /* top: 0;
-    left: 0; */
-  /* background-color: var(--mainContainersColor); */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  /* backdrop-filter: blur(2px); */
+  /* backdrop-filter: saturate(100%); */
   align-items: center;
+  background-color: #46198f47;
   justify-content: space-between;
   height: 85px;
   max-width: 100vw;
@@ -72,14 +65,6 @@ const ButtonsContainer = styled.div`
       text-decoration-line: underline;
       text-decoration-thickness: 3px;
     }
-  }
-`;
-
-const EtiquetaHamburgesa = styled.a`
-  visibility: visible;
-
-  @media (max-width: 768px) {
-    visibility: visible;
   }
 `;
 
@@ -124,13 +109,6 @@ function Header() {
     navigate("/home");
   }
 
-  //   function handleModalClick(e) {
-  //     dispatch(setModalOpening(true));
-  //   }
-  //   function X() {
-  //     return createPortal(<div>Portal</div>, document.querySelector(".modal"));
-  //   }
-
   return (
     <StyledNav>
       <LogoContainer onClick={(e) => handleLogoClick(e)}>
@@ -170,8 +148,6 @@ function Header() {
               </ul>
             </div>
           </div>
-          {/* <Button title="PERFIL" onClick={() => navigate("myprofile")} />
-            <Button title="LOGOUT" onClick={handleLogout} /> */}
         </>
       ) : (
         <>
@@ -225,8 +201,6 @@ function Header() {
           </ButtonsContainer>
         </>
       )}
-
-      {/* <Button title={"PRUEBA"} onClick={() => alertify.alert('prueba')}/> */}
     </StyledNav>
   );
 }

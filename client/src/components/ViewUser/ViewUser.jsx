@@ -5,36 +5,27 @@ import {
   ContainerBodyUser,
   ContainerMisDatos,
   ContainerMisPreferencias,
-  ListaPreferencias,
   ContenedorUltimasVentas,
   ContainerEliminarUser,
-  // ImgPerfil,
   InputData,
   ImagenPerfil,
 } from "./elements/StyleViewUser.jsx";
 
 import { modificacionUser } from "../../redux/actions/index";
 import Swal from "sweetalert2";
-// import { CardVenta } from "./CardVenta.jsx";
-// import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-export const ViewUser = React.memo(() => {
-  // const { username, level } = user;
+import axios from "axios";
 
+export const ViewUser = React.memo(() => {
   const { idUser } = useParams();
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
-
-  // const [input, setInput] = useState({
-  //   username: "",
-  // });
-
   const navigate = useNavigate();
 
   const handleUser = async () => {
@@ -60,11 +51,36 @@ export const ViewUser = React.memo(() => {
       });
       setTimeout(() => {
         dispatch(modificacionUser(idUser, formValues));
-        // window.location.reload();
-        // navigate("/home");
       }, 2500);
     }
   };
+
+  const handleEliminatedUser =  () => {
+    Swal.fire({
+      title: 'Do you want to delete your user?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      color: "var(--secondFontColor)",
+      background: "#46198fb3",
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Eliminated!', '', 'success')
+        const eliminarUser = await axios.delete(`http://localhost:4000/users/${idUser}`)
+        console.log("Entro a eliminar la cuenta!")
+        return eliminarUser;
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
 
   const { username, image } = user;
 
@@ -186,7 +202,7 @@ export const ViewUser = React.memo(() => {
             </div>
           </ContainerMisDatos>
           <ContainerEliminarUser>
-            <Button title="ELIMINAR CUENTA" color="var(--colorError)"></Button>
+            <Button title="ELIMINAR CUENTA" color="var(--colorError)" onClick={handleEliminatedUser}/>
           </ContainerEliminarUser>
         </div>
       </ContainerBodyUser>
