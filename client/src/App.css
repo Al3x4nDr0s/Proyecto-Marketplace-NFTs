@@ -22,7 +22,6 @@ body {
     rgba(53, 7, 93, 0.989233193277311) 47%,
     rgba(19, 5, 78, 0.969625350140056) 90%
   ); */
-  /* background: var(--mainBackGroundColor); */
 }
 
 :root {
@@ -38,7 +37,6 @@ body {
   --large: 18px;
   --medium: 16px;
   --small: 14px;
-
   --gray: #555;
   --purple: #4e65ff;
   --green-blue: #92effd;

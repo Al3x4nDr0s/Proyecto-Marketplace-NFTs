@@ -70,7 +70,6 @@ export const ViewNft = () => {
     setNft(nft);
   }, [instantCallback, mynft]);
 
-  console.log(nft);
 
   return (
     <ContainerNFT>
@@ -99,14 +98,11 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={(ancho > 1300) ? 5 : 2}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
         grabCursor={true}
-        // centeredSlides={true}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -130,18 +126,10 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        a11y={{
-          prevSlideMessage: "Previous slide",
-          nextSlideMessage: "Next slide",
-        }}
-        // scrollbar={{ draggable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log("slide change")}
       >
-        {nft?.length ? (
-          nft
-            .filter((x) => x.category.name === "Gaming")
-            .map((x, i) => (
+        {
+          nft?.filter((x) => x.category.name === "Gaming")
+            .map(x => (
               <SwiperSlide>
                 <CardNft
                   image={x.image}
@@ -158,28 +146,7 @@ export const ViewNft = () => {
                 />
               </SwiperSlide>
             ))
-        ) : (
-          <>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-          </>
-        )}
+        }
       </Swiper>
       <ContainerTitleCategory>
         <div
@@ -229,7 +196,7 @@ export const ViewNft = () => {
       >
         {nft
           ?.filter((x) => x.category.name === "Sports")
-          .map((x) => (
+          .map((x, i) => (
             <SwiperSlide>
               <CardNft
                 image={x.image}
@@ -295,7 +262,7 @@ export const ViewNft = () => {
       >
         {nft
           ?.filter((x) => x.category.name === "Entertainment")
-          .map((x) => (
+          .map((x, i) => (
             <SwiperSlide>
               <CardNft
                 image={x.image}
@@ -358,7 +325,7 @@ export const ViewNft = () => {
       >
         {nft
           ?.filter((x) => x.category.name === "Art")
-          .map((x) => (
+          .map((x, i) => (
             <SwiperSlide>
               <CardNft
                 image={x.image}
@@ -425,7 +392,7 @@ export const ViewNft = () => {
       >
         {nft
           ?.filter((x) => x.category.name === "eSports")
-          .map((x) => (
+          .map((x, i) => (
             <SwiperSlide>
               <CardNft
                 image={x.image}

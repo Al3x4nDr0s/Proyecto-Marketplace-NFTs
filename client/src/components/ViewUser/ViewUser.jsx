@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ContainerHeaderUser,
   ContainerButton,
@@ -10,33 +10,71 @@ import {
   ContainerEliminarUser,
   // ImgPerfil,
   InputData,
-  ImagenPerfil
+  ImagenPerfil,
 } from "./elements/StyleViewUser.jsx";
+
+import { modificacionUser } from "../../redux/actions/index";
+import Swal from "sweetalert2";
 // import { CardVenta } from "./CardVenta.jsx";
 // import {MisPublicaciones} from './Publicaciones/MisPublicaciones.jsx';
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ViewUser = React.memo(() => {
   // const { username, level } = user;
 
-  const user = useSelector((state) => state.user)
+  const { idUser } = useParams();
 
+  const dispatch = useDispatch();
 
-  const {username, image} = user
+  const user = useSelector((state) => state.user);
 
-  const navigate = useNavigate()
+  // const [input, setInput] = useState({
+  //   username: "",
+  // });
+
+  const navigate = useNavigate();
+
+  const handleUser = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: "Pon tu nuevo usuario",
+      html: '<input id="swal-input1" class="swal2-input" placeholder="nuevo usuario..."><div id="recaptcha"></div>',
+      focusConfirm: false,
+      color: "var(--secondFontColor)",
+      background: "#46198fb3",
+      showCancelButton: true,
+      preConfirm: () => {
+        const valores = document.getElementById("swal-input1").value;
+        return {
+          username: valores,
+        };
+      },
+    });
+
+    if (formValues) {
+      Swal.fire({
+        title: "Este es tu nuevo usuario",
+        text: `${formValues.username}`,
+      });
+      setTimeout(() => {
+        dispatch(modificacionUser(idUser, formValues));
+        // window.location.reload();
+        // navigate("/home");
+      }, 2500);
+    }
+  };
+
+  const { username, image } = user;
+
   return (
     <>
       <ContainerHeaderUser>
         <div style={{ display: "flex" }}>
           <ImagenPerfil background={image} />
           <div>
-            <h2>
-              {username}
-            </h2>
+            <h2>{username}</h2>
             <p style={{ color: "var(--colorInfo)" }}>
               Calificacion como vendedor - 10/10
             </p>
@@ -44,7 +82,10 @@ export const ViewUser = React.memo(() => {
         </div>
 
         <ContainerButton>
-          <Button title="MIS PUBLICACIONES" onClick={() => navigate(`/myprofile/mispublicaciones`)}/>
+          <Button
+            title="MIS PUBLICACIONES"
+            onClick={() => navigate(`/myprofile/mispublicaciones`)}
+          />
           <Button title="LOGOUT" />
         </ContainerButton>
       </ContainerHeaderUser>
@@ -52,9 +93,9 @@ export const ViewUser = React.memo(() => {
         <div>
           <h2>Mis preferencias</h2>
           <ContainerMisPreferencias>
-          <h2>In construction</h2>
+            <h2>In construction</h2>
             {/* <ListaPreferencias> */}
-              {/* {user.preferencias.map((x) => (
+            {/* {user.preferencias.map((x) => (
                 <li key={x}>
                   {x} <a>X</a>
                 </li>
@@ -87,8 +128,19 @@ export const ViewUser = React.memo(() => {
             >
               <label>Username</label>
               <InputData>
-                <Input type="text" placeholder="username" height="32px" padding=".4rem" width="12rem"/>
-                <Button title="CAMBIAR USUARIO" padding=".28rem 1.8rem" margin="0"></Button>
+                <Input
+                  type="text"
+                  placeholder={username}
+                  height="32px"
+                  padding=".4rem"
+                  width="12rem"
+                />
+                <Button
+                  title="CAMBIAR USUARIO"
+                  padding=".28rem 1.8rem"
+                  margin="0"
+                  onClick={handleUser}
+                />
               </InputData>
             </div>
             <div
@@ -100,10 +152,20 @@ export const ViewUser = React.memo(() => {
             >
               <label>Passoword</label>
               <div
-                style={{ display: "flex", alignItems: "center", gap: ".6rem"}}
+                style={{ display: "flex", alignItems: "center", gap: ".6rem" }}
               >
-                <Input type="text" placeholder="*************" height="32px" padding=".4rem" width="12rem" />
-                <Button title="CAMBIAR CLAVE" padding=".25rem 2rem" margin="0 .42rem"></Button>
+                <Input
+                  type="text"
+                  placeholder="*************"
+                  height="32px"
+                  padding=".4rem"
+                  width="12rem"
+                />
+                <Button
+                  title="CAMBIAR CLAVE"
+                  padding=".25rem 2rem"
+                  margin="0 .42rem"
+                />
               </div>
             </div>
             <div
@@ -114,7 +176,13 @@ export const ViewUser = React.memo(() => {
               }}
             >
               <label>Mobil</label>
-              <Input type="text" placeholder="+54 387 65678904" height="32px" padding=".4rem" width="12rem" />
+              <Input
+                type="text"
+                placeholder="+54 387 65678904"
+                height="32px"
+                padding=".4rem"
+                width="12rem"
+              />
             </div>
           </ContainerMisDatos>
           <ContainerEliminarUser>

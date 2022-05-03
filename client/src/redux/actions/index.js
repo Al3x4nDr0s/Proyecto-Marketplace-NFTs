@@ -2,10 +2,10 @@ import axios from "axios";
 
 export const SET_MODAL = 'SET_MODAL';
 export const SET_RESIZE = 'SET_RESIZE';
-// export const GET_NFT = 'GET_NFT';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_ALL_NFT = 'GET_ALL_NFT';
 export const GET_NFT_QUERY = 'GET_NFT_QUERY';
+export const PUT_USER = 'PUT_USER'
 export const REMOVE_USER = 'REMOVE_USER';
 export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
 
@@ -29,8 +29,8 @@ export const getAllNft = () => async dispatch => {
 }
 
 export const getNftQuery = (page) => async dispatch => {
-    const dataQuery = await axios.get('http://localhost:4000/nft', {params: {page: page, limit: 8}})
-    if(dataQuery) {
+    const dataQuery = await axios.get('http://localhost:4000/nft', { params: { page: page, limit: 8 } })
+    if (dataQuery) {
         const dataNftQuery = await dispatch({
             type: GET_NFT_QUERY,
             payload: dataQuery.data.getAllNfts
@@ -54,6 +54,23 @@ export const getTokenUser = (user) => async dispatch => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const modificacionUser = (id, item) => async dispatch => {
+    try {
+        const modifUser = await axios.put(`http://localhost:4000/users/${id}`, item)
+        dispatch({
+            type: PUT_USER,
+            payload: modifUser
+        })
+        console.log(modifUser)
+        return modifUser
+    } catch (error) {
+        console.log('un error nuevo', error)
+    }
+    // return dispatch => {
+
+    // }
 }
 
 export const removeNftQuery = () => dispatch => {

@@ -150,7 +150,7 @@ function Header() {
                 <li>
                   <ContainerItemsMenu>
                     <FaUserCircle style={{ width: "22px", height: "42px" }} />
-                    <Link to="/myprofile">Profile</Link>
+                    <Link to={`/myprofile/${userData.uid}`}>Profile</Link>
                   </ContainerItemsMenu>
                 </li>
                 <li>

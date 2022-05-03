@@ -5,7 +5,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../Loading/Loading.jsx";
 import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
 
-
 import { CardNft } from "./CardNft.jsx";
 
 const ContainerAll = styled.div`
@@ -23,7 +22,7 @@ const ContainerNft = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-left: 1rem;
 `;
 
@@ -32,9 +31,15 @@ const ContainerFiltrosMain = styled.div`
   height: 100px;
   line-height: 100px;
   text-align: center;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin: 0 auto 2rem auto;
   background-color: #46198f53;
+`;
+
+const ContainerLoader = styled.div`
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
 `;
 
 // const ContainerLoading = styled.div`
@@ -50,11 +55,11 @@ export const AllNft = () => {
 
   const [page, setPage] = useState(1);
 
-  const instantCallback = useCallback(dispatch, [dispatch])
+  const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
     // if(hasMore) {
-      instantCallback(getNftQuery(page))
+    instantCallback(getNftQuery(page));
     // }
   }, [instantCallback, page]);
 
@@ -63,24 +68,42 @@ export const AllNft = () => {
       if (hasMore) {
         setPage((prevState) => prevState + 1);
       }
-    }, 1000);
+    }, 1500);
   };
 
   return (
     <>
       <ContainerFiltrosMain>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+        <h2 style={{ color: "var(--secondFontColor)" }}>
+          Filter in construction
+        </h2>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
           dataLength={nft?.length}
           next={fecthNft}
           hasMore={hasMore}
-          loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
+          style={{ overflow: "hidden" }}
+          // loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
+          loader={
+            <ContainerLoader>
+              <div
+                style={{
+                  width: "120px",
+                  margin: "0 auto",
+                  textAlign: "center",
+                  padding: "1rem",
+                }}
+              >
+                <Loading />
+              </div>
+            </ContainerLoader>
+          }
           endMessage={
-            <p style={{ textAlign: 'center', color: 'var(--secondFontColor)' }}>
-              Llegaste al final!
-            </p>
+            <hr style={{borderColor: 'var(--mainBackGroundButtonColor)'}}/>
+            // <p style={{ textAlign: "center", color: "var(--secondFontColor)" }}>
+            //   Llegaste al final!
+            // </p>
           }
         >
           <ContainerNft>

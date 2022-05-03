@@ -15,7 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const ContainerCarousel = styled.div`
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 `;
@@ -54,8 +54,7 @@ export const CollectionsCarousel = () => {
     <div>
       <ContainerCarousel>
         <Swiper
-          modules={[Pagination, Scrollbar, Navigation, Autoplay]}
-          navigation
+          modules={[Pagination, Scrollbar, Autoplay]}
           autoplay={{
             delay: 2500,
           }}
