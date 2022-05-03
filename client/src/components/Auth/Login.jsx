@@ -20,7 +20,7 @@ const ContainerLogin = styled.form`
   width: 45%;
   background-color: #46198f53;
   border-radius: 1rem;
-  margin: 0 auto;
+  margin: 7.5rem auto 0 auto;
   padding: 3.2rem 2rem;
   text-align: center;
 `;

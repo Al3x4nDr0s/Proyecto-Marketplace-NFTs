@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../Loading/Loading.jsx";
-import { getNftQuery } from "../../../redux/actions/index";
-
+import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
 
 import { CardNft } from "./CardNft.jsx";
 
@@ -23,7 +22,7 @@ const ContainerNft = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-left: 1rem;
 `;
 
@@ -32,9 +31,15 @@ const ContainerFiltrosMain = styled.div`
   height: 100px;
   line-height: 100px;
   text-align: center;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin: 0 auto 2rem auto;
   background-color: #46198f53;
+`;
+
+const ContainerLoader = styled.div`
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
 `;
 
 // const ContainerLoading = styled.div`
@@ -51,14 +56,20 @@ export const AllNft = () => {
 
   const [page, setPage] = useState(1);
 
-  const instantCallback = useCallback(dispatch, [dispatch])
+  const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
+<<<<<<< HEAD
     instantCallback(getNftQuery(page))
     return () => {
         
     }
 
+=======
+    // if(hasMore) {
+    instantCallback(getNftQuery(page));
+    // }
+>>>>>>> 9548fd1f5b84838652a97be08adbf61a65869959
   }, [instantCallback, page]);
 
   const fecthNft = () => {
@@ -66,23 +77,45 @@ export const AllNft = () => {
       if (hasMore) {
         setPage((prevState) => prevState + 1);
       }
-    }, 1000);
+    }, 1500);
   };
   return (
-    <>
+    <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
+<<<<<<< HEAD
         <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
+=======
+        <h2 style={{ color: "var(--secondFontColor)" }}>
+          Filter in construction
+        </h2>
+>>>>>>> 9548fd1f5b84838652a97be08adbf61a65869959
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
           dataLength={nftAll?.length} //? 8
           next={fecthNft} //2
           hasMore={hasMore}
-          loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
+          style={{ overflow: "hidden" }}
+          // loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
+          loader={
+            <ContainerLoader>
+              <div
+                style={{
+                  width: "120px",
+                  margin: "0 auto",
+                  textAlign: "center",
+                  padding: "1rem",
+                }}
+              >
+                <Loading />
+              </div>
+            </ContainerLoader>
+          }
           endMessage={
-            <p style={{ textAlign: 'center', color: 'var(--secondFontColor)' }}>
-              Llegaste al final!
-            </p>
+            <hr style={{borderColor: 'var(--mainBackGroundButtonColor)'}}/>
+            // <p style={{ textAlign: "center", color: "var(--secondFontColor)" }}>
+            //   Llegaste al final!
+            // </p>
           }
         >
           <ContainerNft>
@@ -104,6 +137,6 @@ export const AllNft = () => {
           </ContainerNft>
         </InfiniteScroll>
       </ContainerAll>
-    </>
+    </div>
   );
 };

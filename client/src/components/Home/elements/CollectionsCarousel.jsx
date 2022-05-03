@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, Pagination, Navigation, Autoplay } from "swiper";
 import styled from "styled-components";
 
-import image1 from "../../../assets/img-carousel/img1.webp";
+import image1 from "../../../assets/img-carousel/img1.jpg";
 import image2 from "../../../assets/img-carousel/img2.png";
 import image3 from "../../../assets/img-carousel/img3.jpg";
 
@@ -15,38 +15,49 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const ContainerCarousel = styled.div`
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
-  position: relative;
 `;
 
 const SlideMain = styled.div`
-  width: 90%;
-  max-width: 85%;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  height: 75vh;
-  text-align: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  position: relative;
+  /* filter: blur(1px); */
   background-image: ${(props) =>
     `url(${props.backgroundImage})` || "url('../../../assets/imagen1.png')"};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  line-height: 500px;
 `;
 
-const ContainerDataCollections = styled.div`
-  width: 71%;
+const ContainerDataSlider = styled.div`
+  width: 100%;
+  padding-top: 2rem;
   position: absolute;
   bottom: 0;
-  right: 120px;
-  z-index: 1000;
-  margin: 0 auto;
+  height: 42%;
+  text-align: justify;
+  line-height: 32px;
+  background-color: #ececec13;
 `;
 
 const Slide = (props) => {
-  const { backgroundImage } = props;
+  const { backgroundImage, title, subtitle } = props;
 
-  return <SlideMain backgroundImage={backgroundImage} />;
+  return (
+    <SlideMain backgroundImage={backgroundImage}>
+      <ContainerDataSlider>
+        <h2 style={{ fontSize: "1.9rem", color: "var(--secondFontColor)", marginLeft: "6.8rem", borderBottom: '1.2px solid var(--mainBackGroundButtonColor)', marginRight: "6.8rem"}}>
+          {title}
+        </h2>
+        <p style={{color: "var(--colorInfo)", marginLeft: "6.8rem", marginRight: "6.8rem"}}>{subtitle}</p>
+      </ContainerDataSlider>
+    </SlideMain>
+  );
 };
 
 export const CollectionsCarousel = () => {
@@ -54,8 +65,7 @@ export const CollectionsCarousel = () => {
     <div>
       <ContainerCarousel>
         <Swiper
-          modules={[Pagination, Scrollbar, Navigation, Autoplay]}
-          navigation
+          modules={[Pagination, Scrollbar, Autoplay]}
           autoplay={{
             delay: 2500,
           }}
@@ -63,21 +73,36 @@ export const CollectionsCarousel = () => {
           slidesPerView={1}
         >
           <SwiperSlide>
-            <Slide backgroundImage={image1}></Slide>
+            <Slide
+              backgroundImage={image1}
+              title="Collection Electronic"
+              subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque mauris orci, dapibus nec pretium ut, efficitur eu ex. Maecenas convallis, augue ac placerat ultricies, metus libero condimentum ipsum, eget finibus elit purus eu justo. Sed id lacus sed orci convallis vehicula non sed sapien. Curabitur gravida dictum libero. Aenean volutpat bibendum nunc, eget ultricies urna facilisis vulputate. Donec dolor dolor, commodo eu molestie et, egestas quis magna. Ut magna ante, tempor eu purus sollicitudin, laoreet feugiat lorem. Curabitur posuere metus posuere, congue arcu eget, lacinia sapien. Sed vulputate efficitur turpis. Integer vestibulum nec nulla non rhoncus. Proin vitae felis sit amet est accumsan luctus. "
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <Slide backgroundImage={image2}></Slide>
+            <Slide
+              backgroundImage={image2}
+              title="Collection Streaming"
+              subtitle="Quisque posuere erat ex, vel ornare nunc interdum non. Aliquam ut mattis felis. Vivamus aliquet erat ante, aliquam dictum ligula consectetur in. Suspendisse eu tortor condimentum, gravida libero non, aliquet nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim mauris ultrices faucibus placerat. Morbi hendrerit malesuada nibh, vel tempor dui pretium eget. Sed nec consequat quam, molestie luctus dolor. Nunc fringilla facilisis auctor. Aenean sed ipsum risus. Mauris ut lorem lectus. Phasellus magna nunc, dignissim sit amet libero eget, posuere facilisis ipsum. Curabitur ullamcorper ut nisl et maximus. Maecenas nec tortor sodales, lacinia magna at, pharetra risus. "
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <Slide backgroundImage={image3}></Slide>
+            <Slide
+              backgroundImage={image3}
+              title="Collection Shoes"
+              subtitle="Vivamus in sollicitudin ligula. Aenean rutrum molestie ipsum sed pulvinar. Duis velit nisl, aliquam sed sollicitudin et, semper sodales lacus. Sed iaculis, urna ut aliquam porta, est nulla convallis diam, nec tincidunt augue leo at nisl. Ut non hendrerit eros. Pellentesque efficitur quam quis nibh dapibus, consequat molestie libero lobortis. Integer tempor nibh eu sem sollicitudin, eget sollicitudin enim auctor. Vivamus eget egestas turpis. Vivamus eget tincidunt urna. "
+            />
           </SwiperSlide>
         </Swiper>
-        {/* <ContainerDataCollections>
-          <h1 style={{ color: "var(--secondFontColor)", fontSize: "45px" }}>
-            Collections
-          </h1>
-        </ContainerDataCollections> */}
       </ContainerCarousel>
+      {/* <ContainerDataCollections>
+        <ContainerData>
+          <h1 style={{ color: "var(--secondFontColor)", fontSize: "45px", borderBottom: ".2rem solid #e9e9e92c" }}>
+          Promotions
+          </h1>
+          <p style={{color: "var(--secondFontColor)", fontSize: "1.7rem"}}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt assumenda, dolor veritatis, dignissimos repellat dolorum delectus amet molestiae necessitatibus fuga rem incidunt quae hic beatae? Nostrum modi rerum porro facere!</p>
+        </ContainerData>
+      </ContainerDataCollections> */}
     </div>
   );
 };
