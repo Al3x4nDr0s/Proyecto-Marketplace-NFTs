@@ -23,7 +23,6 @@ const rootReducer = (state = initialState, action) => {
         case REMOVE_USER:
             return { ...state, user: action.payload, isLogged: false }
         case GET_NFT_QUERY:
-<<<<<<< HEAD
             // console.log('aquiii', state.nftquery)
             let setHasMore;
             if(state.nftquery.length > 0) {
@@ -37,31 +36,6 @@ const rootReducer = (state = initialState, action) => {
                 nftquery: state.hasMore === false 
                 ? state.nftquery 
                 : [ ...state.nftquery, ...action.payload ]
-=======
-            var setHasMore;
-            if (state.nftquery.length) {
-                setHasMore = action.payload.length !== 0 ? true : false
-            } else {
-                setHasMore = false
-            }
-            const unionPrueba = state.nftquery.concat(action.payload)
-            return {
-                ...state,
-                hasMore: setHasMore,
-                nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
-            }
-        case REMOVE_NFT_QUERY:
-            return {
-                ...state,
-                nftquery: [],
-                hasMore: true
-            }
-        case PUT_USER:
-            const username = action.payload.data
-            return {
-                ...state,
-                user: username
->>>>>>> 9548fd1f5b84838652a97be08adbf61a65869959
             }
         default: return state
     };

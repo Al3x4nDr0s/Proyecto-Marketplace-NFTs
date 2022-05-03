@@ -59,17 +59,11 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
-<<<<<<< HEAD
     instantCallback(getNftQuery(page))
     return () => {
         
     }
 
-=======
-    // if(hasMore) {
-    instantCallback(getNftQuery(page));
-    // }
->>>>>>> 9548fd1f5b84838652a97be08adbf61a65869959
   }, [instantCallback, page]);
 
   const fecthNft = () => {
@@ -82,13 +76,7 @@ export const AllNft = () => {
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-<<<<<<< HEAD
         <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
-=======
-        <h2 style={{ color: "var(--secondFontColor)" }}>
-          Filter in construction
-        </h2>
->>>>>>> 9548fd1f5b84838652a97be08adbf61a65869959
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
