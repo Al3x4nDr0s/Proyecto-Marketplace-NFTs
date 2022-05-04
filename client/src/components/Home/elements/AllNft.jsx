@@ -49,6 +49,7 @@ const ContainerLoader = styled.div`
 // `
 
 export const AllNft = () => {
+  const nftAll = useSelector((state) => state.nfts);
   const nft = useSelector((state) => state.nftquery);
   const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();
@@ -63,6 +64,11 @@ export const AllNft = () => {
     // }
   }, [instantCallback, page]);
 
+  const token = localStorage.getItem("token")
+
+
+  console.log(token)
+
   const fecthNft = () => {
     setTimeout(() => {
       if (hasMore) {
@@ -70,18 +76,15 @@ export const AllNft = () => {
       }
     }, 1500);
   };
-
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-        <h2 style={{ color: "var(--secondFontColor)" }}>
-          Filter in construction
-        </h2>
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
-          dataLength={nft?.length}
-          next={fecthNft}
+          dataLength={page * 10} //? 8
+          next={fecthNft} //2
           hasMore={hasMore}
           style={{ overflow: "hidden" }}
           // loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
@@ -101,9 +104,6 @@ export const AllNft = () => {
           }
           endMessage={
             <hr style={{borderColor: 'var(--mainBackGroundButtonColor)'}}/>
-            // <p style={{ textAlign: "center", color: "var(--secondFontColor)" }}>
-            //   Llegaste al final!
-            // </p>
           }
         >
           <ContainerNft>
@@ -118,6 +118,8 @@ export const AllNft = () => {
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
                 salestype={x.sales_types.name}
+                likes={x.likes}
+                token={token}
                 id={x._id}
                 key={x._id}
               />

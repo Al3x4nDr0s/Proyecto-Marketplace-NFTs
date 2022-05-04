@@ -70,6 +70,8 @@ export const ViewNft = () => {
     setNft(nft);
   }, [instantCallback, mynft]);
 
+  const token = localStorage.getItem("token")
+
 
   return (
     <ContainerNFT>
@@ -129,8 +131,8 @@ export const ViewNft = () => {
       >
         {
           nft?.filter((x) => x.category.name === "Gaming")
-            .map(x => (
-              <SwiperSlide>
+          .map((x, i) => (
+            <SwiperSlide key={i}>
                 <CardNft
                   image={x.image}
                   name={x.name}
@@ -138,6 +140,8 @@ export const ViewNft = () => {
                   files={x.files_types.name}
                   category={x.category}
                   currency={x.currencies}
+                  likes={x.likes}
+                  token={token}
                   imageCurrencies={x.currencies.image}
                   owner={x.details.owner.username}
                   salestype={x.sales_types.name}
@@ -194,7 +198,7 @@ export const ViewNft = () => {
         {nft
           ?.filter((x) => x.category.name === "Sports")
           .map((x, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i+1}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -204,6 +208,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -257,7 +263,7 @@ export const ViewNft = () => {
         {nft
           ?.filter((x) => x.category.name === "Entertainment")
           .map((x, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i+2}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -268,6 +274,8 @@ export const ViewNft = () => {
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
                 salestype={x.sales_types.name}
+                likes={x.likes}
+                token={token}
                 id={x._id}
                 key={x._id}
               />
@@ -320,7 +328,7 @@ export const ViewNft = () => {
         {nft
           ?.filter((x) => x.category.name === "Art")
           .map((x, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i+3}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -330,6 +338,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -383,7 +393,7 @@ export const ViewNft = () => {
         {nft
           ?.filter((x) => x.category.name === "eSports")
           .map((x, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i+4}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -393,6 +403,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}

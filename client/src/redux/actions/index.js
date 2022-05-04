@@ -57,13 +57,19 @@ export const getTokenUser = (user) => async dispatch => {
     }
 }
 
-export const putLikesNft = (nft, item) => async dispatch => {
+export const putLikesNft = (nft, tokenuser, item) => async dispatch => {
     try {
-        const dataLikes = await axios.get(`http://localhost:4000/nft/${nft}`, item)
+        const dataLikes = await axios.put(`http://localhost:4000/nft/${nft}`,item, {
+            headers: {
+                Authorization: JSON.parse(tokenuser)
+            }
+        })
         const Likes = await dispatch({
             type: PUT_LIKES,
             payload: dataLikes.data
         })
+        console.log(dataLikes.data)
+        return Likes
     } catch (error) {
         console.log('error:', error)
     }
