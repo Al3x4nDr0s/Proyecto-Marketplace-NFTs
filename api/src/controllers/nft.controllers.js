@@ -1,4 +1,4 @@
-
+const User = require('../models/User');
 const Nft = require ('../models/Nft');
 const getAllNfts = async (req, res) => {
     try {
@@ -225,16 +225,50 @@ const getNftById = async (req, res) =>{
     };
 };
 
-const putNftUpdate = async (res, req) => {
+const putNftUpdate = async (req, res) => {
+    const { id } = req.params;
     try {
-        const nftUpdate = await Nft.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true } //es para que nos devuelva el actualizado y no el anterior
-        );
-        res.json(nftUpdate);
+        
+        //? buscar usuario por uid y si tiene id nft en favoritos lo elimina
+        const userFav = await User.findById(req.uid);
+        
+        if (userFav.favorite.includes(id)) {
+            //? remover id nft de favs
+            const userPull = await User.findByIdAndUpdate(req.uid, { $pull: { favorite: id } }, { new: true })
+            .populate('user_type', 'name')
+            .populate('favorite', 'name');
+
+            //? restar 1 a likes de nft
+            const obj = {
+                ...req.body,
+                likes: req.body.likes - 1
+            }
+            const nftLike = await Nft.findByIdAndUpdate(id, obj, { new: true });
+            
+            return res.status(200).json({
+                ok: 'true',
+                nft: nftLike,
+                user: userPull
+            });
+        }
+        else {
+            //? agregar a favoritos
+            const user = await User.findByIdAndUpdate(req.uid, { $push: { favorite: id } }, { new: true })
+            .populate('user_type', 'name')
+            .populate('favorite', 'name');
+
+            //? update nft
+            const nft = await Nft.findByIdAndUpdate(id, req.body, { new: true });
+            return res.status(200).json({
+                ok: 'true',
+                nft,
+                user
+            });
+        }
+
+
+        
     } catch (error) {
-        // console.log(error);
         res.status(500).json({
             ok: false,
             msg: 'Unexpected error'

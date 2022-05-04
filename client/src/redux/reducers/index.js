@@ -1,5 +1,5 @@
 import {
-    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY
+    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY
 } from "../actions";
 
 
@@ -23,20 +23,27 @@ const rootReducer = (state = initialState, action) => {
         case REMOVE_USER:
             return { ...state, user: action.payload, isLogged: false }
         case GET_NFT_QUERY:
-            // console.log('aquiii', state.nftquery)
-            let setHasMore;
-            if(state.nftquery.length > 0) {
-                action.payload.length > 0 ? setHasMore = true : setHasMore = false
+            var setHasMore;
+            if(state.nftquery.length) {
+                setHasMore = action.payload.length !== 0 ? true : false
             } else {
                 setHasMore = false
             }
+            const unionPrueba = state.nftquery.concat(action.payload)
+            // const prueba = [...action.payload, action.payload]
+            // const set = new Set( unionPrueba.map( JSON.stringify))
+            // const sinDuplicaciones = Array.from( set ).map( JSON.parse )
             return {
                 ...state,
                 hasMore: setHasMore,
-                nftquery: state.hasMore === false 
-                ? state.nftquery 
-                : [ ...state.nftquery, ...action.payload ]
+                nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
             }
+         case REMOVE_NFT_QUERY:
+             return {
+                 ...state,
+                 nftquery: [],
+                 hasMore: true
+             }   
         default: return state
     };
 };

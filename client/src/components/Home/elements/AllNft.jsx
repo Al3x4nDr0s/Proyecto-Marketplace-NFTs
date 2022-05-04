@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../Loading/Loading.jsx";
-import { getNftQuery } from "../../../redux/actions/index";
+import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
 
 
 import { CardNft } from "./CardNft.jsx";
@@ -54,11 +54,9 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch])
 
   useEffect(() => {
-    instantCallback(getNftQuery(page))
-    return () => {
-        
-    }
-
+    // if(hasMore) {
+      instantCallback(getNftQuery(page))
+    // }
   }, [instantCallback, page]);
 
   const fecthNft = () => {
@@ -75,7 +73,7 @@ export const AllNft = () => {
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
-          dataLength={nftAll?.length} //? 8
+          dataLength={page * 10} //? 8
           next={fecthNft} //2
           hasMore={hasMore}
           loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}

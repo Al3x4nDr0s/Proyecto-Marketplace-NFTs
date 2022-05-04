@@ -7,6 +7,9 @@ export const GET_TOKEN = 'GET_TOKEN';
 export const GET_ALL_NFT = 'GET_ALL_NFT';
 export const GET_NFT_QUERY = 'GET_NFT_QUERY';
 export const REMOVE_USER = 'REMOVE_USER';
+export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
+
+
 
 export const setModalOpening = (isOpen) => async (dispatch) => {
 
@@ -51,6 +54,13 @@ export const getTokenUser = (user) => async dispatch => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const removeNftQuery = () => dispatch => {
+    dispatch({
+        type: REMOVE_NFT_QUERY,
+        payload: []
+    })
 }
 
 
