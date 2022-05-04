@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
+var mongoose = require('mongoose')
 require('mongoose-double')(mongoose);
 
-const Sales = Schema({
+const Transactions = Schema({
     username: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -10,19 +11,22 @@ const Sales = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Nft'
     },
-    currencies_id: {
+    currencies: {
         type: Schema.Types.ObjectId,
         ref: 'Currencies'
     },
     amount: {
         type: mongoose.Types.Double
+    },
+    transaction: {
+        type: Schema.Types.ObjectId,
+        ref: 'Transaction_type'
     }
-
 });
 
-Sales.method('toJSON', function () {
+Transactions.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
     return object;
 });
 
-module.exports = model('Sales', Sales);
+module.exports = model('Transactions', Transactions);

@@ -3,7 +3,10 @@ const Auction = require("../models/Auction");
 
 const getAllAuction = async (req, res) => {
     try {
-        const getAuction = await Auction.find(); 
+        const getAuction = await Auction.find()
+            .populate("ownerNft", {username:1, _id:0}) 
+            .populate("namenft", {name:1, _id:0})
+            .populate("buyer", {username:1, _id:0})
         res.status(200).json(getAuction);
     } catch (error) {
         res.status(404).json({
@@ -14,10 +17,14 @@ const getAllAuction = async (req, res) => {
     };
 };
 
-const getAllAuctionById = async (req, res) => {
+const getAuctionByNftId = async (req, res) => {
     const { id } = req.params;
+    const auctionId = {"Nft": id};
     try {
-        const getAuction = await Auction.findById(id); 
+        const getAuction = await Auction.find(auctionId)
+            .populate("ownerNft", {username:1, _id:0}) 
+            .populate("namenft", {name:1, _id:0})
+            .populate("buyer", {username:1, _id:0})
         res.status(200).json(getAuction);
     } catch (error) {
         res.status(404).json({
@@ -61,7 +68,7 @@ const deleteAuction = async (req, res) => {
             msg: "Auction could not be deleted"
         });
         console.log(error);
-    }
+    };
 };
 
-module.exports = { getAllAuction, createNewAuction, deleteAuction, getAllAuctionById };
+module.exports = { getAllAuction, createNewAuction, deleteAuction, getAuctionByNftId };
