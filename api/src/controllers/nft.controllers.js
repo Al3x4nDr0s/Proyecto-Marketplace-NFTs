@@ -164,6 +164,7 @@ const getAllNfts = async (req, res) => {
                     },
                     create_date: 1,
                     price: 1,
+                    likes: 1,
                 }
             }    
         ]);
