@@ -8,6 +8,8 @@ export const GET_NFT_QUERY = 'GET_NFT_QUERY';
 export const PUT_USER = 'PUT_USER'
 export const REMOVE_USER = 'REMOVE_USER';
 export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_CURRENCIES = 'GET_CURRENCIES';
 
 
 
@@ -86,6 +88,34 @@ export const removeUser = () => dispatch => {
         type: REMOVE_USER,
         payload: {}
     })
+}
+
+
+export const getNftCategories = ()=> async dispatch =>{
+    try {
+        const dataCat = await axios.get('http://localhost:4000/misc/category')
+        const dataUser = await dispatch({
+            type: GET_CATEGORIES,
+            payload : dataCat.data
+        })
+        return dataUser
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+export const getNftCurrencies = ()=> async dispatch =>{
+
+    try {
+        const dataCurr = await axios.get('http://localhost:4000/misc/currencies')
+        const dataUser = await dispatch({
+            type: GET_CURRENCIES,
+            payload : dataCurr.data
+        })
+        return dataUser
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 

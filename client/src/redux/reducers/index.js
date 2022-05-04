@@ -1,5 +1,5 @@
 import {
-    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, PUT_USER
+    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, PUT_USER, GET_CURRENCIES, GET_CATEGORIES
 } from "../actions";
 
 
@@ -9,7 +9,9 @@ const initialState = {
     nftquery: [],
     hasMore: true,
     isLogged: false,
-    user: {}
+    user: {},
+    currencies:[],
+    categories:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -18,6 +20,10 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
             return { ...state, nfts: action.payload }
+        case GET_CURRENCIES:
+            return { ...state, currencies: action.payload }
+        case GET_CATEGORIES:
+            return { ...state, categories: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
