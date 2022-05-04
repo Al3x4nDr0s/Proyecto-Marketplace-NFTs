@@ -164,6 +164,7 @@ const getAllNfts = async (req, res) => {
                     },
                     create_date: 1,
                     price: 1,
+                    likes: 1,
                 }
             }    
         ]);
@@ -228,41 +229,44 @@ const getNftById = async (req, res) =>{
 const putNftUpdate = async (req, res) => {
     const { id } = req.params;
     try {
-        
-        //? buscar usuario por uid y si tiene id nft en favoritos lo elimina
-        const userFav = await User.findById(req.uid);
-        
-        if (userFav.favorite.includes(id)) {
-            //? remover id nft de favs
-            const userPull = await User.findByIdAndUpdate(req.uid, { $pull: { favorite: id } }, { new: true })
-            .populate('user_type', 'name')
-            .populate('favorite', 'name');
-
-            //? restar 1 a likes de nft
-            const obj = {
-                ...req.body,
-                likes: req.body.likes - 1
-            }
-            const nftLike = await Nft.findByIdAndUpdate(id, obj, { new: true });
+        if(req.body.likes){
+            const userFav = await User.findById(req.uid);
+            const nftLikes = await Nft.findById(id);
+            if (userFav.favorite.includes(id)) {
+                console.log(userFav.favorite.includes(id));
+                
+                const userPull = await User.findByIdAndUpdate(req.uid, { $pull: { favorite: id } }, { new: true })
+                .populate('user_type', 'name')
+                .populate('favorite', 'name');
+                const obj = { ...req.body, likes: nftLikes.likes - 1 }
+                const nftLike = await Nft.findByIdAndUpdate(id, obj, { new: true });
             
-            return res.status(200).json({
-                ok: 'true',
-                nft: nftLike,
-                user: userPull
-            });
+                return res.status(200).json({
+                    ok: 'true',
+                    nft: nftLike,
+                    user: userPull
+                });
+            }
+            else {
+                const user = await User.findByIdAndUpdate(req.uid, { $push: { favorite: id } }, { new: true })
+                .populate('user_type', 'name')
+                .populate('favorite', 'name');
+                const obj = { ...req.body, likes: nftLikes.likes + 1 }
+                const nft = await Nft.findByIdAndUpdate(id, obj, { new: true });
+                
+                return res.status(200).json({
+                    ok: 'true',
+                    nft,
+                    user
+                });
+            }
+
         }
         else {
-            //? agregar a favoritos
-            const user = await User.findByIdAndUpdate(req.uid, { $push: { favorite: id } }, { new: true })
-            .populate('user_type', 'name')
-            .populate('favorite', 'name');
-
-            //? update nft
             const nft = await Nft.findByIdAndUpdate(id, req.body, { new: true });
-            return res.status(200).json({
+            res.status(200).json({
                 ok: 'true',
-                nft,
-                user
+                nft
             });
         }
 
