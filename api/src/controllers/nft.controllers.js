@@ -225,7 +225,7 @@ const getNftById = async (req, res) =>{
     };
 };
 
-const putNftUpdate = async (res, req) => {
+const putNftUpdate = async (req, res) => {
     try {
         const nftUpdate = await Nft.findByIdAndUpdate(
             req.params.id,

@@ -2,7 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const Collection_nft = Schema({
     name: {
-        type: String,  
+        type: String  
+    },
+    image: {
+        type: String
     }
 });
 Collection_nft.method('toJSON', function () {
