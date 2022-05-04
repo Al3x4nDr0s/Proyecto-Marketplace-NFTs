@@ -87,8 +87,8 @@ const googleSignIn = async (req, res) => {
             ok: false,
             msg: 'Unexpected error'
         });
-    }
-}
+    };
+};
 
 const renewToken = async (req, res) => {
 
@@ -100,8 +100,7 @@ const renewToken = async (req, res) => {
         usuario,
         token
     });
-
-}
+};
 
 //?export 
 module.exports = { 

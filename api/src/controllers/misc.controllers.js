@@ -26,7 +26,7 @@ const createCategory = async (req, res) => {
     };
 };
 
-const modifyCategorie = async (res, req) => {
+const modifyCategorie = async (req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     try {
@@ -86,7 +86,7 @@ const createCollection = async (req, res) => {
     };
 };
 
-const modifyCollection = async (res, req) => {
+const modifyCollection = async (req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     try {
@@ -146,7 +146,7 @@ const createCurrencies = async (req, res) => {
     };
 };
 
-const modifyCurrencies = async (res, req) => {
+const modifyCurrencies = async (req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     try {
@@ -206,7 +206,7 @@ const createFiles_types = async (req, res) => {
     };
 };
 
-const modifyFiles_types = async (res, req) => {
+const modifyFiles_types = async (req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     try {
@@ -266,7 +266,7 @@ const createSales_types = async (req, res) => {
     };
 };
 
-const modifySales_types = async (res, req) => {
+const modifySales_types = async (req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     try {
@@ -305,6 +305,10 @@ const deleteSales_types = async(req, res) => {
         });
         console.log(error);
     };
+
+ 
+    
+
 };
 
 module.exports = {createCategory, createCollection, createCurrencies, createFiles_types,

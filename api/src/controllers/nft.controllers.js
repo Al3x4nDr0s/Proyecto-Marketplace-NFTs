@@ -164,6 +164,7 @@ const getAllNfts = async (req, res) => {
                     },
                     create_date: 1,
                     price: 1,
+                    likes: 1,
                 }
             }    
         ]);
@@ -225,7 +226,7 @@ const getNftById = async (req, res) =>{
     };
 };
 
-const putNftUpdate = async (res, req) => {
+const putNftUpdate = async (req, res) => {
     try {
         const nftUpdate = await Nft.findByIdAndUpdate(
             req.params.id,
@@ -234,8 +235,12 @@ const putNftUpdate = async (res, req) => {
         );
         res.json(nftUpdate);
     } catch (error) {
-        res.status(404).json({error: 'could not be modified'});
-    };
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    }
 };
 
 const deleteNft = async (req, res) => {
@@ -244,8 +249,12 @@ const deleteNft = async (req, res) => {
         const nftDelete = await Nft.findByIdAndDelete(id);
         res.json(nftDelete);
     } catch (error) {
-        res.status(404).json({error: 'could not delete'});
-    };
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    }
 };
 
 module.exports = { getAllNfts, createNft, putNftUpdate, deleteNft, getNftById };
