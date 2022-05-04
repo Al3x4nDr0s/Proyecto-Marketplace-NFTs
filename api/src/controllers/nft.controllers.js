@@ -1,4 +1,4 @@
-
+const User = require('../models/User');
 const Nft = require ('../models/Nft');
 const getAllNfts = async (req, res) => {
     try {
@@ -227,15 +227,52 @@ const getNftById = async (req, res) =>{
 };
 
 const putNftUpdate = async (req, res) => {
+    const { id } = req.params;
     try {
-        const nftUpdate = await Nft.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true } //es para que nos devuelva el actualizado y no el anterior
-        );
-        res.json(nftUpdate);
+        if(req.body.likes){
+            const userFav = await User.findById(req.uid);
+            const nftLikes = await Nft.findById(id);
+            if (userFav.favorite.includes(id)) {
+                console.log(userFav.favorite.includes(id));
+                
+                const userPull = await User.findByIdAndUpdate(req.uid, { $pull: { favorite: id } }, { new: true })
+                .populate('user_type', 'name')
+                .populate('favorite', 'name');
+                const obj = { ...req.body, likes: nftLikes.likes - 1 }
+                const nftLike = await Nft.findByIdAndUpdate(id, obj, { new: true });
+            
+                return res.status(200).json({
+                    ok: 'true',
+                    nft: nftLike,
+                    user: userPull
+                });
+            }
+            else {
+                const user = await User.findByIdAndUpdate(req.uid, { $push: { favorite: id } }, { new: true })
+                .populate('user_type', 'name')
+                .populate('favorite', 'name');
+                const obj = { ...req.body, likes: nftLikes.likes + 1 }
+                const nft = await Nft.findByIdAndUpdate(id, obj, { new: true });
+                
+                return res.status(200).json({
+                    ok: 'true',
+                    nft,
+                    user
+                });
+            }
+
+        }
+        else {
+            const nft = await Nft.findByIdAndUpdate(id, req.body, { new: true });
+            res.status(200).json({
+                ok: 'true',
+                nft
+            });
+        }
+
+
+        
     } catch (error) {
-        // console.log(error);
         res.status(500).json({
             ok: false,
             msg: 'Unexpected error'

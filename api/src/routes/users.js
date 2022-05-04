@@ -26,6 +26,6 @@ router.get('/',
         getUsers);
 router.get('/:id', getUser);
 router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.delete('/:id', deleteUser); //? gaby puto
 
 module.exports = router;

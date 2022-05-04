@@ -28,8 +28,10 @@ const UserSchema = Schema({
             type: Schema.Types.ObjectId,
             ref: 'User_type'  
     },
+    //? array de id
     favorite: {
-        type: Array
+        type: [Schema.Types.ObjectId],
+        ref: 'Nft'
     },
     collectionNft: {
         type: Array

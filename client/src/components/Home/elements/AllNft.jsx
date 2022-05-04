@@ -44,6 +44,7 @@ const ContainerFiltrosMain = styled.div`
 // `
 
 export const AllNft = () => {
+  const nftAll = useSelector((state) => state.nfts);
   const nft = useSelector((state) => state.nftquery);
   const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();
@@ -65,16 +66,15 @@ export const AllNft = () => {
       }
     }, 1000);
   };
-
   return (
     <>
       <ContainerFiltrosMain>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
-          dataLength={nft?.length}
-          next={fecthNft}
+          dataLength={page * 10} //? 8
+          next={fecthNft} //2
           hasMore={hasMore}
           loader={<h3 style={{color: 'var(--secondFontColor)', textAlign: 'center'}}>Loading...</h3>}
           endMessage={
