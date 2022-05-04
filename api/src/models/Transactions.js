@@ -3,9 +3,17 @@ var mongoose = require('mongoose')
 require('mongoose-double')(mongoose);
 
 const Transactions = Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     username: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    nftId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Nft'
     },
     namenft: {
         type: Schema.Types.ObjectId,
@@ -18,7 +26,7 @@ const Transactions = Schema({
     amount: {
         type: mongoose.Types.Double
     },
-    transaction: {
+    transaction_type: {
         type: Schema.Types.ObjectId,
         ref: 'Transaction_type'
     }
