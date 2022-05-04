@@ -120,6 +120,12 @@ export const Register = () => {
         console.log(res)
         navigate("/home")
       })
+      .then((res) => {navigate("/home")
+      Toast.fire({
+        icon: "success",
+        title: "Register successfully",
+      });
+    })
       .catch((e) => {
         console.log(e.response.data);
         alert(e.response.data.msg);
