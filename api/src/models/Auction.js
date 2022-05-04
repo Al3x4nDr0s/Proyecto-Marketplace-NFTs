@@ -1,7 +1,12 @@
 const { Schema, model } = require('mongoose');
+var mongoose = require('mongoose')
 require('mongoose-double')(mongoose);
 
 const Auction = Schema({
+    idNft: {
+        type: Schema.Types.ObjectId,
+        ref: 'Nft'
+    },
     ownerNft: {
         type: Schema.Types.ObjectId,
         ref: 'User'

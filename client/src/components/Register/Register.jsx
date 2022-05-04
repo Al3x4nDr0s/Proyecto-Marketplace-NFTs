@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import GoogleLogin from "react-google-login";
+import Swal from "sweetalert2";
+
 
 import React, { useState, useEffect } from "react";
 
@@ -96,14 +98,37 @@ export const Register = () => {
     }
   };
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    color: 'var(--secondFontColor)',
+    background: '#46198fb3',
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:4000/users/", input)
+<<<<<<< HEAD
       .then((res) =>{
         console.log(res)
         navigate("/home")
       })
+=======
+      .then((res) => {navigate("/home")
+      Toast.fire({
+        icon: "success",
+        title: "Register successfully",
+      });
+    })
+>>>>>>> history/back/routes_Ale
       .catch((e) => {
         console.log(e.response.data);
         alert(e.response.data.msg);

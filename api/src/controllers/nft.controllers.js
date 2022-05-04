@@ -188,7 +188,11 @@ const getAllNfts = async (req, res) => {
 const createNft = async (req, res) => {
     
     try {
-        const nft = new Nft(req.body);
+        const obj = {
+            ...req.body,
+            likes: 0
+        }
+        const nft = new Nft(obj);
         await nft.save();
         res.status(200).json({
             ok: 'true',
