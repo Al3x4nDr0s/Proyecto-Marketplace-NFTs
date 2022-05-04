@@ -79,7 +79,7 @@ export const AllNft = () => {
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll

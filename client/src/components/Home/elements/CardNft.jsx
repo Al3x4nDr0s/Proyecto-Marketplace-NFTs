@@ -205,7 +205,7 @@ export const CardNft = (props) => {
   const dispatch = useDispatch();
   const handlerLikes = () => {
     const acumLikes = {
-      likes: parseInt(likecurrent)
+      likes: 1
     }
     dispatch(putLikesNft(id,token,acumLikes))
   }
