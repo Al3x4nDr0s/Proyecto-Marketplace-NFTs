@@ -7,14 +7,11 @@ import { FcGoogle } from "react-icons/fc";
 import GoogleLogin from "react-google-login";
 
 import axios from "axios";
-// const client = new OAuth2Client(process.env.GOOGLE_ID);
-
 import Button from "../shared/Button.jsx";
 
 import Input from "../shared/Input.jsx";
 import Swal from "sweetalert2";
 
-// const client = process.env.GOOGLE_ID
 
 const ContainerLogin = styled.form`
   width: 45%;

@@ -15,8 +15,10 @@ import { modificacionUser } from "../../redux/actions/index";
 import Swal from "sweetalert2";
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import authService from "../../services/authService";
+import {removeUser} from '../../redux/actions/index'
 
 import axios from "axios";
 
@@ -74,6 +76,9 @@ export const ViewUser = React.memo(() => {
       if (result.isConfirmed) {
         Swal.fire('Eliminated!', '', 'success')
         const eliminarUser = await axios.delete(`http://localhost:4000/users/${idUser}`)
+        authService.logut();
+        dispatch(removeUser());
+        navigate('/home')
         console.log("Entro a eliminar la cuenta!")
         return eliminarUser;
       } else if (result.isDenied) {

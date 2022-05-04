@@ -12,9 +12,6 @@ import Swal from "sweetalert2";
 
 import "./header.css";
 
-import { IoApps } from "react-icons/io5";
-import axios from "axios";
-
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
