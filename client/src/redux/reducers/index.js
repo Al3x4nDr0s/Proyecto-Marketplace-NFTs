@@ -20,13 +20,9 @@ const initialState = {
     hasMore: true,
     isLogged: false,
     user: {},
-<<<<<<< HEAD
     collections: [],
     filterNfts: [],
     nft:{}
-=======
-    nft: {}
->>>>>>> history/front/viewuser
 };
 
 const rootReducer = (state = initialState, action) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
@@ -27,6 +26,8 @@ useEffect(() => { //cuando se monta, actualiza el componente
 // };
 
 const myNft = useSelector((state) => state.filterNfts);
+
+
 
 return (
     <div >

@@ -171,7 +171,7 @@ function Header() {
               About
             </Link>
             <Link
-              to={"/home"}
+              to={"/home/collections/"}
               // onClick={() =>
               //   Swal.fire({
               //     title: "In Construction",
