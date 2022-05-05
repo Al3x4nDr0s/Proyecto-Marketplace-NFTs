@@ -9,7 +9,9 @@ import Login from './components/Auth/Login.jsx';
 import { DetailsNft } from './components/Home/elements/DetailsNft.jsx';
 import {AllNft} from './components/Home/elements/AllNft.jsx';
 // import PrivateRoute from './services/getPrivateRoute'
-import { Register } from './components/Register/Register.jsx'
+import { Register } from './components/Register/Register.jsx';
+import  Collections  from './components/Collections/Collections.jsx';
+import  CardNftCollection  from './components/Collections/CardNftCollection.jsx';
 import './App.css';
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 import { useSelector } from "react-redux";
@@ -42,6 +44,8 @@ function App() {
             <Route exact path={"/home"} element={<Home />} />
             <Route exact path={"/home/login"} element={!logged ? <Login /> : <Home/>} />
             <Route exact path={"/home/register"} element={<Register />} />
+            <Route exact path={"/home/collections"} element={<Collections />} />
+            <Route exact path={"/home/collections/nfts/:name"} element={<CardNftCollection />} />
           </Route>
         </Routes>
       </BrowserRouter>

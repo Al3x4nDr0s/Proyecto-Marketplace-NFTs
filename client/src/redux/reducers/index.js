@@ -1,5 +1,5 @@
 import {
-    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY
+    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, GET_ALL_COLLECTIONS, FILTER_NFT
 } from "../actions";
 
 
@@ -9,7 +9,9 @@ const initialState = {
     nftquery: [],
     hasMore: true,
     isLogged: false,
-    user: {}
+    user: {},
+    collections: [],
+    filterNfts: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,7 +45,23 @@ const rootReducer = (state = initialState, action) => {
                  ...state,
                  nftquery: [],
                  hasMore: true
-             }   
+             }
+         case GET_ALL_COLLECTIONS:
+             return {
+                 ...state,
+                 collections: action.payload
+             }
+         case FILTER_NFT:
+            //  nfts[0].collection_nft.name //collections[0].name
+            const nftsAll = state.nfts
+            
+            const filters = nftsAll.filter(n => n.collection_nft && n.collection_nft.name === action.payload)
+
+             return {
+                ...state,
+                filterNfts: filters
+             }
+
         default: return state
     };
 };
