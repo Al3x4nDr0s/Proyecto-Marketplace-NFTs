@@ -76,6 +76,7 @@ export const AllNft = () => {
       }
     }, 1500);
   };
+  
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>

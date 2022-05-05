@@ -2,17 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import {
-  ContainerDataCard,
-  ContainerCategory,
-} from "./StylesHome/ViewNftStyles.jsx";
-
 import Swal from "sweetalert2";
 import { putLikesNft } from "../../../redux/actions/";
 
 import imagenaudio from "../../../assets/nft-audio.jpg";
 import imagenvideo from "../../../assets/azuki-nft.gif";
 import { useDispatch } from "react-redux";
+import { BsHeartFill } from "react-icons/bs";
+
 const CardContainerNft = styled.div`
   width: 280px;
   height: 450px;
@@ -87,12 +84,12 @@ const CardBodyFooter = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: .9rem;
+  font-size: 0.9rem;
 
   div {
     position: relative;
     padding-left: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 
     &:nth-child(1) {
       color: hsl(178, 100%, 50%);
@@ -194,21 +191,18 @@ export const CardNft = (props) => {
     owner,
     imageCurrencies,
     likes,
-    token
+    token,
   } = props;
 
-  
-  const likecurrent = likes
-
-
+  const likecurrent = likes;
 
   const dispatch = useDispatch();
   const handlerLikes = () => {
     const acumLikes = {
-      likes: 1
-    }
-    dispatch(putLikesNft(id,token,acumLikes))
-  }
+      likes: 1,
+    };
+    dispatch(putLikesNft(id, token, acumLikes));
+  };
   const handlePhoto = () => {
     if (files === "Image") {
       return `${image}`;
@@ -230,18 +224,39 @@ export const CardNft = (props) => {
             imageHeight: 360,
             imageWidth: 400,
             title: `${name}`,
-            color: 'var(--secondFontColor)',
-            background: '#46198fb3',
+            color: "var(--secondFontColor)",
+            background: "#46198fb3",
             backdrop: `
             #46198f84
             `,
           })
         }
       >
-        <img src={handlePhoto()} alt="photo nft"/>
+        <img src={handlePhoto()} alt="photo nft" />
       </CardingImg>
-      <button onClick={handlerLikes}>likes</button>
-      <span style={{fontSize: "1rem", marginLeft: "1rem"}}>{likes ? likes : 0}</span>
+      <div style={{ display: "flex", justifyContent: "flex-end"}}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: "center",
+          }}
+        >
+          <BsHeartFill
+            style={{ color: "var(--colorInfo)" }}
+            onClick={handlerLikes}
+          />
+          <span
+            style={{
+              fontSize: "1rem",
+              marginLeft: ".5rem",
+              color: "var(--colorInfo)",
+            }}
+          >
+            {likes ? likes : 0}
+          </span>
+        </div>
+      </div>
       <CardBody>
         <h4>
           <Link
@@ -253,10 +268,7 @@ export const CardNft = (props) => {
         </h4>
         <p>Our Equilibrium collection promotes balance and calm.</p>
         <CardBodyFooter>
-          <PruebaPrice
-            title={price}
-            priceN={currency?.name}
-          />
+          <PruebaPrice title={price} priceN={currency?.name} />
           <PruebaPrice title={salestype} />
         </CardBodyFooter>
       </CardBody>

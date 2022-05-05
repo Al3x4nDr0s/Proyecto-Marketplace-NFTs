@@ -68,7 +68,6 @@ export const putLikesNft = (nft, tokenuser, item) => async dispatch => {
             type: PUT_LIKES,
             payload: dataLikes.data
         })
-        console.log(dataLikes.data)
         return Likes
     } catch (error) {
         console.log('error:', error)
