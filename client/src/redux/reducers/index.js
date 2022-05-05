@@ -20,9 +20,13 @@ const initialState = {
     hasMore: true,
     isLogged: false,
     user: {},
+<<<<<<< HEAD
     collections: [],
     filterNfts: [],
     nft:{}
+=======
+    nft: {}
+>>>>>>> history/front/viewuser
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -30,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
         case SET_MODAL:
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
-            return { ...state, nfts: action.payload, copynft: action.payload}
+            return { ...state, nfts: action.payload, copynft: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
@@ -83,9 +87,16 @@ const rootReducer = (state = initialState, action) => {
                 user: username
             }
         case PUT_LIKES:
+            const objFav = []
+            state.nfts.forEach(x => {
+                if(x._id === action.payload.nft._id) {
+                    x.likes = action.payload.nft.likes
+                }
+                objFav.push(x)                
+            })
             return {
                 ...state,
-                nft: action.payload
+                nfts: objFav,
             }
         default: return state
     };

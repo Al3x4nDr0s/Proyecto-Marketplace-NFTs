@@ -31,6 +31,7 @@ export const MisPublicaciones = () => {
           backgroundColor: "var(--mainBackGroundButtonColor)",
         }}
       />
+      
             
       </>
       <ContainerPublicaciones><h1>In construction</h1></ContainerPublicaciones>
