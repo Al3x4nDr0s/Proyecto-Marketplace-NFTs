@@ -70,7 +70,8 @@ export const ViewNft = () => {
     setNft(nft);
   }, [instantCallback, mynft]);
 
-  console.log(nft);
+  const token = localStorage.getItem("token")
+
 
   return (
     <ContainerNFT>
@@ -99,14 +100,11 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={(ancho > 1300) ? 5 : 2}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         grabCursor={true}
-        // centeredSlides={true}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -130,19 +128,11 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        a11y={{
-          prevSlideMessage: "Previous slide",
-          nextSlideMessage: "Next slide",
-        }}
-        // scrollbar={{ draggable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log("slide change")}
       >
-        {nft?.length ? (
-          nft
-            .filter((x) => x.category.name === "Gaming")
-            .map((x, i) => (
-              <SwiperSlide>
+        {
+          nft?.filter((x) => x.category.name === "Gaming")
+          .map((x, i) => (
+            <SwiperSlide key={i}>
                 <CardNft
                   image={x.image}
                   name={x.name}
@@ -150,6 +140,8 @@ export const ViewNft = () => {
                   files={x.files_types.name}
                   category={x.category}
                   currency={x.currencies}
+                  likes={x.likes}
+                  token={token}
                   imageCurrencies={x.currencies.image}
                   owner={x.details.owner.username}
                   salestype={x.sales_types.name}
@@ -158,28 +150,7 @@ export const ViewNft = () => {
                 />
               </SwiperSlide>
             ))
-        ) : (
-          <>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardNft />
-            </SwiperSlide>
-          </>
-        )}
+        }
       </Swiper>
       <ContainerTitleCategory>
         <div
@@ -196,9 +167,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -223,14 +191,14 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
         {nft
           ?.filter((x) => x.category.name === "Sports")
-          .map((x) => (
-            <SwiperSlide>
+          .map((x, i) => (
+            <SwiperSlide key={i+1}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -240,6 +208,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -262,9 +232,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -289,14 +256,14 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
         {nft
           ?.filter((x) => x.category.name === "Entertainment")
-          .map((x) => (
-            <SwiperSlide>
+          .map((x, i) => (
+            <SwiperSlide key={i+2}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -307,6 +274,8 @@ export const ViewNft = () => {
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
                 salestype={x.sales_types.name}
+                likes={x.likes}
+                token={token}
                 id={x._id}
                 key={x._id}
               />
@@ -352,14 +321,14 @@ export const ViewNft = () => {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
         {nft
           ?.filter((x) => x.category.name === "Art")
-          .map((x) => (
-            <SwiperSlide>
+          .map((x, i) => (
+            <SwiperSlide key={i+3}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -369,6 +338,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}
@@ -391,9 +362,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        // spaceBetween={125}
-        // slidesPerView={5}
-        // navigation
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -417,16 +385,15 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        // width=
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
         {nft
           ?.filter((x) => x.category.name === "eSports")
-          .map((x) => (
-            <SwiperSlide>
+          .map((x, i) => (
+            <SwiperSlide key={i+4}>
               <CardNft
                 image={x.image}
                 name={x.name}
@@ -436,6 +403,8 @@ export const ViewNft = () => {
                 currency={x.currencies}
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
+                likes={x.likes}
+                token={token}
                 salestype={x.sales_types.name}
                 id={x._id}
                 key={x._id}

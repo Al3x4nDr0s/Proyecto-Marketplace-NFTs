@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-var mongoose = require('mongoose')
 
 const Posting = Schema({
     posts : {

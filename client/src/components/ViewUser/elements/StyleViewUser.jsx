@@ -7,7 +7,7 @@ export const ContainerHeaderUser = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3.2rem auto 2rem auto;
+  margin: 6.5rem auto 2rem auto;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 `;

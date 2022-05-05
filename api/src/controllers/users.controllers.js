@@ -27,7 +27,8 @@ const createUser = async (req, res) => {
             lastName,
             email,
             password,
-            user_type: user_type._id
+            user_type: user_type._id,
+            image: 'https://res.cloudinary.com/hysmatafuegos/image/upload/v1651516047/sevenDevs/avatardefault_92824_s6mwzv.png'
         });
         //? encriptar password
         const salt = await bcrypt.genSalt(10);

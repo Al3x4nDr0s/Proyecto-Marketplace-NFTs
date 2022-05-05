@@ -1,17 +1,20 @@
 import {
-    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, GET_ALL_COLLECTIONS, FILTER_NFT
+    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, GET_ALL_COLLECTIONS, FILTER_NFT,
+    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, PUT_USER, PUT_LIKES
 } from "../actions";
 
 
 const initialState = {
     isOpen: false,
     nfts: [],
+    copynft: [],
     nftquery: [],
     hasMore: true,
     isLogged: false,
     user: {},
     collections: [],
-    filterNfts: []
+    filterNfts: [],
+    nft:{}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -19,22 +22,19 @@ const rootReducer = (state = initialState, action) => {
         case SET_MODAL:
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
-            return { ...state, nfts: action.payload }
+            return { ...state, nfts: action.payload, copynft: action.payload}
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
             return { ...state, user: action.payload, isLogged: false }
         case GET_NFT_QUERY:
             var setHasMore;
-            if(state.nftquery.length) {
+            if (state.nftquery.length) {
                 setHasMore = action.payload.length !== 0 ? true : false
             } else {
                 setHasMore = false
             }
             const unionPrueba = state.nftquery.concat(action.payload)
-            // const prueba = [...action.payload, action.payload]
-            // const set = new Set( unionPrueba.map( JSON.stringify))
-            // const sinDuplicaciones = Array.from( set ).map( JSON.parse )
             return {
                 ...state,
                 hasMore: setHasMore,
@@ -62,6 +62,23 @@ const rootReducer = (state = initialState, action) => {
                 filterNfts: filters
              }
 
+        case REMOVE_NFT_QUERY:
+            return {
+                ...state,
+                nftquery: [],
+                hasMore: true
+            }
+        case PUT_USER:
+            const username = action.payload.data
+            return {
+                ...state,
+                user: username
+            }
+        case PUT_LIKES:
+            return {
+                ...state,
+                nft: action.payload
+            }
         default: return state
     };
 };

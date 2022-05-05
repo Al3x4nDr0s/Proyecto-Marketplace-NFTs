@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route exact path={"/"} element={<LandingPage />} />
           <Route element={<MainLayout />}>
-            <Route exact path={"/myprofile"} element={logged ? <ViewUser /> : <Home />} />
+            <Route exact path={"/myprofile/:idUser"} element={logged ? <ViewUser /> : <Home />} />
             <Route exact path={"/myprofile/mispublicaciones"} element={logged ? <MisPublicaciones /> : <Home />} />
             <Route exact path={"/details/:idNft"} element={<DetailsNft />} />
             <Route exact path={"/nft"} element={<AllNft />} />
