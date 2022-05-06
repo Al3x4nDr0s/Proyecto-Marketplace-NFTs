@@ -8,7 +8,6 @@ const ColletionMain = styled.div`
     width: 100%;
     margin: 0 auto;
     margin-top: 7.5rem;
-    background-color: red;
 `
 const CentrarCard = styled.div`
     margin: 0 12rem 0 12rem;
