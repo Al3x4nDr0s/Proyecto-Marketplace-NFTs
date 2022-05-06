@@ -1,34 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import axios from 'axios';
 import styled, { css } from "styled-components";
 import { HiShare } from "react-icons/hi";
 import { FcLike } from "react-icons/fc";
 import { IoIosArrowDown } from "react-icons/io";
 import { SiEthereum } from "react-icons/si";
 import { BsFillSuitHeartFill } from "react-icons/bs";
+import { getAllNft } from "../../redux/actions";
 
 export const Details = () => {
   //const {img, image, name, price, id, category, files, currency, salestype, owner, imageCurrencies } =props;
   const location = useLocation();
   const [like, setLike] = useState(false);
+  
   console.log(location);
   const id = location.pathname.split("/")[2];
   const cards = useSelector((state) => state.nfts);
+  const dispatch = useDispatch();
   const nft = cards.filter((item) => item._id === id);
-  console.log(nft[0].image)
-  
-
-  console.log(nft);
-  
-  const handleClick=(e)=>{
-    e.preventDefault();
-    setLike(!like);
-   // nft[0].hasOwnProperty('likes')?(
-   //    axios.put() 
-   // )
+  const [cantLikes, setCantLikes]= useState(nft[0].likes);
+  console.log("Nuevo Renderizado");
+  if(nft[0].sales_types.name==="Live Auction"){
+    console.log("Nft con Subasta"); 
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+    const auction = axios.get(`http://localhost:4000/auction/${nft[0]._id}`)
+                         .then(res=>console.log(res.data))   
+    
+    /*let initTime = nft[0].sales_types.
+        finalYear:
+        finalMonth:
+        finalDay:
+        finalHour:
+        finalMin:
+        finalSeg:
+        initYear:, initMonth, initDay, initHour, finalMin, finalSeg } 
+        */
   }
   
+
+useEffect(()=>{
+    dispatch(getAllNft);
+},[like,cantLikes]);
+
+  const handleClick=(e)=>{
+    
+    
+    if(nft[0].hasOwnProperty('likes')){
+     like?setCantLikes(cantLikes-1) :setCantLikes(cantLikes+1);
+     console.log(cantLikes);
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+    axios.put(`http://localhost:4000/nft/${nft[0]._id}`,{likes:cantLikes})
+    .then(res=>console.log(res.data));
+    setLike(!like);
+
+    }
+    else{
+        setCantLikes(0);
+
+    }
+    
+   }
+  
+    
   return (
     <DetailsContainer>
       <Column>
@@ -85,17 +121,19 @@ export const Details = () => {
             />
             <BsFillSuitHeartFill
               onClick={handleClick}
-              color={like ? "grey" : "red"}
+              color={like ? "red" : "grey"}
               style={{ cursor: "pointer", width: "25px", height: "25px", padding:'0px' }}
             />
           </LikeIcons>
         </Row>
         <Row style={{position: 'absolute', top:'22%', left:'85%'}}>
-         {nft[0].hasOwnProperty('likes')&&<p>{nft[0].likes}</p>}
+         {nft[0].hasOwnProperty('likes')&&<p>{cantLikes}</p>
+            }
         </Row>
         <Row style={{ justifyContent: "left", gap: "65%" }}>
           <p>Price</p>
-          <p>Ends in</p>
+        {nft[0].sales_types.name==="Live Auction"&&<p>Ends in</p>
+        }
         </Row>
         <Row style={{ justifyContent: "left", gap: "53%" }}>
           <Row>
@@ -105,15 +143,15 @@ export const Details = () => {
             />
             <h2>{nft[0].price}</h2>
           </Row>
-          <p>
-            44 <small>days</small> 30 <small>hours</small> 15 <small>min</small>{" "}
-            00 <small>secs</small>
-          </p>
+          {nft[0].sales_types.name==="Live Auction"&&<p> <small>days</small> 30 <small>hours</small> 15 <small>min</small>{" "}
+            00 <small>secs</small></p>
+          }
         </Row>
 
-        <Row style={{ gap: "5%" }}>
-          <Button1 title="Buy Now" height="40px" width="100%"></Button1>
-          <Button1 title="Make Offer" height="40px" width="100%"></Button1>
+        <Row style={{ gap: "10%" }}>
+          <Button1 title="Buy Now" height="40px" width="300px"></Button1>
+          {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="40px" width="300px"></Button1>
+            }
         </Row>
 
         <Row>
@@ -148,8 +186,9 @@ const DetailsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-
-  justify-content: space-around;
+  justify-content: space-evenly;
+  padding-left: 2%;
+  
 `;
 
 const Column = styled.div`
@@ -157,13 +196,15 @@ const Column = styled.div`
   flex-direction: column;
   width: 35%;
   color: white;
+  flex-wrap: wrap;
+  
 `;
 
 const Column1 = styled.div`
   display: flex;
   flex-direction: column;
   height: 15%;
-  width: 50%;
+  width: 60%;
 `;
 
 const Row = styled.div`
@@ -184,8 +225,8 @@ const Row1 = styled.div`
 const Img = styled.div`
    background-image: url(${props => props.img});
    background-size: 100%;
-   width: 500px;
-   height: 500px;
+   width: 400px;
+   height: 400px;
    border-radius:5px;
    //background-color:${props=>props.color};
 `;
