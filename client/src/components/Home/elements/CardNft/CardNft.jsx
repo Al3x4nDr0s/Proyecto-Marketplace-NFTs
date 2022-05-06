@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Swal from "sweetalert2";
-import { putLikesNft } from "../../../redux/actions/";
+import { putLikesNft } from "../../../../redux/actions";
 
-import imagenaudio from "../../../assets/nft-audio.jpg";
-import imagenvideo from "../../../assets/azuki-nft.gif";
+import imagenaudio from "../../../../assets/nft-audio.jpg";
+import imagenvideo from "../../../../assets/azuki-nft.gif";
 import { useDispatch } from "react-redux";
 import { BsHeartFill } from "react-icons/bs";
+
 
 const CardContainerNft = styled.div`
   width: 280px;
@@ -240,6 +241,8 @@ export const CardNft = (props) => {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             alignItems: "center",
+            top: "1.65rem",
+            position: "relative"
           }}
         >
           <BsHeartFill

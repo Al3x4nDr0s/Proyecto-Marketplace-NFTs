@@ -13,13 +13,13 @@ import {
   ContainerNFT,
   NftTitle,
   ContainerCardNft,
-} from "./StylesHome/ViewNftStyles.jsx";
+} from "../StylesHome/ViewNftStyles.jsx";
 
 import { Link } from "react-router-dom";
 
-import { CardNft } from "./CardNft.jsx";
+import { CardNft } from "../CardNft/CardNft.jsx";
 
-import { getAllNft } from "../../../redux/actions/index";
+import { getAllNft } from "../../../../redux/actions/index";
 
 import {
   FcSteam,

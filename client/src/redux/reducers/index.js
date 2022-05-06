@@ -1,14 +1,19 @@
 import {
-    SET_MODAL, 
-    GET_ALL_NFT, 
-    GET_TOKEN, 
-    REMOVE_USER, 
-    GET_NFT_QUERY, 
-    REMOVE_NFT_QUERY, 
-    GET_ALL_COLLECTIONS, 
-    FILTER_NFT,   
-    PUT_USER, 
-    PUT_LIKES
+    SET_MODAL,
+    GET_ALL_NFT,
+    GET_TOKEN,
+    REMOVE_USER,
+    GET_NFT_QUERY,
+    REMOVE_NFT_QUERY,
+    GET_ALL_COLLECTIONS,
+    FILTER_NFT,
+    PUT_USER,
+    PUT_LIKES,
+    CREATE_NFT,
+    GET_CATEGORY,
+    GET_CURRENCIES,
+    GET_FILES_TYPE,
+    GET_SALES_TYPE
 } from "../actions";
 
 
@@ -22,7 +27,11 @@ const initialState = {
     user: {},
     collections: [],
     filterNfts: [],
-    nft:{}
+    nft: {},
+    category: [],
+    sales_type: [],
+    files_type: [],
+    currencies: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -48,27 +57,27 @@ const rootReducer = (state = initialState, action) => {
                 hasMore: setHasMore,
                 nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
             }
-         case REMOVE_NFT_QUERY:
-             return {
-                 ...state,
-                 nftquery: [],
-                 hasMore: true
-             }
-         case GET_ALL_COLLECTIONS:
-             return {
-                 ...state,
-                 collections: action.payload
-             }
-         case FILTER_NFT:
+        case REMOVE_NFT_QUERY:
+            return {
+                ...state,
+                nftquery: [],
+                hasMore: true
+            }
+        case GET_ALL_COLLECTIONS:
+            return {
+                ...state,
+                collections: action.payload
+            }
+        case FILTER_NFT:
             //  nfts[0].collection_nft.name //collections[0].name
             const nftsAll = state.nfts
-            
+
             const filters = nftsAll.filter(n => n.collection_nft && n.collection_nft.name === action.payload)
 
-             return {
+            return {
                 ...state,
                 filterNfts: filters
-             }
+            }
 
         case REMOVE_NFT_QUERY:
             return {
@@ -85,14 +94,39 @@ const rootReducer = (state = initialState, action) => {
         case PUT_LIKES:
             const objFav = []
             state.nfts.forEach(x => {
-                if(x._id === action.payload.nft._id) {
+                if (x._id === action.payload.nft._id) {
                     x.likes = action.payload.nft.likes
                 }
-                objFav.push(x)                
+                objFav.push(x)
             })
             return {
                 ...state,
                 nfts: objFav,
+            }
+        case CREATE_NFT:
+            return {
+                ...state,
+                ntfs: [...state.nfts, action.payload]
+            }
+        case GET_CATEGORY:
+            return {
+                ...state,
+                category: action.payload
+            }
+        case GET_CURRENCIES:
+            return {
+                ...state,
+                currencies: action.payload
+            }
+        case GET_SALES_TYPE:
+            return {
+                ...state,
+                sales_type: action.payload
+            }
+        case GET_FILES_TYPE:
+            return {
+                ...state,
+                files_type: action.payload
             }
         default: return state
     };

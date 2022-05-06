@@ -138,7 +138,7 @@
 .navigation.active {
   width: 250px;
   background: #131833f3;
-  height: 220px;
+  height: 260px;
   transition: width 0.5s, height 0.5s;
   transition-delay: 0s, 0.75s;
 }
