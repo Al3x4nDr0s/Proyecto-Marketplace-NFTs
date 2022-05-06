@@ -10,11 +10,17 @@ import { IoIosArrowDown } from "react-icons/io";
 import { SiEthereum } from "react-icons/si";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import { getAllNft } from "../../redux/actions";
+import Timer from "./Timer";
 
 export const Details = () => {
   //const {img, image, name, price, id, category, files, currency, salestype, owner, imageCurrencies } =props;
   const location = useLocation();
   const [like, setLike] = useState(false);
+  const [infoTimer, setInfoTimer]=useState({startDate:'5/4/2022 18:58', finishDate:'5/9/2022 18:58'});
+  const [timerEnabled, setTimerEnabled] = useState(false);
+  const [timerItems, setTimerItems] = useState({d:'',h:'', m:'', s:''})
+
+  
   
   console.log(location);
   const id = location.pathname.split("/")[2];
@@ -23,21 +29,24 @@ export const Details = () => {
   const nft = cards.filter((item) => item._id === id);
   const [cantLikes, setCantLikes]= useState(nft[0].likes);
   console.log("Nuevo Renderizado");
-  if(nft[0].sales_types.name==="Live Auction"){
-    console.log("Nft con Subasta"); 
+  if((nft[0].sales_types.name==="Live Auction")&&(timerEnabled===false)){
+    
+   /*
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
     const auction = axios.get(`http://localhost:4000/auction/${nft[0]._id}`)
-                         .then(res=>console.log(res.data))   
+                         .then(res=>{
+                           console.log(res.data);
+                           setInfoTimer({startDate: res.data.startDate, finishDate:res.data.finishDate});
+                           setTimerEnabled(true);
+                          })  
+    console.log("Nft con Subasta");
+    */ 
     
-    /*let initTime = nft[0].sales_types.
-        finalYear:
-        finalMonth:
-        finalDay:
-        finalHour:
-        finalMin:
-        finalSeg:
-        initYear:, initMonth, initDay, initHour, finalMin, finalSeg } 
-        */
+    /*
+   
+      
+    */
+    
   }
   
 
@@ -143,14 +152,18 @@ useEffect(()=>{
             />
             <h2>{nft[0].price}</h2>
           </Row>
-          {nft[0].sales_types.name==="Live Auction"&&<p> <small>days</small> 30 <small>hours</small> 15 <small>min</small>{" "}
-            00 <small>secs</small></p>
+          {nft[0].sales_types.name==="Live Auction"&& infoTimer.finishDate!==''&&
+          <Timer 
+          startDate={infoTimer.startDate}
+           finishDate={infoTimer.finishDate}
+           setTimerItems = {setTimerItems}
+           />
           }
         </Row>
 
-        <Row style={{ gap: "10%" }}>
-          <Button1 title="Buy Now" height="40px" width="300px"></Button1>
-          {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="40px" width="300px"></Button1>
+        <Row style={{ gap: "15%", marginTop:'10px' }}>
+          <Button1 title="Buy Now" height="45px" width="350px"></Button1>
+          {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="45px" width="350px"></Button1>
             }
         </Row>
 
@@ -227,7 +240,7 @@ const Img = styled.div`
    background-size: 100%;
    width: 400px;
    height: 400px;
-   border-radius:5px;
+   border-radius:8px;
    //background-color:${props=>props.color};
 `;
 
