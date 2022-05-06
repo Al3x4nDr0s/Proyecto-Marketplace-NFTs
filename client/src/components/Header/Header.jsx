@@ -6,7 +6,7 @@ import authService from "../../services/authService";
 import { getTokenUser, removeUser } from "../../redux/actions/index";
 import Button from "../shared/Button";
 import { IoIosLogOut } from "react-icons/io";
-import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
+import { FaUserCircle, FaInfoCircle, FaBuffer } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 
@@ -136,6 +136,12 @@ function Header() {
                 </li>
                 <li>
                   <ContainerItemsMenu>
+                  <FaBuffer style={{ width: "22px", height: "42px" }} />
+                    <Link to={"/home/collections/"} style={{marginLeft: "1rem"}}>Collections</Link>
+                  </ContainerItemsMenu>
+                </li>
+                <li>
+                  <ContainerItemsMenu>
                     <IoIosLogOut style={{ width: "22px", height: "42px" }} />
                     <Link to="/home" onClick={handleLogout}>
                       Logout
@@ -152,41 +158,26 @@ function Header() {
             <Link to={"/home"}>Home</Link>
             <Link
               to={"/home"}
-              // onClick={() =>
-              //   Swal.fire({
-              //     title: "In Construction",
-              //     width: 600,
-              //     padding: "3em",
-              //     color: "var(--secondFontColor)",
-              //     background: "#46198fb3",
-              //     backdrop: `
-              //   #21217750
-              //   url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-              //   left top
-              //   no-repeat
-              // `,
-              //   })
-              // }
+              onClick={() =>
+                Swal.fire({
+                  title: "In Construction",
+                  width: 600,
+                  padding: "3em",
+                  color: "var(--secondFontColor)",
+                  background: "#46198fb3",
+                  backdrop: `
+                #21217750
+                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
+                left top
+                no-repeat
+              `,
+                })
+              }
             >
               About
             </Link>
             <Link
               to={"/home/collections/"}
-              // onClick={() =>
-              //   Swal.fire({
-              //     title: "In Construction",
-              //     width: 600,
-              //     padding: "3em",
-              //     color: "var(--secondFontColor)",
-              //     background: "#46198fb3",
-              //     backdrop: `
-              //   #2121774c
-              //   url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-              //   left top
-              //   no-repeat
-              // `,
-              //   })
-              // }
             >
               Collections
             </Link>

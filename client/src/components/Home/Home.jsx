@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ViewNft } from "./elements/ViewNft.jsx";
-import { CollectionsCarousel } from "./elements/CollectionsCarousel.jsx";
+import { ViewNft } from "./elements/ViewNft/ViewNft.jsx";
+import { CollectionsCarousel } from "./elements/CollectionCarousel/CollectionsCarousel.jsx";
 
 
 

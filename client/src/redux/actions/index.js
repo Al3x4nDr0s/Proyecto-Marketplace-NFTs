@@ -5,12 +5,17 @@ export const SET_RESIZE = 'SET_RESIZE';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_ALL_NFT = 'GET_ALL_NFT';
 export const GET_NFT_QUERY = 'GET_NFT_QUERY';
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_SALES_TYPE = 'GET_SALES_TYPE';
+export const GET_FILES_TYPE = 'GET_FILES_TYPE';
+export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const PUT_USER = 'PUT_USER'
 export const PUT_LIKES = 'PUT_LIKES';
 export const REMOVE_USER = 'REMOVE_USER';
 export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
 export const GET_ALL_COLLECTIONS = 'GET_ALL_COLLECTIONS';
 export const FILTER_NFT = 'FILTER_NFT';
+export const CREATE_NFT = 'CREATE_NFT';
 
 
 
@@ -40,7 +45,7 @@ export const getAllCollections = () => async dispatch => {
     return data
 }
 
-export function filterNft (payload) {
+export function filterNft(payload) {
     return {
         type: 'FILTER_NFT',
         payload
@@ -78,7 +83,7 @@ export const getTokenUser = (user) => async dispatch => {
 
 export const putLikesNft = (nft, tokenuser, item) => async dispatch => {
     try {
-        const dataLikes = await axios.put(`http://localhost:4000/nft/${nft}`,item, {
+        const dataLikes = await axios.put(`http://localhost:4000/nft/${nft}`, item, {
             headers: {
                 Authorization: JSON.parse(tokenuser)
             }
@@ -90,6 +95,76 @@ export const putLikesNft = (nft, tokenuser, item) => async dispatch => {
         return Likes
     } catch (error) {
         console.log('error:', error)
+    }
+}
+
+export const getCategory = () => async dispatch => {
+    try {
+        const dataCategory = await axios.get('http://localhost:4000/misc/category')
+        const finallyDataCategory = await dispatch({
+            type: GET_CATEGORY,
+            payload: dataCategory.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+export const getSalesType = () => async dispatch => {
+    try {
+        const dataSalesType = await axios.get('http://localhost:4000/misc/sales_type')
+        const finallyDataSalesType = await dispatch({
+            type: GET_SALES_TYPE,
+            payload: dataSalesType.data
+        })
+        return finallyDataSalesType
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+export const getCurrencies = () => async dispatch => {
+    try {
+        const dataCurrencies = await axios.get('http://localhost:4000/misc/currencies')
+        const finallyDataCurrencies = dispatch({
+            type: GET_CURRENCIES,
+            payload: dataCurrencies.data
+        })
+        return finallyDataCurrencies
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+export const getFileTypes = () => async dispatch => {
+    try {
+        const dataFileTypes = await axios.get('http://localhost:4000/misc/files_type')
+        const finallyDataFilesType = await dispatch({
+            type: GET_FILES_TYPE,
+            payload: dataFileTypes.data
+        })
+        return finallyDataFilesType
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+export const postNft = (tokenuser, item) => async dispatch => {
+    try {
+        const dataPost = await axios.post(`http://localhost:4000/nft`, item, {
+            headers: {
+                Authorization: JSON.parse(tokenuser)
+            }
+        })
+        const responsePost = await dispatch({
+            type: CREATE_NFT,
+            payload: dataPost.data
+        })
+        console.log(dataPost.data)
+        return responsePost
+    } catch (error) {
+        console.log("error", error)
     }
 }
 

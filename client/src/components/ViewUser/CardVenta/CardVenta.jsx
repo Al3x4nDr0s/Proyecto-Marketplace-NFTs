@@ -1,5 +1,5 @@
 import React from "react";
-import { UltimasVentas, ImgNft } from "./elements/StyleViewUser.jsx";
+import { UltimasVentas, ImgNft } from "../elements/StyleViewUser.jsx";
 
 export const CardVenta = (props) => {
   const { title, tiempo, tipo } = props;

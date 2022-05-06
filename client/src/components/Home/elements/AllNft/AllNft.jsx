@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Loading } from "../../Loading/Loading.jsx";
-import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
+import { Loading } from "../../../Loading/Loading.jsx";
+import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
 
-import { CardNft } from "./CardNft.jsx";
+import { CardNft } from "../CardNft/CardNft.jsx";
 
 const ContainerAll = styled.div`
   width: 80%;
