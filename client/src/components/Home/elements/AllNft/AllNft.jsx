@@ -59,17 +59,14 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
-<<<<<<< HEAD:client/src/components/Home/elements/AllNft.jsx
     instantCallback(getNftQuery(page))
     return () => {
         
     }
 
-=======
     // if(hasMore) {
-    instantCallback(getNftQuery(page));
+    // instantCallback(getNftQuery(page));
     // }
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67:client/src/components/Home/elements/AllNft/AllNft.jsx
   }, [instantCallback, page]);
 
   const token = localStorage.getItem("token")
@@ -88,11 +85,8 @@ export const AllNft = () => {
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-<<<<<<< HEAD:client/src/components/Home/elements/AllNft.jsx
         <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
-=======
         <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67:client/src/components/Home/elements/AllNft/AllNft.jsx
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll

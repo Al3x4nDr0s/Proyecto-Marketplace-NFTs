@@ -13,14 +13,9 @@ export const PUT_USER = 'PUT_USER'
 export const PUT_LIKES = 'PUT_LIKES';
 export const REMOVE_USER = 'REMOVE_USER';
 export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
-<<<<<<< HEAD
-export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_CURRENCIES = 'GET_CURRENCIES';
-=======
 export const GET_ALL_COLLECTIONS = 'GET_ALL_COLLECTIONS';
 export const FILTER_NFT = 'FILTER_NFT';
 export const CREATE_NFT = 'CREATE_NFT';
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
 
 
 
@@ -59,13 +54,8 @@ export function filterNft(payload) {
 
 
 export const getNftQuery = (page) => async dispatch => {
-<<<<<<< HEAD
     const dataQuery = await axios.get('http://localhost:4000/nft', {params: {page: page, limit: 8}})
     if(dataQuery) {
-=======
-    const dataQuery = await axios.get('http://localhost:4000/nft', { params: { page: page, limit: 8 } })
-    if (dataQuery) {
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
         const dataNftQuery = await dispatch({
             type: GET_NFT_QUERY,
             payload: dataQuery.data.getAllNfts
