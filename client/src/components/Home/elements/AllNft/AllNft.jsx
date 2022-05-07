@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Loading } from "../../Loading/Loading.jsx";
-import { getNftQuery, removeNftQuery } from "../../../redux/actions/index";
+import { Loading } from "../../../Loading/Loading.jsx";
+import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
 
-import { CardNft } from "./CardNft.jsx";
+import { CardNft } from "../CardNft/CardNft.jsx";
 
 const ContainerAll = styled.div`
   width: 80%;
@@ -59,12 +59,23 @@ export const AllNft = () => {
   const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
+<<<<<<< HEAD:client/src/components/Home/elements/AllNft.jsx
     instantCallback(getNftQuery(page))
     return () => {
         
     }
 
+=======
+    // if(hasMore) {
+    instantCallback(getNftQuery(page));
+    // }
+>>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67:client/src/components/Home/elements/AllNft/AllNft.jsx
   }, [instantCallback, page]);
+
+  const token = localStorage.getItem("token")
+
+
+  console.log(token)
 
   const fecthNft = () => {
     setTimeout(() => {
@@ -73,14 +84,19 @@ export const AllNft = () => {
       }
     }, 1500);
   };
+  
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
+<<<<<<< HEAD:client/src/components/Home/elements/AllNft.jsx
         <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
+=======
+        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+>>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67:client/src/components/Home/elements/AllNft/AllNft.jsx
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
-          dataLength={nftAll?.length} //? 8
+          dataLength={page * 10} //? 8
           next={fecthNft} //2
           hasMore={hasMore}
           style={{ overflow: "hidden" }}
@@ -101,9 +117,6 @@ export const AllNft = () => {
           }
           endMessage={
             <hr style={{borderColor: 'var(--mainBackGroundButtonColor)'}}/>
-            // <p style={{ textAlign: "center", color: "var(--secondFontColor)" }}>
-            //   Llegaste al final!
-            // </p>
           }
         >
           <ContainerNft>
@@ -118,6 +131,8 @@ export const AllNft = () => {
                 imageCurrencies={x.currencies.image}
                 owner={x.details.owner.username}
                 salestype={x.sales_types.name}
+                likes={x.likes}
+                token={token}
                 id={x._id}
                 key={x._id}
               />

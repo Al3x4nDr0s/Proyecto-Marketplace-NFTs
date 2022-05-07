@@ -6,6 +6,7 @@ const nftRouter = require("../routes/nft");
 const miscRouter = require('../routes/misc');
 const filterRouter = require("../routes/filter");
 const orderRouter = require("../routes/order");
+const auctionRouter = require("../routes/auction");
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.use('/nft', nftRouter);
 router.use('/misc', miscRouter);
 router.use('/filter', filterRouter);
 router.use('/order', orderRouter);
+router.use('/auction', auctionRouter);
 
 
 module.exports = router;

@@ -6,14 +6,11 @@ import authService from "../../services/authService";
 import { getTokenUser, removeUser } from "../../redux/actions/index";
 import Button from "../shared/Button";
 import { IoIosLogOut } from "react-icons/io";
-import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
+import { FaUserCircle, FaInfoCircle, FaBuffer } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 
 import "./header.css";
-
-import { IoApps } from "react-icons/io5";
-import axios from "axios";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -139,6 +136,12 @@ function Header() {
                 </li>
                 <li>
                   <ContainerItemsMenu>
+                  <FaBuffer style={{ width: "22px", height: "42px" }} />
+                    <Link to={"/home/collections/"} style={{marginLeft: "1rem"}}>Collections</Link>
+                  </ContainerItemsMenu>
+                </li>
+                <li>
+                  <ContainerItemsMenu>
                     <IoIosLogOut style={{ width: "22px", height: "42px" }} />
                     <Link to="/home" onClick={handleLogout}>
                       Logout
@@ -174,22 +177,7 @@ function Header() {
               About
             </Link>
             <Link
-              to={"/home"}
-              onClick={() =>
-                Swal.fire({
-                  title: "In Construction",
-                  width: 600,
-                  padding: "3em",
-                  color: "var(--secondFontColor)",
-                  background: "#46198fb3",
-                  backdrop: `
-                #2121774c
-                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-                left top
-                no-repeat
-              `,
-                })
-              }
+              to={"/home/collections/"}
             >
               Collections
             </Link>

@@ -2,15 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import {
-  ContainerDataCard,
-  ContainerCategory,
-} from "./StylesHome/ViewNftStyles.jsx";
-
 import Swal from "sweetalert2";
+import { putLikesNft } from "../../../../redux/actions";
 
-import imagenaudio from "../../../assets/nft-audio.jpg";
-import imagenvideo from "../../../assets/azuki-nft.gif";
+import imagenaudio from "../../../../assets/nft-audio.jpg";
+import imagenvideo from "../../../../assets/azuki-nft.gif";
+import { useDispatch } from "react-redux";
+import { BsHeartFill } from "react-icons/bs";
+
 
 const CardContainerNft = styled.div`
   width: 280px;
@@ -86,12 +85,12 @@ const CardBodyFooter = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: .9rem;
+  font-size: 0.9rem;
 
   div {
     position: relative;
     padding-left: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 
     &:nth-child(1) {
       color: hsl(178, 100%, 50%);
@@ -192,8 +191,19 @@ export const CardNft = (props) => {
     salestype,
     owner,
     imageCurrencies,
+    likes,
+    token,
   } = props;
 
+  const likecurrent = likes;
+
+  const dispatch = useDispatch();
+  const handlerLikes = () => {
+    const acumLikes = {
+      likes: 1,
+    };
+    dispatch(putLikesNft(id, token, acumLikes));
+  };
   const handlePhoto = () => {
     if (files === "Image") {
       return `${image}`;
@@ -215,16 +225,41 @@ export const CardNft = (props) => {
             imageHeight: 360,
             imageWidth: 400,
             title: `${name}`,
-            color: 'var(--secondFontColor)',
-            background: '#46198fb3',
+            color: "var(--secondFontColor)",
+            background: "#46198fb3",
             backdrop: `
             #46198f84
             `,
           })
         }
       >
-        <img src={handlePhoto()} alt="photo nft"/>
+        <img src={handlePhoto()} alt="photo nft" />
       </CardingImg>
+      <div style={{ display: "flex", justifyContent: "flex-end"}}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: "center",
+            top: "1.65rem",
+            position: "relative"
+          }}
+        >
+          <BsHeartFill
+            style={{ color: "var(--colorInfo)" }}
+            onClick={handlerLikes}
+          />
+          <span
+            style={{
+              fontSize: "1rem",
+              marginLeft: ".5rem",
+              color: "var(--colorInfo)",
+            }}
+          >
+            {likes ? likes : 0}
+          </span>
+        </div>
+      </div>
       <CardBody>
         <h4>
           <Link
@@ -236,10 +271,7 @@ export const CardNft = (props) => {
         </h4>
         <p>Our Equilibrium collection promotes balance and calm.</p>
         <CardBodyFooter>
-          <PruebaPrice
-            title={price}
-            priceN={currency?.name}
-          />
+          <PruebaPrice title={price} priceN={currency?.name} />
           <PruebaPrice title={salestype} />
         </CardBodyFooter>
       </CardBody>
@@ -251,44 +283,5 @@ export const CardNft = (props) => {
         </p>
       </CardFooter>
     </CardContainerNft>
-    // <ContainerCategory>
-    //   <Link style={{ textDecoration: "none" }} to={`/details/${id}`}>
-    //     {files === "Image" ? (
-    //       <Card backgroundImage={image} key={id}/>
-    //     ) : files === "Video" ? (
-    //       <Card backgroundImage={imagenvideo} key={id}/>
-    //     ) : //   <video src={image} width="260px" height="300px"></video>
-    //     files === "Audio" ? (
-    //       <Card backgroundImage={imagenaudio} key={id}/>
-    //     ) : null}
-    //     {/* <Card backgroundImage={image} /> */}
-    //     <ContainerDataCard>
-    //       <div style={{ display: "flex", justifyContent: "space-between" }}>
-    //         <h3 style={{ color: "#fff" }}>{name}</h3>
-    //         <p
-    //           style={{
-    //             border: "2px solid var(--mainBackGroundButtonColor)",
-    //             padding: ".2rem",
-    //             borderRadius: ".3rem",
-    //           }}
-    //         >
-    //           {salestype}
-    //         </p>
-    //       </div>
-    //       <div style={{display: "flex", justifyContent: "space-between", marginTop: ".5rem", color: "var(--colorInfo)"}}>
-    //           <div>
-    //               <span>Precio Actual</span>
-    //           </div>
-    //         <div>
-    //           <span style={{ color: "var(--colorInfo)" }}>{price}</span>
-    //           <span style={{ color: "var(--colorInfo)" }}>
-    //             {" "}
-    //             {currency?.name}
-    //           </span>
-    //         </div>
-    //       </div>
-    //     </ContainerDataCard>
-    //   </Link>
-    // </ContainerCategory>
   );
 };

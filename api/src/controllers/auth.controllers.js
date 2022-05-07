@@ -9,7 +9,10 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         //? validar email
-        const existEmail = await Usuario.findOne({ email }).populate('user_type', 'name');
+        const existEmail = await Usuario.findOne({ email })
+        .populate('user_type', 'name')
+        .populate('favorite', 'name');
+
         if (!existEmail) {
             return res.status(400).json({
                 ok: false,
@@ -87,8 +90,8 @@ const googleSignIn = async (req, res) => {
             ok: false,
             msg: 'Unexpected error'
         });
-    }
-}
+    };
+};
 
 const renewToken = async (req, res) => {
 
@@ -100,8 +103,7 @@ const renewToken = async (req, res) => {
         usuario,
         token
     });
-
-}
+};
 
 //?export 
 module.exports = { 
