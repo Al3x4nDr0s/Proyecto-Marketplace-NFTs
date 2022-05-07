@@ -16,6 +16,7 @@ export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
 export const GET_ALL_COLLECTIONS = 'GET_ALL_COLLECTIONS';
 export const FILTER_NFT = 'FILTER_NFT';
 export const CREATE_NFT = 'CREATE_NFT';
+export const CATEGORY_FILTER = 'CATEGORY_FILTER';
 
 
 
@@ -110,6 +111,34 @@ export const getCategory = () => async dispatch => {
         console.log('error:', error)
     }
 }
+export const filterByCategory = (id) => async dispatch => {
+    try {
+        const dataCategory = await axios.get('http://localhost:4000/filter/category/'+ id)
+        console.log(dataCategory.data)
+        const finallyDataCategory = await dispatch({
+            type: GET_ALL_NFT,
+            payload: dataCategory.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+export const filterByCurrencies = (id) => async dispatch => {
+    try {
+        const dataCurrencies = await axios.get('http://localhost:4000/filter/currencies/'+ id)
+        console.log(dataCurrencies.data)
+        const finallyDataCategory = await dispatch({
+            type: GET_ALL_NFT,
+            payload: dataCurrencies.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+
+
 
 export const getSalesType = () => async dispatch => {
     try {
@@ -201,19 +230,7 @@ export const removeUser = () => dispatch => {
 }
 
 
-export const getNftCategories = ()=> async dispatch =>{
-    try {
-        const dataCat = await axios.get('http://localhost:4000/misc/category')
-        const dataUser = await dispatch({
-            type: GET_CATEGORIES,
-            payload : dataCat.data
-        })
-        return dataUser
-    } catch (error) {
-        console.log(error)
-    }
-    
-}
+
 export const getNftCurrencies = ()=> async dispatch =>{
 
     try {

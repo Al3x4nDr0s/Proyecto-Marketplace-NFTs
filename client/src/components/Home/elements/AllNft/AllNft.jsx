@@ -6,6 +6,8 @@ import { Loading } from "../../../Loading/Loading.jsx";
 import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
 
 import { CardNft } from "../CardNft/CardNft.jsx";
+import CategoryFilter from "./filters/CategoryFilter.jsx";
+import CurrenciesFilter from "./filters/CategoryFilter.jsx";
 
 const ContainerAll = styled.div`
   width: 80%;
@@ -85,8 +87,9 @@ export const AllNft = () => {
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction {page}</h2>
-        <h2 style={{color: 'var(--secondFontColor)'}}>Filter in construction</h2>
+        <CategoryFilter/>
+        
+        <CurrenciesFilter/>
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll

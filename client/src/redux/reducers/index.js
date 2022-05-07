@@ -1,7 +1,4 @@
 import {
-<<<<<<< HEAD
-    SET_MODAL, GET_ALL_NFT, GET_TOKEN, REMOVE_USER, GET_NFT_QUERY, REMOVE_NFT_QUERY, PUT_USER, GET_CURRENCIES, GET_CATEGORIES
-=======
     SET_MODAL,
     GET_ALL_NFT,
     GET_TOKEN,
@@ -17,7 +14,6 @@ import {
     GET_CURRENCIES,
     GET_FILES_TYPE,
     GET_SALES_TYPE
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
 } from "../actions";
 
 
@@ -29,10 +25,6 @@ const initialState = {
     hasMore: true,
     isLogged: false,
     user: {},
-<<<<<<< HEAD
-    currencies:[],
-    categories:[],
-=======
     collections: [],
     filterNfts: [],
     nft: {},
@@ -40,7 +32,6 @@ const initialState = {
     sales_type: [],
     files_type: [],
     currencies: []
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -48,35 +39,12 @@ const rootReducer = (state = initialState, action) => {
         case SET_MODAL:
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
-<<<<<<< HEAD
-            return { ...state, nfts: action.payload }
-        case GET_CURRENCIES:
-            return { ...state, currencies: action.payload }
-        case GET_CATEGORIES:
-            return { ...state, categories: action.payload }
-=======
             return { ...state, nfts: action.payload, copynft: action.payload }
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
             return { ...state, user: action.payload, isLogged: false }
         case GET_NFT_QUERY:
-<<<<<<< HEAD
-            // console.log('aquiii', state.nftquery)
-            let setHasMore;
-            if(state.nftquery.length > 0) {
-                action.payload.length > 0 ? setHasMore = true : setHasMore = false
-            } else {
-                setHasMore = false
-            }
-            return {
-                ...state,
-                hasMore: setHasMore,
-                nftquery: state.hasMore === false 
-                ? state.nftquery 
-                : [ ...state.nftquery, ...action.payload ]
-=======
             var setHasMore;
             if (state.nftquery.length) {
                 setHasMore = action.payload.length !== 0 ? true : false
@@ -88,12 +56,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 hasMore: setHasMore,
                 nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
-            }
-        case REMOVE_NFT_QUERY:
-            return {
-                ...state,
-                nftquery: [],
-                hasMore: true
             }
         case GET_ALL_COLLECTIONS:
             return {
@@ -159,7 +121,6 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 files_type: action.payload
->>>>>>> 0f3f5d4a19551fb587f32dda9aa36023fb189b67
             }
         default: return state
     };
