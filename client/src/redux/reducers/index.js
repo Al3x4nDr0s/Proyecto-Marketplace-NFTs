@@ -13,7 +13,9 @@ import {
     GET_CATEGORY,
     GET_CURRENCIES,
     GET_FILES_TYPE,
-    GET_SALES_TYPE
+    GET_SALES_TYPE,
+    CATEGORY_FILTER,
+    CURRENCY_FILTER
 } from "../actions";
 
 
@@ -40,6 +42,10 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
             return { ...state, nfts: action.payload, copynft: action.payload }
+        case CATEGORY_FILTER:
+            return { ...state, nftquery: action.payload }
+        case CURRENCY_FILTER:
+            return { ...state, nftquery: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:

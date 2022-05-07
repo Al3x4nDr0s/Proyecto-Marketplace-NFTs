@@ -87,9 +87,12 @@ export const AllNft = () => {
   return (
     <div style={{marginTop: "7.5rem"}}>
       <ContainerFiltrosMain>
-        <CategoryFilter/>
-        
+
         <CurrenciesFilter/>
+
+        <CategoryFilter/>
+
+        
       </ContainerFiltrosMain>
       <ContainerAll>
         <InfiniteScroll
