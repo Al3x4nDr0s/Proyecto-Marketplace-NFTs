@@ -19,13 +19,24 @@ const getAllAuction = async (req, res) => {
 
 const getAuctionByNftId = async (req, res) => {
     const { id } = req.params;
-    const auctionId = {"Nft": id};
+    const auctionId = {"idNft": id};
     try {
-        const getAuction = await Auction.find(auctionId)
-            .populate("ownerNft", {username:1, _id:0}) 
-            .populate("namenft", {name:1, _id:0})
-            .populate("buyer", {username:1, _id:0})
-        res.status(200).json(getAuction);
+        
+        //? encontrar por idNft y no por id de auction para que no se muestre el auction que esta en proceso
+        const getAuction = await Auction.findOne(auctionId)
+        .populate("ownerNft", {username:1, _id:0})
+        .populate("namenft", {name:1, _id:0})
+        .populate("buyer", {username:1, _id:0})
+    
+        //? si no hay auction en proceso
+        if(!getAuction){
+            return res.status(404).json({
+                ok: false,
+                msg: "Auction not Found"
+            });
+        }
+        return res.status(200).json(getAuction);
+
     } catch (error) {
         res.status(404).json({
             ok: false,
