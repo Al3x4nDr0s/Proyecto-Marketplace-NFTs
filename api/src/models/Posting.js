@@ -1,16 +1,22 @@
 const { Schema, model } = require('mongoose');
 
 const Posting = Schema({
-    posts : {
+    post : {
         type: String
     },
-    username: {
+    userid: {
         type: Schema.Types.ObjectId,
-        ref: 'User'  
+        ref: 'User' 
     },
-    namenft: {
+    username: {
+        type: String
+    },
+    nftid: {
         type: Schema.Types.ObjectId,
         ref: 'Nft'
+    },
+    namenft: {
+        type: String
     }
 });
 Posting.method('toJSON', function () {
