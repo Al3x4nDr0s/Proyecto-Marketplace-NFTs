@@ -2,44 +2,157 @@ const User = require('../models/User');
 const Nft = require ('../models/Nft');
 const getAllNfts = async (req, res) => {
     try {
-        // const { name } = req.query;
-        // const allNfts = await Nft.find({})
-        //     .populate('category', { name:1, _id:0})
-        //     .populate('collection_nft', { name:1, _id:0})
-        //     .populate('currencies', { name:1, _id:0})
-        //     .populate('sales_types', { name:1, _id:0})
-        //     .populate('files_types', { name:1, _id:0})
-        //     .populate('details.owner', { username:1, _id:0})
-        //     .populate('details.user_creator', { username:1, _id:0})
+        //? si hay un parametro search, busca por ese parametro
+        if (req.query.search && req.query.search !== '') {
             
-        // if (name){
-        //     response = allNfts.filter((elem) => elem.name.toLowerCase().includes(name.toLowerCase()));
-        //     if(response.length >= 1 ) return res.send(response);
-        //     return res.status(404).json({
-        //         ok: 'false',
-        //         msg: 'Name NFT not found'
-        //     });
-        // } else {
-        //     return res.status(200).json(allNfts);
-        // }
-        let { page = 1, limit } = req.query; 
+            const count = await Nft.countDocuments({ name: { $regex: req.query.search, $options: 'i' }});
+            let search = req.query.search
+            const pagination = {
+                page: req.query.page || 1,
+                limit: parseInt(req.query.limit) || count,
+                sort: req.query.sort || 'create_date'
+            }
+            const getNftsSearch = await Nft.aggregate([
+                { $match: { name: { $regex: search, $options: 'i' } } },  
+                { $sort: { create_date: -1 } },
+                { $skip: (pagination.page - 1) * pagination.limit },
+                { $limit: pagination.limit },
+                
+                { $lookup: {
+                    from: 'categories',
+                    localField: 'category',
+                    foreignField: '_id',
+                    as: 'category'
+                    }
+                },
+                { $unwind: {
+                    path: '$category',
+                    preserveNullAndEmptyArrays: true
+                    }
+                },
+                { $lookup: {
+                    from: 'collection_nfts',
+                    localField: 'collection_nft',
+                    foreignField: '_id',
+                    as: 'collection_nft'
+                    }
+                },
+                { $unwind: {
+                    path: '$collection_nft',
+                    preserveNullAndEmptyArrays: true
+                    }
+                },
+                { $lookup: {
+                    from: 'currencies',
+                    localField: 'currencies',
+                    foreignField: '_id',
+                    as: 'currencies'
+                    }
+                },
+                { $unwind: {
+                    path: '$currencies',
+                    preserveNullAndEmptyArrays: true
+                    }
+                },
+                { $lookup: {
+                    from: 'sales_types',
+                    localField: 'sales_types',
+                    foreignField: '_id',
+                    as: 'sales_types'
+                    }
+                },
+                { $unwind: {
+                    path: '$sales_types',
+                    preserveNullAndEmptyArrays: true
+                    }
+                },
+                { $lookup: {
+                    from: 'files_types',
+                    localField: 'files_types',
+                    foreignField: '_id',
+                    as: 'files_types'
+                    }
+                },
+                { $unwind: {
+                    path: '$files_types',
+                    preserveNullAndEmptyArrays: true
+                    }
+                },
+                { $lookup: {
+                    from: 'users',
+                    localField: 'details.owner',
+                    foreignField: '_id',
+                    as: 'details.owner'
+                    }
+                },
+                { $unwind: '$details.owner' },
+                { $lookup: {
+                    from: 'users',
+                    localField: 'details.user_creator',
+                    foreignField: '_id',
+                    as: 'details.user_creator'
+                    }
+                },
+                { $unwind: '$details.user_creator' },
+                { $project: {
+                    name: 1,
+                    image: 1,
+                    description: 1,
+                    details: {
+                        user_creator: {
+                            username: 1
+                        },
+                        owner: {
+                            username: 1
+                        },
+                        contract_address: 1,
+                        token_id: 1
+                    },
+                    category: {
+                        name: 1
+                    },
+                    collection_nft: {
+                        name: 1
+                    },
+                    currencies: {
+                        name: 1,
+                        image: 1
+                    },
+                    sales_types: {
+                        name: 1
+                    },
+                    files_types: {
+                        name: 1
+                    },
+                    create_date: 1,
+                    price: 1,
+                    likes: 1,
+                    }
+                }
+            ]);
         
+            return res.status(200).json({
+                ok: true,
+                nfts: getNftsSearch,
+                total: getNftsSearch.length,
+                ...pagination
+            });
+        
+        }
         const total = await Nft.countDocuments();
-        const countPages = Math.ceil(total / limit);
-        limit ? limit = parseInt(limit) : limit = total;
-        
-        const start = (page - 1) * limit;
-        const end = page * limit;
-        //? AGREGATE 
+        const pagination = {
+            page: req.query.page || 1,
+            limit: parseInt(req.query.limit) || total,
+            sort: req.query.sort || 'create_date'
+        }
+        const countPages = Math.ceil(total / pagination.limit);
         const getAllNfts = await Nft.aggregate([
             //? skip limit 
-            { $skip: start },
-            { $limit : limit },
-            //? sort by name
-            { $sort: { name: 1 } },
+            { $skip: (pagination.page - 1) * pagination.limit },
+            { $limit : pagination.limit },
+            { $sort: { create_date: -1 } },
             
-            {
-                $lookup: {
+            { $lookup: {
                     from: 'categories',
                     localField: 'category',
                     foreignField: '_id',
@@ -173,9 +286,9 @@ const getAllNfts = async (req, res) => {
             ok: 'true',
             getAllNfts,
             total,
-            end,
-            countPages
+            ...pagination
         });
+
     } catch (error) {
         res.status(404).json({
             ok: 'false',
