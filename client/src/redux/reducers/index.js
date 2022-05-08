@@ -14,7 +14,11 @@ import {
     GET_CURRENCIES,
     GET_FILES_TYPE,
     GET_SALES_TYPE,
-    FILTER_CATEGORY
+    FILTER_CATEGORY,
+    CATEGORY_FILTER,
+    CURRENCY_FILTER,
+    SALES_FILTER,
+    FILE_FILTER
 } from "../actions";
 
 
@@ -31,7 +35,7 @@ const initialState = {
     nft: {},
     category: [],
     sales_type: [],
-    files_type: [],
+    file_types: [],
     currencies: []
 };
 
@@ -41,6 +45,14 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, isOpen: action.payload }
         case GET_ALL_NFT:
             return { ...state, nfts: action.payload, copynft: action.payload }
+        case CATEGORY_FILTER:
+            return { ...state, nftquery: action.payload }
+        case SALES_FILTER:
+            return { ...state, nftquery: action.payload }
+        case FILE_FILTER:
+            return { ...state, nftquery: action.payload }
+        case CURRENCY_FILTER:
+            return { ...state, nftquery: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
@@ -58,19 +70,12 @@ const rootReducer = (state = initialState, action) => {
                 hasMore: setHasMore,
                 nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
             }
-        case REMOVE_NFT_QUERY:
-            return {
-                ...state,
-                nftquery: [],
-                hasMore: true
-            }
         case GET_ALL_COLLECTIONS:
             return {
                 ...state,
                 collections: action.payload
             }
         case FILTER_NFT:
-            //  nfts[0].collection_nft.name //collections[0].name
             const nftsAll = state.nfts
 
             const filters = nftsAll.filter(n => n.collection_nft && n.collection_nft.name === action.payload)
@@ -127,7 +132,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_FILES_TYPE:
             return {
                 ...state,
-                files_type: action.payload
+                file_types: action.payload
             }
         case FILTER_CATEGORY:
             return {
