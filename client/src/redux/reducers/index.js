@@ -13,7 +13,8 @@ import {
     GET_CATEGORY,
     GET_CURRENCIES,
     GET_FILES_TYPE,
-    GET_SALES_TYPE
+    GET_SALES_TYPE,
+    FILTER_CATEGORY
 } from "../actions";
 
 
@@ -127,6 +128,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 files_type: action.payload
+            }
+        case FILTER_CATEGORY:
+            return {
+                ...state,
+                nftquery: action.payload
             }
         default: return state
     };

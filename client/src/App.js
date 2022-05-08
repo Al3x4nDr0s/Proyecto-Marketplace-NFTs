@@ -8,7 +8,6 @@ import Header from "./components/Header/Header.jsx";
 import Home from "./components/Home/Home.jsx";
 import { ViewUser } from './components/ViewUser/ViewUser.jsx';
 import Login from './components/Auth/Login.jsx';
-import { DetailsNft } from './components/Home/elements/DetailsNft.jsx';
 import { Details } from './components/Details/Details.jsx';
 import { AllNft } from './components/Home/elements/AllNft/AllNft.jsx';
 // import PrivateRoute from './services/getPrivateRoute'

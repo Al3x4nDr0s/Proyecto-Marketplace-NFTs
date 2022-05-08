@@ -16,6 +16,7 @@ export const REMOVE_NFT_QUERY = 'REMOVE_NFT_QUERY';
 export const GET_ALL_COLLECTIONS = 'GET_ALL_COLLECTIONS';
 export const FILTER_NFT = 'FILTER_NFT';
 export const CREATE_NFT = 'CREATE_NFT';
+export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 
 
 
@@ -167,6 +168,32 @@ export const postNft = (tokenuser, item) => async dispatch => {
         console.log("error", error)
     }
 }
+
+export const filterForCategory = (id) => async dispatch => {
+    try {
+        const dataFilterCategory = await axios.get(`http://localhost:4000/filter/category/${id}`)
+        const finallyFilterCategory = await dispatch({
+            type: FILTER_CATEGORY,
+            payload: dataFilterCategory.data
+        })
+        return finallyFilterCategory
+    } catch (error) {
+        console.log("error", error)
+    }
+}
+
+// export const filterForCollections = (id) => async dispatch => {
+//     try {
+//         const dataFilterCategory = await axios.get(`http://localhost:4000/filter/category/${id}`)
+//         const finallyFilterCategory = await dispatch({
+//             type: FILTER_CATEGORY,
+//             payload: dataFilterCategory.data
+//         })
+//         return finallyFilterCategory
+//     } catch (error) {
+//         console.log("error", error)
+//     }
+// }
 
 export const modificacionUser = (id, item) => async dispatch => {
     try {

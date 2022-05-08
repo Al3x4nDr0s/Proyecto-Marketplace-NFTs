@@ -99,11 +99,11 @@ export const ViewNft = () => {
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        modules={[Navigation, Scrollbar, A11y]}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
         grabCursor={true}
         breakpoints={{
           320: {
@@ -166,7 +166,7 @@ export const ViewNft = () => {
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        modules={[Navigation, Scrollbar, A11y]}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -190,10 +190,10 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
       >
         {nft
           ?.filter((x) => x.category.name === "Sports")
@@ -231,7 +231,7 @@ export const ViewNft = () => {
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        modules={[Navigation, Scrollbar, A11y]}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -255,10 +255,10 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
       >
         {nft
           ?.filter((x) => x.category.name === "Entertainment")
@@ -296,7 +296,7 @@ export const ViewNft = () => {
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        modules={[Navigation, Scrollbar, A11y]}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -320,10 +320,10 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
       >
         {nft
           ?.filter((x) => x.category.name === "Art")
@@ -361,7 +361,7 @@ export const ViewNft = () => {
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
       <Swiper
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
+        modules={[Navigation, Scrollbar, A11y]}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -385,10 +385,10 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
       >
         {nft
           ?.filter((x) => x.category.name === "eSports")

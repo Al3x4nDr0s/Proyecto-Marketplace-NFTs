@@ -68,7 +68,7 @@ const getNftByCurrencies = async(req, res) => {
 
 const getNftBySalesTypes = async(req, res) => {
     const {id} = req.params;
-    catId = {"sales_types": id};
+    const catId = {"sales_types": id};
     try {
         const getBySalesTypes = await Nft.find(catId)
             .populate('category', { name:1, _id:0})
