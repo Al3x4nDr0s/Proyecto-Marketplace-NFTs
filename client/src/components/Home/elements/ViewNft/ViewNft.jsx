@@ -295,7 +295,7 @@ export const ViewNft = () => {
         </div>
         <Link to={`/nft`}>All NFT</Link>
       </ContainerTitleCategory>
-      <Swiper
+      <Swiper 
         modules={[Navigation, Scrollbar, A11y]}
         breakpoints={{
           320: {
