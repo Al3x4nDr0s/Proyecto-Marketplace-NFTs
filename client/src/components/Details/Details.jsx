@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import axios from 'axios';
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { HiShare } from "react-icons/hi";
 import { FcLike } from "react-icons/fc";
 import { IoIosArrowDown } from "react-icons/io";
@@ -12,51 +12,64 @@ import { BsFillSuitHeartFill } from "react-icons/bs";
 import { getAllNft } from "../../redux/actions";
 import Timer from "./Timer";
 
+
+
+const AuctionRequest = async(sales_type,)=>{
+    
+ 
+                      
+};
+
+
 export const Details = () => {
-  //const {img, image, name, price, id, category, files, currency, salestype, owner, imageCurrencies } =props;
+  console.log("Inicio");
   const location = useLocation();
+  const idNft = location.pathname.split("/")[2];
+  const cards = useSelector((state) => state.nfts);
+  const dispatch = useDispatch();
   const [like, setLike] = useState(false);
   const [infoTimer, setInfoTimer]=useState({startDate:'5/4/2022 18:58', finishDate:'5/9/2022 18:58'});
   const [timerEnabled, setTimerEnabled] = useState(false);
-  const [timerItems, setTimerItems] = useState({d:'',h:'', m:'', s:''})
-
+  const [timerItems, setTimerItems] = useState({d:'',h:'', m:'', s:''});
   
-  
-  console.log(location);
-  const id = location.pathname.split("/")[2];
-  const cards = useSelector((state) => state.nfts);
-  const dispatch = useDispatch();
-  const nft = cards.filter((item) => item._id === id);
+  const nft = cards.filter((item) => item._id === idNft);
   const [cantLikes, setCantLikes]= useState(nft[0].likes);
-  console.log("Nuevo Renderizado");
-  if((nft[0].sales_types.name==="Live Auction")&&(timerEnabled===false)){
-    
-   /*
+  
+  console.log(nft[0]._id);
+  console.log(nft[0].name);
+  
+  /*
+  if((nft[0].sales_types.name==="Live Auction"&&!timerEnabled)){
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-    const auction = axios.get(`http://localhost:4000/auction/${nft[0]._id}`)
+    axios.get(`http://localhost:4000/auction/${idNft}`)
                          .then(res=>{
-                           console.log(res.data);
-                           setInfoTimer({startDate: res.data.startDate, finishDate:res.data.finishDate});
+                           console.log(res.data[0]);
+                           setInfoTimer({startDate: res.data[0].startDate, finishDate:res.data[0].finishDate});
                            setTimerEnabled(true);
                           })  
     console.log("Nft con Subasta");
-    */ 
-    
-    /*
    
-      
-    */
-    
-  }
-  
+
+  } */
+
+  useEffect(()=>{
+    if((nft[0].sales_types.name==="Live Auction")){
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+      axios.get(`http://localhost:4000/auction/${idNft}`)
+                           .then(res=>{
+                             console.log(res.data[0]);
+                             setInfoTimer({startDate: res.data[0].startDate, finishDate:res.data[0].finishDate});
+                             setTimerEnabled(true);
+                            })  
+      console.log("Nft con Subasta");}
+},[]);
+
 
 useEffect(()=>{
     dispatch(getAllNft);
 },[like,cantLikes]);
 
   const handleClick=(e)=>{
-    
-    
     if(nft[0].hasOwnProperty('likes')){
      like?setCantLikes(cantLikes-1) :setCantLikes(cantLikes+1);
      console.log(cantLikes);
@@ -64,14 +77,11 @@ useEffect(()=>{
     axios.put(`http://localhost:4000/nft/${nft[0]._id}`,{likes:cantLikes})
     .then(res=>console.log(res.data));
     setLike(!like);
-
-    }
-    else{
-        setCantLikes(0);
-
-    }
-    
    }
+  }
+  
+  
+  
   
     
   return (
@@ -97,11 +107,7 @@ useEffect(()=>{
           <p>Owner</p>
           <p>{nft[0].details.owner.username}</p>
         </Row>
-        {/*<Row style={{justifyContent:'space-between'}}>
-      <p>Network</p>
-      <p>La atarraya</p>
-      </Row>
-    */}
+        
         <Row style={{ justifyContent: "space-between" }}>
           <p>Smart Contract</p>
           <p>{nft[0].details.contract_address}</p>
@@ -114,7 +120,7 @@ useEffect(()=>{
 
       <Column1>
         <Row>
-          <CollectionIcon src="https://public.nftstatic.com/static/nft/zipped/6a1d1afbc8654d64a8bbe6f8187a1f1e_zipped.png" />
+          <CollectionIcon src={nft[0].collection_nft?nft[0].collection_nft.image:"https://cdn-icons-png.flaticon.com/512/2088/2088090.png"} />
         {
          nft[0].hasOwnProperty('collection_nft')&&<h3>{nft[0].collection_nft.name}</h3>
 }
@@ -124,7 +130,7 @@ useEffect(()=>{
             <h1>{nft[0].name}</h1>
             <p>{nft[0].category.name}</p>
           </Title>
-          <LikeIcons  style={{ position:'absolute', top:'20%', left:'80%', padding:'0px', margin:'0px'}}>
+          <LikeIcons  style={{ position:'absolute', top:'23%', left:'80%', padding:'0px', margin:'0px'}}>
             <HiShare
               style={{ width: "25px", height: "25px", cursor: "pointer", padding:'0px'}}
             />
@@ -135,11 +141,11 @@ useEffect(()=>{
             />
           </LikeIcons>
         </Row>
-        <Row style={{position: 'absolute', top:'22%', left:'85%'}}>
+        <Row style={{position: 'absolute', top:'25%', left:'85%'}}>
          {nft[0].hasOwnProperty('likes')&&<p>{cantLikes}</p>
             }
         </Row>
-        <Row style={{ justifyContent: "left", gap: "65%" }}>
+        <Row style={{ justifyContent: "left", gap: "65%", marginBottom:"10px"}}>
           <p>Price</p>
         {nft[0].sales_types.name==="Live Auction"&&<p>Ends in</p>
         }
@@ -152,13 +158,16 @@ useEffect(()=>{
             />
             <h2>{nft[0].price}</h2>
           </Row>
+
           {nft[0].sales_types.name==="Live Auction"&& infoTimer.finishDate!==''&&
+         
           <Timer 
           startDate={infoTimer.startDate}
-           finishDate={infoTimer.finishDate}
-           setTimerItems = {setTimerItems}
+          finishDate={infoTimer.finishDate}
+          setTimerItems = {setTimerItems}
            />
           }
+          
         </Row>
 
         <Row style={{ gap: "15%", marginTop:'10px' }}>
@@ -168,22 +177,22 @@ useEffect(()=>{
         </Row>
 
         <Row>
-          <h3>Provenience</h3>
+          <h2 style={{ marginTop:"20px"}}>Provenience</h2>
         </Row>
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
-          <h5>Name</h5>
-          <h5>Action</h5>
-          <h5>Trade Price</h5>
-          <h5>Time</h5>
+        <Row style={{ justifyContent: "space-around", textAlign: "left", display:"flex", marginRight:"40px"}}>
+          <h3>Name</h3>
+          <h3>Action</h3>
+          <h3>Trade Price</h3>
+          <h3>Time</h3>
         </Row>
         <hr />
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
+        <Row style={{ justifyContent: "space-around", textAlign: "left", marginTop: "5px" , display:"flex"}}>
           <p>Usuario1</p>
           <p>Purchased</p>
           <p>30.5 USDT</p>
           <p>2022-01-04 14:30:04</p>
         </Row>
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
+        <Row style={{ justifyContent: "space-around", textAlign: "left", marginTop: "5px" , display:"flex"}}>
           <p>Usuario2</p>
           <p>Purchased</p>
           <p>25.8 USDT</p>
@@ -192,7 +201,9 @@ useEffect(()=>{
       </Column1>
     </DetailsContainer>
   );
-};
+
+          }
+              
 
 const DetailsContainer = styled.div`
   height: 100%;
@@ -237,12 +248,18 @@ const Row1 = styled.div`
 
 const Img = styled.div`
    background-image: url(${props => props.img});
-   background-size: 100%;
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   
    width: 400px;
    height: 400px;
    border-radius:8px;
    //background-color:${props=>props.color};
+   animation: animateDown infinite 1.5s;
 `;
+
+
 
 
 const ImgNft = styled.img`
@@ -252,8 +269,9 @@ const ImgNft = styled.img`
 `;
 
 const CollectionIcon = styled.img`
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius:50%;
 `;
 
 const Title = styled.div`
@@ -328,3 +346,5 @@ const Button1 = ({
     </StyledButton>
   );
 };
+
+

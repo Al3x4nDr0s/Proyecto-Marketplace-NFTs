@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-//const Timer = ({startDate, finishDate}) => {
+
 const Timer = ({startDate, finishDate ,setTimerItems} ) => {
     
-  //const startDate = '4/5/2022 18:58';
+  
   const dateTarget = new Date(finishDate);
   const now = new Date();
    

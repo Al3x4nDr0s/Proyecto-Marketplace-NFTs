@@ -19,7 +19,7 @@ const getAllAuction = async (req, res) => {
 
 const getAuctionByNftId = async (req, res) => {
     const { id } = req.params;
-    const auctionId = {"Nft": id};
+    const auctionId = {"idNft": id};
     try {
         const getAuction = await Auction.find(auctionId)
             .populate("ownerNft", {username:1, _id:0}) 
