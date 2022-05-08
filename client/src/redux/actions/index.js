@@ -18,6 +18,8 @@ export const FILTER_NFT = 'FILTER_NFT';
 export const CREATE_NFT = 'CREATE_NFT';
 export const CATEGORY_FILTER = 'CATEGORY_FILTER';
 export const CURRENCY_FILTER = 'CURRENCY_FILTER';
+export const SALES_FILTER = 'SALES_FILTER';
+export const FILE_FILTER = 'FILE_FILTER';
 
 
 
@@ -112,6 +114,7 @@ export const getCategory = () => async dispatch => {
         console.log('error:', error)
     }
 }
+
 export const filterByCategory = (id) => async dispatch => {
     try {
         const dataCategory = await axios.get('http://localhost:4000/filter/category/'+ id)
@@ -125,12 +128,38 @@ export const filterByCategory = (id) => async dispatch => {
         console.log('error:', error)
     }
 }
+export const filterBySaleWay = (id) => async dispatch => {
+    try {
+        const dataCategory = await axios.get('http://localhost:4000/filter/sales/'+ id)
+        console.log(dataCategory.data)
+        const finallyDataCategory = await dispatch({
+            type: SALES_FILTER,
+            payload: dataCategory.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
 export const filterByCurrencies = (id) => async dispatch => {
     try {
         const dataCurrencies = await axios.get('http://localhost:4000/filter/currencies/'+ id)
         console.log(dataCurrencies.data)
         const finallyDataCategory = await dispatch({
             type: CURRENCY_FILTER,
+            payload: dataCurrencies.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+export const filterByFileType = (id) => async dispatch => {
+    try {
+        const dataCurrencies = await axios.get('http://localhost:4000/filter/files/'+ id)
+        console.log(dataCurrencies.data)
+        const finallyDataCategory = await dispatch({
+            type: FILE_FILTER,
             payload: dataCurrencies.data
         })
         return finallyDataCategory

@@ -15,7 +15,9 @@ import {
     GET_FILES_TYPE,
     GET_SALES_TYPE,
     CATEGORY_FILTER,
-    CURRENCY_FILTER
+    CURRENCY_FILTER,
+    SALES_FILTER,
+    FILE_FILTER
 } from "../actions";
 
 
@@ -32,7 +34,7 @@ const initialState = {
     nft: {},
     category: [],
     sales_type: [],
-    files_type: [],
+    file_types: [],
     currencies: []
 };
 
@@ -43,6 +45,10 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_NFT:
             return { ...state, nfts: action.payload, copynft: action.payload }
         case CATEGORY_FILTER:
+            return { ...state, nftquery: action.payload }
+        case SALES_FILTER:
+            return { ...state, nftquery: action.payload }
+        case FILE_FILTER:
             return { ...state, nftquery: action.payload }
         case CURRENCY_FILTER:
             return { ...state, nftquery: action.payload }
@@ -126,7 +132,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_FILES_TYPE:
             return {
                 ...state,
-                files_type: action.payload
+                file_types: action.payload
             }
         default: return state
     };
