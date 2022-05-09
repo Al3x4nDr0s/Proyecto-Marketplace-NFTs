@@ -16,10 +16,7 @@
     "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
-<<<<<<< HEAD
-=======
     "react-infinite-scroller": "^1.2.6",
->>>>>>> e460be0cf4a4d0d54267f23ed707c6f5a30eb7ca
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
