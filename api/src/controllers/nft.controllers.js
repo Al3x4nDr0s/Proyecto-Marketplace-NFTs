@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Nft = require ('../models/Nft');
+
 const getAllNfts = async (req, res) => {
     try {
         //? si hay un parametro search, busca por ese parametro
@@ -301,17 +302,17 @@ const getAllNfts = async (req, res) => {
 const createNft = async (req, res) => {
     
     try {
-        const obj = {
-            ...req.body,
-            likes: 0
-        }
+        
+        const obj = { ...req.body, likes: 0 }
         const nft = new Nft(obj);
         await nft.save();
         res.status(200).json({
             ok: 'true',
             msg: 'NFT created'
         });
-    } catch (error) {
+
+    }
+    catch (error) {
         res.status(500).json({
             ok: 'false',
             msg: "Unexpected error"
