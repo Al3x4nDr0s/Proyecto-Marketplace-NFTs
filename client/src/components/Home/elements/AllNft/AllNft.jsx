@@ -4,6 +4,7 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../../Loading/Loading.jsx";
 import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
+import {IoIosSearch} from "react-icons/io";
 
 import { CardNft } from "../CardNft/CardNft.jsx";
 import CategoryFilter from "./filters/CategoryFilter.jsx";
@@ -33,7 +34,7 @@ const ContainerNft = styled.div`
 
 const ContainerFiltrosMain = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   gap: 20px;
   width: 80%;
@@ -44,6 +45,29 @@ const ContainerFiltrosMain = styled.div`
   margin: 0 auto 2rem auto;
   background-color: #46198f53;
   padding: 20px;
+
+  input{
+    background-color: var(--secondFontColor);
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    height: 25px;
+    width: auto;
+  }
+  button{
+    background-color: transparent;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    color: var(--secondFontColor);
+  }
+  .search-icon{
+    position: relative;
+    top: 4px;
+    height: 20px;
+    width: auto;
+    overflow: visible;
+  }
   select{
     outline: 0;
     box-shadow: none;
@@ -51,8 +75,9 @@ const ContainerFiltrosMain = styled.div`
     background-color: rgba(71, 17, 137, 1);
     color: var(--secondFontColor);
     border-radius: 10px;
-    padding: 6px;
+    padding: 10px;
     height: 70%;
+    width: 18%;
   }
 
   @media (max-width: 800px){
@@ -92,6 +117,7 @@ export const AllNft = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("")
 
   const instantCallback = useCallback(dispatch, [dispatch]);
 
@@ -110,7 +136,7 @@ export const AllNft = () => {
 
 
   console.log(token)
-
+  
   const fecthNft = () => {
     setTimeout(() => {
       if (hasMore) {
@@ -118,11 +144,18 @@ export const AllNft = () => {
       }
     }, 1500);
   };
-  
+  console.log(search)
   return (
     <div style={{marginTop: "7.5rem"}}>
 
       <ContainerFiltrosMain>
+          
+          <div>
+            <input type="text" onChange={(e)=>setSearch(e.target.value)}/>
+            <IoIosSearch className="search-icon"/>
+            
+          </div>
+
         
           <CurrenciesFilter className={"filters"}/>
 
