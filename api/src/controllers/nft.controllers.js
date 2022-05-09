@@ -264,7 +264,8 @@ const getAllNfts = async (req, res) => {
                         name: 1
                     },
                     collection_nft: {
-                        name: 1
+                        name: 1,
+                        image:1
                     },
                     currencies: {
                         name: 1,

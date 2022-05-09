@@ -1,77 +1,184 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import styled, { css } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import axios from 'axios';
+import styled, { css, keyframes } from "styled-components";
 import { HiShare } from "react-icons/hi";
 import { FcLike } from "react-icons/fc";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+
 import { SiEthereum } from "react-icons/si";
 import { BsFillSuitHeartFill } from "react-icons/bs";
+import { getAllNft } from "../../redux/actions";
+import Timer from "./Timer";
+import imgAudio from '../../assets/nft-audio.jpg';
+import imgVideo from '../../assets/azuki-nft.gif';
+import Metamask from './Metamask.jsx';
+
+
+
+const AuctionRequest = async(sales_type,)=>{
+    
+ 
+                      
+};
+
 
 export const Details = () => {
-  //const {img, image, name, price, id, category, files, currency, salestype, owner, imageCurrencies } =props;
+  console.log("Inicio");
   const location = useLocation();
-  const [like, setLike] = useState(false);
-  console.log(location);
-  const id = location.pathname.split("/")[2];
+  const idNft = location.pathname.split("/")[2];
   const cards = useSelector((state) => state.nfts);
-  const nft = cards.filter((item) => item._id === id);
-  console.log(nft[0].image)
-  
+  const dispatch = useDispatch();
+  const [like, setLike] = useState(false);
+  const [infoTimer, setInfoTimer]=useState({startDate:'', finishDate:''});
+  const [timerEnabled, setTimerEnabled] = useState(false);
+  const [timerItems, setTimerItems] = useState({d:'',h:'', m:'', s:''});
+  const [offers, setOffers]=useState([]);
+  const nft = cards.filter((item) => item._id === idNft);
+  const [cantLikes, setCantLikes]= useState(nft[0].likes);
+  const [errors, setErrors] = useState({auction:'false'});
+  const [visibledisabled, setVisibleEnabled] = useState({description:false, details:false });
+ 
 
-  console.log(nft);
+  // console.log(nft[0]._id);
+  // console.log(nft[0].name);
   
+  /*
+  if((nft[0].sales_types.name==="Live Auction"&&!timerEnabled)){
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+    axios.get(`http://localhost:4000/auction/${idNft}`)
+                         .then(res=>{
+                           console.log(res.data[0]);
+                           setInfoTimer({startDate: res.data[0].startDate, finishDate:res.data[0].finishDate});
+                           setTimerEnabled(true);
+                          })  
+    console.log("Nft con Subasta");
+   
+
+  } */
+
+  useEffect(()=>{
+    console.log("Entrando a UseEffect Auction");
+    console.log(nft[0].sales_types.name);
+    if((nft[0].sales_types.name==="Live Auction")){
+      console.log("Entrando a Auction");
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+      axios.get(`https://sevendevs-backend.herokuapp.com/offer/${idNft}`)
+     
+                          .then(res=>{
+                          console.log(res.data);
+                             if(res.data.getAuction.startDate&&res.data.getAuction.finishDate){
+                             setInfoTimer({startDate: res.data.getAuction.startDate, finishDate:res.data.getAuction.finishDate});
+                             setTimerEnabled(true);
+                             setOffers(res.data.offers)
+                            }
+                          }).catch((e)=>{
+                              console.log("Error: ", e.message)
+                              setErrors({...errors, auctions:true});
+                              setTimerEnabled(false);
+                            })  
+      }console.log("Nft no esta en Subasta");
+},[]);
+
+
+useEffect(()=>{
+    dispatch(getAllNft);
+},[like,cantLikes]);
+
   const handleClick=(e)=>{
-    e.preventDefault();
+    if(nft[0].hasOwnProperty('likes')){
+     like?setCantLikes(cantLikes-1) :setCantLikes(cantLikes+1);
+     console.log(cantLikes);
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+    axios.put(`https://sevendevs-backend.herokuapp.com/nft/${nft[0]._id}`,{likes:cantLikes})
+    .then(res=>console.log(res.data));
     setLike(!like);
-   // nft[0].hasOwnProperty('likes')?(
-   //    axios.put() 
-   // )
+   }
   }
   
+  const handleVisibleDescripcionClick =()=>{
+    setVisibleEnabled({...visibledisabled,description:!visibledisabled.description});
+    
+  };
+  const handleVisibleDetailsClick =()=>{
+    setVisibleEnabled({...visibledisabled,details:!visibledisabled.details});
+  };
+
+  const handlePayClick=()=>{
+    console.log("Entrando a Click");
+    return(
+    <Metamask />
+    )
+  };
+  
+ 
+ 
+
   return (
     <DetailsContainer>
       <Column>
-        <Img img={nft[0].image} color='blue'  />
+        <Row style={{ justifyContent: "center" }}>
+        {
+         nft[0].files_types.name==='Image'? <Img img={nft[0].image}   />
+         : nft[0].files_types.name==='Video'? <Img img={imgVideo}   />
+         : <Img img={imgAudio} />
+        
+        
+        }
+
+         {/*(<video width="400" height="400" controls autoplay='true'>
+         <source src={nft[0].image} type="video/mp4"/>
+        </video>)*/}
+        </Row>
          <Row style={{ justifyContent: "space-between" }}>
           <h2>Description</h2>
-          <IoIosArrowDown />
+          {visibledisabled.description?
+          <IoIosArrowUp onClick={handleVisibleDescripcionClick} style={{cursor:'pointer'}}/> 
+          :<IoIosArrowDown onClick={handleVisibleDescripcionClick} style={{cursor:'pointer'}}/>
+          
+        }
         </Row>
-        <Row style={{ textAlign: "justify" }}>
-          <p>{nft[0].description}</p>
-        </Row>
+        {visibledisabled.description&&<Row style={{ textAlign: "justify" }}>
+          <p style={{fontWeight:"lighter"}}>{nft[0].description}</p>
+        </Row>}
         <Row style={{ justifyContent: "space-between" }}>
           <h2>Details</h2>
-          <IoIosArrowDown />
-        </Row>
+          {visibledisabled.details?
+          <IoIosArrowUp onClick={handleVisibleDetailsClick} style={{cursor:'pointer'}}/>
+          :<IoIosArrowDown onClick={handleVisibleDetailsClick} style={{cursor:'pointer'}}/>
+          }
+          </Row>
+        
+        {visibledisabled.details&&<Column>
         <Row style={{ justifyContent: "space-between" }}>
           <p>Creator</p>
-          <p>{nft[0].details.user_creator.username}</p>
+          <p style={{fontWeight:"lighter"}}>{nft[0].details.user_creator.username}</p>
         </Row>
         <Row style={{ justifyContent: "space-between" }}>
           <p>Owner</p>
-          <p>{nft[0].details.owner.username}</p>
+          <p style={{fontWeight:"lighter"}}>{nft[0].details.owner.username}</p>
         </Row>
-        {/*<Row style={{justifyContent:'space-between'}}>
-      <p>Network</p>
-      <p>La atarraya</p>
-      </Row>
-    */}
         <Row style={{ justifyContent: "space-between" }}>
           <p>Smart Contract</p>
-          <p>{nft[0].details.contract_address}</p>
+          <p style={{fontSize:'12px', fontWeight:"lighter" }}>{nft[0].details.contract_address}</p>
         </Row>
         <Row style={{ justifyContent: "space-between" }}>
           <p>Token Id</p>
-          <p>{nft[0].details.token_id}</p>
+          <p style={{fontWeight:"lighter"}}>{nft[0].details.token_id}</p>
         </Row>
+        </Column>
+        }
+        
       </Column>
 
       <Column1>
         <Row>
-          <CollectionIcon src="https://public.nftstatic.com/static/nft/zipped/6a1d1afbc8654d64a8bbe6f8187a1f1e_zipped.png" />
+          <CollectionIcon src={nft[0].collection_nft?nft[0].collection_nft.image:"https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"} />
         {
-         nft[0].hasOwnProperty('collection_nft')&&<h3>{nft[0].collection_nft.name}</h3>
+         nft[0].hasOwnProperty('collection_nft')&&<h3 style={{ backgroundColor:"#46198fb3", marginLeft: '10px',padding: '2px 5px',border:'none', borderRadius:'5px'}}>{nft[0].collection_nft.name}</h3>
 }
         </Row>
         <Row style={{ justifyContent: "left", gap: "50%", marginBottom:'0px', padding: '0px' }}>
@@ -79,25 +186,27 @@ export const Details = () => {
             <h1>{nft[0].name}</h1>
             <p>{nft[0].category.name}</p>
           </Title>
-          <LikeIcons  style={{ position:'absolute', top:'20%', left:'80%', padding:'0px', margin:'0px'}}>
+          <LikeIcons  style={{ position:'absolute', top:'23%', left:'80%', padding:'0px', margin:'0px'}}>
             <HiShare
               style={{ width: "25px", height: "25px", cursor: "pointer", padding:'0px'}}
             />
             <BsFillSuitHeartFill
               onClick={handleClick}
-              color={like ? "grey" : "red"}
+              color={like ? "red" : "grey"}
               style={{ cursor: "pointer", width: "25px", height: "25px", padding:'0px' }}
             />
           </LikeIcons>
         </Row>
-        <Row style={{position: 'absolute', top:'22%', left:'85%'}}>
-         {nft[0].hasOwnProperty('likes')&&<p>{nft[0].likes}</p>}
+        <Row style={{position: 'absolute', top:'25%', left:'85%'}}>
+         {nft[0].hasOwnProperty('likes')&&<p>{cantLikes}</p>
+            }
         </Row>
-        <Row style={{ justifyContent: "left", gap: "65%" }}>
+        <Row style={{ justifyContent: "left", gap: "65%", marginBottom:"10px"}}>
           <p>Price</p>
-          <p>Ends in</p>
+        {nft[0].sales_types.name==="Live Auction"&&<p>Ends in</p>
+        }
         </Row>
-        <Row style={{ justifyContent: "left", gap: "53%" }}>
+        <Row style={{ justifyContent: "left", gap: "58%" }}>
           <Row>
             <img
               src={nft[0].currencies.image}
@@ -105,67 +214,90 @@ export const Details = () => {
             />
             <h2>{nft[0].price}</h2>
           </Row>
-          <p>
-            44 <small>days</small> 30 <small>hours</small> 15 <small>min</small>{" "}
-            00 <small>secs</small>
-          </p>
+
+          {
+          nft[0].sales_types.name==="Live Auction"&&timerEnabled&&
+          <Timer 
+          startDate={infoTimer.startDate}
+          finishDate={infoTimer.finishDate}
+          setTimerItems = {setTimerItems}
+           />
+          }
+          
         </Row>
 
-        <Row style={{ gap: "5%" }}>
-          <Button1 title="Buy Now" height="40px" width="100%"></Button1>
-          <Button1 title="Make Offer" height="40px" width="100%"></Button1>
+        <Row style={{ gap: "15%", marginTop:'10px' }}>
+          <Button1 title="Buy Now" height="45px" width="350px" onClick={handlePayClick}></Button1>
+          {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="45px" width="350px"></Button1>
+            }
         </Row>
 
         <Row>
-          <h3>Provenience</h3>
-        </Row>
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
-          <h5>Name</h5>
-          <h5>Action</h5>
-          <h5>Trade Price</h5>
-          <h5>Time</h5>
+          <h2 style={{ marginTop:"20px"}}>Provenience</h2>
         </Row>
         <hr />
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
-          <p>Usuario1</p>
-          <p>Purchased</p>
-          <p>30.5 USDT</p>
-          <p>2022-01-04 14:30:04</p>
-        </Row>
-        <Row style={{ justifyContent: "space-around", textAlign: "left" }}>
-          <p>Usuario2</p>
-          <p>Purchased</p>
-          <p>25.8 USDT</p>
-          <p>2022-01-04 14:30:04</p>
-        </Row>
+        <table style={{color:'white', textAlign:'center', fontWeight:"lighter"}}>
+            
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+          <th>Trade Price</th>
+          <th>Timerade Price</th>
+        </tr>
+
+       {/* </Row> */}
+
+
+        { offers.length>0&&offers.map(el=> (
+         
+        <tr>
+          <td>{el.idUser.username}</td>
+          <td>Offered</td>
+          <td>{el.amount} {el.currency.name}</td>
+          <td>{el.create_date}</td>
+        </tr>
+
+        
+        
+
+      ))}
+       </table>
       </Column1>
     </DetailsContainer>
   );
-};
+
+          }
+              
 
 const DetailsContainer = styled.div`
   height: 100%;
   width: 100%;
-  margin-top: 7.5rem;
+  /* margin-top: 7.5rem; */
+  /* margin-bottom: 7.5rem; */
+  /* margin: 7.5rem auto  auto; */
   display: flex;
   flex-direction: row;
-
-  justify-content: space-around;
+  justify-content: space-evenly;
+  padding-left: 2%;
+    
 `;
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 29%;
   color: white;
+  flex-wrap: wrap;
+  
 `;
 
 const Column1 = styled.div`
   display: flex;
   flex-direction: column;
   height: 15%;
-  width: 50%;
-`;
+  width: 60%;
+  
+ `;
 
 const Row = styled.div`
   display: flex;
@@ -173,24 +305,22 @@ const Row = styled.div`
   align-items: center;
   gap: 5px;
   color: white;
-`;
-const Row1 = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  
 
-  color: white;
-`;
+  `;
 
 const Img = styled.div`
    background-image: url(${props => props.img});
-   background-size: 100%;
-   width: 500px;
-   height: 500px;
-   border-radius:5px;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   //background-size:100%;
+   width: 380px;
+   height: 380px;
+   border-radius:8px;
    //background-color:${props=>props.color};
+   //animation: animateDown infinite 1.5s;
 `;
-
 
 const ImgNft = styled.img`
   height: 30%;
@@ -199,8 +329,9 @@ const ImgNft = styled.img`
 `;
 
 const CollectionIcon = styled.img`
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius:50%;
 `;
 
 const Title = styled.div`
@@ -275,3 +406,5 @@ const Button1 = ({
     </StyledButton>
   );
 };
+
+
