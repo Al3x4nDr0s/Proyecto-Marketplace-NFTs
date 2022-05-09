@@ -199,6 +199,35 @@ export const removeUser = () => dispatch => {
         payload: {}
     })
 }
+export function deleteCategory(id) {
+    return async function () {
+      try {
+         await axios.delete("http://localhost:4000/category" + id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+  export function deleteNFT(ids) {
+    return function () {
+      try {
+        ids.map((id) => axios.delete("http://localhost:4000/nft/" + id));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  
+  export function deleteUser(id) {
+    return function () {
+      try {
+       axios.delete("http://localhost:4000/users/" + id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  } 
 
 
 // export const getNft = (id) => dispatch => {
