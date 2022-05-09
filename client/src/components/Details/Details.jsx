@@ -66,7 +66,7 @@ export const Details = () => {
     if((nft[0].sales_types.name==="Live Auction")){
       console.log("Entrando a Auction");
       axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-      axios.get(`http://localhost:4000/offer/${idNft}`)
+      axios.get(`https://sevendevs-backend.herokuapp.com/offer/${idNft}`)
      
                           .then(res=>{
                           console.log(res.data);
@@ -93,7 +93,7 @@ useEffect(()=>{
      like?setCantLikes(cantLikes-1) :setCantLikes(cantLikes+1);
      console.log(cantLikes);
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-    axios.put(`http://localhost:4000/nft/${nft[0]._id}`,{likes:cantLikes})
+    axios.put(`https://sevendevs-backend.herokuapp.com/nft/${nft[0]._id}`,{likes:cantLikes})
     .then(res=>console.log(res.data));
     setLike(!like);
    }
