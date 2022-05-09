@@ -116,6 +116,13 @@ export const Register = () => {
     e.preventDefault();
     axios
       .post("http://localhost:4000/users/", input)
+<<<<<<< HEAD
+=======
+      .then((res) =>{
+        console.log(res)
+        navigate("/home")
+      })
+>>>>>>> e460be0cf4a4d0d54267f23ed707c6f5a30eb7ca
       .then((res) => {navigate("/home")
       Toast.fire({
         icon: "success",
