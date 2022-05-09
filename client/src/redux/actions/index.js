@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const SET_MODAL = 'SET_MODAL';
 export const SET_RESIZE = 'SET_RESIZE';
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_ALL_NFT = 'GET_ALL_NFT';
 export const GET_NFT_QUERY = 'GET_NFT_QUERY';
@@ -221,8 +222,20 @@ export const postNft = (tokenuser, item) => async dispatch => {
             type: CREATE_NFT,
             payload: dataPost.data
         })
-        console.log(dataPost.data)
         return responsePost
+    } catch (error) {
+        console.log("error", error)
+    }
+}
+
+export const postCategory = (item) => async dispatch => {
+    try {
+        const dataPostCategory = await axios.post(`http://localhost:4000/misc/category`, item)
+        const respDataPostCategory = await dispatch({
+            type: CREATE_CATEGORY,
+            payload: dataPostCategory
+        })
+        return respDataPostCategory
     } catch (error) {
         console.log("error", error)
     }

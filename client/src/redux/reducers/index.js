@@ -18,7 +18,8 @@ import {
     CATEGORY_FILTER,
     CURRENCY_FILTER,
     SALES_FILTER,
-    FILE_FILTER
+    FILE_FILTER,
+    CREATE_CATEGORY
 } from "../actions";
 
 
@@ -76,6 +77,7 @@ const rootReducer = (state = initialState, action) => {
                 collections: action.payload
             }
         case FILTER_NFT:
+            //  nfts[0].collection_nft.name //collections[0].name
             const nftsAll = state.nfts
 
             const filters = nftsAll.filter(n => n.collection_nft && n.collection_nft.name === action.payload)
@@ -113,6 +115,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ntfs: [...state.nfts, action.payload]
+            }
+        case CREATE_CATEGORY:
+            return {
+                ...state,
+                category: [...state.category, action.payload]
             }
         case GET_CATEGORY:
             return {
