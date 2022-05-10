@@ -7,10 +7,13 @@ import { getTokenUser, removeUser } from "../../redux/actions/index";
 import Button from "../shared/Button";
 import { IoIosLogOut } from "react-icons/io";
 import { FaUserCircle, FaInfoCircle, FaBuffer } from "react-icons/fa";
+import Logo from "../../assets/logo.png";
 
 import Swal from "sweetalert2";
 
-import "./header.css";
+import 'sweetalert2/dist/sweetalert2.css'
+
+import styles from './Header.module.css';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -19,8 +22,6 @@ const StyledNav = styled.nav`
   top: 0;
   left: 0;
   z-index: 1000;
-  /* backdrop-filter: blur(2px); */
-  /* backdrop-filter: saturate(100%); */
   align-items: center;
   background-color: #46198f47;
   justify-content: space-between;
@@ -109,19 +110,62 @@ function Header() {
   return (
     <StyledNav>
       <LogoContainer onClick={(e) => handleLogoClick(e)}>
-        <img src={require("../../assets/logo.png")} alt="not found" />
+        <img src={Logo} alt="not found" />
       </LogoContainer>
-      {jwt ? (
+      {(jwt && userData?.user_type?.name === "admin") ? (
+         <>
+         <div className={`${styles.navigation} ${isActive ? `${styles.active}` : ""}`}>
+           <div className={styles.userBox}>
+             <div className={styles.imageBox}>
+               <img src={userData.image} alt="foto-1" />
+             </div>
+             <p className={styles.username}>{userData.username}</p>
+           </div>
+           <div className={styles.menuToggle} onClick={(e) => handleClick(e)}>
+             <ul className={styles.menu}>
+               <li>
+                 <ContainerItemsMenu>
+                   <FaUserCircle style={{ width: "22px", height: "42px" }} />
+                   <Link to={`/admin`}>Admin</Link>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                   <FaInfoCircle style={{ width: "22px", height: "42px" }} />
+                   <a href="#">About</a>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                 <FaBuffer style={{ width: "22px", height: "42px" }} />
+                   <Link to={"/home/collections/"} style={{marginLeft: "1rem"}}>Collections</Link>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                   <IoIosLogOut style={{ width: "22px", height: "42px" }} />
+                   <Link to="/home" onClick={handleLogout}>
+                     Logout
+                   </Link>
+                 </ContainerItemsMenu>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </>
+      ) 
+      : jwt 
+      ? (
         <>
-          <div className={`navigation ${isActive ? "active" : ""}`}>
-            <div className="user-box">
-              <div className="image-box">
+          <div className={`${styles.navigation} ${isActive ? `${styles.active}` : ""}`}>
+            <div className={styles.userBox}>
+              <div className={styles.imageBox}>
                 <img src={userData.image} alt="foto-1" />
               </div>
-              <p className="username">{userData.username}</p>
+              <p className={styles.username}>{userData.username}</p>
             </div>
-            <div className="menu-toggle" onClick={(e) => handleClick(e)}>
-              <ul className="menu">
+            <div className={styles.menuToggle} onClick={(e) => handleClick(e)}>
+              <ul className={styles.menu}>
                 <li>
                   <ContainerItemsMenu>
                     <FaUserCircle style={{ width: "22px", height: "42px" }} />

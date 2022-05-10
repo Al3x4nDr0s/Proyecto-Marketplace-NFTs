@@ -19,7 +19,11 @@ import {
     CURRENCY_FILTER,
     SALES_FILTER,
     FILE_FILTER,
-    CREATE_CATEGORY
+    CREATE_CATEGORY,
+    GET_USERS,
+    DELETE_NFT,
+    CREATE_CURRENCIES,
+    CREATE_SALES_TYPES
 } from "../actions";
 
 
@@ -32,11 +36,12 @@ const initialState = {
     isLogged: false,
     user: {},
     collections: [],
+    users: [],
     filterNfts: [],
     nft: {},
     category: [],
     sales_type: [],
-    file_types: [],
+    files_type: [],
     currencies: []
 };
 
@@ -70,6 +75,26 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 hasMore: setHasMore,
                 nftquery: state.hasMore !== true ? state.nftquery : unionPrueba
+            }
+        case DELETE_NFT:
+            return {
+                ...state,
+                // nft: action.payload
+            }
+        case CREATE_CURRENCIES:
+            return {
+                ...state,
+                currencies: [...state.currencies, action.payload]
+            }
+        case CREATE_SALES_TYPES:
+            return {
+                ...state,
+                sales_type: [...state.sales_type, action.payload]
+            }
+        case GET_USERS:
+            return {
+                ...state,
+                users: action.payload.users
             }
         case GET_ALL_COLLECTIONS:
             return {

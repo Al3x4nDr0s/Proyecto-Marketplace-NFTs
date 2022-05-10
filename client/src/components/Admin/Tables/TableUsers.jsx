@@ -122,7 +122,7 @@ export const TableUsers = (props) => {
         id={number}
         name={number}
         value={number}
-        onClick={(e) => handleClickPageNumbers(e.target.value)}
+        // onClick={(e) => handleClickPageNumbers(e.target.value)}
         className={currentPage.user === number ? "active" : null}
         style={{ cursor: "pointer" }}
       >
