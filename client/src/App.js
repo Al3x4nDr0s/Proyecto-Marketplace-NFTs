@@ -10,7 +10,7 @@ import Home from "./components/Home/Home.jsx";
 import { ViewUser } from './components/ViewUser/ViewUser.jsx';
 import Login from './components/Auth/Login.jsx';
 import {Details} from './components/Details/Details.jsx';
-import {AllNft} from './components/Home/elements/AllNft.jsx';
+import {AllNft} from './components/Home/elements/AllNft/AllNft.jsx';
 import { Admin } from "./components/Admin/Admin.jsx";
 import { Register } from './components/Register/Register.jsx';
 import Collections from './components/Collections/Collections.jsx';
