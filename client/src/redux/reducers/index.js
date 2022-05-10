@@ -17,7 +17,8 @@ import {
     CATEGORY_FILTER,
     CURRENCY_FILTER,
     SALES_FILTER,
-    FILE_FILTER
+    FILE_FILTER,
+    SEARCHBAR_FILTER
 } from "../actions";
 
 
@@ -51,6 +52,8 @@ const rootReducer = (state = initialState, action) => {
         case FILE_FILTER:
             return { ...state, nftquery: action.payload }
         case CURRENCY_FILTER:
+            return { ...state, nftquery: action.payload }
+        case SEARCHBAR_FILTER:
             return { ...state, nftquery: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }

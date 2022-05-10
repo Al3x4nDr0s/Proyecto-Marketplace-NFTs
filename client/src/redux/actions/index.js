@@ -20,6 +20,7 @@ export const CATEGORY_FILTER = 'CATEGORY_FILTER';
 export const CURRENCY_FILTER = 'CURRENCY_FILTER';
 export const SALES_FILTER = 'SALES_FILTER';
 export const FILE_FILTER = 'FILE_FILTER';
+export const SEARCHBAR_FILTER = 'SEARCHBAR_FILTER';
 
 
 
@@ -118,7 +119,6 @@ export const getCategory = () => async dispatch => {
 export const filterByCategory = (id) => async dispatch => {
     try {
         const dataCategory = await axios.get('http://localhost:4000/filter/category/'+ id)
-        console.log(dataCategory.data)
         const finallyDataCategory = await dispatch({
             type: CATEGORY_FILTER,
             payload: dataCategory.data
@@ -131,7 +131,6 @@ export const filterByCategory = (id) => async dispatch => {
 export const filterBySaleWay = (id) => async dispatch => {
     try {
         const dataCategory = await axios.get('http://localhost:4000/filter/sales/'+ id)
-        console.log(dataCategory.data)
         const finallyDataCategory = await dispatch({
             type: SALES_FILTER,
             payload: dataCategory.data
@@ -144,7 +143,6 @@ export const filterBySaleWay = (id) => async dispatch => {
 export const filterByCurrencies = (id) => async dispatch => {
     try {
         const dataCurrencies = await axios.get('http://localhost:4000/filter/currencies/'+ id)
-        console.log(dataCurrencies.data)
         const finallyDataCategory = await dispatch({
             type: CURRENCY_FILTER,
             payload: dataCurrencies.data
@@ -157,10 +155,21 @@ export const filterByCurrencies = (id) => async dispatch => {
 export const filterByFileType = (id) => async dispatch => {
     try {
         const dataCurrencies = await axios.get('http://localhost:4000/filter/files/'+ id)
-        console.log(dataCurrencies.data)
         const finallyDataCategory = await dispatch({
             type: FILE_FILTER,
             payload: dataCurrencies.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+export const searchBarFilter = (name) => async dispatch => {
+    try {
+        const dataCurrencies = await axios.get('http://localhost:4000/nft?search=' + name)
+        const finallyDataCategory = await dispatch({
+            type: SEARCHBAR_FILTER,
+            payload: dataCurrencies.data.nfts
         })
         return finallyDataCategory
     } catch (error) {

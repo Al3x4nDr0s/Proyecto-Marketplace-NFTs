@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../../Loading/Loading.jsx";
-import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
+import { getNftQuery, removeNftQuery, searchBarFilter } from "../../../../redux/actions/index";
 import {IoIosSearch} from "react-icons/io";
 
 import { CardNft } from "../CardNft/CardNft.jsx";
@@ -48,11 +48,12 @@ const ContainerFiltrosMain = styled.div`
 
   input{
     background-color: var(--secondFontColor);
+    padding: 10px;
     border-radius: .3rem;
     outline: none;
     border: none;
     height: 25px;
-    width: auto;
+    width: 80%;
   }
   button{
     background-color: transparent;
@@ -65,8 +66,10 @@ const ContainerFiltrosMain = styled.div`
     position: relative;
     top: 4px;
     height: 20px;
-    width: auto;
+    width: 20%;
     overflow: visible;
+    color:var(--secondFontColor);
+    cursor: pointer;
   }
   select{
     outline: 0;
@@ -77,7 +80,7 @@ const ContainerFiltrosMain = styled.div`
     border-radius: 10px;
     padding: 10px;
     height: 70%;
-    width: 18%;
+    width: 15%;
   }
 
   @media (max-width: 800px){
@@ -86,13 +89,24 @@ const ContainerFiltrosMain = styled.div`
     gap: 20px;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: 400px;
     padding: 30px;
     
     select{
       width: 100%;
     }
+    .searchbar-container{
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
+    input{
+      width: 90%;
+    }
+    .search-icon{
+      width: 10%;
+    }
   }
   
   
@@ -121,6 +135,12 @@ export const AllNft = () => {
 
   const instantCallback = useCallback(dispatch, [dispatch]);
 
+  function handleInputSearch(e){
+    const value = e.target.value
+    setSearch(value)
+    if(value === "")fecthNft()
+    else dispatch(searchBarFilter(search))
+  }
   useEffect(() => {
     instantCallback(getNftQuery(page))
     return () => {
@@ -136,7 +156,7 @@ export const AllNft = () => {
 
 
   console.log(token)
-  
+  console.log(search)
   const fecthNft = () => {
     setTimeout(() => {
       if (hasMore) {
@@ -144,14 +164,13 @@ export const AllNft = () => {
       }
     }, 1500);
   };
-  console.log(search)
   return (
     <div style={{marginTop: "7.5rem"}}>
 
       <ContainerFiltrosMain>
           
-          <div>
-            <input type="text" onChange={(e)=>setSearch(e.target.value)}/>
+          <div className="searchbar-container">
+            <input placeholder="Search..." value={search}  onChange={(e)=>handleInputSearch(e)} type="text" />
             <IoIosSearch className="search-icon"/>
             
           </div>
