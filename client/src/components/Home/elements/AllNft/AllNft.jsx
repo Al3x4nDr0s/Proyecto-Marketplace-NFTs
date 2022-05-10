@@ -69,8 +69,8 @@ const ContainerFiltrosMain = styled.div`
     width: 20%;
     overflow: visible;
     color:var(--secondFontColor);
-    cursor: pointer;
   }
+  
   select{
     outline: 0;
     box-shadow: none;
