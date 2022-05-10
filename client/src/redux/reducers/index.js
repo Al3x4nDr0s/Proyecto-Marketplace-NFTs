@@ -36,11 +36,12 @@ const initialState = {
     isLogged: false,
     user: {},
     collections: [],
+    users: [],
     filterNfts: [],
     nft: {},
     category: [],
     sales_type: [],
-    file_types: [],
+    files_type: [],
     currencies: []
 };
 

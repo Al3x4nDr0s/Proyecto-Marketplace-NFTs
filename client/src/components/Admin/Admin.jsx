@@ -94,6 +94,9 @@ export const Admin = () => {
     dispatch(deleteNft(token, id));
   };
 
+
+  console.log(users)
+
   // const handlenNext = (e) => {
   //   e.preventDefault();
   //   console.log(e.target.name)
