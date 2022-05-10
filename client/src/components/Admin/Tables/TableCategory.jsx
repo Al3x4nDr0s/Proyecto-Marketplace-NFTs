@@ -127,7 +127,7 @@ export const TableCategory = (props) => {
               <i className="fas fa-edit"></i>
             </Link>
           </ContainerButtonEditar>
-          <ButtonEliminar onClick={() => handelRemoveNft(x._id)}>
+          <ButtonEliminar onClick={() => console.log("se removio")}>
             <i className="fas fa-trash-alt" style={{ color: "#fff" }}></i>
           </ButtonEliminar>
         </td>
@@ -142,7 +142,7 @@ export const TableCategory = (props) => {
         id={number}
         name={number}
         value={number}
-        onClick={(e) => handleClickPageNumbers(e.target.value)}
+        // onClick={(e) => handleClickPageNumbers(e.target.value)}
         className={
           currentPage.category === number ? "active" : null
         }

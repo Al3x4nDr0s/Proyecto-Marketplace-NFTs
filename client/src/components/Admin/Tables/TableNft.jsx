@@ -4,12 +4,9 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import {PostSalesTypes} from "../../../redux/actions"
-import { useDispatch } from "react-redux";
+import imagenvideo from "../../../assets/azuki-nft.gif";
 
-import Swal from "sweetalert2";
-
-import "sweetalert2/dist/sweetalert2.css";
+import imagenaudio from "../../../assets/nft-audio.jpg";
 
 const ContainerPagination = styled.div`
   margin: 0 auto;
@@ -97,55 +94,32 @@ const ListTable = styled.li`
   border: 1px solid #22a5a757;
 `;
 
-export const TableSaleTypes = (props) => {
-  const { currentPage, itemsPerPage, setCurrentPage, sales } = props;
-  const pagesSaleTypes = []; //? pages for sales
+export const TableNft = (props) => {
+  const { currentPage, setCurrentPage, nft, itemsPerPage } = props;
 
-  const dispatch = useDispatch();
-
-  //? Paginado por sales types
-  for (let i = 1; i <= Math.ceil(sales.length / itemsPerPage); i++) {
-    pagesSaleTypes.push(i);
+  const pagesNft = []; //? pages for nft
+  //? Paginado por nft
+  for (let i = 1; i <= Math.ceil(nft.length / itemsPerPage); i++) {
+    pagesNft.push(i);
   }
 
-  const indexOfLastItemSales = currentPage.salesType * itemsPerPage; //? index last of sales type
-  const indexOfFirstItemSales = indexOfLastItemSales - itemsPerPage; //? index first of sales type
+  const handleClickPageNumbers = (number) => {
+    setCurrentPage({
+      ...currentPage,
+      nft: number,
+    });
+  };
 
-  const currentItemsSaleTypes = sales.slice(
-    indexOfFirstItemSales,
-    indexOfLastItemSales
-  ); //? items per sales type
-
-  const handleRenderTableSales = currentItemsSaleTypes?.map((x, i) => {
-    return (
-      <tr key={i} style={{ color: "white", marginBottom: ".2rem" }}>
-        <td> {x._id}</td>
-        <td> {x.name}</td>
-        <td style={{ display: "flex", justifyContent: "space-evenly" }}>
-          <ContainerButtonEditar>
-            <Link to={`/edit/${x._id}`} style={{ color: "#fff" }}>
-              <i className="fas fa-edit"></i>
-            </Link>
-          </ContainerButtonEditar>
-          <ButtonEliminar onClick={() => console.log('en construccion')}>
-            <i className="fas fa-trash-alt" style={{ color: "#fff" }}></i>
-          </ButtonEliminar>
-        </td>
-      </tr>
-    );
-  });
-
-  const renderPageNumberSales = pagesSaleTypes.map((number) => {
+  const renderPageNumberNft = pagesNft.map((number) => {
+    console.log(number);
     return (
       <ListTable
         key={number}
         id={number}
         name={number}
         value={number}
-        // onClick={(e) => handleClickPageNumbers(e.target.value)}
-        className={
-          currentPage.salesType === number ? "active" : null
-        }
+        onClick={(e) => handleClickPageNumbers(e.target.value)}
+        className={currentPage.nft === number ? "active" : null}
         style={{ cursor: "pointer" }}
       >
         <span>{number}</span>
@@ -153,76 +127,114 @@ export const TableSaleTypes = (props) => {
     );
   });
 
-  const handlenNext = (e) => {
-    e.preventDefault();
-    setCurrentPage({
-      ...currentPage,
-      salesType: currentPage.salesType + 1,
-    });
-  };
+  const indexOfLastItemNft = currentPage.nft * itemsPerPage; //? valor = 9 , index last of nft
+  const indexOfFirstItemNft = indexOfLastItemNft - itemsPerPage; //? valor = 0 , index first of nft
 
-  const handlenPrev = (e) => {
+  const currentItemsNft = nft.slice(indexOfFirstItemNft, indexOfLastItemNft); //? items per nfts
+
+  // const handlePhoto = () => {
+  //   if (x.files_types.name === "Image") {
+  //     return `${x.image}`;
+  //   }
+  //   if (x.files_types.name === "Video") {
+  //     return `${imagenvideo}`;
+  //   }
+  //   if (x.file_types.name === "Audio") {
+  //     return `${imagenaudio}`;
+  //   }
+  // };
+
+  const handleRenderTableNft = currentItemsNft?.map((x, i) => {
+    return (
+      <tr key={i} style={{ color: "white", marginBottom: ".2rem" }}>
+        <td> {x.name}</td>
+        <td>
+          {x.image ? (
+            <img
+              src={
+                x.files_types.name === "Image"
+                  ? x.image
+                  : x.files_types.name === "Video"
+                  ? imagenvideo
+                  : x.files_types.name === "Audio"
+                  ? imagenaudio
+                  : null
+              }
+              style={{ width: "55px", height: "52px" }}
+            />
+          ) : (
+            "S/N"
+          )}
+        </td>
+        <td>{x.files_types.name}</td>
+        <td>{x.description}</td>
+        <td>{x.category.name}</td>
+        <td>{x.sales_types.name}</td>
+        <td>{x.details.user_creator.username}</td>
+        <td>{x.details.owner.username}</td>
+        <td style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <ContainerButtonEditar>
+            <Link to={`/edit/${x._id}`} style={{ color: "#fff" }}>
+              <i className="fas fa-edit"></i>
+            </Link>
+          </ContainerButtonEditar>
+          <ButtonEliminar onClick={() => console.log("entro")}>
+            <i className="fas fa-trash-alt" style={{ color: "#fff" }}></i>
+          </ButtonEliminar>
+        </td>
+      </tr>
+    );
+  });
+
+  const handlenNext = (e) => {
     e.preventDefault();
     // const valueName = e.target.name
     setCurrentPage({
       ...currentPage,
-      salesType: currentPage.salesType - 1,
+      nft: currentPage.nft + 1,
     });
   };
 
-  const handleCreateSales = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: "Escribe el nuevo tipo de venta",
-      html: '<input id="swal-input1" class="swal2-input" placeholder="nuevo sale types ..."><div id="recaptcha"></div>',
-      focusConfirm: false,
-      color: "var(--secondFontColor)",
-      background: "#46198fb3",
-      showCancelButton: true,
-      preConfirm: () => {
-        const valores = document.getElementById("swal-input1").value;
-        return {
-          name: valores,
-        };
-      },
-    });
+  const handlePrev = (e) => {
+    e.preventDefault();
 
-    if (formValues) {
-      Swal.fire({
-        title: "Este es tu nuevo tipo de venta",
-        text: `${formValues.name}`,
-      });
-      setTimeout(() => {
-        dispatch(PostSalesTypes(formValues));
-      }, 2500);
-    }
+    setCurrentPage({
+      ...currentPage,
+      nft: currentPage.nft - 1,
+    });
   };
 
-  //? postSales
-
-  console.log(sales)
+  // console.log(currentPage.nft)
 
   return (
     <>
       <div>
-        <h2 style={{ borderBottom: "1px solid #fff" }}>Sales Types</h2>
+        <h1 style={{ textAlign: "center", fontWeight: "bold" }}>Tables</h1>
+        <h2 style={{ borderBottom: "1px solid #fff" }}>All NFT</h2>
         <ContainerNavTable>
           <RowNavTable>
             <ColNavTable>
-              <ButtonAgregar onClick={() => handleCreateSales()}>
-                {/* <button to="/admin/create" style={{ color: "#fff" }}> */}
+              <ButtonAgregar>
+                <Link to="/admin/create" style={{ color: "#fff" }}>
                   <i className="fas fa-plus"></i>
-                {/* </button> */}
+                </Link>
               </ButtonAgregar>
               <Link to="/"></Link>
               <ContainerTable>
                 <thead className="tableTheadBg">
                   <tr>
-                    <th>Id</th>
-                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Files</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Sales</th>
+                    <th>Creator</th>
+                    <th>Owner</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>{handleRenderTableSales}</tbody>
+                <tbody>{handleRenderTableNft}</tbody>
               </ContainerTable>
             </ColNavTable>
           </RowNavTable>
@@ -236,11 +248,9 @@ export const TableSaleTypes = (props) => {
           <ContainerPaginationTable>
             <li>
               <ButtonPrevAndNext
-                onClick={handlenPrev}
-                name="salesType"
-                disabled={
-                  currentPage.salesType === pagesSaleTypes[0] ? true : false
-                }
+                onClick={handlePrev}
+                name="nft"
+                disabled={currentPage.nft === pagesNft[0] ? true : false}
                 aria-label="Previus"
                 style={{ cursor: "pointer" }}
               >
@@ -249,14 +259,13 @@ export const TableSaleTypes = (props) => {
                 </span>
               </ButtonPrevAndNext>
             </li>
-            {renderPageNumberSales}
+            {renderPageNumberNft}
             <li>
               <ButtonPrevAndNext
                 onClick={handlenNext}
-                name="category"
+                name="nft"
                 disabled={
-                  currentPage.salesType ===
-                  pagesSaleTypes[pagesSaleTypes.length - 1]
+                  currentPage.nft === pagesNft[pagesNft.length - 1]
                     ? true
                     : false
                 }

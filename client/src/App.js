@@ -1,24 +1,25 @@
-import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom"
+import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer/Footer.jsx";
 
-import { CreateNft } from './components/CreateNft/CreateNft.jsx';
+import { CreateNft } from "./components/CreateNft/CreateNft.jsx";
 import { CreateNftAdmin } from "./components/Admin/Tables/CreateNftAdmin.jsx";
 // import NavBar from './components/Header/Header.jsx';
 import Header from "./components/Header/Header.jsx";
 import Home from "./components/Home/Home.jsx";
-import { ViewUser } from './components/ViewUser/ViewUser.jsx';
-import Login from './components/Auth/Login.jsx';
-import {Details} from './components/Details/Details.jsx';
-import {AllNft} from './components/Home/elements/AllNft.jsx';
+import { ViewUser } from "./components/ViewUser/ViewUser.jsx";
+import Login from "./components/Auth/Login.jsx";
+import { Details } from "./components/Details/Details.jsx";
+import { AllNft } from "./components/Home/elements/AllNft/AllNft.jsx";
+// import PrivateRoute from './services/getPrivateRoute'
+import { Register } from "./components/Register/Register.jsx";
+import Collections from "./components/Collections/Collections.jsx";
 import { Admin } from "./components/Admin/Admin.jsx";
-import { Register } from './components/Register/Register.jsx';
-import Collections from './components/Collections/Collections.jsx';
-import CardNftCollection from './components/Collections/CardNftCollection.jsx';
-import './App.css';
+import CardNftCollection from "./components/Collections/CardNftCollection.jsx";
+import "./App.css";
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 import { useSelector } from "react-redux";
-
+import { useEffect } from "react";
 function MainLayout() {
   return (
     <div>
@@ -26,13 +27,14 @@ function MainLayout() {
       <Outlet />
       <Footer />
     </div>
-  )
+  );
 }
 
 function App() {
-
-  const logged = useSelector(state => state.isLogged)
+  const logged = useSelector((state) => state.isLogged);
   const user = useSelector((state) => state.user);
+
+  // const usertype = user.user_type.name;
 
   return (
     <div className="App">

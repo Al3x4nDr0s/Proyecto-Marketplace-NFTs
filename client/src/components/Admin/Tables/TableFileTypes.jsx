@@ -143,7 +143,7 @@ export const TableFileTypes = (props) => {
         id={number}
         name={number}
         value={number}
-        onClick={(e) => handleClickPageNumbers(e.target.value)}
+        // onClick={(e) => handleClickPageNumbers(e.target.value)}
         className={
           currentPage.fileTypes === number ? "active" : null
         }

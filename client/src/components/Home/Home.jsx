@@ -15,7 +15,6 @@ function Home() {
       <CollectionsCarousel />
       <HomeTitle />
       <ViewNft />
-     
     </>
   );
 }

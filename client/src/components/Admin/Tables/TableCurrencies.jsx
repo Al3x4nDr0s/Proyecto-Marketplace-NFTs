@@ -143,7 +143,7 @@ export const TableCurrencies = (props) => {
         id={number}
         name={number}
         value={number}
-        onClick={(e) => handleClickPageNumbers(e.target.value)}
+        // onClick={(e) => handleClickPageNumbers(e.target.value)}
         className={currentPage.currencies === number ? "active" : null}
         style={{ cursor: "pointer" }}
       >
