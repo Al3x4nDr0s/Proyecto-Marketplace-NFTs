@@ -11,6 +11,10 @@ const AboutUsComponent = styled.div`
     }
 `
 
+const TeamCards = styled.div`
+
+`
+
 const WhoWeAreContainer = styled.div`
     height: 600px;
     width: 100%;
@@ -72,6 +76,14 @@ const WhoWeAreContainer = styled.div`
 const About = () => {
 
 
+    const teamCards = [
+        {
+            name : "esteban",
+            img:""
+        }
+    ]
+
+
     return (
         <AboutUsComponent className='about-us-component'>
 
@@ -88,7 +100,11 @@ const About = () => {
                 </div>
             </WhoWeAreContainer>
             <hr className='division'/>
+            <TeamCards>
+
+            </TeamCards>
         </AboutUsComponent>
+
     );
 };
 
