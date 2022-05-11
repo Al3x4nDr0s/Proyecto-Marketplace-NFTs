@@ -1,22 +1,30 @@
 import React from 'react';
 import styled from "styled-components"
+import esteban from "../../assets/teamCards/esteban.png"
+import gabriel from "../../assets/teamCards/gabriel.png"
+import carolina from "../../assets/teamCards/carolina.png"
+import cesar from "../../assets/teamCards/cesar.png"
+import alejandro from "../../assets/teamCards/alejandro.png"
+import ignacio from "../../assets/teamCards/ignacio.png"
+import TeamCards from './TeamCards';
 
 const AboutUsComponent = styled.div`
     display: flex;
     flex-direction: column;
-
+    padding: 30px;
+    color: var(--secondFontColor);
+    .team-members{
+        margin-left: 40px;
+        margin-top: 40px;
+    }
     .division{
         color: var(--secondFontColor);
         margin: 20px;
     }
 `
 
-const TeamCards = styled.div`
-
-`
-
 const WhoWeAreContainer = styled.div`
-    height: 600px;
+    height: 500px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -27,7 +35,6 @@ const WhoWeAreContainer = styled.div`
     
     .img-container{
         margin-left: 20px;
-        padding: 30px;
         width: 50%;
         height: 100%;
         justify-content: center;
@@ -49,6 +56,7 @@ const WhoWeAreContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
+        height: 800px;
         .img-container{
         padding: 20px;
         width: 100%;
@@ -78,9 +86,35 @@ const About = () => {
 
     const teamCards = [
         {
-            name : "esteban",
-            img:""
-        }
+            name : "Esteban Puentes",
+            img: esteban,
+            linkedInProfile: "https://www.linkedin.com/in/raul-esteban-puentes-roldan-183600192/",
+        },
+        {
+            name : "Gabriel Copa",
+            img: gabriel,
+            linkedInProfile: "https://www.linkedin.com/in/gabriel-copa-full-stack/",
+        },
+        {
+            name : "Ignacio ",
+            img: ignacio,
+            linkedInProfile: "https://www.linkedin.com/in/jorge-ignacio-burgos/",
+        },
+        {
+            name : "Cesar Galeano",
+            img: cesar,
+            linkedInProfile: "https://www.linkedin.com/in/cesargaleanotorres/",
+        },
+        {
+            name : "Alejandro Cardenas",
+            img: alejandro,
+            linkedInProfile: "https://www.linkedin.com/in/alejandro-cardenas-7746b144/",
+        },
+        {
+            name : "Carolina Leoni",
+            img: carolina,
+            linkedInProfile: "https://www.linkedin.com/in/carolina-maria-leoni-022438132/",
+        },
     ]
 
 
@@ -99,10 +133,10 @@ const About = () => {
                           sold not only with a fixed price but also to be auctioned</p>
                 </div>
             </WhoWeAreContainer>
+            <h1 className='team-members'>Team Members</h1>
             <hr className='division'/>
-            <TeamCards>
-
-            </TeamCards>
+            <TeamCards teamCardsArray={teamCards}/>
+            
         </AboutUsComponent>
 
     );
