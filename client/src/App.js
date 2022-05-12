@@ -15,15 +15,17 @@ import { AllNft } from "./components/Home/elements/AllNft/AllNft.jsx";
 import { Register } from "./components/Register/Register.jsx";
 import Collections from "./components/Collections/Collections.jsx";
 import { Admin } from "./components/Admin/Admin.jsx";
+// import  Admin  from "./components/Admin/admin/AdminApp";
 import CardNftCollection from "./components/Collections/CardNftCollection.jsx";
 import "./App.css";
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+// import { SoftUIControllerProvider } from "context";
 function MainLayout() {
   return (
     <div>
-      <Header />
+      <Header  />
       <Outlet />
       <Footer />
     </div>
@@ -39,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      {/* <SoftUIControllerProvider> */}
         <Routes>
           <Route exact path={"/"} element={<LandingPage />} />
           <Route element={<MainLayout />}>
@@ -91,6 +94,7 @@ function App() {
             />
           </Route>
         </Routes>
+        {/* </SoftUIControllerProvider> */}
       </BrowserRouter>
     </div>
   );
