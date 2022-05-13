@@ -274,7 +274,7 @@ const DetailsContainer = styled.div`
   width: 100%;
   /* margin-top: 7.5rem; */
   /* margin-bottom: 7.5rem; */
-  /* margin: 7.5rem auto  auto; */
+  margin: 7.5rem auto  auto;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

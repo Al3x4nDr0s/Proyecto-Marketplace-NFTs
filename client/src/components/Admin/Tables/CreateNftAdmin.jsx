@@ -9,7 +9,7 @@ import {
   getCurrencies,
   getSalesType,
   getCategory,
-} from "../../../redux/actions/index";
+} from "../../../redux/actions";
 
 import Input from "../../shared/Input.jsx";
 
@@ -90,7 +90,7 @@ const ContainerFormCreateNft = styled.div`
   width: 100%;
   margin: 1.2rem auto 0 auto;
   border-radius: 0.2rem;
-  background-color: #46198f53;
+  background-color: #370a5f;
   padding: 2rem .2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -113,9 +113,9 @@ export const CreateNftAdmin = () => {
 
   const [data, setData] = useState({
     name: "",
-    image: "",
+    // image: "",
     description: "",
-    details: null,
+    contract_address: "",
     category: "",
     price: 0,
     sales_types: "",
@@ -123,13 +123,21 @@ export const CreateNftAdmin = () => {
     files_types: "",
   });
 
-  const [dataDetails, setDataDetails] = useState({
-    user_creator: idUser,
-    owner: "",
-    contract_address: "",
-  });
+  const [formData, setFormData] = useState("")
+
+  // const [dataDetails, setDataDetails] = useState({
+  //   user_creator: idUser,
+  //   owner: "",
+    
+  // });
 
   const [send, setSend] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState("")
+
+  const formDateishon = new FormData();
+  
+  formDateishon.append('img', selectedImage)
 
   useEffect(() => {
     if (
@@ -152,16 +160,23 @@ export const CreateNftAdmin = () => {
     });
   };
 
-  const handleInputDetails = (e) => {
-    setDataDetails({
-      ...dataDetails,
-      [e.target.name]: e.target.value,
-    });
-    setData({
-      ...data,
-      details: dataDetails,
-    });
-  };
+  // const handleInputDetails = (e) => {
+  //   setDataDetails({
+  //     ...dataDetails,
+  //     [e.target.name]: e.target.value,
+  //   });
+  //   setData({
+  //     ...data,
+  //     details: dataDetails,
+  //   });
+  // };
+
+  const handleImage = (e) => {
+    e.preventDefault();
+    setFormData(e.target.value)
+  }
+
+  // ? Realizar el upload de la image del nft
 
   const handleSelect = (e) => {
     setData({
@@ -176,16 +191,12 @@ export const CreateNftAdmin = () => {
     e.preventDefault();
     console.log(data);
     if (send === false) {
-      dispatch(postNft(token, data));
+      dispatch(postNft(token, data, formDateishon));
       setData({
         name: "",
         image: "",
         description: "",
-        details: {
-          user_creator: idUser,
-          owner: "",
-          contract_address: "",
-        },
+        contract_address: "",
         category: "",
         price: 0,
         sales_types: "",
@@ -194,7 +205,7 @@ export const CreateNftAdmin = () => {
       });
       setSend(true);
       alert("nft creado correctamente");
-      navigate("/home");
+      // navigate("/home");
     } else {
       alert("no se pudo crear el nft");
     }
@@ -227,9 +238,10 @@ export const CreateNftAdmin = () => {
               placeholder="URL image..."
               padding=".4rem"
               width="75%"
-              onChange={(e) => handleInput(e)}
+              type="file"
+              onChange={(e) => setSelectedImage(e.target.files[0])}
               name="image"
-              value={data.image}
+              value={formData}
             />
           </ContainerGridLabelInput>
           {data.image && <ImageView backgroundImage={data.image} />}
@@ -247,26 +259,20 @@ export const CreateNftAdmin = () => {
         </div>
         <div>
           <ContainerGridLabelInput>
-            <label style={{ fontSize: "1.2rem" }}>Owner</label>
-            <SelectType name="owner" onChange={(e) => handleInputDetails(e)}>
-              <option value={idUser}>{user.username}</option>
-              <option value={idUser}>Otro...</option>
-            </SelectType>
-          </ContainerGridLabelInput>
-          <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Contract Address</label>
             <Input
               placeholder="Address..."
               padding=".4rem"
               width="75%"
-              onChange={(e) => handleInputDetails(e)}
-              value={dataDetails.contract_address}
+              onChange={(e) => handleInput(e)}
+              value={data.contract_address}
               name="contract_address"
             />
           </ContainerGridLabelInput>
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Category</label>
             <SelectType name="category" onChange={(e) => handleSelect(e)}>
+              <option value="categ">Category...</option>
               {category?.map((x) => (
                 <option value={x._id} key={x._id}>
                   {x.name}
@@ -277,6 +283,7 @@ export const CreateNftAdmin = () => {
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Sales Type</label>
             <SelectType name="sales_types" onChange={(e) => handleSelect(e)}>
+              <option value="salest">Sale types...</option>
               {salesType?.map((x) => (
                 <option value={x._id} key={x._id}>
                   {x.name}
@@ -287,6 +294,7 @@ export const CreateNftAdmin = () => {
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Files Type</label>
             <SelectType name="files_types" onChange={(e) => handleSelect(e)}>
+              <option value="fil">File types...</option>
               {filesType?.map((x) => (
                 <option value={x._id} key={x._id}>
                   {x.name}
@@ -302,6 +310,7 @@ export const CreateNftAdmin = () => {
                   name="currencies"
                   onChange={(e) => handleSelect(e)}
                 >
+                  <option value="select">Currencies...</option>
                   {currency?.map((x) => (
                     <option value={x._id} key={x._id}>
                       {x.name}
@@ -327,17 +336,17 @@ export const CreateNftAdmin = () => {
         <div
           style={{
             display: "flex",
-            background: "#46198f53",
+            background: "#370a5f",
             paddingBottom: "2.2rem",
             justifyContent: "center",
           }}
         >
-          <Button
+          {/* <Button
             title="BACK"
-            onClick={() => navigate("/admin")}
+            onClick={() => navigate("/myprofile/mispublicaciones")}
             margin="0 2rem"
             padding=".2rem 3rem"
-          />
+          /> */}
           <Button title="CREATE" type="submit" margin="0 2rem" padding=".2rem 3rem"/>
         </div>
       </FormCreateNft>
