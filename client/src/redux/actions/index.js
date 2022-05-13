@@ -232,20 +232,37 @@ export const getFileTypes = () => async dispatch => {
     }
 }
 
-export const postNft = (tokenuser, item) => async dispatch => {
+export const postNft = (tokenuser, item, formData) => async dispatch => {
     try {
+        //? aca despues tendria
+        
         const dataPost = await axios.post(`https://sevendevs-backend.herokuapp.com/nft`, item, {
             headers: {
-                Authorization: JSON.parse(tokenuser)
+                Authorization: JSON.parse(tokenuser) // usuarios registrados puedan hacer creeacion de nfts
             }
         })
+        const uid = dataPost.data.nft._id
+        console.log(uid)
+        const dataImageNft = await axios.put(`https://sevendevs-backend.herokuapp.com/upload/nft/${uid}`, formData, { 
+            headers: {
+                Authorization: JSON.parse(tokenuser),
+                "Content-Type": "multipart/form-data",
+                
+            }
+        })
+        const obj1 = {...dataPost.data.nft, image: dataImageNft.url}
         const responsePost = await dispatch({
             type: CREATE_NFT,
-            payload: dataPost.data
+            payload: obj1
         })
+
+        // const finallyUpdateImageNft = await dispatch({
+        //     type: UPDATE_IMAGE_NFT,
+        //     payload: dataImageNft.data.url
+        // })
         return responsePost
     } catch (error) {
-        console.log("error", error)
+        console.log("paso por aqui perro asi que hay", error)
     }
 }
 

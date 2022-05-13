@@ -118,7 +118,7 @@ export const TableCategory = (props) => {
 
   const handleRenderTableCategory = currentItemsCategory?.map((x, i) => {
     return (
-      <tr key={i} style={{ color: "white", marginBottom: ".2rem" }}>
+      <tr key={i} style={{ color: "#141414", marginBottom: ".2rem" }}>
         <td> {x.name}</td>
         <td> {x._id}</td>
         <td style={{ display: "flex", justifyContent: "space-evenly" }}>
@@ -127,7 +127,7 @@ export const TableCategory = (props) => {
               <i className="fas fa-edit"></i>
             </Link>
           </ContainerButtonEditar>
-          <ButtonEliminar onClick={() => console.log("se removio")}>
+          <ButtonEliminar onClick={() => console.log("se hizo click")}>
             <i className="fas fa-trash-alt" style={{ color: "#fff" }}></i>
           </ButtonEliminar>
         </td>
@@ -204,7 +204,7 @@ export const TableCategory = (props) => {
   return (
     <>
       <div>
-        <h2 style={{ borderBottom: "1px solid #fff" }}>Category</h2>
+        <h2 style={{ borderBottom: "1px solid #fff" }}>Table Category</h2>
         <ContainerNavTable>
           <RowNavTable>
             <ColNavTable>

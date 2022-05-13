@@ -28,7 +28,7 @@ import {
 
 
 const initialState = {
-    isOpen: false,
+    // isOpen: false,
     nfts: [],
     copynft: [],
     nftquery: [],
@@ -42,23 +42,24 @@ const initialState = {
     category: [],
     sales_type: [],
     files_type: [],
-    currencies: []
+    currencies: [],
+    open: false
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MODAL:
-            return { ...state, isOpen: action.payload }
+            return { ...state, open: action.payload }
         case GET_ALL_NFT:
             return { ...state, nfts: action.payload, copynft: action.payload }
         case CATEGORY_FILTER:
-            return { ...state, nftquery: action.payload }
+            return { ...state, nftquery: action.payload, hasMore: false }
         case SALES_FILTER:
-            return { ...state, nftquery: action.payload }
+            return { ...state, nftquery: action.payload, hasMore: false }
         case FILE_FILTER:
-            return { ...state, nftquery: action.payload }
+            return { ...state, nftquery: action.payload, hasMore: false }
         case CURRENCY_FILTER:
-            return { ...state, nftquery: action.payload }
+            return { ...state, nftquery: action.payload, hasMore: false }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:
@@ -139,7 +140,7 @@ const rootReducer = (state = initialState, action) => {
         case CREATE_NFT:
             return {
                 ...state,
-                ntfs: [...state.nfts, action.payload]
+                nfts: [...state.nfts, action.payload]
             }
         case CREATE_CATEGORY:
             return {
@@ -164,7 +165,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_FILES_TYPE:
             return {
                 ...state,
-                file_types: action.payload
+                files_type: action.payload
             }
         case FILTER_CATEGORY:
             return {
