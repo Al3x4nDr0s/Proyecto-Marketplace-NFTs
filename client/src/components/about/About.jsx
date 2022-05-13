@@ -3,6 +3,7 @@ import styled from "styled-components"
 import esteban from "../../assets/teamCards/esteban.png"
 import gabriel from "../../assets/teamCards/gabriel.png"
 import carolina from "../../assets/teamCards/carolina.png"
+import andres from "../../assets/teamCards/andres.png"
 import cesar from "../../assets/teamCards/cesar.png"
 import alejandro from "../../assets/teamCards/alejandro.png"
 import ignacio from "../../assets/teamCards/ignacio.png"
@@ -115,6 +116,12 @@ const About = () => {
             img: carolina,
             linkedInProfile: "https://www.linkedin.com/in/carolina-maria-leoni-022438132/",
         },
+        {
+            name : "Andres Higuita",
+            img: andres,
+            linkedInProfile: "https://www.linkedin.com/in/edwinandreshiguita/",
+        },
+
     ]
 
 
