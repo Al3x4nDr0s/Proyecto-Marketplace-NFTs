@@ -20,7 +20,7 @@ import CardNftCollection from "./components/Collections/CardNftCollection.jsx";
 import "./App.css";
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import { SoftUIControllerProvider } from "context";
 function MainLayout() {
   return (

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../../Loading/Loading.jsx";
-import { getNftQuery, removeNftQuery } from "../../../../redux/actions/index";
+import { getNftQuery } from "../../../../redux/actions/index";
 
 import { CardNft } from "../CardNft/CardNft.jsx";
 import CategoryFilter from "./filters/CategoryFilter.jsx";
@@ -18,10 +18,10 @@ const ContainerAll = styled.div`
   grid-template-columns: 100%;
 `;
 
-const ContainerFilterNft = styled.div`
-  width: 100%;
+// const ContainerFilterNft = styled.div`
+//   width: 100%;
   
-`;
+// `;
 
 const ContainerNft = styled.div`
   width: 100%;
@@ -80,7 +80,7 @@ const ContainerLoader = styled.div`
 `;
 
 export const AllNft = () => {
-  const nftAll = useSelector((state) => state.nfts);
+  // const nftAll = useSelector((state) => state.nfts);
   const nft = useSelector((state) => state.nftquery);
   const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();

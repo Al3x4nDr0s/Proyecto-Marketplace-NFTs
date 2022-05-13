@@ -143,7 +143,7 @@ export const CreateNftAdmin = () => {
       dispatch(getCategory());
       dispatch(getSalesType());
     }
-  }, [dispatch]);
+  }, []);
 
   const handleInput = (e) => {
     setData({

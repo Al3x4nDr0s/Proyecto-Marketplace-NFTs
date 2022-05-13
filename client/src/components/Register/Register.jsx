@@ -1,7 +1,7 @@
 import Input from "../shared/Input.jsx";
 import axios from "axios";
 import styled, { css } from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import GoogleLogin from "react-google-login";
@@ -132,7 +132,7 @@ export const Register = () => {
       });
   };
 
-  const handleOnBlur = (e) => {};
+  // const handleOnBlur = (e) => {};
 
   const handleLogin = (googleData) => {
     /* axios

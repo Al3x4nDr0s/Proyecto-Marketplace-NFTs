@@ -9,7 +9,7 @@ const CurrenciesFilter = () => {
 
     useEffect(()=>{
         dispatch(getCurrencies())
-    },[])
+    },[dispatch])
 
     function handleChange(e){
         const id = e.target.value

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {TableNft} from './Tables/TableNft.jsx';
+// import {TableNft} from './Tables/TableNft.jsx';
 import { TableCategory } from "./Tables/TableCategory.jsx";
 import { TableUsers } from "./Tables/TableUsers.jsx";
 import { TableCurrencies } from "./Tables/TableCurrencies.jsx";
