@@ -1,15 +1,18 @@
 import axios from "axios";
 
 const login = (email, password) => {
-    return axios.post("http://localhost:4000/user/auth", {
+    return axios.post("http://localhost:4000/auth", {
         email,
         password
     }).then((response) => {
+        console.log(response.data)
         if (response.data.token) {
-            localStorage.setItem("user", JSON.stringify(response.data))
+            localStorage.setItem("token", JSON.stringify(response.data.token));
         };
         return response.data
-    });
+    }).catch((error) => {
+        console.log(error);
+    })
 };
 
 const logut = () => {

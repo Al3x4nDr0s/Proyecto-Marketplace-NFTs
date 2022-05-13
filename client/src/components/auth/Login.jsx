@@ -1,6 +1,13 @@
 import { React, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import authService from '../../services/authService';
+import styled from 'styled-components';
+
+const ContainerLogin = styled.div`
+width: 75%;
+margin: 0 auto;
+
+`
 
 const Login = () => {
     const navigate = useNavigate();
@@ -32,13 +39,15 @@ const Login = () => {
           );
         } catch (error) {
             console.log(error);
+            navigate("/register");
+            window.location.reload();
         };
     };
 
   return (
-    <div>
+    <ContainerLogin>
         <form>
-        <label>Correo Electronico</label>
+        <label>Correo</label>
             <input 
             type={"email"}
             name={"email"}
@@ -50,6 +59,7 @@ const Login = () => {
             <input 
             type={"password"}
             name={"password"}
+            placeholder={"Ingresa Tu Correo Contraseña"}
             value={password}
             onChange={handleUser}
             />
@@ -58,7 +68,7 @@ const Login = () => {
             onClick={handleSend}
             >Ingresar</button>
         </form>
-    </div>
+    </ContainerLogin>
   )
 }
 
