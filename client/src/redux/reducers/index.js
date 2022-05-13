@@ -23,7 +23,8 @@ import {
     GET_USERS,
     DELETE_NFT,
     CREATE_CURRENCIES,
-    CREATE_SALES_TYPES
+    CREATE_SALES_TYPES,
+    SEARCHBAR_FILTER
 } from "../actions";
 
 
@@ -60,6 +61,8 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, nftquery: action.payload, hasMore: false }
         case CURRENCY_FILTER:
             return { ...state, nftquery: action.payload, hasMore: false }
+        case SEARCHBAR_FILTER:
+            return { ...state, nftquery: action.payload }
         case GET_TOKEN:
             return { ...state, user: action.payload.usuario, isLogged: true }
         case REMOVE_USER:

@@ -263,3 +263,11 @@
   .openClick:hover {
     cursor: pointer;
   }
+
+  .containerBtnAddNft {
+    display: flex;
+    justify-content:center;
+    background-color: rgb(76, 32, 129);
+    padding-bottom: 2.2rem;
+    border-radius: 0 0 .2rem .2rem;
+  }

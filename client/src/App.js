@@ -23,6 +23,7 @@ import "./App.css";
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import About from "./components/about/About";
 function MainLayout() {
   return (
     <div className="body-fondo">
@@ -80,7 +81,7 @@ function App() {
             />
             <Route exact path={"/home/register"} element={<Register />} />
             <Route exact path={"/home/collections"} element={<Collections />} />
-            <Route
+            {/* <Route
               exact
               path={"/admin/create"}
               element={<CreateNftAdmin />}
@@ -95,7 +96,12 @@ function App() {
                   <Home />
                 )
               }
-            />
+            /> */}
+            <Route exact path={"/about"} element={<About />} />
+            <Route exact path={"/home/login"} element={!logged ? <Login /> : <Home />} />
+            <Route exact path={"/home/register"} element={<Register />} />
+            <Route exact path={"/home/collections"} element={<Collections />} />
+            <Route exact path={"/home/collections/nfts/:name"} element={<CardNftCollection />} />
             <Route
               exact
               path={"/home/collections/nfts/:name"}
@@ -128,6 +134,8 @@ function App() {
               path={"/admin/menuadmin/dashboard"}
               element={<Dashboard />}
             />
+            
+
           </Route>
         </Routes>
       </BrowserRouter>

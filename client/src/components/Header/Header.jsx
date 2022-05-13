@@ -201,22 +201,7 @@ function Header() {
           <ButtonsContainer>
             <Link to={"/home"}>Home</Link>
             <Link
-              to={"/home"}
-              onClick={() =>
-                Swal.fire({
-                  title: "In Construction",
-                  width: 600,
-                  padding: "3em",
-                  color: "var(--secondFontColor)",
-                  background: "#46198fb3",
-                  backdrop: `
-                #21217750
-                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-                left top
-                no-repeat
-              `,
-                })
-              }
+              to={"/about"}
             >
               About
             </Link>
