@@ -127,7 +127,7 @@ export const AllNft = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("")
 
-  const instantCallback = useCallback(dispatch, [dispatch]);
+  const instantCallback = useCallback(dispatch, [dispatch]); //! memorizar la data que le entra
 
   function handleInputSearch(e){
     const value = e.target.value
@@ -135,6 +135,7 @@ export const AllNft = () => {
     if(value === "")fecthNft()
     else dispatch(searchBarFilter(search))
   }
+
   useEffect(() => {
     instantCallback(getNftQuery(page))
   }, [instantCallback, page]);
