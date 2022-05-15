@@ -15,8 +15,8 @@ import { getAllNft } from "../../redux/actions";
 import Timer from "./Timer";
 import imgAudio from '../../assets/nft-audio.jpg';
 import imgVideo from '../../assets/azuki-nft.gif';
-import {isMetamaskInstalled} from './Metamask';
 import {isMetamaskInstalledp, saldoWallet, payPurchase, searchWalletAddress} from './Metamask';
+import Swal from 'sweetalert2';
 
 
 
@@ -117,7 +117,13 @@ useEffect(()=>{
         navigate('/home')
       }
       else{
-        alert('Recursos Insuficientes');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Metamask Installed, but not connected!!!!',
+          
+        })
+        //alert('Metamask Installed, but not connected!!!');
       }
      
      

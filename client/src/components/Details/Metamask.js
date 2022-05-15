@@ -1,7 +1,7 @@
 import React from "react";
 import { ethers } from "ethers";
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
  
 
  export const isMetamaskInstalled = async () => {
@@ -27,7 +27,8 @@ import axios from 'axios';
     const { ethereum } = window;
     console.log(ethereum);
     if (!ethereum) {
-      alert("Please Install Metamask!!");
+      Swal.fire('Please Install Metamask!!!')
+      //alert("Please Install Metamask!!");
     } else {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -54,7 +55,13 @@ import axios from 'axios';
     return Number(saldo);
     }
     catch(e){
-      console.log(e);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "The User don't have an associated Wallet!!!!",
+        
+      })
+      //alert("The User don't have an associated Wallet");
     }
   };
 
@@ -70,7 +77,8 @@ import axios from 'axios';
         to: addressToTransfer,
         value: ethers.utils.parseEther(amount)
     });
-    alert('Buy Finished!!');
+    Swal.fire('Buy Finished!!!')
+    //alert('Buy Finished!!');
     console.log("Transaction: ", transaction);
     const register = saveTransaction(transact);
 
@@ -79,7 +87,13 @@ import axios from 'axios';
     return true;
   }
   catch(e){
-    alert('Error!!');
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: "The Nft Owner don't have an associated Wallet!!!!",
+      
+    })
+    //alert("The Nft Owner don't have an associated Wallet !!");
     return false;
     
   }
@@ -94,7 +108,7 @@ import axios from 'axios';
     return address;
   }
   catch(e){
-    alert('Error!!');
+    alert('El usuario no tiene Wallet asociada');
     return false;
     
   }
@@ -110,7 +124,7 @@ import axios from 'axios';
     return res;
   }
   catch(e){
-    alert('Error!!');
+    alert('Error al guardar transaccion!!');
     return false;
     
   }
