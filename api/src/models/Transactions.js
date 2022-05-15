@@ -8,16 +8,14 @@ const Transactions = Schema({
         ref: 'User'
     },
     username: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+        type: String
     },
     nftId: {
         type: Schema.Types.ObjectId,
         ref: 'Nft'
     },
     namenft: {
-        type: Schema.Types.ObjectId,
-        ref: 'Nft'
+        type: String
     },
     currencies: {
         type: Schema.Types.ObjectId,
