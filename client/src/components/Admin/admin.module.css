@@ -46,7 +46,6 @@
     margin-top: 10px;
     margin-left: -80px;
     transition: width 0.5s ease-in-out;
-    /* transition: display .5s ease-in-out; */
   }
   
   .sidebarBrand {
@@ -168,30 +167,6 @@
     transition: all .5s linear;
   }
   
-  /* .searchWrapper{
-      border: 1px solid rgb(71, 17, 137);
-      border-radius: 50px;
-      width: 30%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      overflow-x: hidden;
-  }
-  
-  .searchWrapper span {
-      display: inline-block;
-      padding: 0rem 1rem;
-      font-size: 1.5rem;
-  
-  }
-  
-  .searchWrapper input {
-      height: 100%;
-      padding: .5rem;
-      border: none;
-      outline: none;
-  } */
-  
   .userWrapper {
     display: flex;
     align-items: center;
@@ -255,8 +230,8 @@
   }
   
   .containerPrimarioClose {
-    width: 90%;
-    margin: 5rem 10% 0 10%;
+    width: 84%;
+    margin: 7.5rem 10% 0 10%;
     transition: all 0.5s ease-in-out;
   }
 
@@ -270,4 +245,31 @@
     background-color: rgb(76, 32, 129);
     padding-bottom: 2.2rem;
     border-radius: 0 0 .2rem .2rem;
+  }
+
+  .table {
+    padding: .2rem .8rem;
+    border: 1px solid rgb(76, 32, 129);
+    margin-top: 2rem;
+    border-radius: .4rem;
+  }
+
+  .dropdown {
+    display: none;
+    transition: display .5s ease-in-out;
+  }
+
+  .dropup {
+    display: visible;
+    transition: display .5s ease-in-out;
+  }
+
+  .ContainerTitleTableAll {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ContainerTitleTableNft i {
+    cursor: pointer;
   }

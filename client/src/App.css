@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* font-family: 'Poppins', sans-serif; */
   font-family: "Kanit", sans-serif;
 }
 
@@ -25,9 +26,7 @@
   
 } */
 
-footer {
-  margin-top: auto;
-}
+
 
 .body-fondo {
   background: rgb(71, 17, 137);
@@ -55,6 +54,10 @@ footer {
     rgba(19, 5, 78, 0.969625350140056) 90%
   );
   min-height: 100vh; */
+}
+
+footer {
+  margin-top: auto;
 }
 
 .tableTheadBg {

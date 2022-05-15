@@ -74,7 +74,7 @@ export const MenuAdmin = () => {
                 className={active.dashboard === true ? styles.active : null}
                 id="dashboard"
                 style={{ display: "flex" }}
-                onClick={(e) => handleClickActive(e)}
+                onClick={handleClickActive}
               >
                 <span id="dashboard">
                   <BsFillBarChartFill id="dashboard" />
@@ -84,11 +84,11 @@ export const MenuAdmin = () => {
             </li>
             <li>
               <Link
-                to={"admin/menuadmin/tables"}
+                to={"/admin/menuadmin/tables"}
                 style={{ display: "flex" }}
                 className={active.tables === true ? styles.active : null}
                 id="tables"
-                onClick={(e) => handleClickActive(e)}
+                onClick={handleClickActive}
               >
                 <span id="tables">
                   <BsGrid3X3 id="tables" />
@@ -96,15 +96,6 @@ export const MenuAdmin = () => {
                 <p id="tables">Tables</p>
               </Link>
             </li>
-            {/* <li>
-              <a href="#">
-                {" "}
-                <span>
-                  <BsFillPersonFill />{" "}
-                </span>
-                Users
-              </a>
-            </li> */}
           </ul>
         </div>
       </div>

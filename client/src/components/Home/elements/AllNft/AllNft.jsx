@@ -127,7 +127,7 @@ export const AllNft = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("")
 
-  const instantCallback = useCallback(dispatch, [dispatch]); //! memorizar la data que le entra
+  const instantCallback = useCallback(dispatch, [dispatch]); 
 
   function handleInputSearch(e){
     const value = e.target.value

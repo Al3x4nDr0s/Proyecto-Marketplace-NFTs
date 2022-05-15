@@ -81,7 +81,7 @@ const ContainerSoporte = styled.div`
 
 const Footer = () => {
   return (
-    <footer style={{marginTop: "1.5rem"}}>
+    <footer>
       <ContainerFooter>
         <ContainerImagen>
           <Link to="/home">

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import {postCategory} from "../../../redux/actions"
+import { postCategory } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
+
+import styles from "../admin.module.css";
 
 import Swal from "sweetalert2";
 
@@ -108,6 +110,8 @@ export const TableCategory = (props) => {
     pagesCategory.push(i);
   }
 
+  const [openDrop, setOpenDrop] = useState(false);
+
   const indexOfLastItemCategory = currentPage.category * itemsPerPage; //? index last of category
   const indexOfFirstItemCategory = indexOfLastItemCategory - itemsPerPage; //? index first of category
 
@@ -119,8 +123,8 @@ export const TableCategory = (props) => {
   const handleRenderTableCategory = currentItemsCategory?.map((x, i) => {
     return (
       <tr key={i} style={{ color: "#141414", marginBottom: ".2rem" }}>
-        <td> {x.name}</td>
         <td> {x._id}</td>
+        <td> {x.name}</td>
         <td style={{ display: "flex", justifyContent: "space-evenly" }}>
           <ContainerButtonEditar>
             <Link to={`/edit/${x._id}`} style={{ color: "#fff" }}>
@@ -143,9 +147,7 @@ export const TableCategory = (props) => {
         name={number}
         value={number}
         // onClick={(e) => handleClickPageNumbers(e.target.value)}
-        className={
-          currentPage.category === number ? "active" : null
-        }
+        className={currentPage.category === number ? "active" : null}
         style={{ cursor: "pointer" }}
       >
         <span>{number}</span>
@@ -197,80 +199,93 @@ export const TableCategory = (props) => {
     }
   };
 
+  const handleDespliegue = () => {
+    if (openDrop === false) {
+      setOpenDrop(true);
+    }
+    if (openDrop === true) {
+      setOpenDrop(false);
+    }
+  };
+
   //? postCategory
 
-
-
   return (
-    <>
-      <div>
+    <div className={styles.table}>
+      <div className={styles.ContainerTitleTableAll}>
         <h2 style={{ borderBottom: "1px solid #fff" }}>Table Category</h2>
-        <ContainerNavTable>
-          <RowNavTable>
-            <ColNavTable>
-              <ButtonAgregar onClick={() => handleCreateCategory()}>
-                {/* <button to="/admin/create" style={{ color: "#fff" }}> */}
-                  <i className="fas fa-plus"></i>
-                {/* </button> */}
-              </ButtonAgregar>
-              <Link to="/"></Link>
-              <ContainerTable>
-                <thead className="tableTheadBg">
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>{handleRenderTableCategory}</tbody>
-              </ContainerTable>
-            </ColNavTable>
-          </RowNavTable>
-        </ContainerNavTable>
+        <i
+          className="fa-solid fa-circle-chevron-down"
+          onClick={() => handleDespliegue()}
+        ></i>
       </div>
-      <ContainerPagination>
-        <nav
-          className="Page navigation example"
-          style={{ margin: "0 auto", width: "40%" }}
-        >
-          <ContainerPaginationTable>
-            <li>
-              <ButtonPrevAndNext
-                onClick={handlenPrev}
-                name="category"
-                disabled={
-                  currentPage.category === pagesCategory[0] ? true : false
-                }
-                aria-label="Previus"
-                style={{ cursor: "pointer" }}
-              >
-                <span aria-hidden="true" style={{ color: "#fff" }}>
-                  &laquo;
-                </span>
-              </ButtonPrevAndNext>
-            </li>
-            {renderPageNumberCategory}
-            <li>
-              <ButtonPrevAndNext
-                onClick={handlenNext}
-                name="category"
-                disabled={
-                  currentPage.category ===
-                  pagesCategory[pagesCategory.length - 1]
-                    ? true
-                    : false
-                }
-                aria-label="Next"
-                style={{ cursor: "pointer" }}
-              >
-                <span aria-hidden="true" style={{ color: "#fff" }}>
-                  &raquo;
-                </span>
-              </ButtonPrevAndNext>
-            </li>
-          </ContainerPaginationTable>
-        </nav>
-      </ContainerPagination>
-    </>
+      <div className={openDrop === false ? styles.dropdown : styles.dropup}>
+        <div>
+          <ContainerNavTable>
+            <RowNavTable>
+              <ColNavTable>
+                <ButtonAgregar onClick={() => handleCreateCategory()}>
+                  <i className="fas fa-plus"></i>
+                </ButtonAgregar>
+                <Link to="/"></Link>
+                <ContainerTable>
+                  <thead className="tableTheadBg">
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>{handleRenderTableCategory}</tbody>
+                </ContainerTable>
+              </ColNavTable>
+            </RowNavTable>
+          </ContainerNavTable>
+        </div>
+        <ContainerPagination>
+          <nav
+            className="Page navigation example"
+            style={{ margin: "0 auto", width: "40%" }}
+          >
+            <ContainerPaginationTable>
+              <li>
+                <ButtonPrevAndNext
+                  onClick={handlenPrev}
+                  name="category"
+                  disabled={
+                    currentPage.category === pagesCategory[0] ? true : false
+                  }
+                  aria-label="Previus"
+                  style={{ cursor: "pointer" }}
+                >
+                  <span aria-hidden="true" style={{ color: "#fff" }}>
+                    &laquo;
+                  </span>
+                </ButtonPrevAndNext>
+              </li>
+              {renderPageNumberCategory}
+              <li>
+                <ButtonPrevAndNext
+                  onClick={handlenNext}
+                  name="category"
+                  disabled={
+                    currentPage.category ===
+                    pagesCategory[pagesCategory.length - 1]
+                      ? true
+                      : false
+                  }
+                  aria-label="Next"
+                  style={{ cursor: "pointer" }}
+                >
+                  <span aria-hidden="true" style={{ color: "#fff" }}>
+                    &raquo;
+                  </span>
+                </ButtonPrevAndNext>
+              </li>
+            </ContainerPaginationTable>
+          </nav>
+        </ContainerPagination>
+      </div>
+    </div>
   );
 };
