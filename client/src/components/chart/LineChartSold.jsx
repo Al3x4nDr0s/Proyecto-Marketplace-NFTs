@@ -28,12 +28,14 @@ ChartJS.register(
 
 
 const ChartContainer = styled.div`
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
 `
 
 export default function LineChartSold() {
-
+    
+    const dispatch = useDispatch()
+    const transactions = useSelector(state=> state.transactions)
     const months = {
         0:"enero",
         1:"febrero",
@@ -49,26 +51,25 @@ export default function LineChartSold() {
         11:"diciembre"
     }
 
-
-    const dispatch = useDispatch()
-    const transactions = useSelector(state=> state.transactions)
     
     useEffect(()=>{
-        dispatch(getTransactions())
+        
+        dispatch(getTransactions());
     },[])
-    
     
     console.log(transactions)
     const uniqueMonths = [...new Set(transactions?.map(t => new Date(t.create_date).getMonth()))]
-    const uniqueMonthsConvertedToMonthName = uniqueMonths.map( m=> months[m])
+    const sortUniqueMonths  = uniqueMonths.sort()
+    console.log(sortUniqueMonths, "meses de mayor a menor")
+    const uniqueMonthsConvertedToMonthName = sortUniqueMonths?.map( m=> months[m])
 
+    
+    
+    
     const quantityPerSaleMarch = []
     const quantityPerSaleApril = []
     const quantityPerSaleMay = []
-
-
-
-    const calculateQuantity = transactions.forEach(t =>{
+    const calculateQuantity = transactions?.forEach(t =>{
         if((new Date(t.create_date).getMonth()) === 2){
             quantityPerSaleMarch.push(t.amount)
         } 
@@ -80,9 +81,9 @@ export default function LineChartSold() {
         } 
     })
     
-    const quantitySoldMarch = quantityPerSaleMarch.reduce(function(a, b) { return a + b})
-    const quantitySoldApril = quantityPerSaleApril.reduce(function(a, b) { return a + b})
-    const quantitySoldMay = quantityPerSaleMay.reduce(function(a, b) { return a + b})
+    const quantitySoldMarch = quantityPerSaleMarch?.reduce(function(a, b) { return a + b})
+    const quantitySoldApril = quantityPerSaleApril?.reduce(function(a, b) { return a + b})
+    const quantitySoldMay = quantityPerSaleMay?.reduce(function(a, b) { return a + b})
     
     const totalsPerMonth = [quantitySoldMarch,quantitySoldApril,quantitySoldMay]
     console.log(totalsPerMonth)
@@ -95,7 +96,10 @@ export default function LineChartSold() {
     // const uniqueMonths
     
     const options = {
-        responsive : true
+        responsive : true,
+        fill:true,
+
+        
     }
      
     const data = useMemo ( function (){ 
@@ -104,8 +108,9 @@ export default function LineChartSold() {
             
             datasets: [
                 {
-                    label: "Sales per Month",
-                    data: totalsPerMonth
+                    label: "Sales per Month (ETH)",
+                    data: totalsPerMonth,
+                    borderColor: "#dfdfdf", 
                 }
             ],
             labels: uniqueMonthsConvertedToMonthName,
