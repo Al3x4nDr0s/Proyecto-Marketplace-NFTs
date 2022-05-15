@@ -105,7 +105,15 @@ useEffect(()=>{
       
       if(saldo>Number(nft[0].price)){
         console.log(nft[0].details.user_creator)
-        const pay = await payPurchase(nft[0].price,wallet);
+        let transact= {
+          userId:nft[0].details.owner_id,
+        nftId: nft[0]._id,
+        currencies:nft[0].currencies._id,
+        amount: nft[0].price,
+        transaction_type:"6272dae3d6b583da5e6e5568"
+      }
+        const pay = await payPurchase(nft[0].price,wallet,transact);
+        
         navigate('/home')
       }
       else{
@@ -231,8 +239,8 @@ useEffect(()=>{
         </Row>
 
         <Row style={{ gap: "15%", marginTop:'10px' }}>
-          <Button1 title="Buy Now" height="45px" width="350px" onClick={handlePayClick}></Button1>
-          
+        {nft[0].sales_types.name==="Fixed Price"&&<Button1 title="Buy Now" height="45px" width="350px" onClick={handlePayClick}></Button1>
+        }
          
           {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="45px" width="350px"></Button1>
             }

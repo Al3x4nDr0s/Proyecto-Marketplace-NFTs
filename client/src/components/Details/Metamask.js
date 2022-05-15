@@ -58,7 +58,7 @@ import axios from 'axios';
     }
   };
 
-  export const payPurchase = async (am, wallet) => {
+  export const payPurchase = async (am, wallet, transact) => {
     try{
     //var amount = "1.0";
     var amount = String(am);
@@ -72,6 +72,10 @@ import axios from 'axios';
     });
     alert('Buy Finished!!');
     console.log("Transaction: ", transaction);
+    const register = saveTransaction(transact);
+
+    
+
     return true;
   }
   catch(e){
@@ -95,4 +99,19 @@ import axios from 'axios';
     
   }
   };
+
+
   
+  export const saveTransaction = async (transaction) => {
+    try{
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+      const res = (await axios.post('http://localhost:4000/trans/',transaction)).data;
+      console.log(res);
+    return res;
+  }
+  catch(e){
+    alert('Error!!');
+    return false;
+    
+  }
+  };
