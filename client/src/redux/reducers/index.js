@@ -18,7 +18,8 @@ import {
     CURRENCY_FILTER,
     SALES_FILTER,
     FILE_FILTER,
-    SEARCHBAR_FILTER
+    SEARCHBAR_FILTER,
+    GET_TRANSACTIONS
 } from "../actions";
 
 
@@ -36,7 +37,8 @@ const initialState = {
     category: [],
     sales_type: [],
     file_types: [],
-    currencies: []
+    currencies: [],
+    transactions:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -53,6 +55,8 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, nftquery: action.payload }
         case CURRENCY_FILTER:
             return { ...state, nftquery: action.payload }
+        case GET_TRANSACTIONS:
+            return { ...state, transactions: action.payload }
         case SEARCHBAR_FILTER:
             return { ...state, nftquery: action.payload }
         case GET_TOKEN:

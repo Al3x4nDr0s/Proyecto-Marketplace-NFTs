@@ -21,6 +21,7 @@ export const CURRENCY_FILTER = 'CURRENCY_FILTER';
 export const SALES_FILTER = 'SALES_FILTER';
 export const FILE_FILTER = 'FILE_FILTER';
 export const SEARCHBAR_FILTER = 'SEARCHBAR_FILTER';
+export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 
 
 
@@ -109,6 +110,18 @@ export const getCategory = () => async dispatch => {
         const finallyDataCategory = await dispatch({
             type: GET_CATEGORY,
             payload: dataCategory.data
+        })
+        return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+export const getTransactions = () => async dispatch => {
+    try {
+        const dataTransactions = await axios.get('https://sevendevs-backend.herokuapp.com/trans')
+        const finallyDataCategory = await dispatch({
+            type: GET_TRANSACTIONS,
+            payload: dataTransactions.data
         })
         return finallyDataCategory
     } catch (error) {

@@ -47,7 +47,6 @@ const TeamCards = (props) => {
 
     const {teamCardsArray} = props
 
-    console.log(teamCardsArray)
     
     return (
         <CardContainer >
