@@ -185,17 +185,13 @@ export const CardNft = (props) => {
     name,
     price,
     id,
-    category,
     files,
     currency,
     salestype,
     owner,
-    imageCurrencies,
     likes,
     token,
   } = props;
-
-  const likecurrent = likes;
 
   const dispatch = useDispatch();
   const handlerLikes = () => {

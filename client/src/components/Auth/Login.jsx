@@ -20,6 +20,10 @@ const ContainerLogin = styled.form`
   margin: 7.5rem auto 0 auto;
   padding: 3.2rem 2rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const ContainerUsuarioLogin = styled.div`

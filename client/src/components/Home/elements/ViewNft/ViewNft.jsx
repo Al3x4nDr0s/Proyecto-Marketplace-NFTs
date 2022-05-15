@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Autoplay, Navigation, Scrollbar, A11y } from "swiper";
+import { Navigation, Scrollbar, A11y } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -12,7 +12,6 @@ import SwiperCore, { Pagination } from "swiper/core";
 import {
   ContainerNFT,
   NftTitle,
-  ContainerCardNft,
 } from "../StylesHome/ViewNftStyles.jsx";
 
 import { Link } from "react-router-dom";
@@ -59,19 +58,15 @@ export const ViewNft = () => {
 
   const dispatch = useDispatch();
 
-  const [mynft, setNft] = useState([]);
-
   const instantCallback = useCallback(dispatch, [dispatch]);
 
   useEffect(() => {
-    if (Object.keys(nft).length === 0) {
+    if (nft.length === 0) {
       instantCallback(getAllNft());
     }
-    setNft(nft);
-  }, [instantCallback, mynft]);
+  }, [instantCallback, nft]);
 
   const token = localStorage.getItem("token")
-
 
   return (
     <ContainerNFT>
@@ -100,10 +95,6 @@ export const ViewNft = () => {
       </ContainerTitleCategory>
       <Swiper
         modules={[Navigation, Scrollbar, A11y]}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
         grabCursor={true}
         breakpoints={{
           320: {
@@ -190,10 +181,6 @@ export const ViewNft = () => {
             spaceBetween: 45,
           },
         }}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
       >
         {nft
           ?.filter((x) => x.category.name === "Sports")

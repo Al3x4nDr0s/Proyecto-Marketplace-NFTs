@@ -5,10 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, Pagination, Autoplay } from "swiper";
 import styled from "styled-components";
 
-import image1 from "../../../../assets/img-carousel/img1.jpg";
-import image2 from "../../../../assets/img-carousel/img2.png";
-import image3 from "../../../../assets/img-carousel/img3.jpg";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -87,7 +83,7 @@ export const CollectionsCarousel = () => {
     if (collection.length === 0) {
       dispatch(getAllCollections());
     }
-  }, [dispatch]);
+  }, [dispatch, collection]);
 
   return (
     <div>

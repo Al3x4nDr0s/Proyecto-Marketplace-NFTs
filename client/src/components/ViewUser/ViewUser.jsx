@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ContainerHeaderUser,
   ContainerButton,
@@ -12,7 +12,7 @@ import {
   ModificacionPerfil,
 } from "./elements/StyleViewUser.jsx";
 
-import { Favorito } from "./Favorito/Favorito.jsx";
+// import { Favorito } from "./Favorito/Favorito.jsx";
 
 import { modificacionUser } from "../../redux/actions/index";
 import Swal from "sweetalert2";
@@ -20,7 +20,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 import Input from "../shared/Input.jsx";
 import Button from "../shared/Button.jsx";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "../../services/authService";
 import { removeUser } from "../../redux/actions/index";
@@ -96,7 +96,7 @@ export const ViewUser = React.memo(() => {
 
   //? <i className="fas fa-edit"></i>
 
-  const { username, image, favorite, collectionNft } = user;
+  const { username, image, collectionNft } = user;
 
   return (
     <>

@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "../../../Loading/Loading.jsx";
-import { getNftQuery, removeNftQuery, searchBarFilter } from "../../../../redux/actions/index";
+import { getNftQuery, searchBarFilter } from "../../../../redux/actions/index";
 import {IoIosSearch} from "react-icons/io";
 
 import { CardNft } from "../CardNft/CardNft.jsx";
@@ -17,11 +17,6 @@ const ContainerAll = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: 100%;
-`;
-
-const ContainerFilterNft = styled.div`
-  width: 100%;
-  
 `;
 
 const ContainerNft = styled.div`
@@ -119,7 +114,6 @@ const ContainerLoader = styled.div`
 `;
 
 export const AllNft = () => {
-  const nftAll = useSelector((state) => state.nfts);
   const nft = useSelector((state) => state.nftquery);
   const hasMore = useSelector((state) => state.hasMore);
   const dispatch = useDispatch();
@@ -142,9 +136,6 @@ export const AllNft = () => {
 
   const token = localStorage.getItem("token")
 
-
-  console.log(token)
-  console.log(search)
   const fecthNft = () => {
     setTimeout(() => {
       if (hasMore) {

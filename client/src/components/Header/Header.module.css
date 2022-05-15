@@ -25,6 +25,22 @@
   transition-delay: 0s, 0.75s;
 }
 
+@media (max-width: 678px) {
+  .navigation {
+    position: fixed;
+    top: 20px;
+    right: 8px;
+  }
+
+  .navigation .userBox {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
+    transition-delay: 0.5s;
+  }
+}
+
 .navigation .userBox {
   /* position: relative; */
   width: 60px;

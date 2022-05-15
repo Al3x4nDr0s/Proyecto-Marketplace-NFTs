@@ -1,7 +1,7 @@
 import Input from "../shared/Input.jsx";
 import axios from "axios";
 import styled, { css } from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import GoogleLogin from "react-google-login";
@@ -132,25 +132,7 @@ export const Register = () => {
       });
   };
 
-  const handleOnBlur = (e) => {};
-
   const handleLogin = (googleData) => {
-    /* axios
-    .post("http://localhost:4000/auth/google",
-      {token: googleData.tokenId,
-      givenName: googleData.profileObj.givenName,
-      familyName: googleData.profileObj.familyName })
-      .then((res) => {
-        console.log(res.data)
-        setLoginData(res.data);
-        localStorage.setItem('loginData', JSON.stringify(res.data))
-        
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-        alert(e.response.data.msg);
-      });
-      */
     console.log(googleData);
     localStorage.setItem("token", JSON.stringify(googleData));
     navigate("/home");
@@ -243,7 +225,6 @@ export const Register = () => {
                   placeholder="Enter your password"
                   padding= ".5rem"
                   onChange={handleChange}
-                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.password}</MsgError>
@@ -257,7 +238,6 @@ export const Register = () => {
                   padding= ".5rem"
                   placeholder="Enter your phone number"
                   onChange={handleChange}
-                  //onBlur={handleOnBlur}
                   width="100%"
                 />
                 <MsgError>{errors.phone}</MsgError>
@@ -392,6 +372,10 @@ const FormButtons = styled.div`
   width: 60%;
   align-items: center;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const Form = styled.form`
@@ -414,6 +398,11 @@ const FormContainer = styled.div`
   border-radius: 1rem;
   margin: 5% 25% 0% 25%;
   padding: 2% 2%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
 
 const ContainerAccept = styled.div`

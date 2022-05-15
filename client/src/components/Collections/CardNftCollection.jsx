@@ -17,6 +17,15 @@ const ContenedorMainColecciones = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+`;
+
+const ContenedorTitleCollectionsType = styled.div`
+  margin: 0 auto;
+  width: 85%;
 `;
 
 export default function CardNftCollection() {
@@ -40,9 +49,9 @@ export default function CardNftCollection() {
 
   return (
     <ContenedorDeCardsColecciones>
-      <div style={{width: "20%", margin: "0 auto"}}>
+      <ContenedorTitleCollectionsType>
       <h1 style={{color: "var(--secondFontColor)", textAlign: "center", marginBottom: "1.5rem", borderBottom: '2px solid var(--mainBackGroundButtonColor)'}}>Colecciones - {name}</h1>
-      </div>
+      </ContenedorTitleCollectionsType>
       <ContenedorMainColecciones>
         {myNft?.length ? (
           myNft.map((x) => (
