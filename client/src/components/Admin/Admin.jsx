@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { TableNft } from "./Tables/TableNft.jsx";
 import { TableCategory } from "./Tables/TableCategory.jsx";
@@ -110,7 +110,7 @@ export const Admin = () => {
             itemsPerPage={itemsPerPage}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
-          />
+          /> 
           <TableCategory
             category={category}
             currentPage={currentPage}

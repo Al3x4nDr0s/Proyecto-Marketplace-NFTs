@@ -12,7 +12,6 @@ import {
   ModificacionPerfil,
 } from "./elements/StyleViewUser.jsx";
 
-// import { Favorito } from "./Favorito/Favorito.jsx";
 
 import { modificacionUser } from "../../redux/actions/index";
 import Swal from "sweetalert2";
@@ -28,12 +27,60 @@ import { removeUser } from "../../redux/actions/index";
 import axios from "axios";
 
 export const ViewUser = React.memo(() => {
+  const paginaWallet = () => window.open( `https://metamask.io/download/`)
+
   const { idUser } = useParams();
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+
+  const token = localStorage.getItem("token")
+
+  const [currentAccount, setCurrentAccount] = useState(null);
+  
+  const checkWalletIsConnected = async () => {
+    const { ethereum } = window;
+    console.log(ethereum);
+
+    if (!ethereum) {
+      console.log("Make sure you have Metamask installed!");
+      return;
+    } else {
+      console.log("Wallet exists! We're ready to go!");
+    }
+
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    console.log('account' ,accounts);
+    if (accounts.length !== 0) {
+      const account = accounts[0];
+      console.log("Found an authorized account:", account);
+      setCurrentAccount(account);
+    } else {
+      console.log("No authorized account found!");
+    }
+  }
+  const connectWalletHandler = async () => {
+    const { ethereum } = window;
+
+    if (!ethereum) {
+      
+      return paginaWallet()
+    };
+
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log("Found an account! Address:", accounts[0]);//numero de cuenta en accounts
+      setCurrentAccount(accounts[0]);
+    } catch (err) {
+      console.log(err);
+    };
+  };
+  useEffect(() => {
+    checkWalletIsConnected();
+  }, [])
 
   const handleUser = async () => {
     const { value: formValues } = await Swal.fire({
@@ -94,6 +141,10 @@ export const ViewUser = React.memo(() => {
     });
   };
 
+  //! crear el handle para actualizacion de img perfil
+  //! crear la actions para la modificacion de img de perfil
+  //! traerse el token del localStorage
+
   //? <i className="fas fa-edit"></i>
 
   const { username, image, collectionNft } = user;
@@ -107,9 +158,16 @@ export const ViewUser = React.memo(() => {
             <ModificacionPerfil onClick={() => console.log("enia")}><i className="fas fa-plus" style={{position: "relative", left: "5px"}}></i></ModificacionPerfil>
           </div>
           <div>
-            <h2>{username}</h2>
+            <h2>{username}</h2> - <span>{currentAccount ? " Wallet connected" : currentAccount}</span>
             <p style={{ color: "var(--colorInfo)" }}>
-              Calificacion como vendedor - 10/10
+              {
+                <div>
+                <div>
+                  Wallet Address: {currentAccount ? currentAccount : "No Wallet Connected"}
+                </div>
+                
+              </div> 
+              }
             </p>
           </div>
         </div>

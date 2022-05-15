@@ -18,6 +18,7 @@ import { Dashboard } from "./components/Admin/secciones/Dashboard.jsx";
 import { Register } from "./components/Register/Register.jsx";
 import Collections from "./components/Collections/Collections.jsx";
 import { Admin } from "./components/Admin/Admin.jsx";
+// import  Admin  from "./components/Admin/admin/AdminApp";
 import CardNftCollection from "./components/Collections/CardNftCollection.jsx";
 import "./App.css";
 import { MisPublicaciones } from "./components/ViewUser/Publicaciones/MisPublicaciones.jsx";
@@ -52,6 +53,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      {/* <SoftUIControllerProvider> */}
         <Routes>
           <Route exact path={"/"} element={<LandingPage />} />
           <Route element={<MainLayout />}>

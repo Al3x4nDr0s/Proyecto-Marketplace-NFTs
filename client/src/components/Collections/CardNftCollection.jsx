@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { filterNft } from "../../redux/actions/index.js";
 import { CardNft } from "../Home/elements/CardNft/CardNft.jsx";
 import styled from "styled-components";
