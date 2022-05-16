@@ -203,7 +203,7 @@ export const filterByFileType = (id) => async dispatch => {
 }
 export const searchBarFilter = (name) => async dispatch => {
     try {
-        const dataCurrencies = await axios.get('http://localhost:4000/nft?search=' + name)
+        const dataCurrencies = await axios.get('https://sevendevs-backend.herokuapp.com/nft?search=' + name)
         const finallyDataCategory = await dispatch({
             type: SEARCHBAR_FILTER,
             payload: dataCurrencies.data.nfts
