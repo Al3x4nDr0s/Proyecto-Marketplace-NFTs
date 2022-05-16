@@ -4,26 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
  
 
- export const isMetamaskInstalled = async () => {
-    const { ethereum } = window;
-    console.log(ethereum);
-    if (!ethereum) {
-      alert("Please Install Metamask!!");
-
-    } else {
-      try {
-        const accounts = await ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        console.log("Found an Account! Address: ", accounts[0]);
-        return accounts[0];
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
-  export const isMetamaskInstalledp = async () => {
+   export const isMetamaskInstalledp = async () => {
     const { ethereum } = window;
     console.log(ethereum);
     if (!ethereum) {
@@ -125,6 +106,20 @@ import Swal from 'sweetalert2';
   }
   catch(e){
     alert('Error al guardar transaccion!!');
+    return false;
+    
+  }
+  };
+
+  export const putNft = async (id, update) => {
+    try{
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+      const res = (await axios.post(`http://localhost:4000/nft/${id}`,update)).data;
+      console.log(res);
+    return res;
+  }
+  catch(e){
+    alert('Sale Types Update Error!!');
     return false;
     
   }

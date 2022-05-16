@@ -23,7 +23,7 @@ const Timer = ({startDate, finishDate ,setTimerItems} ) => {
       const hours = Math.floor((duration % ms1d) / ms1h);
       const min = Math.floor((duration % ms1h) / ms1m);
       const sec = Math.floor((duration % ms1m) / ms1s);
-  
+      if(days>=0&&hours>=0&&min>=0&&sec>=0){
   
      console.log(days);
      console.log(hours);
@@ -31,9 +31,17 @@ const Timer = ({startDate, finishDate ,setTimerItems} ) => {
      console.log(sec);
      
      setTimeout(()=>{
+       
       setTimerItems({days, hours, min, sec});
+       },1000);
+       
+      }
+      else{
+        return(
+          <p>Oferta Finalizada</p>
+        )
 
-    },1000) 
+      }
    
    
     return (

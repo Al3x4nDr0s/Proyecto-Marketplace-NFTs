@@ -98,6 +98,7 @@ useEffect(()=>{
 
   const handlePayClick=async()=>{
     const acc = await isMetamaskInstalledp();
+    console.log(acc);
     if(acc){
       setAccount(acc);
       const saldo = await saldoWallet();
@@ -120,13 +121,23 @@ useEffect(()=>{
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Metamask Installed, but not connected!!!!',
+          text: 'Insufficient Funds!!!!',
           
         })
-        //alert('Metamask Installed, but not connected!!!');
+        
       }
      
      
+    }
+    else{
+      
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Metamask Installed, but not connected!!!',
+          
+        })
+
     }
 
 
