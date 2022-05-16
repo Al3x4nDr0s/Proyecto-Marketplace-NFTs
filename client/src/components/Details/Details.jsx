@@ -15,7 +15,7 @@ import { getAllNft } from "../../redux/actions";
 import Timer from "./Timer";
 import imgAudio from '../../assets/nft-audio.jpg';
 import imgVideo from '../../assets/azuki-nft.gif';
-import {isMetamaskInstalledp, saldoWallet, payPurchase, searchWalletAddress} from './Metamask';
+import {isMetamaskInstalledp, saldoWallet, payPurchase, searchWalletAddress, putNft} from './Metamask';
 import Swal from 'sweetalert2';
 
 
@@ -114,6 +114,7 @@ useEffect(()=>{
         transaction_type:"6272dae3d6b583da5e6e5568"
       }
         const pay = await payPurchase(nft[0].price,wallet,transact);
+        const updateSaleTypes = putNft(nft[0]._id,{"sales_types":"62681a95ae667f54d92828c2"});
         
         navigate('/home')
       }

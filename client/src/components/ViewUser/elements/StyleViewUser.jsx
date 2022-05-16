@@ -7,7 +7,7 @@ export const ContainerHeaderUser = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3.2rem auto 2rem auto;
+  margin: 6.5rem auto 2rem auto;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 `;
@@ -15,7 +15,7 @@ export const ContainerHeaderUser = styled.div`
 export const ContainerButton = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 30%;
   @media (max-width: 1600px) {
     width: 29%;
   }
@@ -50,6 +50,9 @@ export const ContainerMisPreferencias = styled.div`
   height: 200px;
   line-height: 140px;
   text-align: center;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .2rem; */
   width: 92%;
   border-radius: 0.6rem;
   padding: 1.5rem;
@@ -117,6 +120,7 @@ const ImgPerfil = styled.div`
   background-image: ${(props) => `url(${props.background})`};
   background-repeat: no-repeat;
   background-size: contain;
+  position: relative;
   height: 60px;
   margin-right: 10px;
   border-radius: 50%;
@@ -132,6 +136,21 @@ export const ImagenPerfil = (props) => {
     <ImgPerfil background={background}/>
   )
 }
+
+export const ModificacionPerfil = styled.div`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: absolute;
+  border: 1px solid var(--mainBackGroundButtonColor);
+  background-color: var(--mainBackGroundButton);
+  top: 0;
+  right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export const InputData = styled.div`
   display: flex;

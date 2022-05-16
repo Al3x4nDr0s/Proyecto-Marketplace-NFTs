@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import Button from './shared/Button';
+import React from 'react';
 import {Link} from 'react-router-dom'
 import styled from 'styled-components';
 import fondo1 from '../assets/img-landing/landing-op1.jpg';
