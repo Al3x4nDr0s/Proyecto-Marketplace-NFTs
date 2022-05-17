@@ -24,7 +24,8 @@ import {
     DELETE_NFT,
     CREATE_CURRENCIES,
     CREATE_SALES_TYPES,
-    SEARCHBAR_FILTER
+    SEARCHBAR_FILTER,
+    FILTER_CONTRACT_TOKEN
 } from "../actions";
 
 
@@ -44,7 +45,8 @@ const initialState = {
     sales_type: [],
     files_type: [],
     currencies: [],
-    open: false
+    open: false,
+    contract: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -114,6 +116,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filterNfts: filters
+            }
+        case FILTER_CONTRACT_TOKEN:
+            return {
+                ...state,
+                contract: [...state.contract, action.payload]
             }
 
         case REMOVE_NFT_QUERY:

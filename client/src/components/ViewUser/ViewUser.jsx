@@ -172,7 +172,9 @@ export const ViewUser = React.memo(() => {
             title="MIS PUBLICACIONES"
             onClick={() => navigate(`/myprofile/mispublicaciones`)}
           />
-          <Button title="WALLET" />
+          <Button 
+          title="WALLET" 
+          onClick={connectWalletHandler}/>
           <Button title="LOGOUT" />
         </ContainerButton>
       </ContainerHeaderUser>

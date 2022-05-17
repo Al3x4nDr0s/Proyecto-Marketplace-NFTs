@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../shared/Button.jsx";
 import {
   postNft,
@@ -12,6 +12,7 @@ import {
 } from "../../redux/actions";
 
 import Input from "../shared/Input.jsx";
+
 
 const ContainerCreateNft = styled.div`
   width: 60%;
@@ -111,11 +112,14 @@ export const CreateNft = () => {
 
   const dispatch = useDispatch();
 
+  const location = useLocation();
+  const contracts = location.state.contract[0]
+
   const [data, setData] = useState({
     name: "",
     // image: "",
     description: "",
-    contract_address: "",
+    contract_address: contracts,
     category: "",
     price: 0,
     sales_types: "",
@@ -258,17 +262,17 @@ export const CreateNft = () => {
           </ContainerGridLabelInput>
         </div>
         <div>
-          <ContainerGridLabelInput>
+          {/* <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Contract Address</label>
-            <Input
+            {/* <Input
               placeholder="Address..."
               padding=".4rem"
               width="75%"
               onChange={(e) => handleInput(e)}
               value={data.contract_address}
               name="contract_address"
-            />
-          </ContainerGridLabelInput>
+            /> */}
+          {/* </ContainerGridLabelInput> */ }
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Category</label>
             <SelectType name="category" onChange={(e) => handleSelect(e)}>
