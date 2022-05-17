@@ -113,7 +113,6 @@ export const CreateNft = () => {
 
   const [data, setData] = useState({
     name: "",
-    // image: "",
     description: "",
     contract_address: "",
     category: "",
@@ -160,16 +159,6 @@ export const CreateNft = () => {
     });
   };
 
-  // const handleInputDetails = (e) => {
-  //   setDataDetails({
-  //     ...dataDetails,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   setData({
-  //     ...data,
-  //     details: dataDetails,
-  //   });
-  // };
 
   const handleImage = (e) => {
     e.preventDefault();
@@ -205,7 +194,6 @@ export const CreateNft = () => {
       });
       setSend(true);
       alert("nft creado correctamente");
-      // navigate("/home");
     } else {
       alert("no se pudo crear el nft");
     }
@@ -235,7 +223,6 @@ export const CreateNft = () => {
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Image</label>
             <Input
-              placeholder="URL image..."
               padding=".4rem"
               width="75%"
               type="file"

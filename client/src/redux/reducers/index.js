@@ -24,7 +24,7 @@ import {
     DELETE_NFT,
     CREATE_CURRENCIES,
     CREATE_SALES_TYPES,
-    SEARCHBAR_FILTER
+    SEARCHBAR_FILTER,
 } from "../actions";
 
 

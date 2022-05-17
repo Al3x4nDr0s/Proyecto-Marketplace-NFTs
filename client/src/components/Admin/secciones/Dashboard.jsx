@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "../admin.module.css";
 
-import {
-  BsFillPersonFill,
-  BsKanbanFill,
-  BsMinecart,
-} from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { BsFillPersonFill, BsKanbanFill, BsMinecart } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export const Dashboard = () => {
-  const isOpen = useSelector((state) => state.open)
+  const isOpen = useSelector((state) => state.open);
 
-  const nfts = useSelector((state) => state.nfts)
+  const nfts = useSelector((state) => state.nfts);
 
-  const users = useSelector((state) => state.users)
-
-
+  const users = useSelector((state) => state.users);
 
   return (
-    <div className={isOpen === true ? styles.mainContent : styles.mainContentClose}>
+    <div
+      className={isOpen === true ? styles.mainContent : styles.mainContentClose}
+    >
       <main>
         <div className={styles.cards}>
           <div className={styles.cardSingle}>

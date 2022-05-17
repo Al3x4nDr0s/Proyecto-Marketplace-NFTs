@@ -215,7 +215,6 @@ export const searchBarFilter = (name) => async dispatch => {
 }
 
 
-
 export const getSalesType = () => async dispatch => {
     try {
         const dataSalesType = await axios.get('https://sevendevs-backend.herokuapp.com/misc/sales_type')
