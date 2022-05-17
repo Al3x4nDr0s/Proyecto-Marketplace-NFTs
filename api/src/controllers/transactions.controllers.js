@@ -57,6 +57,7 @@ const getTransByUserId = async (req, res) => {
 
 const createTransaction = async (req, res) => {
     try {
+        console.log(req.body);
         const newTransaction = new Transactions(req.body);
         await newTransaction.save();
         res.status(200).json({

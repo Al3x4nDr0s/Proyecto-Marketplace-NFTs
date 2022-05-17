@@ -49,7 +49,12 @@ const UserSchema = Schema({
     confirm_email: {
         type: Boolean,
         default: false
+    },
+    wallet: {
+        type: String ,
+        
     }
+
     
 });
 //? schema methods for user model

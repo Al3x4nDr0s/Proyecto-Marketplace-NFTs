@@ -2,37 +2,28 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../Modal.jsx";
 import authService from "../../services/authService";
-import {
-  setModalOpening,
-  getTokenUser,
-  removeUser,
-} from "../../redux/actions/index";
+import { getTokenUser, removeUser } from "../../redux/actions/index";
 import Button from "../shared/Button";
-
-// import { createPortal } from "react-dom";
 import { IoIosLogOut } from "react-icons/io";
-import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
+import { FaUserCircle, FaInfoCircle, FaBuffer } from "react-icons/fa";
+import Logo from "../../assets/logo.png";
 
 import Swal from "sweetalert2";
-// import alertify from 'alertifyjs';
 
-import "./header.css";
+import 'sweetalert2/dist/sweetalert2.css'
 
-// alertify
-
-import { IoApps } from "react-icons/io5";
-import axios from "axios";
+import styles from './Header.module.css';
 
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
-  /* position: fixed; */
-  /* top: 0;
-    left: 0; */
-  /* background-color: var(--mainContainersColor); */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   align-items: center;
+  background-color: #46198f47;
   justify-content: space-between;
   height: 85px;
   max-width: 100vw;
@@ -59,6 +50,10 @@ const LogoContainer = styled.div`
   &:hover img {
     transform: scale(1.05);
   }
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 
 const ButtonsContainer = styled.div`
@@ -73,13 +68,13 @@ const ButtonsContainer = styled.div`
       text-decoration-thickness: 3px;
     }
   }
-`;
-
-const EtiquetaHamburgesa = styled.a`
-  visibility: visible;
 
   @media (max-width: 768px) {
-    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin: 0 auto;
   }
 `;
 
@@ -124,39 +119,81 @@ function Header() {
     navigate("/home");
   }
 
-  //   function handleModalClick(e) {
-  //     dispatch(setModalOpening(true));
-  //   }
-  //   function X() {
-  //     return createPortal(<div>Portal</div>, document.querySelector(".modal"));
-  //   }
-
   return (
     <StyledNav>
       <LogoContainer onClick={(e) => handleLogoClick(e)}>
-        <img src={require("../../assets/logo.png")} alt="not found" />
+        <img src={Logo} alt="not found" />
       </LogoContainer>
-      {jwt ? (
+      {(jwt && userData?.user_type?.name === "admin") ? (
+         <>
+         <div className={`${styles.navigation} ${isActive ? `${styles.active}` : ""}`}>
+           <div className={styles.userBox}>
+             <div className={styles.imageBox}>
+               <img src={userData.image} alt="foto-1" />
+             </div>
+             <p className={styles.username}>{userData.username}</p>
+           </div>
+           <div className={styles.menuToggle} onClick={(e) => handleClick(e)}>
+             <ul className={styles.menu}>
+               <li>
+                 <ContainerItemsMenu>
+                   <FaUserCircle style={{ width: "22px", height: "42px" }} />
+                   <Link to={`/admin/menuadmin`}>Admin</Link>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                   <FaInfoCircle style={{ width: "22px", height: "42px" }} />
+                   <Link to={"/about"}>About</Link>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                 <FaBuffer style={{ width: "22px", height: "42px" }} />
+                   <Link to={"/home/collections/"} style={{marginLeft: "1rem"}}>Collections</Link>
+                 </ContainerItemsMenu>
+               </li>
+               <li>
+                 <ContainerItemsMenu>
+                   <IoIosLogOut style={{ width: "22px", height: "42px" }} />
+                   <Link to="/home" onClick={handleLogout}>
+                     Logout
+                   </Link>
+                 </ContainerItemsMenu>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </>
+      ) 
+      : jwt 
+      ? (
         <>
-          <div className={`navigation ${isActive ? "active" : ""}`}>
-            <div className="user-box">
-              <div className="image-box">
+          <div className={`${styles.navigation} ${isActive ? `${styles.active}` : ""}`}>
+            <div className={styles.userBox}>
+              <div className={styles.imageBox}>
                 <img src={userData.image} alt="foto-1" />
               </div>
-              <p className="username">{userData.username}</p>
+              <p className={styles.username}>{userData.username}</p>
             </div>
-            <div className="menu-toggle" onClick={(e) => handleClick(e)}>
-              <ul className="menu">
+            <div className={styles.menuToggle} onClick={(e) => handleClick(e)}>
+              <ul className={styles.menu}>
                 <li>
                   <ContainerItemsMenu>
                     <FaUserCircle style={{ width: "22px", height: "42px" }} />
-                    <Link to="/myprofile">Profile</Link>
+                    <Link to={`/myprofile/${userData.uid}`}>Profile</Link>
                   </ContainerItemsMenu>
                 </li>
                 <li>
                   <ContainerItemsMenu>
                     <FaInfoCircle style={{ width: "22px", height: "42px" }} />
-                    <a href="#">About</a>
+                    <Link to={"/about"}>About</Link>
+                  </ContainerItemsMenu>
+                </li>
+                <li>
+                  <ContainerItemsMenu>
+                  <FaBuffer style={{ width: "22px", height: "42px" }} />
+                    <Link to={"/home/collections/"} style={{marginLeft: "1rem"}}>Collections</Link>
                   </ContainerItemsMenu>
                 </li>
                 <li>
@@ -170,50 +207,18 @@ function Header() {
               </ul>
             </div>
           </div>
-          {/* <Button title="PERFIL" onClick={() => navigate("myprofile")} />
-            <Button title="LOGOUT" onClick={handleLogout} /> */}
         </>
       ) : (
         <>
           <ButtonsContainer>
             <Link to={"/home"}>Home</Link>
             <Link
-              to={"/home"}
-              onClick={() =>
-                Swal.fire({
-                  title: "In Construction",
-                  width: 600,
-                  padding: "3em",
-                  color: "var(--secondFontColor)",
-                  background: "#46198fb3",
-                  backdrop: `
-                #21217750
-                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-                left top
-                no-repeat
-              `,
-                })
-              }
+              to={"/about"}
             >
               About
             </Link>
             <Link
-              to={"/home"}
-              onClick={() =>
-                Swal.fire({
-                  title: "In Construction",
-                  width: 600,
-                  padding: "3em",
-                  color: "var(--secondFontColor)",
-                  background: "#46198fb3",
-                  backdrop: `
-                #2121774c
-                url("https://static.wixstatic.com/media/98a066_b36ecd03055c4f12b0b00651ae9d0ce3~mv2.gif")
-                left top
-                no-repeat
-              `,
-                })
-              }
+              to={"/home/collections/"}
             >
               Collections
             </Link>
@@ -225,8 +230,6 @@ function Header() {
           </ButtonsContainer>
         </>
       )}
-
-      {/* <Button title={"PRUEBA"} onClick={() => alertify.alert('prueba')}/> */}
     </StyledNav>
   );
 }

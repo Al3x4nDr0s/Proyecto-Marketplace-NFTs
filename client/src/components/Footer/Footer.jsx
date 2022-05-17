@@ -14,24 +14,22 @@ const ContainerFooter = styled.div`
   justify-content: space-between;
   padding-top: 1rem;
   margin-top: auto;
-  /* background-color: var(--mainContainersColor); */
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const ContainerImagen = styled.div`
   margin-left: 5rem;
-`;
 
-const ContainerNewsletter = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  width: 30%;
-  h3 {
-    font-size: 1.3rem;
-    color: var(--secondFontColor);
-  }
-  input {
-    width: 90%;
+  @media (max-width: 768px) {
+    margin: 0 auto;
   }
 `;
 
@@ -42,6 +40,12 @@ const ContainerInfoFooter = styled.div`
   margin-right: 7rem;
   h3 {
     color: var(--secondFontColor);
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
   }
 `;
 
@@ -68,7 +72,7 @@ const ContainerSoporte = styled.div`
   h3 {
     color: var(--secondFontColor);
   }
-  
+
   a {
     color: var(--colorInfo);
     text-decoration: none;
@@ -79,9 +83,13 @@ const ContainerSoporte = styled.div`
   }
 `;
 
+const ContainerDerechoAutor = styled.div`
+
+`;
+
 const Footer = () => {
   return (
-    <footer style={{marginTop: "1.5rem"}}>
+    <footer>
       <ContainerFooter>
         <ContainerImagen>
           <Link to="/home">
@@ -107,15 +115,23 @@ const Footer = () => {
               Que son los NFT ?
             </a>
           </p>
-          <p><a href="#">Como comprar un NFT</a></p>
+          <p>
+            <a href="#">Como comprar un NFT</a>
+          </p>
         </ContainerInfo>
         <ContainerSoporte>
           <div>
             <h3>Soporte</h3>
           </div>
-          <p><a href="#">Danos tu opinion</a></p>
-          <p><a href="#">Charla con el asistente virtual</a></p>
-          <p><a href="#">Preguntas frecuentes</a></p>
+          <p>
+            <a href="#">Danos tu opinion</a>
+          </p>
+          <p>
+            <a href="#">Charla con el asistente virtual</a>
+          </p>
+          <p>
+            <a href="#">Preguntas frecuentes</a>
+          </p>
         </ContainerSoporte>
         <ContainerInfoFooter>
           <div>
@@ -134,17 +150,19 @@ const Footer = () => {
           </div>
         </ContainerInfoFooter>
       </ContainerFooter>
-      <h4
-        style={{
-          // backgroundColor: "var(--mainContainersColor)",
-          textAlign: "center",
-          color: "var(--colorInfo)",
-          paddingBottom: "1rem",
-          paddingTop: "1rem",
-        }}
-      >
-        @ Derechos reservados 7DevsNFT
-      </h4>
+      <ContainerDerechoAutor>
+        <h4
+          style={{
+            // backgroundColor: "var(--mainContainersColor)",
+            textAlign: "center",
+            color: "var(--colorInfo)",
+            paddingBottom: "1rem",
+            paddingTop: "1rem",
+          }}
+        >
+          @ Derechos reservados 7DevsNFT
+        </h4>
+      </ContainerDerechoAutor>
     </footer>
   );
 };

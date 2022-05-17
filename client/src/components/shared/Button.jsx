@@ -30,14 +30,14 @@ const StyledButton = styled.button`
   }
 `;
 
-const iconDictionary = {
-    search: "https://cdn-icons-png.flaticon.com/512/64/64673.png",
-}
+// const iconDictionary = {
+//     search: "https://cdn-icons-png.flaticon.com/512/64/64673.png",
+// }
 
 export default function Button(props) {
-  const { title, color, icon, onClick, padding, width, margin } = props;
+  const { title, color, onClick, padding, width, margin } = props;
   return <StyledButton color={color} onClick={onClick} width={width} padding={padding} margin={margin}>
-      {icon && <img src={iconDictionary[icon] }/>}
+      {/* {icon && <img src={iconDictionary[icon] }/>} */}
       {title}
       </StyledButton>;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import axios from 'axios';
@@ -15,7 +15,8 @@ import { getAllNft } from "../../redux/actions";
 import Timer from "./Timer";
 import imgAudio from '../../assets/nft-audio.jpg';
 import imgVideo from '../../assets/azuki-nft.gif';
-import Metamask from './Metamask.jsx';
+import {isMetamaskInstalledp, saldoWallet, payPurchase, searchWalletAddress, putNft} from './Metamask';
+import Swal from 'sweetalert2';
 
 
 
@@ -27,7 +28,7 @@ const AuctionRequest = async(sales_type,)=>{
 
 
 export const Details = () => {
-  console.log("Inicio");
+  let navigate = useNavigate();
   const location = useLocation();
   const idNft = location.pathname.split("/")[2];
   const cards = useSelector((state) => state.nfts);
@@ -41,26 +42,12 @@ export const Details = () => {
   const [cantLikes, setCantLikes]= useState(nft[0].likes);
   const [errors, setErrors] = useState({auction:'false'});
   const [visibledisabled, setVisibleEnabled] = useState({description:false, details:false });
- 
+  const [account, setAccount] = useState(false);
 
-  console.log(nft[0]._id);
-  console.log(nft[0].name);
+  console.log("Nft Id: ", nft[0]._id);
+  console.log("Nft Name: ", nft[0].name);
   
-  /*
-  if((nft[0].sales_types.name==="Live Auction"&&!timerEnabled)){
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-    axios.get(`http://localhost:4000/auction/${idNft}`)
-                         .then(res=>{
-                           console.log(res.data[0]);
-                           setInfoTimer({startDate: res.data[0].startDate, finishDate:res.data[0].finishDate});
-                           setTimerEnabled(true);
-                          })  
-    console.log("Nft con Subasta");
-   
-
-  } */
-
-  useEffect(()=>{
+    useEffect(()=>{
     console.log("Entrando a UseEffect Auction");
     console.log(nft[0].sales_types.name);
     if((nft[0].sales_types.name==="Live Auction")){
@@ -109,11 +96,52 @@ useEffect(()=>{
     
   };
 
-  const handlePayClick=()=>{
-    console.log("Entrando a Click");
-    return(
-    <Metamask />
-    )
+  const handlePayClick=async()=>{
+    const acc = await isMetamaskInstalledp();
+    console.log(acc);
+    if(acc){
+      setAccount(acc);
+      const saldo = await saldoWallet();
+      const wallet = await searchWalletAddress(nft[0].details.owner._id);
+      
+      if(saldo>Number(nft[0].price)){
+        console.log(nft[0].details.user_creator)
+        let transact= {
+          userId:nft[0].details.owner_id,
+        nftId: nft[0]._id,
+        currencies:nft[0].currencies._id,
+        amount: nft[0].price,
+        transaction_type:"6272dae3d6b583da5e6e5568"
+      }
+        const pay = await payPurchase(nft[0].price,wallet,transact);
+        const updateSaleTypes = putNft(nft[0]._id,{"sales_types":"62681a95ae667f54d92828c2"});
+        
+        navigate('/home')
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Insufficient Funds!!!!',
+          
+        })
+        
+      }
+     
+     
+    }
+    else{
+      
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Metamask Installed, but not connected!!!',
+          
+        })
+
+    }
+
+
   };
   
  
@@ -229,7 +257,9 @@ useEffect(()=>{
         </Row>
 
         <Row style={{ gap: "15%", marginTop:'10px' }}>
-          <Button1 title="Buy Now" height="45px" width="350px" onClick={handlePayClick}></Button1>
+        {nft[0].sales_types.name==="Fixed Price"&&<Button1 title="Buy Now" height="45px" width="350px" onClick={handlePayClick}></Button1>
+        }
+         
           {nft[0].sales_types.name==="Live Auction"&&<Button1 title="Make Offer" height="45px" width="350px"></Button1>
             }
         </Row>
@@ -265,6 +295,7 @@ useEffect(()=>{
       ))}
        </table>
       </Column1>
+   
     </DetailsContainer>
   );
 
