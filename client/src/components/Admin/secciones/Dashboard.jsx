@@ -5,6 +5,15 @@ import styles from "../admin.module.css";
 import { BsFillPersonFill, BsKanbanFill, BsMinecart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
+import LineChartSold from "../Chart/LineChartSold.jsx";
+
+import styled from "styled-components";
+
+const ContainerChart = styled.div`
+  width: 60%;
+  margin: 2rem auto;
+`;
+
 
 export const Dashboard = () => {
   const isOpen = useSelector((state) => state.open);
@@ -53,6 +62,9 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
+        <ContainerChart>
+          <LineChartSold />
+        </ContainerChart>
 
         {/* <div className="recentFlex">
           <div className="projects">

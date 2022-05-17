@@ -106,7 +106,7 @@ export const TableFileTypes = (props) => {
 
   console.log(file);
   //? Paginado por sales types
-  for (let i = 1; i <= Math.ceil(file.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(file?.length / itemsPerPage); i++) {
     pagesFileTypes.push(i);
   }
 
@@ -115,7 +115,7 @@ export const TableFileTypes = (props) => {
   const indexOfLastItemFiles = currentPage.fileTypes * itemsPerPage; //? index last of sales type
   const indexOfFirstItemFiles = indexOfLastItemFiles - itemsPerPage; //? index first of sales type
 
-  const currentItemsFile = file.slice(
+  const currentItemsFile = file?.slice(
     indexOfFirstItemFiles,
     indexOfLastItemFiles
   ); //? items per sales type

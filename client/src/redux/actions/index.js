@@ -27,6 +27,7 @@ export const DELETE_NFT = 'DELETE_NFT';
 export const CREATE_CURRENCIES = 'CREATE_CURRENCIES';
 export const CREATE_SALES_TYPES = 'CREATE_SALES_TYPES';
 export const SEARCHBAR_FILTER = 'SEARCHBAR_FILTER';
+export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 
 
 
@@ -140,6 +141,19 @@ export const getCategory = () => async dispatch => {
             payload: dataCategory.data
         })
         return finallyDataCategory
+    } catch (error) {
+        console.log('error:', error)
+    }
+}
+export const getTransactions = () => async dispatch => {
+    try {
+        const dataTransactions = await axios.get('https://sevendevs-backend.herokuapp.com/trans')
+        console.log(dataTransactions.data)
+        const pruebatrans = await dispatch({
+            type: GET_TRANSACTIONS,
+            payload: dataTransactions.data
+        })
+        return pruebatrans
     } catch (error) {
         console.log('error:', error)
     }
@@ -277,11 +291,6 @@ export const postNft = (tokenuser, item, formData) => async dispatch => {
             type: CREATE_NFT,
             payload: obj1
         })
-
-        // const finallyUpdateImageNft = await dispatch({
-        //     type: UPDATE_IMAGE_NFT,
-        //     payload: dataImageNft.data.url
-        // })
         return responsePost
     } catch (error) {
         console.log("paso por aqui perro asi que hay", error)

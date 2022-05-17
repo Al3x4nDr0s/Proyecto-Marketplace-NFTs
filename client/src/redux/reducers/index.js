@@ -25,6 +25,7 @@ import {
     CREATE_CURRENCIES,
     CREATE_SALES_TYPES,
     SEARCHBAR_FILTER,
+    GET_TRANSACTIONS
 } from "../actions";
 
 
@@ -42,9 +43,9 @@ const initialState = {
     nft: {},
     category: [],
     sales_type: [],
-    files_type: [],
+    file_types: [],
     currencies: [],
-    open: false
+    transactions:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -61,6 +62,8 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, nftquery: action.payload, hasMore: false }
         case CURRENCY_FILTER:
             return { ...state, nftquery: action.payload, hasMore: false }
+        case GET_TRANSACTIONS:
+            return { ...state, transactions: action.payload }
         case SEARCHBAR_FILTER:
             return { ...state, nftquery: action.payload }
         case GET_TOKEN:

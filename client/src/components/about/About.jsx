@@ -8,6 +8,7 @@ import cesar from "../../assets/teamCards/cesar.png"
 import alejandro from "../../assets/teamCards/alejandro.png"
 import ignacio from "../../assets/teamCards/ignacio.png"
 import TeamCards from './TeamCards';
+import LineChartSold from '../Admin/Chart/LineChartSold.jsx';
 
 const AboutUsComponent = styled.div`
     display: flex;
@@ -143,6 +144,7 @@ const About = () => {
             <h1 className='team-members'>Team Members</h1>
             <hr className='division'/>
             <TeamCards teamCardsArray={teamCards}/>
+            {/* <LineChartSold/> */}
             
         </AboutUsComponent>
 
