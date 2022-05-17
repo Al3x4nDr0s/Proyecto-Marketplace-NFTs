@@ -119,11 +119,11 @@ export const getCategory = () => async dispatch => {
 export const getTransactions = () => async dispatch => {
     try {
         const dataTransactions = await axios.get('https://sevendevs-backend.herokuapp.com/trans')
-        const finallyDataCategory = await dispatch({
+        console.log(dataTransactions.data)
+        dispatch({
             type: GET_TRANSACTIONS,
             payload: dataTransactions.data
         })
-        return finallyDataCategory
     } catch (error) {
         console.log('error:', error)
     }

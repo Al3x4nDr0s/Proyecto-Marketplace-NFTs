@@ -56,6 +56,7 @@ const rootReducer = (state = initialState, action) => {
         case CURRENCY_FILTER:
             return { ...state, nftquery: action.payload }
         case GET_TRANSACTIONS:
+            console.log(action.payload, "payload reducer")
             return { ...state, transactions: action.payload }
         case SEARCHBAR_FILTER:
             return { ...state, nftquery: action.payload }

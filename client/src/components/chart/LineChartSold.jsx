@@ -28,34 +28,34 @@ ChartJS.register(
 
 
 const ChartContainer = styled.div`
-    height: 95vh;
-    width: 100vw;
+    height: 95%;
+    width: 100%;
 `
+const months = {
+    0:"enero",
+    1:"febrero",
+    2:"marzo",
+    3:"abril",
+    4:"mayo",
+    5:"junio",
+    6:"julio",
+    7:"agosto",
+    8:"septiembre",
+    9:"octubre",
+    10:"noviembre",
+    11:"diciembre"
+}
 
 export default function LineChartSold() {
+    const transactions = useSelector(state=> state.transactions)
     
     const dispatch = useDispatch()
-    const transactions = useSelector(state=> state.transactions)
-    const months = {
-        0:"enero",
-        1:"febrero",
-        2:"marzo",
-        3:"abril",
-        4:"mayo",
-        5:"junio",
-        6:"julio",
-        7:"agosto",
-        8:"septiembre",
-        9:"octubre",
-        10:"noviembre",
-        11:"diciembre"
-    }
+    useEffect(()=>{
+        dispatch(getTransactions());
+        
+    },[])
 
     
-    useEffect(()=>{
-        
-        dispatch(getTransactions());
-    },[])
     
     console.log(transactions)
     const uniqueMonths = [...new Set(transactions?.map(t => new Date(t.create_date).getMonth()))]
@@ -98,8 +98,6 @@ export default function LineChartSold() {
     const options = {
         responsive : true,
         fill:true,
-
-        
     }
      
     const data = useMemo ( function (){ 
