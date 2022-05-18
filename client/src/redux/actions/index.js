@@ -28,6 +28,7 @@ export const CREATE_CURRENCIES = 'CREATE_CURRENCIES';
 export const CREATE_SALES_TYPES = 'CREATE_SALES_TYPES';
 export const SEARCHBAR_FILTER = 'SEARCHBAR_FILTER';
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
+export const FILTER_CONTRACT_TOKEN = 'FILTER_CONTRACT_TOKEN';
 
 
 
@@ -81,6 +82,12 @@ export const getAllCollections = () => async dispatch => {
 export function filterNft(payload) {
     return {
         type: 'FILTER_NFT',
+        payload
+    }
+};
+export function contratcToken(payload) {
+    return {
+        type: FILTER_CONTRACT_TOKEN,
         payload
     }
 };

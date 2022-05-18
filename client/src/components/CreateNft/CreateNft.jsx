@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../shared/Button.jsx";
 import {
   postNft,
@@ -12,6 +12,7 @@ import {
 } from "../../redux/actions";
 
 import Input from "../shared/Input.jsx";
+
 
 const ContainerCreateNft = styled.div`
   width: 60%;
@@ -111,10 +112,15 @@ export const CreateNft = () => {
 
   const dispatch = useDispatch();
 
+  const location = useLocation();
+  const contracts = location.state.contract[0]
+  const token_id = location.state.contract[1]
+
   const [data, setData] = useState({
     name: "",
     description: "",
-    contract_address: "",
+    contract_address: contracts,
+    token_id: token_id,
     category: "",
     price: 0,
     sales_types: "",
@@ -123,12 +129,6 @@ export const CreateNft = () => {
   });
 
   const [formData, setFormData] = useState("")
-
-  // const [dataDetails, setDataDetails] = useState({
-  //   user_creator: idUser,
-  //   owner: "",
-    
-  // });
 
   const [send, setSend] = useState(false);
 
@@ -139,17 +139,17 @@ export const CreateNft = () => {
   formDateishon.append('img', selectedImage)
 
   useEffect(() => {
-    if (
-      category.length === 0 &&
-      currency.length === 0 &&
-      filesType.length === 0 &&
-      salesType.length === 0
-    ) {
+    // if (
+    //   category.length === 0 &&
+    //   currency.length === 0 &&
+    //   filesType.length === 0 &&
+    //   salesType.length === 0
+    // ) {
       dispatch(getFileTypes());
       dispatch(getCurrencies());
       dispatch(getCategory());
       dispatch(getSalesType());
-    }
+    // }
   }, [dispatch]);
 
   const handleInput = (e) => {
@@ -160,10 +160,9 @@ export const CreateNft = () => {
   };
 
 
-  const handleImage = (e) => {
-    e.preventDefault();
-    setFormData(e.target.value)
-  }
+  // const handleImage = (e) => {
+  //   e.preventDefault();
+  //   setFormData(e.target.value)
 
   // ? Realizar el upload de la image del nft
 
@@ -174,8 +173,8 @@ export const CreateNft = () => {
     });
   };
 
-  console.log(data);
 
+  console.log(data)
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
@@ -245,17 +244,6 @@ export const CreateNft = () => {
           </ContainerGridLabelInput>
         </div>
         <div>
-          <ContainerGridLabelInput>
-            <label style={{ fontSize: "1.2rem" }}>Contract Address</label>
-            <Input
-              placeholder="Address..."
-              padding=".4rem"
-              width="75%"
-              onChange={(e) => handleInput(e)}
-              value={data.contract_address}
-              name="contract_address"
-            />
-          </ContainerGridLabelInput>
           <ContainerGridLabelInput>
             <label style={{ fontSize: "1.2rem" }}>Category</label>
             <SelectType name="category" onChange={(e) => handleSelect(e)}>

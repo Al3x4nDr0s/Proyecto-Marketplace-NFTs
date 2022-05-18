@@ -227,7 +227,6 @@ export const TableSaleTypes = (props) => {
             <RowNavTable>
               <ColNavTable>
                 <ButtonAgregar onClick={() => handleCreateSales()}>
-                  {/* <button to="/admin/create" style={{ color: "#fff" }}> */}
                   <i className="fas fa-plus"></i>
                   {/* </button> */}
                 </ButtonAgregar>
