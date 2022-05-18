@@ -1,15 +1,35 @@
 import React from "react";
 import { ethers } from "ethers";
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+
+
  
 
-   export const isMetamaskInstalledp = async () => {
+ export const isMetamaskInstalled = async () => {
     const { ethereum } = window;
     console.log(ethereum);
     if (!ethereum) {
-      Swal.fire('Please Install Metamask!!!')
-      //alert("Please Install Metamask!!");
+      alert("Please Install Metamask!!");
+
+    } else {
+      try {
+        const accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        console.log("Found an Account! Address: ", accounts[0]);
+        return accounts[0];
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
+  export const isMetamaskInstalledp = async () => {
+    const { ethereum } = window;
+    console.log(ethereum);
+    if (!ethereum) {
+      alert("Please Install Metamask!!");
     } else {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -46,10 +66,10 @@ import Swal from 'sweetalert2';
     }
   };
 
-  export const payPurchase = async (am, wallet, transact) => {
+  export const payPurchase = async (wallet, transact) => {
     try{
     //var amount = "1.0";
-    var amount = String(am);
+    var amount = String(transact.amount);
     //var addressToTransfer = "0xa36c9F2B01077454Fc977a7393Da157538148c7F";
     var addressToTransfer = wallet;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -84,7 +104,7 @@ import Swal from 'sweetalert2';
   export const searchWalletAddress = async (id) => {
     try{
       axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-      const address = (await axios.get(`http://localhost:4000/users/${id}`)).data.wallet;
+      const address = (await axios.get(`https://sevendevs-backend.herokuapp.com/users/${id}`)).data.user.wallet;
       console.log(address);
     return address;
   }
@@ -100,7 +120,7 @@ import Swal from 'sweetalert2';
   export const saveTransaction = async (transaction) => {
     try{
       axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-      const res = (await axios.post('http://localhost:4000/trans/',transaction)).data;
+      const res = (await axios.post('https://sevendevs-backend.herokuapp.com/trans/',transaction)).data;
       console.log(res);
     return res;
   }
@@ -111,12 +131,24 @@ import Swal from 'sweetalert2';
   }
   };
 
-  export const putNft = async (id, update) => {
+  export const putNft = async (idNft, details) => {
     try{
-      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-      const res = (await axios.post(`http://localhost:4000/nft/${id}`,update)).data;
-      console.log(res);
-    return res;
+      console.log(idNft);
+      console.log(details);
+      console.log(localStorage.getItem('token'));
+      axios.defaults.headers.common['Authorization'] = JSON.parse(localStorage.getItem('token'));
+      //const token = localStorage.getItem('token');
+      //console.log(token);
+      const res= await axios.put(`https://sevendevs-backend.herokuapp.com/nft/${idNft}`,details);
+      console.log(res.data);
+      /* await axios.put(`https://sevendevs-backend.herokuapp.com/nft/${idNft}`,details, {
+      headers: {
+        Authorization: JSON.parse(token)
+    }
+})*/
+
+      //console.log(res);
+    //return res;
   }
   catch(e){
     alert('Sale Types Update Error!!');
