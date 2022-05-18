@@ -252,9 +252,12 @@ const getAllNfts = async (req, res) => {
                     description: 1,
                     details: {
                         user_creator: {
+                            _id:1,
                             username: 1
+
                         },
                         owner: {
+                            _id:1,
                             username: 1
                         },
                         contract_address: 1,
@@ -269,7 +272,8 @@ const getAllNfts = async (req, res) => {
                     },
                     currencies: {
                         name: 1,
-                        image: 1
+                        image: 1,
+                        _id: 1
                     },
                     sales_types: {
                         name: 1
