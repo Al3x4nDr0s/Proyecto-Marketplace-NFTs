@@ -114,12 +114,16 @@ export const CreateNft = () => {
 
   const location = useLocation();
   const contracts = location.state.contract[0]
+  const tokens = location.state.contract[0]
+  console.log(tokens)
+  
 
   const [data, setData] = useState({
     name: "",
     // image: "",
     description: "",
     contract_address: contracts,
+    token_id: tokens,
     category: "",
     price: 0,
     sales_types: "",

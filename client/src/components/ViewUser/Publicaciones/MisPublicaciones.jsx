@@ -38,7 +38,7 @@ const ContainerHeaderPublicaciones = styled.div`
 
 export const MisPublicaciones = () => {
   const dispatch = useDispatch()
-  const [currentAccount, setCurrentAccount] = useState();
+  const [currentAccount, setCurrentAccount] = useState([]);
   const contract = useSelector((state) => state.contract);
   
   
@@ -70,7 +70,7 @@ export const MisPublicaciones = () => {
         console.log("Mining... please wait");
         await nftTxn.wait();
         console.log(`Mined, transaction hash: ${nftTxn.hash}`);
-        alert('Contract and Token created succesibled')
+        alert('Contract and Token successfully created')
       } else {
         console.log("Ethereum object does not exit");
       };
