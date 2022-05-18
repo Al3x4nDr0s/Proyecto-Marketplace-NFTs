@@ -6,30 +6,12 @@ import Swal from 'sweetalert2'
 
  
 
- export const isMetamaskInstalled = async () => {
+   export const isMetamaskInstalledp = async () => {
     const { ethereum } = window;
     console.log(ethereum);
     if (!ethereum) {
-      alert("Please Install Metamask!!");
-
-    } else {
-      try {
-        const accounts = await ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        console.log("Found an Account! Address: ", accounts[0]);
-        return accounts[0];
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
-  export const isMetamaskInstalledp = async () => {
-    const { ethereum } = window;
-    console.log(ethereum);
-    if (!ethereum) {
-      alert("Please Install Metamask!!");
+      Swal.fire('Please Install Metamask!!!')
+      //alert("Please Install Metamask!!");
     } else {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
