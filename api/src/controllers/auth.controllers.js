@@ -9,11 +9,14 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         //? validar email
-        const existEmail = await Usuario.findOne({ email }).populate('user_type', 'name');
+        const existEmail = await Usuario.findOne({ email })
+        .populate('user_type', 'name')
+        .populate('favorite', 'name');
+
         if (!existEmail) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email no esta registrado'
+                msg: 'The email is not registered'
             });
         };
         //? validar password
@@ -21,9 +24,16 @@ const login = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: 'La contraseña es incorrecta'
+                msg: 'The password is wrong'
             });
         };
+        //? si confirm email es false no puede logearse
+        // if (!existEmail.confirm_email) {
+        //     return res.status(400).json({
+        //         ok: false,
+        //         msg: 'El email no ha sido confirmado'
+        //     });
+        // }
         //? generar jwt
         const token = await generateJwt(existEmail.id);
         //? respuesta
@@ -37,7 +47,7 @@ const login = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
     };
 };
@@ -78,10 +88,10 @@ const googleSignIn = async (req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado'
+            msg: 'Unexpected error'
         });
-    }
-}
+    };
+};
 
 const renewToken = async (req, res) => {
 
@@ -93,8 +103,7 @@ const renewToken = async (req, res) => {
         usuario,
         token
     });
-
-}
+};
 
 //?export 
 module.exports = { 

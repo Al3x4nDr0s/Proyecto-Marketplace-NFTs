@@ -1,47 +1,37 @@
-import React from 'react';
-import Modal from '../Modal.jsx';
-import {useSelector, useDispatch} from "react-redux"
-import { setModalOpening } from '../../redux/actions';
-import styled from 'styled-components';
-import {ViewNft} from './elements/ViewNft.jsx'
-import { CollectionsCarousel } from './elements/CollectionsCarousel.jsx';
+import { React, useEffect, useState } from "react";
+import styled from "styled-components";
+import { ViewNft } from "./elements/ViewNft/ViewNft.jsx";
+import { CollectionsCarousel } from "./elements/CollectionCarousel/CollectionsCarousel.jsx";
+import Spinner from "../Spinner/Spinner.jsx";
 
 
-const HomeContainer = styled.div`
-    
-`
-const MainSection = styled.section`
-    /* background: rgb(71,17,137);
-    background: linear-gradient(45deg, rgba(71,17,137,1) 0%, rgba(53,7,93,1) 49%, rgba(19,5,78,1) 100%); */
-    /* height: 800px; */
-`
+
+
 const HomeTitle = styled.div`
-    color: var(--secondFontColor)
+  color: var(--secondFontColor);
 `;
 
-
 function Home() {
-    const dispatch = useDispatch()
-    const {isOpen} = useSelector(state=>({isOpen: state.isOpen}))
+  // const [ isloading, setIsLoading ] = useState(true);
 
-    return (
-        <HomeContainer>
-            <Modal 
-            
-            open={isOpen}
-            onClose={()=>dispatch(setModalOpening(false))}
-            >
-                
-            </Modal>  
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2500);
+  // })
 
-            <MainSection>
-            <HomeTitle/>
-            <CollectionsCarousel />    
-            <ViewNft />
-            </MainSection>
-
-        </HomeContainer>
-    );
+  return (
+    <>
+    {
+      // isloading === true ? <Spinner /> :
+      <div>
+        <CollectionsCarousel />
+        <HomeTitle />
+        <ViewNft />
+      </div>
+    }
+    </>
+  );
 }
 
 export default Home;

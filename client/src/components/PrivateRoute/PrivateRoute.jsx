@@ -7,6 +7,10 @@ const PrivateRoute = () => {
     const [ privateView, setPrivateView ] = useState([]);
     const navigate = useNavigate();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3c90c9b9d97ba774e2d7c89976dca980014dd448
     useEffect(() => {
         getPrivateRoute().then(
             (response) => {

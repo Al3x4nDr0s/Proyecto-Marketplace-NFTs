@@ -28,7 +28,7 @@ const Nft = Schema({
     create_date: {
         type: String
     },
-    collection_nft: {
+    collection_nft: { //? collection de nft
         type: Schema.Types.ObjectId,
         ref: 'Collection_nft'  
     },
@@ -51,6 +51,10 @@ const Nft = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Files_types'  
     },
+});
+Nft.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
 });
 
 module.exports = model('Nft', Nft);

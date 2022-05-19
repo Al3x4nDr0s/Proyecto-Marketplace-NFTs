@@ -24,20 +24,18 @@ const UserSchema = Schema({
     image: {
         type: String
     },
-    user_type: [{
+    user_type: {
             type: Schema.Types.ObjectId,
             ref: 'User_type'  
-    }],
+    },
+    //? array de id
     favorite: {
-        type: Array
+        type: [Schema.Types.ObjectId],
+        ref: 'Nft'
     },
     collectionNft: {
         type: Array
     },
-    wallet: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Wallet'  
-    }],
     description: {
         type: String
     },
@@ -46,7 +44,13 @@ const UserSchema = Schema({
     },
     money_sales: {
         type: Number
+    },
+    //? estado del usuario confirmacion de mail
+    confirm_email: {
+        type: Boolean,
+        default: false
     }
+    
 });
 //? schema methods for user model
 UserSchema.method('toJSON', function () {
@@ -55,5 +59,12 @@ UserSchema.method('toJSON', function () {
     return object;
 })
 
+// UserSchema.set('toJSON', {
+//     transform: (document, returnedObject) => {
+//         returnedObject.id = returnedObject._id
+//         delete returnedObject._id
+//         delete returnedObject.__v
+//     }
+// })
 
 module.exports = model('User', UserSchema);

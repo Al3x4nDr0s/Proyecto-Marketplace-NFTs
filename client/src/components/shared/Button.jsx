@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   color: var(--secondFontColor);
   padding: ${(props) => props.padding || ".2rem 1.8rem"};
+
   font-weight: 600;
   font-size: 1rem;
   outline: none;

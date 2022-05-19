@@ -1,52 +1,57 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
-import { getAllNft } from "../../../redux/actions/index";
+import "./publicaciones.css";
 
 import styled from "styled-components";
 
+import Button from "../../shared/Button.jsx";
+import { useNavigate } from "react-router-dom";
+
 const ContainerMisPublicaciones = styled.div`
   width: 85%;
-  margin: 0 auto;
+  margin: 6.5rem auto 0 auto;
   color: var(--secondFontColor);
 `;
 
-const ContainerPublicacion = styled.div`
-  /* background-color: red; */
-  display: flex;
+const ContainerPublicaciones = styled.div`
+  width: 100%;
+  height: 70vh;
+  text-align: center;
+  border-radius: .3rem;
+  line-height: 68vh;
+  margin: 2rem auto 0 auto;
+  background-color: #181e5553;
 `;
 
+const ContainerHeaderPublicaciones = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const MisPublicaciones = () => {
-  const nft = useSelector((state) => state.nft);
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getAllNft());
-  }, []);
 
-  console.log(nft);
   return (
     <ContainerMisPublicaciones>
-      <h2>Mis Publicaciones</h2>
-      <hr
-        style={{
-          borderColor: "var(--mainBackGroundButtonColor)",
-          backgroundColor: "var(--mainBackGroundButtonColor)",
-        }}
-      />
-      {nft?.map((x) => (
-        <ContainerPublicacion>
-          <img src={x.image} style={{ width: "240px", height: "230px" }} />
-          <div>
-            <h3>{x.name}</h3>
-            <div>
-              <p>{x.sales_types.name}</p>
-              <p>{x.price}</p>
-            </div>
-          </div>
-        </ContainerPublicacion>
-      ))}
+      <>
+        <ContainerHeaderPublicaciones>
+          <h2>Mis Publicaciones</h2>
+          <Button title="CREATE NFT" onClick={() => navigate("/home/createnft")}/>
+        </ContainerHeaderPublicaciones>
+        <hr
+          style={{
+            borderColor: "var(--mainBackGroundButtonColor)",
+            backgroundColor: "var(--mainBackGroundButtonColor)",
+          }}
+        />
+      </>
+      <ContainerPublicaciones>
+        <h1>No tiene nft creados</h1>
+      </ContainerPublicaciones>
     </ContainerMisPublicaciones>
   );
 };

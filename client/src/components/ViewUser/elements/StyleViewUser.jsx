@@ -7,7 +7,7 @@ export const ContainerHeaderUser = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1px auto;
+  margin: 6.5rem auto 2rem auto;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 `;
@@ -15,7 +15,7 @@ export const ContainerHeaderUser = styled.div`
 export const ContainerButton = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 30%;
   @media (max-width: 1600px) {
     width: 29%;
   }
@@ -29,7 +29,7 @@ export const ContainerButton = styled.div`
 
 export const ContainerBodyUser = styled.div`
   width: 85%;
-  margin: 1.5rem auto;
+  margin: 0 auto;
   color: var(--secondFontColor);
   display: grid;
   grid-template-columns: 23% 77%;
@@ -45,10 +45,14 @@ export const ContainerBodyUser = styled.div`
 `;
 
 export const ContainerMisPreferencias = styled.div`
-  /* background-color: #31313145; */
-  background-color: #50505068;
-  /* background-color: var(--mainContainersColor); */
+  background-color: #46198f53;
   margin-top: 0.5rem;
+  height: 200px;
+  line-height: 140px;
+  text-align: center;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .2rem; */
   width: 92%;
   border-radius: 0.6rem;
   padding: 1.5rem;
@@ -78,17 +82,17 @@ export const ListaPreferencias = styled.ul`
     a {
       cursor: pointer;
       color: var(--mainBackGroundButtonColor);
-      /* color: rgba(65, 17, 135); */
       font-weight: 700;
     }
   }
 `;
 
 export const ContenedorUltimasVentas = styled.div`
-  /* background-color: #31313145; */
-  background-color: #50505068;
-  /* background-color: var(--mainContainersColor); */
+  background-color: #46198f53;
   border-radius: 0.6rem;
+  height: 300px;
+  line-height: 230px;
+  text-align: center;
   width: 92%;
   padding: 1.5rem;
   margin-top: 0.5rem;
@@ -98,6 +102,8 @@ export const UltimasVentas = styled.div`
   padding: 10px;
   display: flex;
   width: 100%;
+  height: 85px;
+  line-height: 85px;
   margin: 8px auto;
 `;
 
@@ -110,14 +116,40 @@ export const ImgNft = styled.div`
   width: 85px;
 `;
 
-export const ImgPerfil = styled.div`
-  content:"";
-  background: var(--colorInfo);
+const ImgPerfil = styled.div`
+  background-image: ${(props) => `url(${props.background})`};
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
   height: 60px;
   margin-right: 10px;
   border-radius: 50%;
   border: 1.2px solid var(--mainBackGroundButtonColor);
   width: 60px;
+`;
+
+export const ImagenPerfil = (props) => {
+  const {background} = props
+
+  console.log(background)
+  return (
+    <ImgPerfil background={background}/>
+  )
+}
+
+export const ModificacionPerfil = styled.div`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: absolute;
+  border: 1px solid var(--mainBackGroundButtonColor);
+  background-color: var(--mainBackGroundButton);
+  top: 0;
+  right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const InputData = styled.div`
