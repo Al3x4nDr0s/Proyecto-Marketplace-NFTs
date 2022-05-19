@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import {putNft} from './Metamask'
 
 
-const Timer = ({startDate, finishDate ,setTimerItems} ) => {
-    
+const Timer = ({startDate, finishDate ,setTimerItems, setTimerEnabled, idNft} ) => {
   
-  const dateTarget = new Date(finishDate);
+  const startDate1 = startDate.split('/');
+  const startDate2 = startDate1[1]+'/'+startDate1[0]+'/'+startDate1[2];
+  console.log(startDate2);
+
+  const finishDate1 = finishDate.split('/');
+  const finishDate2 = finishDate1[1]+'/'+finishDate1[0]+'/'+finishDate1[2];
+  console.log(finishDate2);
+
+  const dateTarget = new Date(finishDate2);
   const now = new Date();
    
   const ms1s = 1000;
@@ -13,7 +21,7 @@ const Timer = ({startDate, finishDate ,setTimerItems} ) => {
   const ms1h = ms1m*60;
   const ms1d = ms1h*24;
   
-  console.log(startDate);
+  //console.log(startDate);
   console.log(dateTarget);
   console.log(now);
   
@@ -37,8 +45,13 @@ const Timer = ({startDate, finishDate ,setTimerItems} ) => {
        
       }
       else{
+        setTimerEnabled(false);
+        
+        
         return(
+         
           <p>Oferta Finalizada</p>
+            
         )
 
       }
@@ -66,7 +79,7 @@ const Timer = ({startDate, finishDate ,setTimerItems} ) => {
         </TimeContainer>
     )
      
-    
+   
 }
 
 

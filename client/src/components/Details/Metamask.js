@@ -91,7 +91,11 @@ import Swal from 'sweetalert2'
     return address;
   }
   catch(e){
-    alert('El usuario no tiene Wallet asociada');
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: "The User don't have an associated Wallet!!!!",
+    })
     return false;
     
   }
@@ -107,7 +111,12 @@ import Swal from 'sweetalert2'
     return res;
   }
   catch(e){
-    alert('Error al guardar transaccion!!');
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: "Error to save transactio!!!!",
+    })
+   
     return false;
     
   }
@@ -123,17 +132,11 @@ import Swal from 'sweetalert2'
       //console.log(token);
       const res= await axios.put(`https://sevendevs-backend.herokuapp.com/nft/${idNft}`,details);
       console.log(res.data);
-      /* await axios.put(`https://sevendevs-backend.herokuapp.com/nft/${idNft}`,details, {
-      headers: {
-        Authorization: JSON.parse(token)
-    }
-})*/
+      Swal.fire('Update Finished!!!')
 
-      //console.log(res);
-    //return res;
   }
   catch(e){
-    alert('Sale Types Update Error!!');
+    alert('Db Update Error!!');
     return false;
     
   }

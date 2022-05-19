@@ -66,8 +66,7 @@ export const Details = () => {
     console.log(nft[0].sales_types.name);
     if (nft[0].sales_types.name === "Live Auction") {
       console.log("Entrando a Auction");
-      axios.defaults.headers.common["Authorization"] =
-        localStorage.getItem("token");
+      axios.defaults.headers.common["Authorization"] = JSON.parse(localStorage.getItem("token"));
       axios
         .get(`https://sevendevs-backend.herokuapp.com/offer/${idNft}`)
 
@@ -80,6 +79,10 @@ export const Details = () => {
             });
             setTimerEnabled(true);
             setOffers(res.data.offers);
+          }
+          if(timerEnabled===false){
+            const changeSalesTypes = putNft(nft[0]._id, {sales_types:"62681a95ae667f54d92828c2"})
+            console.log(changeSalesTypes)
           }
         })
         .catch((e) => {
@@ -398,6 +401,8 @@ export const Details = () => {
                 startDate={infoTimer.startDate}
                 finishDate={infoTimer.finishDate}
                 setTimerItems={setTimerItems}
+                setTimerEnabled={setTimerEnabled}
+                idNft = {nft[0]._id}
               />
             )}
           </RowContador>
@@ -411,13 +416,13 @@ export const Details = () => {
             }
         </Row>*/}
         <ContainerBtnPay>
-          <Button1
+          {nft[0].sales_types.name === "Fixed Price"&&<Button1
             title="Buy Now"
             height="45px"
             width="45%"
             onClick={handlePayClick}
           ></Button1>
-
+          }
           {nft[0].sales_types.name === "Live Auction" && (
             <Button1 title="Make Offer" height="45px" width="45%"></Button1>
           )}
