@@ -120,7 +120,6 @@ export const Details = () => {
       console.log(nft[0].details.owner._id);
       if(userData.uid!=nft[0].details.owner._id) {
       if(saldo>Number(nft[0].price)){
-        //console.log(details);
         const pay = await payPurchase(wallet,transact);
         console.log(userData.uid);
         const changeOwner = await putNft(nft[0]._id, owner)
@@ -140,8 +139,7 @@ export const Details = () => {
     }
     else{
       Swal.fire({
-        text: "Do not buy this Nft, It is your",
-        
+        text: "Do not buy this Nft, It is your",  
       })
     }
      
