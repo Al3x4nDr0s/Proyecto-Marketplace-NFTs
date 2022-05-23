@@ -10,8 +10,7 @@ import Button from "../../shared/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const contractAddress = "0x301e98022EcccA30a656bC090C0342044cb81bC6";
-const abi = contract.abi;
+
 
 const ContainerMisPublicaciones = styled.div`
   width: 85%;
@@ -46,6 +45,13 @@ export const MisPublicaciones = () => {
   
 
   const mintNftHandler = async () => {
+
+    let numero = Math.floor(Math.random() * (999 - 1) + 1);
+    let final = numero.toString()
+    // final.length < 3 ? PadLeft("0" + final, length) : final
+    const contractAddress = `0x301e98022EcccA30a656bC090C0342044cb81${final}`;
+    const abi = contract.abi;
+
     try {
       const { ethereum } = window;
       if (ethereum) {

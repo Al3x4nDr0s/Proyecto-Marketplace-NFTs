@@ -31,11 +31,7 @@ export default function CardNftCollection() {
     dispatch(filterNft(name));
   }, [dispatch, name]); //el array son las dependecias
 
-  // function handleDelete() {
-  //     dispatch(deletePokemon(_id));
-  //     navigate('/home')
-  // };
-
+ 
   const myNft = useSelector((state) => state.filterNfts);
 
   return (

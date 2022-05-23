@@ -25,8 +25,8 @@ const UserSchema = Schema({
         type: String
     },
     user_type: {
-            type: Schema.Types.ObjectId,
-            ref: 'User_type'  
+        type: Schema.Types.ObjectId,
+        ref: 'User_type'
     },
     //? array de id
     favorite: {
