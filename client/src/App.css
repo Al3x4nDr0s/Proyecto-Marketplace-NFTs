@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Kanit", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --mainFontColor: #171717;
+  --secondFontColor: #dfdfdf;
+  --mainBackGroundColor: #0f3942;
+  --mainBackGroundButtonColor: #22a4a7;
+  --backgroundInput: #c7d1d3;
+  --mainContainersColor: #002e39;
+  --loginBackGroundButtonColor: #006466;
+  --colorError: #b54545;
+  --colorInfo: #aeaeae;
+  --large: 18px;
+  --medium: 16px;
+  --small: 14px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* body {
+  
+  
+} */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+
+.body-fondo {
+  background: rgb(71, 17, 137);
+  background: linear-gradient(
+    45deg,
+    rgba(71, 17, 137, 0.9752275910364145) 0%,
+    rgba(69, 16, 132, 1) 5%,
+    rgba(69, 17, 135, 0.989233193277311) 9%,
+    rgba(53, 7, 93, 0.989233193277311) 47%,
+    rgba(19, 5, 78, 0.969625350140056) 90%
+  );
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.body-admin{
+  /* background: rgb(71, 17, 137);
+  background: linear-gradient(
+    45deg,
+    rgba(71, 17, 137, 0.9752275910364145) 0%,
+    rgba(69, 16, 132, 1) 5%,
+    rgba(69, 17, 135, 0.989233193277311) 9%,
+    rgba(53, 7, 93, 0.989233193277311) 47%,
+    rgba(19, 5, 78, 0.969625350140056) 90%
+  );
+  min-height: 100vh; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  margin-top: auto;
 }
+
+.tableTheadBg {
+  background-color: #6b48ff;
+  
+  color:white
+}
+
+.active {
+  background-color: #6b48ff;
+}
+
+
+/* h1,h2,h3,h4,h5 {
+  font-weight: 900;
+} */
